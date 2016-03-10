@@ -17,6 +17,7 @@ class SecurityController extends Controller {
 	*/
         public static function check()
 	{
+
                 $_SESSION['JOSSO_ORIGINAL_URL']=url();
                 //print $_SESSION['JOSSO_ORIGINAL_URL'];exit;
                 $assertionId = \Input::get('josso_assertion_id');

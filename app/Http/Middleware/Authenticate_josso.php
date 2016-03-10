@@ -73,8 +73,8 @@ class Authenticate_josso {
 
                 // Get JOSSO Agent instance
                 $josso_agent = \jossoagent::getNewInstance();
-                $securityCheckUrl = $this->createBaseUrl().$josso_agent->getBaseCode().'/servicecheck';
-                //print $securityCheckUrl;exit;
+                $securityCheckUrl = $this->createBaseUrl().$josso_agent->getBaseCode().'/repository-kinerja/public/servicecheck';
+                // print $securityCheckUrl;exit;
 
                 $loginUrl = 'https://akun.um.ac.id/josso/signon/login.do?josso_back_to=' . $securityCheckUrl;
 

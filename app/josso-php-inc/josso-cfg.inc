@@ -50,7 +50,7 @@ $josso_gatewayLogoutUrl = 'http://akun.um.ac.id/josso/signon/logout.do';
 $josso_endpoint = 'http://akun.um.ac.id';
 
 // This could be also /, it points to the path where JOSSO code is found, for example the josso-security-check.php page.
-$josso_agentBasecode = "";
+$josso_agentBasecode = "skdjfd";
 
 $josso_proxyhost = '';
 $josso_proxyport = '';

@@ -22,10 +22,11 @@
       <header class="main-header">
         <!-- Logo -->
         <a href="../../index2.html" class="logo">
+        <strong>Repositori Kinerja</strong>
           <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini"><img src="{{asset('style/img/logo-small.png') }}" alt="" /></span>
+          <!-- <span class="logo-mini"><img src="{{asset('style/img/logo-small.png') }}" alt="" /></span> -->
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><img src="{{asset('style/img/logo.png') }}" alt="" /></span>
+          <!-- <span class="logo-lg"><img src="{{asset('style/img/logo.png') }}" alt="" /></span> -->
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -71,9 +72,9 @@
 
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
-            <li class="header">MAIN NAVIGATION</li>
-            <li class="treeview {{{ ($menu['menu']=='Dashboard')?'active':''}}}">
-              <a href="#">
+            <!-- <li class="header">MAIN NAVIGATION</li> -->
+            <li class="treeview">
+              <a href="{{url('/')}}">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                 <!--<i class="fa fa-angle-left pull-right"></i>-->
               </a>
@@ -96,33 +97,18 @@
                 <li><a href="#"><i class="fa fa-circle-o"></i> Pengajuan</a></li>
               </ul>-->
             </li>
-            <li class="treeview {{{ ($menu['menu']=='Validasi PTK')?'active':''}}}">
-                  <a href="#"><i class="fa fa-edit"></i> Validasi PTK <i class="fa fa-angle-left pull-right"></i></a>
-                  <ul class="treeview-menu">
-                    <li {{{ ($menu['submenu']=='Biodata')?"class=active":""}}}><a href="/valbiodataptk"><i class="fa fa-circle-o"></i> Biodata @if($menu['hakAkses']=='adminPT')@if($menu['jml_data']>0)<small class="label pull-right bg-red">{{{ $menu['jml_data'] }}}</small>@endif @endif</a></li>
-                    <li>
-                        <a href="#"><i class="fa fa-circle-o"></i> Registrasi</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-circle-o"></i> Penghargaan</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-circle-o"></i> Tunjangan</a>
-                    </li>
-                  </ul>
-                </li>
-              <li>
-                  <a href="#"><i class="fa fa-book"></i> Validasi Litabmas <i class="fa fa-angle-left pull-right"></i></a>
-                  <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Aktivitas</a></li>
-                    <li>
-                        <a href="#"><i class="fa fa-circle-o"></i> Publikasi</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-circle-o"></i> Pembicara</a>
-                    </li>
-                  </ul>
-                </li>
+            <li class="treeview">
+                  <a href="{{url('akademik')}}"><i class="fa fa-graduation-cap"></i> Akademik</a>
+            </li>
+            <li>
+                  <a href="{{url('penelitian')}}"><i class="fa fa-line-chart"></i> Penelitian</a>
+            </li>
+            <li>
+              <a href="{{url('pengabdian')}}"><i class="fa fa-users"></i> Pengabdian</a>
+            </li>
+            <li>
+              <a href="{{url('kegiatan_lain')}}"><i class="fa fa-book"></i> Kegiatan Lain</a>
+            </li>
           </ul>
         </section>
         <!-- /.sidebar -->
@@ -134,7 +120,7 @@
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>E-Klaim <small>Kementrian Riset, Teknologi, dan Pendidikan Tinggi</small></h1>
+          <h1>Selamat Datang, <small>Aplikasi Repositori Kinerja Dosen Universitas Negeri Malang</small></h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li class="active">{{{ $menu['menu'] }}}</li>
@@ -156,9 +142,9 @@
 
       <footer class="main-footer">
         <div class="pull-right hidden-xs">
-          <b>Version</b> 1.0
+          <b>Litbang PTIK UM</b>
         </div>
-        <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Kemenristekdikti</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2014-2015 <a href="http://um.ac.id">Universitas Negeri Malang</a>.</strong> All rights reserved.
       </footer>
 
       <!-- Control Sidebar -->

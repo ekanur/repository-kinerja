@@ -35,4 +35,6 @@ class DefaultController extends Controller {
         return View::make('dashboard/vdashboard')->with('menu',$menu);
     }
 
+    
+
 }

@@ -101,7 +101,7 @@ function jossoRequestLoginForUrl($currentUrl) {
 
     // Get JOSSO Agent instance
     $josso_agent = & jossoagent::getNewInstance();
-    $securityCheckUrl = createBaseUrl().$josso_agent->getBaseCode().'/servicecheck';
+    $securityCheckUrl = createBaseUrl().$josso_agent->getBaseCode().'/repository-kinerja/public/servicecheck';
 
     $loginUrl = $josso_agent->getGatewayLoginUrl(). '?josso_back_to=' . $securityCheckUrl;
 
