@@ -35,6 +35,59 @@ class DefaultController extends Controller {
         return View::make('dashboard/vdashboard')->with('menu',$menu);
     }
 
-    
+    public function akademik()
+    {
+    	$menu=array('menu'=>'Akademik','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID'),'jml_data'=>'');
+        return View::make('akademik/akademik')->with('menu',$menu);
+    }
+
+	public function penelitian()
+    {
+    	$menu=array('menu'=>'Penelitian','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID'),'jml_data'=>'');
+        return View::make('penelitian/penelitian')->with('menu',$menu);
+    }
+	
+	public function pengabdian()
+    {
+    	$menu=array('menu'=>'Pengabdian','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID'),'jml_data'=>'');
+        return View::make('pengabdian/pengabdian')->with('menu',$menu);
+    }
+	
+	public function kegiatan_lain()
+    {
+    	$menu=array('menu'=>'Kegiatan Lain','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID'),'jml_data'=>'');
+        return View::make('kegiatan_lain/kegiatan_lain')->with('menu',$menu);
+    }
+	
+	public function tambah_kegiatan($kategori)
+    {
+    	if(Request::isMethod('post'))
+    	{
+    		//insert to db
+
+    		return Redirect::away($kategori);
+    	}
+    	else
+    	{
+    		//show form
+
+    		switch ($kategori) {
+    			case 'akademik':
+    				$title = 'Akademik';
+    				break;
+    			case 'penelitian':
+    				$title = 'Penelitian';
+    				break;
+    			case 'pengabdian':
+    				$title = 'Pengabdian';
+    				break;
+    			case 'kegiatan_lain':
+    				$title = 'Kegiatan Lain';
+    				break;
+    		}
+    		$menu=array('menu'=>$title,'submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID'),'jml_data'=>'','kategori'=>$kategori);
+        	return View::make('form_tambah')->with('menu',$menu);
+    	}    	
+    }
 
 }
