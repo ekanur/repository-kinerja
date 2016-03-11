@@ -107,7 +107,7 @@
               <a href="{{url('pengabdian')}}"><i class="fa fa-users"></i> Pengabdian</a>
             </li>
             <li>
-              <a href="{{url('kegiatan_lain')}}"><i class="fa fa-book"></i> Kegiatan Lain</a>
+              <a href="{{url('kegiatan_penunjang')}}"><i class="fa fa-book"></i> Kegiatan Penunjang</a>
             </li>
           </ul>
         </section>
@@ -120,7 +120,7 @@
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>Selamat Datang, <small>Aplikasi Repositori Kinerja Dosen Universitas Negeri Malang</small></h1>
+          <!-- <h1>Selamat Datang, <small>Aplikasi Repositori Kinerja Dosen Universitas Negeri Malang</small></h1> -->
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li class="active">{{{ $menu['menu'] }}}</li>
@@ -322,9 +322,103 @@
     <script src="{{asset('style/plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
     <!-- FastClick -->
     <script src="{{ asset('style/plugins/fastclick/fastclick.min.js') }}"></script>
+    <script src="{{ asset('style/plugins/chartjs/Chart.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{asset('style/dist/js/app.min.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{asset('style/dist/js/demo.js')}}"></script>
+    <script>
+
+      var areaChartData = {
+      labels: ["2012", "2013", "2014", "2015", "2016"],
+      datasets: [
+        {
+          label: "Akademik",
+          fillColor: "rgba(210, 214, 222, 1)",
+          strokeColor: "#00C0EF",
+          pointColor: "#00C0EF",
+          pointStrokeColor: "#c1c7d1",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(220,220,220,1)",
+          data: [25, 29, 10, 21, 16 ]
+        },
+        {
+          label: "Penelitian",
+          fillColor: "rgba(60,141,188,0.9)",
+          strokeColor: "#00A65A",
+          pointColor: "#00A65A",
+          pointStrokeColor: "rgba(60,141,188,1)",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(60,141,188,1)",
+          data: [2, 8, 16, 27, 20]
+        },
+        {
+          label: "Pengabdian Masyarakat",
+          fillColor: "rgba(60,141,188,0.9)",
+          strokeColor: "#DD4B39",
+          pointColor: "#DD4B39",
+          pointStrokeColor: "rgba(60,141,188,1)",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(60,141,188,1)",
+          data: [16, 4, 16, 7, 9]
+        },
+        {
+          label: "Kegiatan Penunjang",
+          fillColor: "rgba(60,141,188,0.9)",
+          strokeColor: "#F39C12",
+          pointColor: "#F39C12",
+          pointStrokeColor: "rgba(60,141,188,1)",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(60,141,188,1)",
+          data: [18, 5, 15, 2, 12]
+        }
+      ]
+    };
+
+    var areaChartOptions = {
+      //Boolean - If we should show the scale at all
+      showScale: true,
+      //Boolean - Whether grid lines are shown across the chart
+      scaleShowGridLines: true,
+      //String - Colour of the grid lines
+      scaleGridLineColor: "rgba(0,0,0,.05)",
+      //Number - Width of the grid lines
+      scaleGridLineWidth: 1,
+      //Boolean - Whether to show horizontal lines (except X axis)
+      scaleShowHorizontalLines: true,
+      //Boolean - Whether to show vertical lines (except Y axis)
+      scaleShowVerticalLines: true,
+      //Boolean - Whether the line is curved between points
+      bezierCurve: true,
+      //Number - Tension of the bezier curve between points
+      bezierCurveTension: 0.3,
+      //Boolean - Whether to show a dot for each point
+      pointDot: true,
+      //Number - Radius of each point dot in pixels
+      pointDotRadius: 4,
+      //Number - Pixel width of point dot stroke
+      pointDotStrokeWidth: 1,
+      //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+      pointHitDetectionRadius: 20,
+      //Boolean - Whether to show a stroke for datasets
+      datasetStroke: true,
+      //Number - Pixel width of dataset stroke
+      datasetStrokeWidth: 2,
+      //Boolean - Whether to fill the dataset with a color
+      datasetFill: true,
+      //String - A legend template
+      legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].lineColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>",
+      //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+      maintainAspectRatio: true,
+      //Boolean - whether to make the chart responsive to window resizing
+      responsive: true
+    };
+
+    var ctx=$("#statistik").get(0).getContext("2d");
+    var statistikChart=new Chart(ctx);
+    var lineChartOptions = areaChartOptions;
+    lineChartOptions.datasetFill = false;
+    statistikChart.Line(areaChartData, lineChartOptions);
+    </script>
   </body>
 </html>
