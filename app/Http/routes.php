@@ -24,8 +24,8 @@ Route::get('/akademik','DefaultController@akademik');
 Route::get('/penelitian','DefaultController@penelitian');
 Route::get('/pengabdian','DefaultController@pengabdian');
 Route::get('/kegiatan_lain','DefaultController@kegiatan_lain');
-Route::get('/tambah_kegiatan/{kategori}','DefaultController@tambah_kegiatan');
-Route::post('/tambah_kegiatan/{kategori}','DefaultController@tambah_kegiatan');
+Route::get('/{kategori}/tambah_kegiatan','DefaultController@tambah_kegiatan');
+Route::post('/{kategori}/tambah_kegiatan','DefaultController@tambah_kegiatan');
 
 
 /*

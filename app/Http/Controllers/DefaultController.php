@@ -5,6 +5,7 @@ use View;
 use DB;
 use Request;
 use Session;
+use Redirect;
 class DefaultController extends Controller {
 
 	/*
@@ -65,7 +66,7 @@ class DefaultController extends Controller {
     	{
     		//insert to db
 
-    		return Redirect::away($kategori);
+    		return redirect('akademik');
     	}
     	else
     	{
