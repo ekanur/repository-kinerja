@@ -66,7 +66,7 @@ class DefaultController extends Controller {
     	{
     		//insert to db
 
-    		return redirect('akademik');
+    		return redirect($kategori);
     	}
     	else
     	{
