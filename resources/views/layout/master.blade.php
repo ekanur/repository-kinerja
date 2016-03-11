@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="{{asset('style/dist/css/AdminLTE.min.css') }}">
     <link rel="stylesheet" href="{{asset('style/dist/css/skins/_all-skins.min.css') }}">
+    <link rel="stylesheet" href="{{asset('style/plugins/datepicker/datepicker3.css') }}">
+    <link rel="stylesheet" href="{{asset('style/plugins/select2/select2.min.css') }}">
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -320,6 +322,8 @@
     <script src="{{asset('style/bootstrap/js/bootstrap.min.js') }}"></script>
     <!-- SlimScroll -->
     <script src="{{asset('style/plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
+    <script src="{{asset('style/plugins/datepicker/bootstrap-datepicker.js')}}"></script>
+    <script src="{{asset('style/plugins/select2/select2.full.min.js')}}"></script>
     <!-- FastClick -->
     <script src="{{ asset('style/plugins/fastclick/fastclick.min.js') }}"></script>
     <script src="{{ asset('style/plugins/chartjs/Chart.min.js') }}"></script>
@@ -419,6 +423,13 @@
     var lineChartOptions = areaChartOptions;
     lineChartOptions.datasetFill = false;
     statistikChart.Line(areaChartData, lineChartOptions);
+</script>
+    
+    <script>
+      $(function () {
+        $(".select2").select2();
+        $('#waktu_pelaksanaan').datepicker();
+      });
     </script>
   </body>
 </html>
