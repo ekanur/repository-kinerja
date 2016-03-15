@@ -1,3 +1,4 @@
+{{$menu['menu']}}
 <!DOCTYPE html>
 <html>
   <head>
@@ -75,7 +76,7 @@
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <!-- <li class="header">MAIN NAVIGATION</li> -->
-            <li class="treeview">
+            <li class='treeview <?php if($menu["menu"]=="Dashboard") echo "active"; ?>  '>
               <a href="{{url('/')}}">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                 <!--<i class="fa fa-angle-left pull-right"></i>-->
@@ -99,16 +100,16 @@
                 <li><a href="#"><i class="fa fa-circle-o"></i> Pengajuan</a></li>
               </ul>-->
             </li>
-            <li class="treeview">
+            <li class="treeview <?php if($menu['menu']=='Akademik') echo "active"; ?>  ">
                   <a href="{{url('akademik')}}"><i class="fa fa-graduation-cap"></i> Akademik</a>
             </li>
-            <li>
+            <li class="treeview <?php if($menu['menu']=='Penelitian') echo "active"; ?>">
                   <a href="{{url('penelitian')}}"><i class="fa fa-line-chart"></i> Penelitian</a>
             </li>
-            <li>
+            <li class="treeview <?php if($menu['menu']=='Pengabdian') echo "active" ?>">
               <a href="{{url('pengabdian')}}"><i class="fa fa-users"></i> Pengabdian</a>
             </li>
-            <li>
+            <li class="treeview <?php if($menu['menu']=='Kegiatan Penunjang') echo "active"; ?>">
               <a href="{{url('kegiatan_penunjang')}}"><i class="fa fa-book"></i> Kegiatan Penunjang</a>
             </li>
           </ul>
@@ -331,10 +332,15 @@
     <script src="{{asset('style/dist/js/app.min.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{asset('style/dist/js/demo.js')}}"></script>
+<?php 
+if($menu['menu']=='Dashboard')
+{?>
     <script>
 
       var areaChartData = {
-      labels: ["2012", "2013", "2014", "2015", "2016"],
+      labels: [@for($i=date("Y")-5; $i<=date("Y"); $i++)
+                    {{$i.","}}
+            @endfor       ],
       datasets: [
         {
           label: "Akademik",
@@ -344,7 +350,10 @@
           pointStrokeColor: "#c1c7d1",
           pointHighlightFill: "#fff",
           pointHighlightStroke: "rgba(220,220,220,1)",
-          data: [25, 29, 10, 21, 16 ]
+          data: [@foreach($menu['chart']['akademik'] as $akademik)
+                    {{$akademik[0]->count.", "}}
+                  @endforeach
+          ]
         },
         {
           label: "Penelitian",
@@ -354,7 +363,10 @@
           pointStrokeColor: "rgba(60,141,188,1)",
           pointHighlightFill: "#fff",
           pointHighlightStroke: "rgba(60,141,188,1)",
-          data: [2, 8, 16, 27, 20]
+          data: [@foreach($menu['chart']['penelitian'] as $penelitian)
+                    {{$penelitian[0]->count.", "}}
+                  @endforeach
+          ]
         },
         {
           label: "Pengabdian Masyarakat",
@@ -364,7 +376,10 @@
           pointStrokeColor: "rgba(60,141,188,1)",
           pointHighlightFill: "#fff",
           pointHighlightStroke: "rgba(60,141,188,1)",
-          data: [16, 4, 16, 7, 9]
+          data: [@foreach($menu['chart']['pengabdian'] as $pengabdian)
+                    {{$pengabdian[0]->count.", "}}
+                  @endforeach
+          ]
         },
         {
           label: "Kegiatan Penunjang",
@@ -374,7 +389,10 @@
           pointStrokeColor: "rgba(60,141,188,1)",
           pointHighlightFill: "#fff",
           pointHighlightStroke: "rgba(60,141,188,1)",
-          data: [18, 5, 15, 2, 12]
+          data: [@foreach($menu['chart']['kegiatan_penunjang'] as $kegiatan_penunjang)
+                    {{$kegiatan_penunjang[0]->count.", "}}
+                  @endforeach
+          ]
         }
       ]
     };
@@ -424,7 +442,7 @@
     lineChartOptions.datasetFill = false;
     statistikChart.Line(areaChartData, lineChartOptions);
 </script>
-    
+    <?php } ?>
     <script>
       $(function () {
         $(".select2").select2();

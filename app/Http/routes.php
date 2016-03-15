@@ -16,16 +16,21 @@ error_reporting(E_ALL & ~E_DEPRECATED & ~E_STRICT);
 //    return view('welcome');
 //});
 Route::group(['middleware' => ['web']], function () {
-        Route::get('/', ['as' => '/', 'uses' => 'DefaultController@index']);
+    Route::get('/', ['as' => '/', 'uses' => 'DashboardController@index']);
+    Route::get('/akademik','DefaultController@akademik');
+	Route::get('/penelitian','DefaultController@penelitian');
+	Route::get('/pengabdian','DefaultController@pengabdian');
+	Route::get('/kegiatan_penunjang','DefaultController@kegiatan_penunjang');
+	Route::get('/{kategori}/tambah','DefaultController@tambah');
+	Route::post('/{kategori}/tambah','DefaultController@tambah');
 });
+
 Route::get('/servicecheck','SecurityController@check');
 Route::get('/servicelogout','SecurityController@logout');
-Route::get('/akademik','DefaultController@akademik');
-Route::get('/penelitian','DefaultController@penelitian');
-Route::get('/pengabdian','DefaultController@pengabdian');
-Route::get('/kegiatan_lain','DefaultController@kegiatan_lain');
-Route::get('/{kategori}/tambah_kegiatan','DefaultController@tambah_kegiatan');
-Route::post('/{kategori}/tambah_kegiatan','DefaultController@tambah_kegiatan');
+Route::get('/{kategori}/hapus/{id}', "DefaultController@hapus");
+Route::get('/{kategori}/edit/{id}', "DefaultController@edit");
+Route::post('/{kategori}/update/{id}', "DefaultController@update");
+
 
 
 /*

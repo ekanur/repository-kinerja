@@ -9,32 +9,35 @@
              
               <div class="box box-primary">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Tambah {{$menu['menu']}}</h3>
+                  <h3 class="box-title">Edit {{$menu['kategori']}}</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" method="POST" action="{{url($menu['kategori'].'/tambah')}}" enctype="multipart/form-data">
+                <form role="form" method="POST" action="{{url($menu['kategori'].'/update/'.$menu['data']->id)}}" enctype="multipart/form-data">
+                
                 {{csrf_field()}}
-                <input type="hidden" id="kategori" value="{{$menu['kategori']}}">
+                <input type="hidden" name='kategori' id="kategori" value="{{$menu['kategori']}}">
+                <input type="hidden" name="id" id="id" value="{{$menu['data']->id}}">
                   <div class="box-body">
                     <div class="form-group">
-                      <label for="nama_kegiatan">Nama kegiatan</label>
-                      <input type="text" class="form-control" id="nama_kegiatan" name="nama_kegiatan" placeholder="Nama kegiatan" required="">
+                      <!-- <label for="nama_kegiatan">Nama kegiatan</label> -->
+                     
+                      <input type="text" class="form-control" id="nama_kegiatan" name="nama_kegiatan" placeholder="Nama kegiatan" required="" value='{{$menu['data']->nama_kegiatan}}'>
                     </div>
                     <div class="form-group">
-                      <label for="deskripsi_kegiatan">Deskripsi kegiatan</label>
-                      <textarea class="form-control" id="deskripsi_kegiatan" name="deskripsi_kegiatan" placeholder="Deskripsi kegiatan" required=""></textarea>
+                      <label for="deskripsi">Deskripsi kegiatan</label>
+                      <textarea class="form-control" id="deskripsi" name="deskripsi" placeholder="Deskripsi kegiatan" required="">{{$menu['data']->deskripsi}}</textarea>
                     </div>
                     <div class="form-group">
-                      <label for="url_kegiatan">URL kegiatan</label>
-                      <input type="text" class="form-control" id="url_kegiatan" name="url_kegiatan" placeholder="URL kegiatan" required="">
+                      <label for="url">URL kegiatan</label>
+                      <input type="text" class="form-control" id="url" name="url" value="{{$menu['data']->url}}" placeholder="URL kegiatan" required="">
                     </div>
                     <div class="form-group">
-                      <label for="waktu_pelaksanaan">Waktu pelaksanaan</label>
+                      <label for="tgl">Waktu pelaksanaan</label>
                       <div class="input-group">
                         <div class="input-group-addon">
                           <i class="fa fa-calendar"></i>
                         </div>
-                        <input type="text" class="form-control pull-right" id="waktu_pelaksanaan" name="waktu_pelaksanaan" required="">
+                        <input type="text" class="form-control pull-right" id="waktu_pelaksanaan" name="tgl" required="" value="{{$menu['data']->tgl}}">
                       </div><!-- /.input group -->
                     </div><!-- /.form group -->
                     <div class="form-group">
@@ -82,7 +85,7 @@
                   </div><!-- /.box-body -->
 
                   <div class="box-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Perbarui</button>
                   </div>
                 </form>
               </div><!-- /.box -->

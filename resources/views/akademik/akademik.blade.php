@@ -5,6 +5,14 @@
               <!-- Small boxes (Stat box) -->
           <div class="row">
          <div class="col-md-12">
+         @if(session('success'))
+              
+                <div class='alert alert-success'>{{session('success')}}</div>
+         @elseif(session('error'))
+                <div class='alert alert-danger'>{{session('error')}}</div>   
+         @endif
+
+
          <div class="box">
          	<div class="box-header">
          		<h3 class="box-title">Data Akademik</h3>
@@ -23,46 +31,20 @@
          			</tr>
          		</thead>
          		<tbody>
-         			<tr>
-         				<td>1.</td>
-         				<td><strong data-toggle="tooltip" data-placement="top" title="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...">Kegiatan Pertama</strong></td>
-         				<td><a href="#">Judul Surat</a></td>
-         				<td><a href="#">Bukti Kerja</a></td>
-         				<td><a href="" target="_new">www.google.com</a></td>
-         				<td>{{date('Y-m-d')}}</td>
-         				<td><a href="#" class='btn btn-sm btn-info'>Edit</a></td>
-         				<td><a href="#" class="btn btn-sm btn-danger">Hapus</a></td>
-         			</tr>
-         			<tr>
-         				<td>2.</td>
-         				<td><strong>Kegiatan Pertama</strong></td>
-         				<td><a href="#">Judul Surat</a></td>
-         				<td><a href="#">Bukti Kerja</a></td>
-         				<td><a href="" target="_new">www.google.com</a></td>
-         				<td>{{date('Y-m-d')}}</td>
-         				<td><a href="#" class='btn btn-sm btn-info'>Edit</a></td>
-         				<td><a href="#" class="btn btn-sm btn-danger">Hapus</a></td>
-         			</tr>
-         			<tr>
-         				<td>3.</td>
-         				<td><strong>Kegiatan Pertama</strong></td>
-         				<td><a href="#">Judul Surat</a></td>
-         				<td><a href="#">Bukti Kerja</a></td>
-         				<td><a href="" target="_new">www.google.com</a></td>
-         				<td>{{date('Y-m-d')}}</td>
-         				<td><a href="#" class='btn btn-sm btn-info'>Edit</a></td>
-         				<td><a href="#" class="btn btn-sm btn-danger">Hapus</a></td>
-         			</tr>
-         			<tr>
-         				<td>4.</td>
-         				<td><strong>Kegiatan Pertama</strong></td>
-         				<td><a href="#">Judul Surat</a></td>
-         				<td><a href="#">Bukti Kerja</a></td>
-         				<td><a href="" target="_new">www.google.com</a></td>
-         				<td>{{date('Y-m-d')}}</td>
-         				<td><a href="#" class='btn btn-sm btn-info'>Edit</a></td>
-         				<td><a href="#" class="btn btn-sm btn-danger">Hapus</a></td>
-         			</tr>
+         			<?php $i=1; ?>
+         			@foreach($menu['data'] as $akademik)
+                    
+                     <tr>
+                     <td>{{$i++}}</td>
+                     <td><strong data-toggle="tooltip" data-placement="top" title="{{$akademik->deskripsi}}">{{$akademik->nama_kegiatan}}</strong></td>
+                     <td><a href="{{url('uploads/')."/".$akademik->surat_penugasan}}">{{$akademik->surat_penugasan}}</a></td>
+                     <td><a href="$akademik->bukti_kinerja">{{$akademik->bukti_kinerja}}</a></td>
+                     <td><a href="{!! $akademik->url !!}" target="_new">{{$akademik->url}}</a></td>
+                     <td>{{$akademik->tgl}}</td>
+                     <td><a href="akademik/edit/{{$akademik->id}}" class='btn btn-sm btn-info'>Edit</a></td>
+                     <td><a href="akademik/hapus/{{$akademik->id}}" class="btn btn-sm btn-danger">Hapus</a></td>
+                  </tr>
+                  @endforeach
          		</tbody>
          	</table>
          	</div>
