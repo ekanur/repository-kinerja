@@ -181,7 +181,23 @@ class DefaultController extends Controller {
 
     	$model=$data->find($id);
     	$model->tgl=$this->format_tgl($model->tgl);
-    	$menu=array('menu'=>$kategori,'submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID'),'jml_data'=>'','kategori'=>$kategori, 'data'=>$model);
+
+    	switch ($kategori) {
+    			case 'akademik':
+    				$title = 'Akademik';
+    				break;
+    			case 'penelitian':
+    				$title = 'Penelitian';
+    				break;
+    			case 'pengabdian':
+    				$title = 'Pengabdian';
+    				break;
+    			case 'kegiatan_penunjang':
+    				$title = 'Kegiatan Penunjang';
+    				break;
+    		}
+
+    	$menu=array('menu'=>$title,'submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID'),'jml_data'=>'','kategori'=>$kategori, 'data'=>$model);
     	return View::make('form_edit')->with('menu', $menu);
     }
 

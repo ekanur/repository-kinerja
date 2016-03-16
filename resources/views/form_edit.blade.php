@@ -13,7 +13,7 @@
              @endif
               <div class="box box-primary">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Edit {{$menu['kategori']}}</h3>
+                  <h3 class="box-title">Edit <em>"{{$menu['data']->nama_kegiatan}}"</em></h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
                 <form role="form" method="POST" action="{{url($menu['kategori'].'/update/'.$menu['data']->id)}}" enctype="multipart/form-data">
@@ -23,7 +23,7 @@
                 <input type="hidden" name="id" id="id" value="{{$menu['data']->id}}">
                   <div class="box-body">
                     <div class="form-group">
-                      <!-- <label for="nama_kegiatan">Nama kegiatan</label> -->
+                      <label for="nama_kegiatan">Nama kegiatan</label>
                      
                       <input type="text" class="form-control" id="nama_kegiatan" name="nama_kegiatan" placeholder="Nama kegiatan" required="" value='{{$menu['data']->nama_kegiatan}}'>
                     </div>
@@ -63,10 +63,19 @@
                         
                         <?php
                         for($i=($tahun-1);$i>1998;$i--)
-                        { ?>
+                        { 
+                          if($i."2"==$menu['data']->thaka){
+                            echo "<option selected=\"selected\" value=\"".$tahun."2\">".$i." Semester Genap</option>";
+                          }elseif($i."1"==$menu['data']->thaka){
+                            echo "<option selected=\"selected\" value=\"".$tahun."1\">".$i." Semester Ganjil</option>";
+                          
+                          }else{
+                          ?>
                         	<option value="{{$i}}2">{{$i}} Semester Genap</option>
                         	<option value="{{$i}}1">{{$i}} Semester Ganjil</option>
-                        <?php }
+                        <?php
+                            }
+                         }
                         ?>
                       </select>
                     </div><!-- /.form-group -->
