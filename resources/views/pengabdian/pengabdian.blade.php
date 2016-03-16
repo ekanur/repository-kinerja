@@ -1,6 +1,7 @@
 @extends('layout.master',['menu'=>$menu])
 @section('content')
     <!-- Main content -->
+
         <section class="content">
               <!-- Small boxes (Stat box) -->
           <div class="row">
@@ -33,13 +34,17 @@
          		<tbody>
          			<?php $i=1; ?>
          			@foreach($menu['data'] as $pengabdian)
-                    
+                        
                      <tr>
                      <td>{{$i++}}</td>
                      <td><strong data-toggle="tooltip" data-placement="top" title="{{$pengabdian->deskripsi}}">{{$pengabdian->nama_kegiatan}}</strong></td>
                      <td><a href="{{url('uploads/')."/".$pengabdian->surat_penugasan}}">{{$pengabdian->surat_penugasan}}</a></td>
-                     <td><a href="$pengabdian->bukti_kinerja">{{$pengabdian->bukti_kinerja}}</a></td>
-                     <td><a href="{!! $pengabdian->url !!}" target="_new">{{$pengabdian->url}}</a></td>
+                     <td>
+                        @foreach($pengabdian->bukti_kinerja as $bukti_kinerja)
+                                <a href="{{url('uploads/')."/".$bukti_kinerja}}">{{$bukti_kinerja}}</a><br/>
+                        @endforeach
+                     </td>
+                     <td><a href="http://{!! $pengabdian->url !!}" target="_new">{{$pengabdian->url}}</a></td>
                      <td>{{$pengabdian->tgl}}</td>
                      <td><a href="pengabdian/edit/{{$pengabdian->id}}" class='btn btn-sm btn-info'>Edit</a></td>
                      <td><a href="pengabdian/hapus/{{$pengabdian->id}}" class="btn btn-sm btn-danger">Hapus</a></td>

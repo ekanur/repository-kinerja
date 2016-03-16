@@ -58,7 +58,7 @@
                       	 ?>
                         
                         <?php
-                        for($i=($tahun-1);$i>1998;$i--)
+                        for($i=$tahun;$i>1998;$i--)
                         { ?>
                         	<option value="{{$i}}2">{{$i}} Semester Genap</option>
                         	<option value="{{$i}}1">{{$i}} Semester Ganjil</option>
@@ -67,7 +67,7 @@
                       </select>
                     </div><!-- /.form-group -->
                     <div class="form-group">
-                      <label for="surat_penugasan">Surat penugasan</label><br>
+                      <label for="surat_penugasan">Ganti Surat penugasan</label><br>
                       <div class="btn btn-default btn-file">
                         <i class="fa fa-paperclip"></i> Surat penugasan
                         <input type="file" id="surat_penugasan" name="surat_penugasan">
@@ -75,7 +75,7 @@
                       <p class="help-block">Format file jpg, jpeg, bmp, png</p>
                     </div>
                     <div class="form-group">
-                      <label for="bukti_kinerja[]">Bukti kinerja</label><br>
+                      <label for="bukti_kinerja[]">Tambah Bukti kinerja</label><br>
                       <div class="btn btn-default btn-file">
                         <i class="fa fa-paperclip"></i> Bukti kinerja
                         <input type="file" id="bukti_kinerja[]" name="bukti_kinerja[]" multiple="">

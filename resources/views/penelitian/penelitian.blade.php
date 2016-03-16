@@ -38,7 +38,9 @@
                      <td>{{$i++}}</td>
                      <td><strong data-toggle="tooltip" data-placement="top" title="{{$penelitian->deskripsi}}">{{$penelitian->nama_kegiatan}}</strong></td>
                      <td><a href="{{url('uploads/')."/".$penelitian->surat_penugasan}}">{{$penelitian->surat_penugasan}}</a></td>
-                     <td><a href="$penelitian->bukti_kinerja">{{$penelitian->bukti_kinerja}}</a></td>
+                     <td> @foreach($penelitian->bukti_kinerja as $bukti_kinerja)
+                                <a href="{{url('uploads/')."/".$bukti_kinerja}}">{{$bukti_kinerja}}</a><br/>
+                        @endforeach</td>
                      <td><a href="{!! $penelitian->url !!}" target="_new">{{$penelitian->url}}</a></td>
                      <td>{{$penelitian->tgl}}</td>
                      <td><a href="penelitian/edit/{{$penelitian->id}}" class='btn btn-sm btn-info'>Edit</a></td>

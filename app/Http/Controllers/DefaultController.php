@@ -42,7 +42,9 @@ class DefaultController extends Controller {
     {
     	$akademik=new App\Akademik;
     	$data=$akademik->where('nip_dosen', '=', Session::get('userID'))->orderBy('id', 'DESC')->get();
- 
+ 		foreach ($data as $akademik) {
+    		$akademik->bukti_kinerja=explode(",", $akademik->bukti_kinerja);
+    	}
     	$menu=array('menu'=>'Akademik','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID'),'jml_data'=>'', 'data'=>$data);
         return View::make('akademik/akademik')->with('menu',$menu);
     }
@@ -53,7 +55,9 @@ class DefaultController extends Controller {
     	$data=$penelitian->where('nip_dosen', '=', Session::get('userID'))->orderBy('id', 'DESC')->get();
 
     	$menu=array('menu'=>'Penelitian','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID'),'jml_data'=>'', 'data'=>$data);
-
+    	foreach ($data as $penelitian) {
+    		$penelitian->bukti_kinerja=explode(",", $penelitian->bukti_kinerja);
+    	}
         return View::make('penelitian/penelitian')->with('menu',$menu);
     }
 	
@@ -62,6 +66,9 @@ class DefaultController extends Controller {
     	$pengabdian=new App\Pengabdian;
     	$data=$pengabdian->where('nip_dosen', '=', Session::get('userID'))->orderBy('id', 'DESC')->get();
 
+    	foreach ($data as $pengabdian) {
+    		$pengabdian->bukti_kinerja=explode(",", $pengabdian->bukti_kinerja);
+    	}
     	$menu=array('menu'=>'Pengabdian','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID'),'jml_data'=>'', 'data'=>$data);
         return View::make('pengabdian/pengabdian')->with('menu',$menu);
     }
@@ -70,7 +77,9 @@ class DefaultController extends Controller {
     {
     	$kegiatan_penunjang=new App\Kegiatan_penunjang;
     	$data=$kegiatan_penunjang->where('nip_dosen', '=', Session::get('userID'))->orderBy('id', 'DESC')->get();
-
+    	foreach ($data as $kegiatan_penunjang) {
+    		$kegiatan_penunjang->bukti_kinerja=explode(",", $kegiatan_penunjang->bukti_kinerja);
+    	}
     	$menu=array('menu'=>'Kegiatan Penunjang','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID'),'jml_data'=>'', 'data'=>$data);
         return View::make('kegiatan_penunjang/kegiatan_penunjang')->with('menu',$menu);
     }
@@ -105,8 +114,12 @@ class DefaultController extends Controller {
     	{
     		$data=$this->get_kategori_model($kategori);
 
-    			$array_file_info=array(
+    			$file_info_surat_penugasan=array(
     					"input_name"=>"surat_penugasan",
+    					"required"=>'required|image',
+    				);
+    			$file_info_bukti_kinerja=array(
+    					"input_name"=>"bukti_kinerja",
     					"required"=>'required|image',
     				);
 
@@ -115,8 +128,8 @@ class DefaultController extends Controller {
     			$data->url=Request::get('url_kegiatan');
     			$data->tgl=Request::get('waktu_pelaksanaan');
     			$data->thaka=Request::get('thaka');
-    			$data->surat_penugasan=$this->single_upload('akademik', $array_file_info);
-    			// $data->bukti_kinerja=$this->multiple_upload('akademik', $array_file_info);
+    			$data->surat_penugasan=$this->single_upload($kategori, $file_info_surat_penugasan);
+    			$data->bukti_kinerja=$this->multiple_upload($kategori, $file_info_bukti_kinerja);
     			$data->created_at=date('Y-m-d H:i:s');
     			$data->updated_at=null;
     			$data->created_by=Session::get('userID');
@@ -210,7 +223,7 @@ class DefaultController extends Controller {
 
     }
 
-    public function single_upload($kategori,$array_file_info){
+    public function single_upload($kategori,$array_file_info, $file=null){
             $result=null;
 
             /*Array File Info
@@ -222,7 +235,11 @@ class DefaultController extends Controller {
                 Session::flash('error', 'File bukti kinerja belum diupload');
                 return redirect($kategori.'/tambah_kegiatan');
             }
-            $file = Request::file($array_file_info['input_name']);
+
+            if($file==null){
+            	$file = Request::file($array_file_info['input_name']);
+            }
+            
             // $file_count = count($files);
             // $uploadcount = 0;
             // foreach($files as $file) {
@@ -230,7 +247,7 @@ class DefaultController extends Controller {
                 $validator = Validator::make(array($array_file_info['input_name']=> $file), $rules);
                 if($validator->passes()){
                     $destinationPath = base_path('public/uploads'); //folder destination
-                    $extension = Request::file($array_file_info['input_name'])->getClientOriginalExtension();
+                    $extension = $file->getClientOriginalExtension();
                     $fileName = rand(11111,99999).'.'.$extension; //filename format
                     $upload_success = $file->move($destinationPath, $fileName);
 
@@ -244,40 +261,35 @@ class DefaultController extends Controller {
                     
                 }
             // }
-            
-
-
+           
             return $result;
     }
 
 
-    public function multiple_upload(){
+    public function multiple_upload($kategori, $array_file_info){
     	// loop single_upload function, then create concat string that will be stored into table
-    	// if(!Request::hasFile($array_file_info['input_name'])){
-     //            Session::flash('error', 'File bukti kinerja belum diupload');
-     //            return redirect($kategori.'/tambah_kegiatan');
-     //        }
-     //        $files = Request::file($array_file_info['input_name']);
-     //        $file_count = count($files);
-     //        $uploadcount = 0;
-     //        foreach($files as $file) {
-     //            $rules = array($array_file_info['input_name'] => $array_file_info['required']);
-     //            $validator = Validator::make(array($array_file_info['input_name']=> $file), $rules);
-     //            if($validator->passes()){
-     //                $destinationPath = base_path('uploads'); //folder destination
-     //                $extension = Request::file($array_file_info['input_name'])->getClientOriginalExtension();
-     //                $fileName = rand(11111,99999).'.'.$extension; //filename format
-     //                $upload_success = $file->move($destinationPath, $fileName);
-     //                $uploadcount ++;
-     //            }
-     //        }
-     //        if($uploadcount == $file_count){
-     //            Session::flash('success', 'Upload successfully'); 
-     //            //return Redirect::to($kategori);
-     //        } 
-     //        else {
-     //            return redirect($kategori.'/tambah_kegiatan')->withErrors($validator)->withInput();
-     //        }
+    
+    	$files=Request::file($array_file_info['input_name']);
+    	$file_count=count($files);
+    	$uploaded_count=0;
+    	$file_name="";
+    	$last_file=end($files);
+    	foreach ($files as $file) {
+    		$uploaded_file=$this->single_upload($kategori, $array_file_info, $file);
+    		if($uploaded_file!=null){
+    			$file_name.=$uploaded_file;
+    			if($file!=$last_file){
+    				$file_name.=",";
+    			}
+    			// $uploaded_count++;
+    			// 	if($uploaded_count<$file_count){
+    			// 		$file_name.=", ";
+    			// 	}
+    		}
+    		
+    	}
+
+    	return $file_name;
     }
 
 

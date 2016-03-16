@@ -38,7 +38,9 @@
                      <td>{{$i++}}</td>
                      <td><strong data-toggle="tooltip" data-placement="top" title="{{$akademik->deskripsi}}">{{$akademik->nama_kegiatan}}</strong></td>
                      <td><a href="{{url('uploads/')."/".$akademik->surat_penugasan}}">{{$akademik->surat_penugasan}}</a></td>
-                     <td><a href="$akademik->bukti_kinerja">{{$akademik->bukti_kinerja}}</a></td>
+                     <td> @foreach($akademik->bukti_kinerja as $bukti_kinerja)
+                                <a href="{{url('uploads/')."/".$bukti_kinerja}}">{{$bukti_kinerja}}</a><br/>
+                        @endforeach</td>
                      <td><a href="{!! $akademik->url !!}" target="_new">{{$akademik->url}}</a></td>
                      <td>{{$akademik->tgl}}</td>
                      <td><a href="akademik/edit/{{$akademik->id}}" class='btn btn-sm btn-info'>Edit</a></td>

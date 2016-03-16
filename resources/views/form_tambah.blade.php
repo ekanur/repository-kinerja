@@ -55,7 +55,7 @@
                       	 ?>
                         
                         <?php
-                        for($i=($tahun-1);$i>1998;$i--)
+                        for($i=$tahun;$i>1998;$i--)
                         { ?>
                         	<option value="{{$i}}2">{{$i}} Semester Genap</option>
                         	<option value="{{$i}}1">{{$i}} Semester Ganjil</option>
