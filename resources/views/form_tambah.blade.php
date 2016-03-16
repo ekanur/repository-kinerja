@@ -22,15 +22,15 @@
                   <div class="box-body">
                     <div class="form-group">
                       <label for="nama_kegiatan">Nama kegiatan</label>
-                      <input type="text" class="form-control" id="nama_kegiatan" name="nama_kegiatan" placeholder="Nama kegiatan" required="">
+                      <input type="text" class="form-control" id="nama_kegiatan" name="nama_kegiatan" placeholder="Nama kegiatan" required="" value="{{old('nama_kegiatan')}}">
                     </div>
                     <div class="form-group">
                       <label for="deskripsi_kegiatan">Deskripsi kegiatan</label>
-                      <textarea class="form-control" id="deskripsi_kegiatan" name="deskripsi_kegiatan" placeholder="Deskripsi kegiatan" required=""></textarea>
+                      <textarea class="form-control" id="deskripsi_kegiatan" name="deskripsi_kegiatan" placeholder="Deskripsi kegiatan" required="">{{old('deskripsi_kegiatan')}}</textarea>
                     </div>
                     <div class="form-group">
                       <label for="url_kegiatan">URL kegiatan</label>
-                      <input type="text" class="form-control" id="url_kegiatan" name="url_kegiatan" placeholder="URL kegiatan" required="">
+                      <input type="text" class="form-control" id="url_kegiatan" name="url_kegiatan" placeholder="URL kegiatan" required="" value="{{old('url_kegiatan')}}">
                     </div>
                     <div class="form-group">
                       <label for="waktu_pelaksanaan">Waktu pelaksanaan</label>
@@ -38,7 +38,7 @@
                         <div class="input-group-addon">
                           <i class="fa fa-calendar"></i>
                         </div>
-                        <input type="text" class="form-control pull-right" id="waktu_pelaksanaan" name="waktu_pelaksanaan" required="">
+                        <input type="text" class="form-control pull-right" id="waktu_pelaksanaan" name="waktu_pelaksanaan" required="" value="{{old('waktu_pelaksanaan')}}">
                       </div><!-- /.input group -->
                     </div><!-- /.form group -->
                     <div class="form-group">
@@ -47,7 +47,7 @@
                       	<?php 
                       	if(date('n')<7)
                       	{
-                      		$tahun=date('Y');
+                      		$tahun=date('Y')-1;
                       		echo "<option selected=\"selected\" value=\"".$tahun."2\">".$tahun." Semester Genap</option>";
                       		echo "<option value=\"".$tahun."1\">".$tahun." Semester Ganjil</option>";
                       	}
@@ -59,7 +59,7 @@
                       	 ?>
                         
                         <?php
-                        for($i=$tahun;$i>1998;$i--)
+                        for($i=($tahun-1);$i>1998;$i--)
                         { ?>
                         	<option value="{{$i}}2">{{$i}} Semester Genap</option>
                         	<option value="{{$i}}1">{{$i}} Semester Ganjil</option>

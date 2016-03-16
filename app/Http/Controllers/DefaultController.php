@@ -137,9 +137,9 @@ class DefaultController extends Controller {
     			$data->deleted_at=null;
     			$data->nip_dosen=Session::get('userID');
     			
-    			if($data->surat_penugasan==null && $data->bukti_kinerja==null){
+    			if($data->surat_penugasan==null || $data->bukti_kinerja==null){
     				Session::flash('error', 'File surat penugasan dan bukti kinerja belum diupload');
-    				return Redirect::to($kategori."/tambah");
+    				return Redirect::back()->withInput();
     			}
 
     			if($data->save()){
@@ -216,10 +216,10 @@ class DefaultController extends Controller {
     			
 
     			if($update->save()){
-    				session()->flash('success', 'Berhasil memperbarui kegiatan '.$kategori);
+    				Session::flash('success', 'Berhasil memperbarui kegiatan '.$kategori);
     			}
     			else{
-    				session()->flash('error', 'Gagal memperbarui kegiatan '.$kategori);
+    				Session::flash('error', 'Gagal memperbarui kegiatan '.$kategori);
     			}
 
 
@@ -256,7 +256,6 @@ class DefaultController extends Controller {
                     $upload_success = $file->move($destinationPath, $fileName);
 
                     if($upload_success){
-		                Session::flash('success', 'Upload successfully'); 
 		                $result=$fileName; //return filename
 		            } 
 		            else {
