@@ -137,6 +137,10 @@ class DefaultController extends Controller {
     			$data->deleted_at=null;
     			$data->nip_dosen=Session::get('userID');
     			
+    			if($data->surat_penugasan==null && $data->bukti_kinerja==null){
+    				Session::flash('error', 'File surat penugasan dan bukti kinerja belum diupload');
+    				return Redirect::to($kategori."/tambah");
+    			}
 
     			if($data->save()){
     				session()->flash('success', 'Berhasil menambahkan kegiatan '.$kategori.' baru');
@@ -232,14 +236,14 @@ class DefaultController extends Controller {
             */
 
             if(!Request::hasFile($array_file_info['input_name'])){
-                Session::flash('error', 'File bukti kinerja belum diupload');
-                return redirect($kategori.'/tambah_kegiatan');
+                
+                return null;
             }
 
             if($file==null){
             	$file = Request::file($array_file_info['input_name']);
             }
-            
+
             // $file_count = count($files);
             // $uploadcount = 0;
             // foreach($files as $file) {
@@ -256,7 +260,7 @@ class DefaultController extends Controller {
 		                $result=$fileName; //return filename
 		            } 
 		            else {
-		                return redirect($kategori.'/tambah_kegiatan')->withErrors($validator)->withInput();
+		                return redirect($kategori.'/tambah')->withErrors($validator)->withInput();
 		            }
                     
                 }
@@ -270,6 +274,11 @@ class DefaultController extends Controller {
     	// loop single_upload function, then create concat string that will be stored into table
     
     	$files=Request::file($array_file_info['input_name']);
+
+    	if(!Request::hasFile($array_file_info['input_name'])){
+                return null;
+            }
+
     	$file_count=count($files);
     	$uploaded_count=0;
     	$file_name="";

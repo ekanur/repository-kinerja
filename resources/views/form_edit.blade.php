@@ -6,7 +6,11 @@
           <div class="row">
           	<div class="col-md-10 col-md-offset-1">
               <!-- general form elements -->
-             
+             @if(session('success'))
+                    <div class='alert alert-success'>{{session('success')}}</div>
+             @elseif(session('error'))
+                    <div class='alert alert-danger'>{{session('error')}}</div>   
+             @endif
               <div class="box box-primary">
                 <div class="box-header with-border">
                   <h3 class="box-title">Edit {{$menu['kategori']}}</h3>
@@ -46,7 +50,7 @@
                       	<?php 
                       	if(date('n')<7)
                       	{
-                      		$tahun=date('Y')-1;
+                      		$tahun=date('Y');
                       		echo "<option selected=\"selected\" value=\"".$tahun."2\">".$tahun." Semester Genap</option>";
                       		echo "<option value=\"".$tahun."1\">".$tahun." Semester Ganjil</option>";
                       	}
