@@ -8,6 +8,7 @@ use Session;
 use Redirect;
 use App;
 use Validator;
+use Storage;
 
 
 class DefaultController extends Controller {
@@ -221,6 +222,23 @@ class DefaultController extends Controller {
 			$update->url=Request::get('url');
 			$update->tgl=Request::get('tgl');
 			$update->thaka=Request::get('thaka');
+
+			if(Request::file('surat_penugasan')!=null){
+
+				$file_info_surat_penugasan=array(
+    					"input_name"=>"surat_penugasan",
+    					"required"=>'required|image',
+    				);
+				// Storage::delete(base_path('public\uploads')."\\".$update->surat_penugasan);
+				$update->surat_penugasan=$this->single_upload($kategori, $file_info_surat_penugasan);
+			}
+			if(Request::file('bukti_kinerja')!=null){
+				$file_info_bukti_kinerja=array(
+    					"input_name"=>"bukti_kinerja",
+    					"required"=>'required|image',
+    				);
+				$update->bukti_kinerja=$this->tambah_bukti_kinerja($kategori, $id, $file_info_bukti_kinerja);
+			}
 			// $update->surat_penugasan=$this->single_upload('akademik', $array_file_info);
 			// $update->bukti_kinerja=$this->multiple_upload('akademik', $array_file_info);
 			// $update->created_at=date('Y-m-d H:i:s');
@@ -228,9 +246,8 @@ class DefaultController extends Controller {
 			// $update->created_by="Admin";
 			$update->updated_by=Session::get("userID");
 			// $update->deleted_at=null;
-			$update->nip_dosen=Session::get('userID');
+			// $update->nip_dosen=Session::get('userID');
     			
-
     			if($update->save()){
     				Session::flash('success', 'Berhasil memperbarui kegiatan '.$kategori);
     			}
@@ -316,6 +333,19 @@ class DefaultController extends Controller {
     	return $file_name;
     }
 
+    public function tambah_bukti_kinerja($kategori, $id, $file_info){
+    	$data=$this->get_kategori_model($kategori);
+
+    	$find=$data::find($id);
+    	if($find->bukti_kinerja!=null){
+    		$find->bukti_kinerja=$find->bukti_kinerja.",".$this->multiple_upload($kategori, $file_info);
+    	}else{
+    		$find->bukti_kinerja=$this->multiple_upload($kategori, $file_info);
+    	}
+    	
+
+    	return $find->bukti_kinerja;
+    }
 
     public function hapus($kategori, $id){
 
