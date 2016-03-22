@@ -9,6 +9,7 @@ use Redirect;
 use App;
 use Validator;
 use Storage;
+use File;
 
 
 class DefaultController extends Controller {
@@ -229,7 +230,7 @@ class DefaultController extends Controller {
     					"input_name"=>"surat_penugasan",
     					"required"=>'required|image',
     				);
-				// Storage::delete(base_path('public\uploads')."\\".$update->surat_penugasan);
+                File::delete(base_path('public/uploads/'.$update->surat_penugasan));
 				$update->surat_penugasan=$this->single_upload($kategori, $file_info_surat_penugasan);
 			}
 			if(Request::file('bukti_kinerja')!=null){
