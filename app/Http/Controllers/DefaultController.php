@@ -147,7 +147,8 @@ class DefaultController extends Controller {
                     $file_info_bukti_kinerja=array(
                         "input_name"=>"bukti_kinerja",
                         "required"=>'required|mimes:png,jpg,jpeg,pdf',
-                        "id"=>$data->id
+                        "id"=>$data->id,
+                        "sum_file"=>1,
                     );
 
                     $update=$data::find($data->id);
@@ -248,7 +249,7 @@ class DefaultController extends Controller {
     					"input_name"=>"bukti_kinerja",
     					"required"=>'required|mimes:png,jpg,jpeg,pdf',
                         "id"=>$id,
-                        "sum_file"=>0,
+                        
     				);
 				$update->bukti_kinerja=$this->tambah_bukti_kinerja($kategori, $id, $file_info_bukti_kinerja);
 			}
@@ -274,7 +275,7 @@ class DefaultController extends Controller {
     }
 
     public function upload_surat_tugas($kategori,$array_file_info){
-            $result="null";
+            $result=null;
 
             /*Array File Info
 				-input_name
@@ -402,7 +403,7 @@ class DefaultController extends Controller {
 
     	$find=$data::find($id);
     	if($find->bukti_kinerja!=null){
-            $file_info['sum_file']=count(explode(",", $find->bukti_kinerja));
+            $file_info['sum_file']=count(explode(",", $find->bukti_kinerja))+1; //+1 from count uploaded bukti_kinerja, to increment new uploaded bukti_kinerja
     		$find->bukti_kinerja=$find->bukti_kinerja.",".$this->upload_bukti_kinerja($kategori, $file_info);
     	}else{
     		$find->bukti_kinerja=$this->upload_bukti_kinerja($kategori, $file_info);
