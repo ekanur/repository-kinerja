@@ -26,8 +26,8 @@ class DefaultController extends Controller {
 	*/
     public function __construct()
 	{
-		// $this->middleware('auth_josso');
-                SecurityController::check();
+		$this->middleware('auth_josso');
+                // SecurityController::check();
         
 	}
 	/**
@@ -116,22 +116,15 @@ class DefaultController extends Controller {
     	{
     		$data=$this->get_kategori_model($kategori);
 
-    			$file_info_surat_penugasan=array(
-    					"input_name"=>"surat_penugasan",
-    					"required"=>'required|image',
-    				);
-    			$file_info_bukti_kinerja=array(
-    					"input_name"=>"bukti_kinerja",
-    					"required"=>'required|image',
-    				);
+    			
 
     			$data->nama_kegiatan=Request::get('nama_kegiatan');
     			$data->deskripsi=Request::get('deskripsi_kegiatan');
     			$data->url=Request::get('url_kegiatan');
     			$data->tgl=Request::get('waktu_pelaksanaan');
     			$data->thaka=Request::get('thaka');
-    			$data->surat_penugasan=$this->single_upload($kategori, $file_info_surat_penugasan);
-    			$data->bukti_kinerja=$this->multiple_upload($kategori, $file_info_bukti_kinerja);
+    			// $data->surat_penugasan=$this->single_upload($kategori, $file_info_surat_penugasan);
+    			// $data->bukti_kinerja=$this->multiple_upload($kategori, $file_info_bukti_kinerja);
     			$data->created_at=date('Y-m-d H:i:s');
     			$data->updated_at=null;
     			$data->created_by=Session::get('userID');
@@ -139,12 +132,28 @@ class DefaultController extends Controller {
     			$data->deleted_at=null;
     			$data->nip_dosen=Session::get('userID');
     			
-    			if($data->surat_penugasan==null || $data->bukti_kinerja==null){
-    				Session::flash('error', 'File surat penugasan dan bukti kinerja belum diupload');
-    				return Redirect::back()->withInput();
-    			}
+    			// if($data->surat_penugasan==null || $data->bukti_kinerja==null){
+    			// 	Session::flash('error', 'File surat penugasan dan bukti kinerja belum diupload');
+    			// 	return Redirect::back()->withInput();
+    			// }
 
     			if($data->save()){
+
+                    $file_info_surat_penugasan=array(
+                        "input_name"=>"surat_penugasan",
+                        "required"=>'required|mimes:png,jpg,jpeg,pdf',
+                        "id"=>$data->id
+                    );
+                    $file_info_bukti_kinerja=array(
+                        "input_name"=>"bukti_kinerja",
+                        "required"=>'required|mimes:png,jpg,jpeg,pdf',
+                        "id"=>$data->id
+                    );
+
+                    $update=$data::find($data->id);
+                    $update->surat_penugasan=$this->upload_surat_tugas($kategori, $file_info_surat_penugasan);
+                    $update->bukti_kinerja=$this->upload_bukti_kinerja($kategori, $file_info_bukti_kinerja);
+                    $update->save();
     				session()->flash('success', 'Berhasil menambahkan kegiatan '.$kategori.' baru');
     			}
     			else{
@@ -228,15 +237,18 @@ class DefaultController extends Controller {
 
 				$file_info_surat_penugasan=array(
     					"input_name"=>"surat_penugasan",
-    					"required"=>'required|image',
+    					"required"=>'required|mimes:png,jpg,jpeg,pdf',
+                        "id"=>$id,
     				);
                 File::delete(base_path('public/uploads/'.$update->surat_penugasan));
-				$update->surat_penugasan=$this->single_upload($kategori, $file_info_surat_penugasan);
+				$update->surat_penugasan=$this->upload_surat_tugas($kategori, $file_info_surat_penugasan);
 			}
 			if(Request::file('bukti_kinerja')!=null){
 				$file_info_bukti_kinerja=array(
     					"input_name"=>"bukti_kinerja",
-    					"required"=>'required|image',
+    					"required"=>'required|mimes:png,jpg,jpeg,pdf',
+                        "id"=>$id,
+                        "sum_file"=>0,
     				);
 				$update->bukti_kinerja=$this->tambah_bukti_kinerja($kategori, $id, $file_info_bukti_kinerja);
 			}
@@ -261,32 +273,49 @@ class DefaultController extends Controller {
 
     }
 
-    public function single_upload($kategori,$array_file_info, $file=null){
-            $result=null;
+    public function upload_surat_tugas($kategori,$array_file_info){
+            $result="null";
 
             /*Array File Info
 				-input_name
 				-required
+                -id
             */
+                
+            // $tipe_file="bukti_kinerja";
 
             if(!Request::hasFile($array_file_info['input_name'])){
                 
                 return null;
             }
 
-            if($file==null){
-            	$file = Request::file($array_file_info['input_name']);
-            }
+            // if($file==null){
+            //     // $tipe_file="surat_penugasan";
+            // 	$file = Request::file($array_file_info['input_name']);
+                
+            // }
 
             // $file_count = count($files);
             // $uploadcount = 0;
             // foreach($files as $file) {
+                $file = Request::file($array_file_info['input_name']);
                 $rules = array($array_file_info['input_name'] => $array_file_info['required']);
                 $validator = Validator::make(array($array_file_info['input_name']=> $file), $rules);
+
                 if($validator->passes()){
                     $destinationPath = base_path('public/uploads'); //folder destination
                     $extension = $file->getClientOriginalExtension();
-                    $fileName = rand(11111,99999).'.'.$extension; //filename format
+                    $original_name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                    // $fileName = rand(11111,99 999).'.'.$extension; //filename format
+                    
+                    // if($tipe_file=='surat_penugasan'){
+                        $fileName = $array_file_info['id']."_surat_tugas_".$kategori.'_'.$original_name.'.'.$extension; //filename format utk surat penugasan
+                    // }else{
+                    //     $fileName = $array_file_info['id']."_".$tipe_file.'_'.$kategori.'.'.$extension; //filename format utk bukti kinerja
+                    //     // var_dump($fileName);
+                    //     // exit();
+                    // }
+
                     $upload_success = $file->move($destinationPath, $fileName);
 
                     if($upload_success){
@@ -303,8 +332,7 @@ class DefaultController extends Controller {
     }
 
 
-    public function multiple_upload($kategori, $array_file_info){
-    	// loop single_upload function, then create concat string that will be stored into table
+    public function upload_bukti_kinerja($kategori, $array_file_info){
     
     	$files=Request::file($array_file_info['input_name']);
 
@@ -312,22 +340,57 @@ class DefaultController extends Controller {
                 return null;
             }
 
-    	$file_count=count($files);
-    	$uploaded_count=0;
+    	// $file_count=count($files);
+    	$uploaded_count=$array_file_info['sum_file'];
     	$file_name="";
     	$last_file=end($files);
+        // echo "<pre>";
+        // var_dump($files);
+        // exit();
     	foreach ($files as $file) {
-    		$uploaded_file=$this->single_upload($kategori, $array_file_info, $file);
-    		if($uploaded_file!=null){
-    			$file_name.=$uploaded_file;
-    			if($file!=$last_file){
-    				$file_name.=",";
-    			}
-    			// $uploaded_count++;
-    			// 	if($uploaded_count<$file_count){
-    			// 		$file_name.=", ";
-    			// 	}
-    		}
+            $rules = array($array_file_info['input_name'] => $array_file_info['required']);
+                $validator = Validator::make(array($array_file_info['input_name']=> $file), $rules);
+
+                if($validator->passes()){
+                    $destinationPath = base_path('public/uploads'); //folder destination
+                    $extension = $file->getClientOriginalExtension();
+                    $original_name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                    // $fileName = rand(11111,99 999).'.'.$extension; //filename format
+                    
+                    // if($tipe_file=='surat_penugasan'){
+                    //     $fileName = $array_file_info['id']."_".$tipe_file.'_'.$kategori.'_'.$original_name.'.'.$extension; //filename format utk surat penugasan
+                    // }else{
+                        $fileName = $array_file_info['id']."_bukti_kinerja_".$kategori.$uploaded_count++.'.'.$extension; //filename format utk bukti kinerja
+                        // var_dump($fileName);
+                        // exit();
+                    // }
+
+                    $upload_success = $file->move($destinationPath, $fileName);
+
+                    if($upload_success){
+                        // $result=$fileName; 
+                        $file_name.=$fileName;
+                            if($file!=$last_file){
+                                $file_name.=",";
+                            }
+                    } 
+                    else {
+                        return redirect($kategori.'/tambah')->withErrors($validator)->withInput();
+                    }
+                    
+                }
+    		// $uploaded_file=$this->single_upload($kategori, $array_file_info, $file);
+    		// if($uploaded_file!=null){
+      //           // $uploaded_file=str_replace('bukti_kinerja', "bukti_kinerja_".$uploaded_count++."", $uploaded_file);
+    		// 	// $file_name.=$uploaded_file;
+    		// 	// if($file!=$last_file){
+    		// 	// 	$file_name.=",";
+    		// 	// }
+    			
+    		// 	// 	if($uploaded_count<$file_count){
+    		// 	// 		$file_name.=", ";
+    		// 	// 	}
+    		// }
     		
     	}
 
@@ -339,9 +402,10 @@ class DefaultController extends Controller {
 
     	$find=$data::find($id);
     	if($find->bukti_kinerja!=null){
-    		$find->bukti_kinerja=$find->bukti_kinerja.",".$this->multiple_upload($kategori, $file_info);
+            $file_info['sum_file']=count(explode(",", $find->bukti_kinerja));
+    		$find->bukti_kinerja=$find->bukti_kinerja.",".$this->upload_bukti_kinerja($kategori, $file_info);
     	}else{
-    		$find->bukti_kinerja=$this->multiple_upload($kategori, $file_info);
+    		$find->bukti_kinerja=$this->upload_bukti_kinerja($kategori, $file_info);
     	}
     	
 

@@ -33,7 +33,7 @@
                     </div>
                     <div class="form-group">
                       <label for="url">URL kegiatan</label>
-                      <input type="text" class="form-control" id="url" name="url" value="{{$menu['data']->url}}" placeholder="URL kegiatan" required="">
+                      <input type="text" class="form-control" id="url" name="url" value="{{$menu['data']->url}}" placeholder="URL kegiatan" >
                     </div>
                     <div class="form-group">
                       <label for="tgl">Waktu pelaksanaan</label>

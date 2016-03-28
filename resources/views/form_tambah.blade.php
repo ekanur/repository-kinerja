@@ -30,7 +30,7 @@
                     </div>
                     <div class="form-group">
                       <label for="url_kegiatan">URL kegiatan</label>
-                      <input type="text" class="form-control" id="url_kegiatan" name="url_kegiatan" placeholder="URL kegiatan" required="" value="{{old('url_kegiatan')}}">
+                      <input type="text" class="form-control" id="url_kegiatan" name="url_kegiatan" placeholder="URL kegiatan" value="{{old('url_kegiatan')}}">
                     </div>
                     <div class="form-group">
                       <label for="waktu_pelaksanaan">Waktu pelaksanaan</label>
@@ -73,7 +73,7 @@
                         <i class="fa fa-paperclip"></i> Surat penugasan
                         <input type="file" id="surat_penugasan" name="surat_penugasan">
                       </div>
-                      <p class="help-block">Format file jpg, jpeg, bmp, png</p>
+                      <p class="help-block">Format file pdf, jpg, jpeg, png</p>
                     </div>
                     <div class="form-group">
                       <label for="bukti_kinerja[]">Bukti kinerja</label><br>
@@ -81,7 +81,7 @@
                         <i class="fa fa-paperclip"></i> Bukti kinerja
                         <input type="file" id="bukti_kinerja[]" name="bukti_kinerja[]" multiple="">
                       </div>
-                      <p class="help-block">Format file jpg, jpeg, bmp, png (multiple file upload)</p>
+                      <p class="help-block">Format file pdf, jpg, jpeg, png (multiple file upload)</p>
                     </div>
                   </div><!-- /.box-body -->
 
