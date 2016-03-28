@@ -27,7 +27,7 @@ class DefaultController extends Controller {
     public function __construct()
 	{
 		// $this->middleware('auth_josso');
-                //SecurityController::check();
+                SecurityController::check();
         
 	}
 	/**
