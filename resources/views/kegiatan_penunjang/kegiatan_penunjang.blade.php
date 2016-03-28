@@ -41,7 +41,12 @@
                      <td> @foreach($kegiatan_penunjang->bukti_kinerja as $bukti_kinerja)
                                 <a href="{{url('uploads/')."/".$bukti_kinerja}}">{{$bukti_kinerja}}</a><br/>
                         @endforeach</td>
-                     <td><a href="http://{!! $kegiatan_penunjang->url !!}" target="_new">{{$kegiatan_penunjang->url}}</a></td>
+                     <td>
+
+                         @if($kegiatan_penunjang->url!=null)
+                            <a href="http://{!! $kegiatan_penunjang->url !!}" target="_new">{{$kegiatan_penunjang->url}}</a>
+                         @endif
+                     </td>
                      <td>{{$kegiatan_penunjang->tgl}}</td>
                      <td><a href="kegiatan_penunjang/edit/{{$kegiatan_penunjang->id}}" class='btn btn-sm btn-info'>Edit</a></td>
                      <td><a href="kegiatan_penunjang/hapus/{{$kegiatan_penunjang->id}}" class="btn btn-sm btn-danger">Hapus</a></td>
