@@ -402,8 +402,9 @@ class DefaultController extends Controller {
     	$data=$this->get_kategori_model($kategori);
 
     	$find=$data::find($id);
+        $file_info['sum_file']=count(explode(",", $find->bukti_kinerja))+1; //+1 from count uploaded bukti_kinerja, to increment new uploaded bukti_kinerja
     	if($find->bukti_kinerja!=null){
-            $file_info['sum_file']=count(explode(",", $find->bukti_kinerja))+1; //+1 from count uploaded bukti_kinerja, to increment new uploaded bukti_kinerja
+            
     		$find->bukti_kinerja=$find->bukti_kinerja.",".$this->upload_bukti_kinerja($kategori, $file_info);
     	}else{
     		$find->bukti_kinerja=$this->upload_bukti_kinerja($kategori, $file_info);
