@@ -100,8 +100,8 @@
                 <li><a href="#"><i class="fa fa-circle-o"></i> Pengajuan</a></li>
               </ul>-->
             </li>
-            <li class="treeview <?php if($menu['menu']=='Akademik') echo "active"; ?>  ">
-                  <a href="{{url('akademik')}}"><i class="fa fa-graduation-cap"></i> Akademik</a>
+            <li class="treeview <?php if($menu['menu']=='Pendidikan') echo "active"; ?>  ">
+                  <a href="{{url('akademik')}}"><i class="fa fa-graduation-cap"></i> Pendidikan</a>
             </li>
             <li class="treeview <?php if($menu['menu']=='Penelitian') echo "active"; ?>">
                   <a href="{{url('penelitian')}}"><i class="fa fa-line-chart"></i> Penelitian</a>

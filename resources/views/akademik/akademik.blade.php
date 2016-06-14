@@ -15,7 +15,7 @@
 
          <div class="box">
          	<div class="box-header">
-         		<h3 class="box-title">Data Akademik</h3>
+         		<h3 class="box-title">Data Pendidikan</h3>
          	</div>
          	<div class="box-body">
          		<table class="table table-striped table-bordered table-hover">

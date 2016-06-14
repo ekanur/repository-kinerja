@@ -47,7 +47,7 @@ class DefaultController extends Controller {
  		foreach ($data as $akademik) {
     		$akademik->bukti_kinerja=explode(",", $akademik->bukti_kinerja);
     	}
-    	$menu=array('menu'=>'Akademik','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID'),'jml_data'=>'', 'data'=>$data);
+    	$menu=array('menu'=>'Pendidikan','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID'),'jml_data'=>'', 'data'=>$data);
         return View::make('akademik/akademik')->with('menu',$menu);
     }
 
@@ -170,7 +170,7 @@ class DefaultController extends Controller {
 
     		switch ($kategori) {
     			case 'akademik':
-    				$title = 'Akademik';
+    				$title = 'Pendidikan';
     				break;
     			case 'penelitian':
     				$title = 'Penelitian';

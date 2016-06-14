@@ -12,7 +12,7 @@
 	         			<i class="fa fa-graduation-cap"></i>
 	         		</span>
 	         		<div class="info-box-content">
-	         			<span class="info-box-text">Akademik</span>
+	         			<span class="info-box-text">Pendidikan</span>
 	         			<span class="info-box-number">{{$menu['data']['akademik']}}</span>
 	         		</div>
          		</div>
