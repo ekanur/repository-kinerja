@@ -1,4 +1,4 @@
-{{$menu['menu']}}
+{{$menu['ketdosen']}}
 <!DOCTYPE html>
 <html>
   <head>
@@ -61,7 +61,7 @@
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-right">
-                      <a href="https://ppkpns.um.ac.id/servicelogout?josso_current_url=http://repository-dev.um.ac.id" class="btn btn-default btn-flat">Sign out</a>
+                      <a href="{{url('servicelogout')}}" class="btn btn-default btn-flat">Sign out</a>
                     </div>
                   </li>
                 </ul>

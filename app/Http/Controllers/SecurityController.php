@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Middleware\Authenticate_josso;
 use Illuminate\Support\Facades\Request;
+use Session;
 class SecurityController extends Controller {
 
 	/*
@@ -49,28 +50,8 @@ class SecurityController extends Controller {
 	}
     public static function logout()
 	{
-                session_unset();
-                $josso_agent = \jossoagent::getNewInstance();
-                $backToUrl = $josso_agent->getGatewayLogoutUrl(). '?josso_back_to=http://e-claim.um.ac.id';
-                //$logoutUrl = $logoutUrl . createFrontChannelParams();
-                // Clear SSO Cookie
-                setcookie("JOSSO_SESSIONID", '', 0, "/"); // session cookie ...
-                $_COOKIE['JOSSO_SESSIONID'] = '';
-                if (isset($backToUrl)) {
-                    if (!headers_sent()) {
-                        //print "test";exit;
-                        ob_end_clean();
-                        //Request::url();
-                        //header("Location: " . url());
-                        return redirect($backToUrl);
-                        exit;
-                    }
-                    printf('<HTML>');
-                    printf('<META http-equiv="Refresh" content="0;url=%s">', $backToUrl);
-                    printf('<BODY onload="try {self.location.href="%s" } catch(e) {}"><a href="%s">Redirect </a></BODY>', $backToUrl, $backToUrl);
-                    printf('</HTML>');
-                    die();
-                }
+                Session::flush();
+                return redirect()->away('https://ppkpns.um.ac.id/servicelogout?josso_current_url=http://repository-dev.um.ac.id');
 
 	}
 
