@@ -17,12 +17,14 @@ error_reporting(E_ALL & ~E_DEPRECATED & ~E_STRICT);
 //});
 Route::group(['middleware' => ['web']], function () {
     Route::get('/', ['as' => '/', 'uses' => 'DashboardController@index']);
+	Route::get('/pilih_dosen','pilih_dosen@index');
     Route::get('/akademik','DefaultController@akademik');
 	Route::get('/penelitian','DefaultController@penelitian');
 	Route::get('/pengabdian','DefaultController@pengabdian');
 	Route::get('/kegiatan_penunjang','DefaultController@kegiatan_penunjang');
 	Route::get('/{kategori}/tambah','DefaultController@tambah');
 	Route::post('/{kategori}/tambah','DefaultController@tambah');
+	Route::post('/pilih_dosen/create','pilih_dosen@create');
 });
 
 Route::get('/servicecheck','SecurityController@check');

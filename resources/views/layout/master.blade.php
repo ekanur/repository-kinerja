@@ -43,6 +43,14 @@
           <div class="navbar-custom-menu">
               <ul class="nav navbar-nav">
               <!-- User Account: style can be found in dropdown.less -->
+                <?php if($menu['userfak']){ ?>
+                <li class="user user-menu">
+                  <a href="#"> {{{ $menu['ketdosen'] }}}</a>
+                </li>
+                <li class="user user-menu">
+                   <a href="{{url('pilih_dosen')}}"><i class="fa fa-university"></i> Pilih Dosen</a>
+                </li>
+                <?php } ?>
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <span class="hidden-xs">{{{ $menu['userId'] }}} [Hak Akses: {{{ $menu['hakAkses'] }}}]</span>
@@ -70,7 +78,6 @@
           <div class="user-panel">
             <div class="pull-left info">
               &nbsp;
-            </div>
           </div>
 
           <!-- sidebar menu: : style can be found in sidebar.less -->

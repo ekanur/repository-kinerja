@@ -3,6 +3,8 @@
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 use Session;
+use App;
+use DB;
 include(app_path() . '/josso-php-inc/josso-cfg.inc');
 include(app_path() . '/josso-php-inc/class.jossoagent.php');
 //\Composer\Autoload\includeFile(App\josso-php-inc\josso-cfg.inc);
@@ -43,12 +45,19 @@ class Authenticate_josso {
                 $user= $josso_agent->getUserInSession();
                 if(isset($user)){
                     $request->merge(array("idUser" =>$user->name));
-                    if(ereg("SDIDOP",$user->getProperty('role'))){
+                    if(ereg("ADMINREPO",$user->getProperty('role'))){
                         Session::put('userRole','adminPT');
+                    }elseif(ereg("FAKREPO",$user->getProperty('role'))){
+                        $user_fak=new App\User;
+                        $data_user=$user_fak->where('user_id', '=',$user->name)->get();
+                        foreach ($data_user as $data_user) {
+                            Session::put('userFak',$data_user->user_fak);
+                            Session::put('userRole','Operator '.$data_user->fak_nm);
+                        }
                     }else{
                         Session::put('userRole','Dosen');
                     }
-                    Session::put('userID', $user->name);
+                    Session::put('userID_login', $user->name);
                     return $next($request);
                 }else{
                     $this->jossoRequestLoginForUrl(url());

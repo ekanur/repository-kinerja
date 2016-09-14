@@ -25,7 +25,9 @@ class DashboardController extends Controller
     		"kegiatan_penunjang"=>$this->data_chart_kegiatan_penunjang(),
 
     		);
-    	$menu=array('menu'=>'Dashboard','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID'),'jml_data'=>'', 'data'=>$this->get_total_tridarma(), 'chart'=>$data_chart);
+		var_dump(Session::get('userID'));
+    	$menu=array('menu'=>'Dashboard','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'', 'data'=>$this->get_total_tridarma(), 'chart'=>$data_chart,'userfak'=>Session::get('userFak')
+		,'ketdosen'=>Session::get('ketDosen'));
         return View::make('dashboard/vdashboard')->with('menu',$menu);
     }
 

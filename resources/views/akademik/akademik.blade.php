@@ -51,7 +51,14 @@
          	</table>
          	</div>
          	<div class="box-footer clearfix">
-         		<a href="{{url('akademik/tambah')}}" class="btn btn-md btn-success btn-flat pull-left">Tambah</a>
+				<div class="row">
+					<div class="col-md-1">
+						<a href="{{url('akademik/tambah')}}" class="btn btn-md btn-success btn-flat pull-left">Tambah Data</a>
+					</div>
+					<div class="col-md-1">
+						<a href="{{url('akademik/impor')}}" class="btn btn-md btn-primary btn-flat pull-left">Ambil Data SIAKAD</a>
+					</div>
+				</div>
          	</div>
          </div>
          	
