@@ -45,7 +45,7 @@
               <!-- User Account: style can be found in dropdown.less -->
                 <?php if($menu['userfak']){ ?>
                 <li class="user user-menu">
-                  <a href="#"> {{{ $menu['ketdosen'] }}}</a>
+                  <a href="#"> {{{ (Session::has('ketDosen'))?$menu['ketdosen']:'' }}}</a>
                 </li>
                 <li class="user user-menu">
                    <a href="{{url('pilih_dosen')}}"><i class="fa fa-university"></i> Pilih Dosen</a>
