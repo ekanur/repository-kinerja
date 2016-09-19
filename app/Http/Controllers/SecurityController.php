@@ -26,6 +26,7 @@ class SecurityController extends Controller {
                 $backToUrl = $_SESSION['JOSSO_ORIGINAL_URL'];
                 $josso_agent = \jossoagent::getNewInstance();
                 $ssoSessionId = $josso_agent->resolveAuthenticationAssertion($assertionId);
+                var_dump(Session::get('ketDosen'));
                 //$ssoSessionId='FD2A5F4ECE092613763619472061E373';
                 // Set SSO Cookie ...
                 setcookie("JOSSO_SESSIONID", $ssoSessionId, 0, "/"); // session cookie ...
@@ -50,7 +51,7 @@ class SecurityController extends Controller {
 	}
     public static function logout()
 	{
-                Session::flush();
+                Session::put('ketDosen',' ');
                 return redirect()->away('https://ppkpns.um.ac.id/servicelogout?josso_current_url=http://repository-dev.um.ac.id');
 
 	}
