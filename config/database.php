@@ -67,7 +67,16 @@ return [
             		'prefix'   => '',
             		'schema'   => 'public',
         	],
-
+        'pgsql_2' => [
+                    'driver'   => 'pgsql',
+                    'host'     => env('DB_HOST', '192.168.1.197'),
+                    'database' => env('DB_DATABASE', 'PTIK'),
+                    'username' => env('DB_USERNAME', 'litbangdev'),
+                    'password' => env('DB_PASSWORD', '123456789'),
+                    'charset'  => 'utf8',
+                    'prefix'   => '',
+                    'schema'   => 'dtum',
+            ],
 	],
 
     /*

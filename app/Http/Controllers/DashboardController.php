@@ -18,6 +18,7 @@ class DashboardController extends Controller
     }
 
     public function index(){
+        
     	$data_chart=array(
     		"akademik"=>$this->data_chart_akademik(),
     		"penelitian"=>$this->data_chart_penelitian(),
@@ -25,7 +26,7 @@ class DashboardController extends Controller
     		"kegiatan_penunjang"=>$this->data_chart_kegiatan_penunjang(),
 
     		);
-		var_dump(Session::get('userID'));
+        // var_dump($data_chart);exit();
     	$menu=array('menu'=>'Dashboard','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'', 'data'=>$this->get_total_tridarma(), 'chart'=>$data_chart,'userfak'=>Session::get('userFak')
 		,'ketdosen'=>Session::get('ketDosen'));
         return View::make('dashboard/vdashboard')->with('menu',$menu);
@@ -52,7 +53,8 @@ class DashboardController extends Controller
 
     		$data=array();
     		for ($i=date("Y")-5; $i <= date("Y"); $i++) { 
-    			$data[$i]=DB::select("select count(id) from akademik where extract(year from tgl)=".$i." and nip_dosen='".Session::get('userID')."' and deleted_at IS NULL ");
+                // $data[$i]=DB::select("select count(id) from akademik where extract(year from tgl)=".$i." and nip_dosen='".Session::get('userID')."' and deleted_at IS NULL ");
+    			$data[$i]=DB::select("select count(id) from akademik where cast(thaka as text) LIKE '".$i."%' and nip_dosen='".Session::get('userID')."' and deleted_at IS NULL ");
     		}   	
     		
     	return $data;
@@ -63,7 +65,8 @@ class DashboardController extends Controller
 
     		$data=array();
     		for ($i=date("Y")-5; $i <= date("Y"); $i++) { 
-    			$data[$i]=DB::select("select count(id) from penelitian where extract(year from tgl)=".$i." and nip_dosen='".Session::get('userID')."' and deleted_at IS NULL ");
+                // $data[$i]=DB::select("select count(id) from penelitian where extract(year from tgl)=".$i." and nip_dosen='".Session::get('userID')."' and deleted_at IS NULL ");
+    			$data[$i]=DB::select("select count(id) from penelitian where cast(thaka as text) LIKE '".$i."%' and nip_dosen='".Session::get('userID')."' and deleted_at IS NULL ");
     		}   	
     		
     	return $data;
@@ -74,7 +77,8 @@ class DashboardController extends Controller
 
     		$data=array();
     		for ($i=date("Y")-5; $i <= date("Y"); $i++) { 
-    			$data[$i]=DB::select("select count(id) from pengabdian where extract(year from tgl)=".$i." and nip_dosen='".Session::get('userID')."' and deleted_at IS NULL ");
+                // $data[$i]=DB::select("select count(id) from pengabdian where extract(year from tgl)=".$i." and nip_dosen='".Session::get('userID')."' and deleted_at IS NULL ");
+    			$data[$i]=DB::select("select count(id) from pengabdian where cast(thaka as text) LIKE '".$i."%' and nip_dosen='".Session::get('userID')."' and deleted_at IS NULL ");
     		}   	
     		
     	return $data;
@@ -84,7 +88,8 @@ class DashboardController extends Controller
     public function data_chart_kegiatan_penunjang(){
     	$data=array();
     		for ($i=date("Y")-5; $i <= date("Y"); $i++) { 
-    			$data[$i]=DB::select("select count(id) from kegiatan_penunjang where extract(year from tgl)=".$i." and nip_dosen='".Session::get('userID')."' and deleted_at IS NULL ");
+                // $data[$i]=DB::select("select count(id) from kegiatan_penunjang where extract(year from tgl)=".$i." and nip_dosen='".Session::get('userID')."' and deleted_at IS NULL ");
+    			$data[$i]=DB::select("select count(id) from kegiatan_penunjang where cast(thaka as text) LIKE '".$i."%' and nip_dosen='".Session::get('userID')."' and deleted_at IS NULL ");
     		}   	
     		
     	return $data;

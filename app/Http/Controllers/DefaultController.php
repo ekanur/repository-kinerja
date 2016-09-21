@@ -43,20 +43,20 @@ class DefaultController extends Controller {
     public function akademik()
     {
     	$akademik=new App\Akademik;
-    	$data=$akademik->where('nip_dosen', '=', Session::get('userID'))->orderBy('id', 'DESC')->get();
+    	$data=$akademik->where('nip_dosen', '=', Session::get('userID_login'))->orderBy('id', 'DESC')->get();
  		foreach ($data as $akademik) {
     		$akademik->bukti_kinerja=explode(",", $akademik->bukti_kinerja);
     	}
-    	$menu=array('menu'=>'Pendidikan','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID'),'jml_data'=>'', 'data'=>$data,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'));
+    	$menu=array('menu'=>'Pendidikan','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'', 'data'=>$data,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'));
         return View::make('akademik/akademik')->with('menu',$menu);
     }
 
 	public function penelitian()
     {
     	$penelitian=new App\Penelitian;
-    	$data=$penelitian->where('nip_dosen', '=', Session::get('userID'))->orderBy('id', 'DESC')->get();
+    	$data=$penelitian->where('nip_dosen', '=', Session::get('userID_login'))->orderBy('id', 'DESC')->get();
 
-    	$menu=array('menu'=>'Penelitian','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID'),'jml_data'=>'', 'data'=>$data,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'));
+    	$menu=array('menu'=>'Penelitian','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'', 'data'=>$data,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'));
     	foreach ($data as $penelitian) {
     		$penelitian->bukti_kinerja=explode(",", $penelitian->bukti_kinerja);
     	}
@@ -66,23 +66,23 @@ class DefaultController extends Controller {
 	public function pengabdian()
     {
     	$pengabdian=new App\Pengabdian;
-    	$data=$pengabdian->where('nip_dosen', '=', Session::get('userID'))->orderBy('id', 'DESC')->get();
+    	$data=$pengabdian->where('nip_dosen', '=', Session::get('userID_login'))->orderBy('id', 'DESC')->get();
 
     	foreach ($data as $pengabdian) {
     		$pengabdian->bukti_kinerja=explode(",", $pengabdian->bukti_kinerja);
     	}
-    	$menu=array('menu'=>'Pengabdian','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID'),'jml_data'=>'', 'data'=>$data,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'));
+    	$menu=array('menu'=>'Pengabdian','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'', 'data'=>$data,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'));
         return View::make('pengabdian/pengabdian')->with('menu',$menu);
     }
 	
 	public function kegiatan_penunjang()
     {
     	$kegiatan_penunjang=new App\Kegiatan_penunjang;
-    	$data=$kegiatan_penunjang->where('nip_dosen', '=', Session::get('userID'))->orderBy('id', 'DESC')->get();
+    	$data=$kegiatan_penunjang->where('nip_dosen', '=', Session::get('userID_login'))->orderBy('id', 'DESC')->get();
     	foreach ($data as $kegiatan_penunjang) {
     		$kegiatan_penunjang->bukti_kinerja=explode(",", $kegiatan_penunjang->bukti_kinerja);
     	}
-    	$menu=array('menu'=>'Kegiatan Penunjang','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID'),'jml_data'=>'', 'data'=>$data,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'));
+    	$menu=array('menu'=>'Kegiatan Penunjang','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'', 'data'=>$data,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'));
         return View::make('kegiatan_penunjang/kegiatan_penunjang')->with('menu',$menu);
     }
 
@@ -127,10 +127,10 @@ class DefaultController extends Controller {
     			// $data->bukti_kinerja=$this->multiple_upload($kategori, $file_info_bukti_kinerja);
     			$data->created_at=date('Y-m-d H:i:s');
     			$data->updated_at=null;
-    			$data->created_by=Session::get('userID');
+    			$data->created_by=Session::get('userID_login');
     			$data->updated_by=null;
     			$data->deleted_at=null;
-    			$data->nip_dosen=Session::get('userID');
+    			$data->nip_dosen=Session::get('userID_login');
     			
     			// if($data->surat_penugasan==null || $data->bukti_kinerja==null){
     			// 	Session::flash('error', 'File surat penugasan dan bukti kinerja belum diupload');
@@ -182,7 +182,7 @@ class DefaultController extends Controller {
     				$title = 'Kegiatan Penunjang';
     				break;
     		}
-    		$menu=array('menu'=>$title,'submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID'),'jml_data'=>'','kategori'=>$kategori,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'));
+    		$menu=array('menu'=>$title,'submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'','kategori'=>$kategori,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'));
         	return View::make('form_tambah')->with('menu',$menu);
     	}    	
     }
@@ -209,7 +209,7 @@ class DefaultController extends Controller {
     				break;
     		}
 
-    	$menu=array('menu'=>$title,'submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID'),'jml_data'=>'','kategori'=>$kategori, 'data'=>$model,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'));
+    	$menu=array('menu'=>$title,'submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'','kategori'=>$kategori, 'data'=>$model,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'));
     	return View::make('form_edit')->with('menu', $menu);
     }
 
@@ -260,7 +260,7 @@ class DefaultController extends Controller {
 			// $update->created_by="Admin";
 			$update->updated_by=Session::get("userID");
 			// $update->deleted_at=null;
-			// $update->nip_dosen=Session::get('userID');
+			// $update->nip_dosen=Session::get('userID_login');
     			
     			if($update->save()){
     				Session::flash('success', 'Berhasil memperbarui kegiatan '.$kategori);

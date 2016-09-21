@@ -205,6 +205,7 @@ class jossoagent  {
 	*/
 	function getUserInSession() {
 		$sessionId = $this->getSessionId();
+		// var_dump($sessionId);exit();
 		if (!isset($sessionId)) {
 			return ;
 		}
@@ -214,7 +215,7 @@ class jossoagent  {
 
 		$findUserInSessionRequest = array('FindUserInSessionRequest' => array('ssoSessionId' => $sessionId));
 		$findUserInSessionResponse  = $soapclient ->call('findUserInSession', $findUserInSessionRequest);
-		//print_r($findUserInSessionResponse);
+		// var_dump($findUserInSessionResponse);exit();
 		if (! $this->checkError($soapclient)) {
 			return $this->newUser($findUserInSessionResponse['SSOUser']);
 		}

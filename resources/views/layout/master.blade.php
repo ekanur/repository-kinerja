@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="{{asset('style/dist/css/skins/_all-skins.min.css') }}">
     <link rel="stylesheet" href="{{asset('style/plugins/datepicker/datepicker3.css') }}">
     <link rel="stylesheet" href="{{asset('style/plugins/select2/select2.min.css') }}">
+    <link rel="stylesheet" href="{{asset('style/plugins/easyautocomplete/easy-autocomplete.css') }}">
+    <!-- <link rel="stylesheet" href="{{asset('style/plugins/easyautocomplete/easy-autocomplete.themes.css') }}"> -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -20,11 +22,12 @@
   </head>
   <body class="hold-transition skin-blue fixed sidebar-mini">
     <!-- Site wrapper -->
+
     <div class="wrapper">
 
       <header class="main-header">
         <!-- Logo -->
-        <a href="../../index2.html" class="logo">
+        <a href="{{url('/')}}" class="logo">
         <strong>Repositori Kinerja</strong>
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <!-- <span class="logo-mini"><img src="{{asset('style/img/logo-small.png') }}" alt="" /></span> -->
@@ -34,24 +37,21 @@
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
-          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <div class="navbar-custom-menu">
-              <ul class="nav navbar-nav">
+         <div class="container">
+    <div class="navbar-header">
+       <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </a>
+    
+    </div>
+    <div class="navbar-collapse collapse" id="searchbar">
+     
+     <ul class="nav navbar-nav navbar-right" style="margin-right:40px">
               <!-- User Account: style can be found in dropdown.less -->
-                <?php if($menu['userfak']){ ?>
-                <li class="user user-menu">
-                  <a href="#"> {{{ (Session::has('ketDosen'))?$menu['ketdosen']:'' }}}</a>
-                </li>
-                <li class="user user-menu">
-                   <a href="{{url('pilih_dosen')}}"><i class="fa fa-university"></i> Pilih Dosen</a>
-                </li>
-                <?php } ?>
-              <li class="dropdown user user-menu">
+              <li class="dropdown user user-menu" style="width:300px;text-align:right">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <span class="hidden-xs">{{{ $menu['userId'] }}} [Hak Akses: {{{ $menu['hakAkses'] }}}]</span>
                 </a>
@@ -67,7 +67,32 @@
                 </ul>
               </li>
             </ul>
-          </div>
+     
+     
+     @if($menu['userfak'])
+      @if($menu['ketdosen'])
+          <ul class="nav navbar-nav" style="margin:auto">
+            <li style="padding:15px;"><span style="color:yellow">Anda Sedang mengakses Dosen : {{$menu['ketdosen']}}</span></li>
+            <li><a href='{{url("/pilih_dosen/remove")}}' class=''><i class="fa fa-close"></i></a></li>
+          </ul>
+      @else
+        <form class="navbar-form" action="{{url('/pilih_dosen/create')}}" method="post">
+         {{csrf_field()}}
+            <div class="form-group" style="display:flex;">
+              <div class="input-group" style="display:table;">
+                <input class="form-control" name="cari_dosen" placeholder="Cari NIP Dosen..." autofocus="autofocus" type="text" id="cari_dosen" style="width:100%">
+                <span class="input-group-btn" style="width:1%">
+                           <button type='submit' class='btn btn-success'><i class="fa fa-university"></i> Pilih Dosen</button>
+                          </span>
+              </div>
+            </div>
+        </form>
+      @endif
+     
+    @endif
+    </div><!--/.nav-collapse -->
+  </div>
+          
         </nav>
       </header>
 
@@ -141,7 +166,7 @@
         <section class="content">
 
 
-
+ <!-- {{var_dump(Session::all())}} -->
           @yield('content')
 
 
@@ -157,171 +182,7 @@
         <strong>Copyright &copy; 2014-2015 <a href="http://um.ac.id">Universitas Negeri Malang</a>.</strong> All rights reserved.
       </footer>
 
-      <!-- Control Sidebar -->
-      <aside class="control-sidebar control-sidebar-dark">
-        <!-- Create the tabs -->
-        <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-          <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-          <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-        </ul>
-        <!-- Tab panes -->
-        <div class="tab-content">
-          <!-- Home tab content -->
-          <div class="tab-pane" id="control-sidebar-home-tab">
-            <h3 class="control-sidebar-heading">Recent Activity</h3>
-            <ul class="control-sidebar-menu">
-              <li>
-                <a href="javascript::;">
-                  <i class="menu-icon fa fa-birthday-cake bg-red"></i>
-                  <div class="menu-info">
-                    <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
-                    <p>Will be 23 on April 24th</p>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="javascript::;">
-                  <i class="menu-icon fa fa-user bg-yellow"></i>
-                  <div class="menu-info">
-                    <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
-                    <p>New phone +1(800)555-1234</p>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="javascript::;">
-                  <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
-                  <div class="menu-info">
-                    <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
-                    <p>nora@example.com</p>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="javascript::;">
-                  <i class="menu-icon fa fa-file-code-o bg-green"></i>
-                  <div class="menu-info">
-                    <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
-                    <p>Execution time 5 seconds</p>
-                  </div>
-                </a>
-              </li>
-            </ul><!-- /.control-sidebar-menu -->
-
-            <h3 class="control-sidebar-heading">Tasks Progress</h3>
-            <ul class="control-sidebar-menu">
-              <li>
-                <a href="javascript::;">
-                  <h4 class="control-sidebar-subheading">
-                    Custom Template Design
-                    <span class="label label-danger pull-right">70%</span>
-                  </h4>
-                  <div class="progress progress-xxs">
-                    <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="javascript::;">
-                  <h4 class="control-sidebar-subheading">
-                    Update Resume
-                    <span class="label label-success pull-right">95%</span>
-                  </h4>
-                  <div class="progress progress-xxs">
-                    <div class="progress-bar progress-bar-success" style="width: 95%"></div>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="javascript::;">
-                  <h4 class="control-sidebar-subheading">
-                    Laravel Integration
-                    <span class="label label-warning pull-right">50%</span>
-                  </h4>
-                  <div class="progress progress-xxs">
-                    <div class="progress-bar progress-bar-warning" style="width: 50%"></div>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="javascript::;">
-                  <h4 class="control-sidebar-subheading">
-                    Back End Framework
-                    <span class="label label-primary pull-right">68%</span>
-                  </h4>
-                  <div class="progress progress-xxs">
-                    <div class="progress-bar progress-bar-primary" style="width: 68%"></div>
-                  </div>
-                </a>
-              </li>
-            </ul><!-- /.control-sidebar-menu -->
-
-          </div><!-- /.tab-pane -->
-          <!-- Stats tab content -->
-          <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div><!-- /.tab-pane -->
-          <!-- Settings tab content -->
-          <div class="tab-pane" id="control-sidebar-settings-tab">
-            <form method="post">
-              <h3 class="control-sidebar-heading">General Settings</h3>
-              <div class="form-group">
-                <label class="control-sidebar-subheading">
-                  Report panel usage
-                  <input type="checkbox" class="pull-right" checked>
-                </label>
-                <p>
-                  Some information about this general settings option
-                </p>
-              </div><!-- /.form-group -->
-
-              <div class="form-group">
-                <label class="control-sidebar-subheading">
-                  Allow mail redirect
-                  <input type="checkbox" class="pull-right" checked>
-                </label>
-                <p>
-                  Other sets of options are available
-                </p>
-              </div><!-- /.form-group -->
-
-              <div class="form-group">
-                <label class="control-sidebar-subheading">
-                  Expose author name in posts
-                  <input type="checkbox" class="pull-right" checked>
-                </label>
-                <p>
-                  Allow the user to show his name in blog posts
-                </p>
-              </div><!-- /.form-group -->
-
-              <h3 class="control-sidebar-heading">Chat Settings</h3>
-
-              <div class="form-group">
-                <label class="control-sidebar-subheading">
-                  Show me as online
-                  <input type="checkbox" class="pull-right" checked>
-                </label>
-              </div><!-- /.form-group -->
-
-              <div class="form-group">
-                <label class="control-sidebar-subheading">
-                  Turn off notifications
-                  <input type="checkbox" class="pull-right">
-                </label>
-              </div><!-- /.form-group -->
-
-              <div class="form-group">
-                <label class="control-sidebar-subheading">
-                  Delete chat history
-                  <a href="javascript::;" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
-                </label>
-              </div><!-- /.form-group -->
-            </form>
-          </div><!-- /.tab-pane -->
-        </div>
-      </aside><!-- /.control-sidebar -->
-      <!-- Add the sidebar's background. This div must be placed
-           immediately after the control sidebar -->
-      <div class="control-sidebar-bg"></div>
+     
     </div><!-- ./wrapper -->
 
     <!-- jQuery 2.1.4 -->
@@ -335,6 +196,10 @@
     <!-- FastClick -->
     <script src="{{ asset('style/plugins/fastclick/fastclick.min.js') }}"></script>
     <script src="{{ asset('style/plugins/chartjs/Chart.min.js') }}"></script>
+    <!-- easyautocomplete -->
+    <script src="{{ asset('style/plugins/easyautocomplete/jquery.easy-autocomplete.min.js') }}"></script>
+    <!-- bootstrap notify -->
+    <script src="{{ asset('style/plugins/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{asset('style/dist/js/app.min.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
@@ -450,11 +315,81 @@ if($menu['menu']=='Dashboard')
     statistikChart.Line(areaChartData, lineChartOptions);
 </script>
     <?php } ?>
+
+
     <script>
       $(function () {
         $(".select2").select2();
         $('#waktu_pelaksanaan').datepicker();
       });
     </script>
+
+    @if($menu['userfak'])
+    <script>
+
+      var options={
+        url:function(pharse){
+            return "{{url('api/dosen')}}/"+pharse;
+        },
+        getValue:"dsn_nip",
+
+        template:{
+          type:"custom",
+          method: function(value, item){
+                    item.dsn_gelar=(item.dsn_gelar!==null)?item.dsn_gelar:'';
+                    item.dsn_gelar2=(item.dsn_gelar2!==null)?item.dsn_gelar2:'';
+
+                    return "<strong>"+value+"</strong> - <span>"+item.dsn_gelar+item.dsn_nm+item.dsn_gelar2+"</span> - <em>"+item.jurusan.jur_nm+"</em>";
+          }
+        },
+        list:{
+          showAnimation:{
+            type:"fade",
+            time:400,
+            callback:function(){}
+          },
+          hideAnimation:{
+            type:"slide",
+            time:300,
+            callback:function(){}
+          }
+        }
+      };
+
+      $("#cari_dosen").easyAutocomplete(options);
+    </script>
+    @endif
+
+    @if(session("error"))
+    <script>
+    $(document).ready(function(){
+        $.notify({
+          message: '{{session("error")}}'
+        },{
+          type:'danger',
+          animate: {
+            enter: 'animated fadeInRight',
+            exit: 'animated fadeOutRight'
+          }
+        });
+    });
+      
+    </script>
+    @elseif(session("success"))
+    <script>
+    $(document).ready(function(){
+      $.notify({
+        message: '{{session("success")}}'
+      },{
+        type:'success',
+        animate: {
+            enter: 'animated fadeInRight',
+            exit: 'animated fadeOutRight'
+        }
+      });
+    });
+      
+    </script>
+    @endif
   </body>
 </html>

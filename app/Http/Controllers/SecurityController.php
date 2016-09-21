@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Middleware\Authenticate_josso;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Auth;
 use Session;
 class SecurityController extends Controller {
 
@@ -28,11 +29,9 @@ class SecurityController extends Controller {
                 $ssoSessionId = $josso_agent->resolveAuthenticationAssertion($assertionId);
 
                 // var_dump($ssoSessionId);exit();
-                if($ssoSessionId==null){
-                    $ssoSessionId='D9980BE9B9893B8C5029BEEDDDA15B61';
-                }
                 
-
+                    // $ssoSessionId='9095AFDCEAD62408F5A3198104B1F314';
+               
                // var_dump(Session::get('ketDosen'));
                 // Set SSO Cookie ...
                 setcookie("JOSSO_SESSIONID", $ssoSessionId, 0, "/"); // session cookie ...
@@ -57,8 +56,38 @@ class SecurityController extends Controller {
 	}
     public static function logout()
 	{
-                Session::put('ketDosen',' ');
-                return redirect()->away('https://ppkpns.um.ac.id/servicelogout?josso_current_url=http://repository-dev.um.ac.id');
+                // Session::put('ketDosen',' ');
+                session_start();
+                Session::flush();
+                \Cookie::forget('JOSSO_SESSIONID');
+                if (isset($_SERVER['HTTP_COOKIE'])) {
+                    $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
+                    foreach($cookies as $cookie) {
+                        $parts = explode('=', $cookie);
+                        $name = trim($parts[0]);
+                        setcookie($name, '', time()-1000);
+                        setcookie($name, '', time()-1000, '/');
+                    }
+                }
+
+                // Unset all of the session variables.
+                $_SESSION = array();
+
+                // If it's desired to kill the session, also delete the session cookie.
+                // Note: This will destroy the session, and not just the session data!
+                if (ini_get("session.use_cookies")) {
+                    $params = session_get_cookie_params();
+                    setcookie(session_name(), '', time() - 42000,
+                        $params["path"], $params["domain"],
+                        $params["secure"], $params["httponly"]
+                    );
+                }
+
+                // Finally, destroy the session.
+                session_destroy();
+                return redirect()->away('https://ppkpns.um.ac.id/servicelogout?josso_current_url='.url('/'));
+                
+                // return redirect()('/');
 
 	}
 

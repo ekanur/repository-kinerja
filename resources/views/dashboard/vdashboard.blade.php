@@ -68,6 +68,5 @@
          </div>
           </div><!-- /.row -->
         </section>
-
         <!-- /.content -->
 @endsection

@@ -25,6 +25,11 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/{kategori}/tambah','DefaultController@tambah');
 	Route::post('/{kategori}/tambah','DefaultController@tambah');
 	Route::post('/pilih_dosen/create','pilih_dosen@create');
+
+
+	// get list dosen on pilih_dosen
+	Route::get("/api/dosen/{id}", "DosenController@show");
+	Route::get("/pilih_dosen/remove", "pilih_dosen@destroy");
 });
 
 Route::get('/servicecheck','SecurityController@check');

@@ -41,8 +41,9 @@ class Authenticate_josso {
 		/* @var $josso_agent type */
                 session_start();
                 $josso_agent = \jossoagent::getNewInstance();
-                $ssoSessionId = $josso_agent->accessSession();
+                // $ssoSessionId = $josso_agent->accessSession();
                 $user= $josso_agent->getUserInSession();
+                
                 if(isset($user)){
                     $request->merge(array("idUser" =>$user->name));
                     if(ereg("ADMINREPO",$user->getProperty('role'))){
