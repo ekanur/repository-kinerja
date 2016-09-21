@@ -53,7 +53,8 @@ class DefaultController extends Controller {
 
 	public function penelitian()
     {
-    	$penelitian=new App\Penelitian;
+
+		$penelitian=new App\Penelitian;
     	$data=$penelitian->where('nip_dosen', '=', Session::get('userID_login'))->orderBy('id', 'DESC')->get();
 
     	$menu=array('menu'=>'Penelitian','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'', 'data'=>$data,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'));
@@ -258,7 +259,7 @@ class DefaultController extends Controller {
 			// $update->created_at=date('Y-m-d H:i:s');
 			$update->updated_at=date('Y-m-d H:i:s');
 			// $update->created_by="Admin";
-			$update->updated_by=Session::get("userID");
+			$update->updated_by=Session::get("userID_login");
 			// $update->deleted_at=null;
 			// $update->nip_dosen=Session::get('userID_login');
     			

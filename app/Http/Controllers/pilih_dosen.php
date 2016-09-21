@@ -33,9 +33,9 @@ class pilih_dosen extends Controller
         if (!$dosen->isEmpty()) {
           Session::forget('ketDosen');
           Session::put('ketDosen',Request::get('cari_dosen'));
-          return redirect()->back()->with("success", "Berhasil memilih NIP");
+          return redirect()->back()->with("berhasil", "Berhasil memilih NIP");
         }else{
-          return redirect()->back()->with("error", "NIP tidak ditemukan");
+          return redirect()->back()->with("gagal", "NIP tidak ditemukan");
         }
        
         
@@ -72,7 +72,7 @@ class pilih_dosen extends Controller
                 // Finally, destroy the session.
                 session_destroy();
 
-                return redirect()->back()->with("success", "Berhasil keluar dari akun dosen");
+                return redirect()->back()->with("berhasil", "Berhasil keluar dari akun dosen");
    }
 
 }

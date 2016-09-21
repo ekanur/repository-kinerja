@@ -360,11 +360,11 @@ if($menu['menu']=='Dashboard')
     </script>
     @endif
 
-    @if(session("error"))
+    @if(session("gagal"))
     <script>
     $(document).ready(function(){
         $.notify({
-          message: '{{session("error")}}'
+          message: '{{session("gagal")}}'
         },{
           type:'danger',
           animate: {
@@ -375,11 +375,11 @@ if($menu['menu']=='Dashboard')
     });
       
     </script>
-    @elseif(session("success"))
+    @elseif(session("berhasil"))
     <script>
     $(document).ready(function(){
       $.notify({
-        message: '{{session("success")}}'
+        message: '{{session("berhasil")}}'
       },{
         type:'success',
         animate: {
