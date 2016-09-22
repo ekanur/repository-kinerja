@@ -6,15 +6,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Aplikasi Repository Kinerja | Universitas Negeri Malang</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link rel="stylesheet" href="{{asset('style/bootstrap/css/bootstrap.min.css') }}">
+      @if(App::environment()=='production')
+    <link rel="stylesheet" href="{{secure_asset('style/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="{{asset('style/dist/css/AdminLTE.min.css') }}">
-    <link rel="stylesheet" href="{{asset('style/dist/css/skins/_all-skins.min.css') }}">
-    <link rel="stylesheet" href="{{asset('style/plugins/datepicker/datepicker3.css') }}">
-    <link rel="stylesheet" href="{{asset('style/plugins/select2/select2.min.css') }}">
-    <link rel="stylesheet" href="{{asset('style/plugins/easyautocomplete/easy-autocomplete.css') }}">
-    <!-- <link rel="stylesheet" href="{{asset('style/plugins/easyautocomplete/easy-autocomplete.themes.css') }}"> -->
+    <link rel="stylesheet" href="{{secure_asset('style/dist/css/AdminLTE.min.css') }}">
+    <link rel="stylesheet" href="{{secure_asset('style/dist/css/skins/_all-skins.min.css') }}">
+    <link rel="stylesheet" href="{{secure_asset('style/plugins/datepicker/datepicker3.css') }}">
+    <link rel="stylesheet" href="{{secure_asset('style/plugins/select2/select2.min.css') }}">
+    <link rel="stylesheet" href="{{secure_asset('style/plugins/easyautocomplete/easy-autocomplete.css') }}">
+    <!-- <link rel="stylesheet" href="{{secure_asset('style/plugins/easyautocomplete/easy-autocomplete.themes.css') }}"> -->
+      @else
+              <link rel="stylesheet" href="{{asset('style/bootstrap/css/bootstrap.min.css') }}">
+              <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+              <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+              <link rel="stylesheet" href="{{asset('style/dist/css/AdminLTE.min.css') }}">
+              <link rel="stylesheet" href="{{asset('style/dist/css/skins/_all-skins.min.css') }}">
+              <link rel="stylesheet" href="{{asset('style/plugins/datepicker/datepicker3.css') }}">
+              <link rel="stylesheet" href="{{asset('style/plugins/select2/select2.min.css') }}">
+              <link rel="stylesheet" href="{{asset('style/plugins/easyautocomplete/easy-autocomplete.css') }}">
+              <!-- <link rel="stylesheet" href="{{asset('style/plugins/easyautocomplete/easy-autocomplete.themes.css') }}"> -->
+      @endif
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -51,7 +63,7 @@
      
      <ul class="nav navbar-nav navbar-right" style="margin-right:40px">
               <!-- User Account: style can be found in dropdown.less -->
-              <li class="dropdown user user-menu" style="width:300px;text-align:right">
+              <li class="dropdown user user-menu" style="text-align:right">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <span class="hidden-xs">{{{ $menu['userId'] }}} [Hak Akses: {{{ $menu['hakAkses'] }}}]</span>
                 </a>
@@ -73,7 +85,7 @@
       @if($menu['ketdosen'])
           <ul class="nav navbar-nav" style="margin:auto">
             <li style="padding:15px;"><span style="color:yellow">Anda Sedang mengakses Dosen : {{$menu['ketdosen']}}</span></li>
-            <li><a href='{{url("/pilih_dosen/remove")}}' class=''><i class="fa fa-close"></i></a></li>
+            <li><a href='{{url("/pilih_dosen/remove")}}' style="padding-top:16px;"><i class="fa fa-close"></i> Ganti Dosen</a></li>
           </ul>
       @else
         <form class="navbar-form" action="{{url('/pilih_dosen/create')}}" method="post">
@@ -184,8 +196,28 @@
 
      
     </div><!-- ./wrapper -->
-
+    @if(App::environment()=='production')
     <!-- jQuery 2.1.4 -->
+    <script src="{{secure_asset('style/plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
+    <!-- Bootstrap 3.3.5 -->
+    <script src="{{secure_asset('style/bootstrap/js/bootstrap.min.js') }}"></script>
+    <!-- SlimScroll -->
+    <script src="{{secure_asset('style/plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
+    <script src="{{secure_asset('style/plugins/datepicker/bootstrap-datepicker.js')}}"></script>
+    <script src="{{secure_asset('style/plugins/select2/select2.full.min.js')}}"></script>
+    <!-- FastClick -->
+    <script src="{{ secure_asset('style/plugins/fastclick/fastclick.min.js') }}"></script>
+    <script src="{{ secure_asset('style/plugins/chartjs/Chart.min.js') }}"></script>
+    <!-- easyautocomplete -->
+    <script src="{{ secure_asset('style/plugins/easyautocomplete/jquery.easy-autocomplete.min.js') }}"></script>
+    <!-- bootstrap notify -->
+    <script src="{{ secure_asset('style/plugins/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
+    <!-- AdminLTE App -->
+    <script src="{{secure_asset('style/dist/js/app.min.js') }}"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="{{secure_asset('style/dist/js/demo.js')}}"></script>
+    @else
+            <!-- jQuery 2.1.4 -->
     <script src="{{asset('style/plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
     <!-- Bootstrap 3.3.5 -->
     <script src="{{asset('style/bootstrap/js/bootstrap.min.js') }}"></script>
@@ -204,6 +236,7 @@
     <script src="{{asset('style/dist/js/app.min.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{asset('style/dist/js/demo.js')}}"></script>
+        @endif
 <?php 
 if($menu['menu']=='Dashboard')
 {?>

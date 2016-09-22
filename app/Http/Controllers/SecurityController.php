@@ -85,7 +85,7 @@ class SecurityController extends Controller {
 
                 // Finally, destroy the session.
                 session_destroy();
-                return redirect()->away('https://ppkpns.um.ac.id/servicelogout?josso_current_url='.url('/'));
+                return redirect()->away('https://akun.um.ac.id/josso/signon/logout.do?josso_back_to='.url('/'));
                 
                 // return redirect()('/');
 
