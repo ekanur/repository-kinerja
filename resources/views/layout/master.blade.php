@@ -362,7 +362,11 @@ if($menu['menu']=='Dashboard')
 
       var options={
         url:function(pharse){
-            return "{{url('api/dosen')}}/"+pharse;
+            @if(App::environment()=='production')
+                return "{{secure_url('api/dosen')}}/"+pharse;
+            @else
+                    return "{{url('api/dosen')}}/"+pharse;
+            @endif
         },
         getValue:"dsn_nip",
 
