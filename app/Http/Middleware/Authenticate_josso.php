@@ -57,8 +57,9 @@ class Authenticate_josso {
                         }
                     }else{
                         Session::put('userRole','Dosen');
+                        Session::put('userID_login',$user->name);
                     }
-                    Session::put('userID_login', $user->name);
+                    Session::put('userID', $user->name);
                     return $next($request);
                 }else{
                     $this->jossoRequestLoginForUrl(url());

@@ -1,4 +1,3 @@
-{{$menu['ketdosen']}}
 <!DOCTYPE html>
 <html>
   <head>
@@ -46,7 +45,7 @@
             </div>
             <div class="col-md-3 text-right">
               <span class="hidden-xs">&nbsp;</span>
-              <a style="color: #FFF;" class="btn-sm btn-default btn-danger btn-flat" href="https://ppkpns.um.ac.id/servicelogout?josso_current_url=#">Sign out</a>
+              <a style="color: #FFF;" class="btn-sm btn-default btn-danger btn-flat" href="{{ url('/servicelogout') }}">Logout</a>
             </div>
           </div>
         </div>
@@ -83,7 +82,7 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu" style="text-align:right; margin-right: 15px;">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <span class="hidden-xs">{{{ $menu['userId'] }}} [Hak Akses: {{{ $menu['hakAkses'] }}}]</span>
+                  <span class="hidden-xs">{{{ Session::get('userID') }}} [Hak Akses: {{{ $menu['hakAkses'] }}}]</span>
                 </a>
               </li>
             </ul>
