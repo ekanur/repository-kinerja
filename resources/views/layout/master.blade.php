@@ -36,13 +36,17 @@
     <div style="padding: 15px 0;" aria-expanded="true">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-9">
               Aplikasi Lainnya :&nbsp;
               <a class="btn-sm btn-primary" href="#">DASHBOARD</a>
               <a href="https://profil.um.ac.id" class="btn-sm btn-secondary">PROFIL</a>
               <a href="https://siakad.um.ac.id" class="btn-sm btn-secondary">SIAKAD</a>
               <a href="http://sipadu.um.ac.id/sirkulasi" class="btn-sm btn-secondary">SIPADU</a>
               <a href="https://email.um.ac.id" class="btn-sm btn-secondary">E-MAIL</a>
+            </div>
+            <div class="col-md-3 text-right">
+              <span class="hidden-xs">&nbsp;</span>
+              <a style="color: #FFF;" class="btn-sm btn-default btn-danger btn-flat" href="https://ppkpns.um.ac.id/servicelogout?josso_current_url=#">Sign out</a>
             </div>
           </div>
         </div>
@@ -77,27 +81,17 @@
      
      <ul class="nav navbar-nav navbar-right">
               <!-- User Account: style can be found in dropdown.less -->
-              <li class="dropdown user user-menu" style="text-align:right">
+              <li class="dropdown user user-menu" style="text-align:right; margin-right: 15px;">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <span class="hidden-xs">{{{ $menu['userId'] }}} [Hak Akses: {{{ $menu['hakAkses'] }}}]</span>
                 </a>
-                <ul class="dropdown-menu">
-                  <!-- User image -->
-                  <!-- Menu Body -->
-                  <!-- Menu Footer-->
-                  <li class="user-footer">
-                    <div class="pull-right">
-                      <a href="{{url('servicelogout')}}" class="btn btn-default btn-flat">Sign out</a>
-                    </div>
-                  </li>
-                </ul>
               </li>
             </ul>
      
      
      @if($menu['userfak'])
       @if($menu['ketdosen'])
-          <ul class="nav navbar-nav" style="margin:auto">
+          <ul class="nav navbar-nav">
             <li style="padding:15px;"><span style="color:yellow">Anda Sedang mengakses Dosen : {{$menu['ketdosen']}}</span></li>
             <li><a href='{{url("/pilih_dosen/remove")}}' style="padding-top:16px;"><i class="fa fa-close"></i> Ganti Dosen</a></li>
           </ul>
@@ -108,12 +102,12 @@
                 <form class="navbar-form" action="{{url('/pilih_dosen/create')}}" method="post">
                 @endif
          {{csrf_field()}}
-            <div class="form-group" style="display:flex;">
-              <div class="input-group" style="display:table;">
-                <input class="form-control" name="cari_dosen" placeholder="Cari NIP Dosen..." autofocus="autofocus" type="text" id="cari_dosen" style="width:100%">
-                <span class="input-group-btn" style="width:1%">
-                           <button type='submit' class='btn btn-success'><i class="fa fa-university"></i> Pilih Dosen</button>
-                          </span>
+            <div class="form-group col-md-6">
+              <div class="input-group">
+                <input class="form-control" name="cari_dosen" placeholder="Cari NIP Dosen..." autofocus="autofocus" type="text" id="cari_dosen" style="width: 100%;">
+                  <span class="input-group-btn" style="width:1%">
+                    <button type='submit' class='btn btn-success'><i class="fa fa-university"></i> Pilih Dosen</button>
+                  </span>
               </div>
             </div>
         </form>
