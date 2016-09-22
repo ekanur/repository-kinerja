@@ -45,7 +45,7 @@
             </div>
             <div class="col-md-3 text-right">
               <span class="hidden-xs">&nbsp;</span>
-              <a style="color: #FFF;" class="btn-sm btn-default btn-danger btn-flat" href="https://ppkpns.um.ac.id/servicelogout?josso_current_url=#">Sign out</a>
+              <a style="color: #FFF;" class="btn-sm btn-default btn-danger btn-flat" href="{{ url('/servicelogout') }}">Logout</a>
             </div>
           </div>
         </div>

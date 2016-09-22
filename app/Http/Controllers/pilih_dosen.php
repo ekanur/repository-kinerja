@@ -31,6 +31,8 @@ class pilih_dosen extends Controller
       })->where('dsn_nip', Request::input('cari_dosen'))->get();
            
         if (!$dosen->isEmpty()) {
+            Session::forget('userID_login');
+            Session::put('userID_login', Request::get('cari_dosen'));
           Session::forget('ketDosen');
           Session::put('ketDosen',Request::input('cari_dosen'));
           Session::put('userID_login',Request::input('cari_dosen'));
