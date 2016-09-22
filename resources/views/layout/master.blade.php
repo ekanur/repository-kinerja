@@ -32,7 +32,21 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="hold-transition skin-blue fixed sidebar-mini">
+  <body class="skin-blue sidebar-mini">
+    <div style="padding: 15px 0;" aria-expanded="true">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-10">
+              Aplikasi Lainnya :&nbsp;
+              <a class="btn-sm btn-primary" href="#">DASHBOARD</a>
+              <a href="https://profil.um.ac.id" class="btn-sm btn-secondary">PROFIL</a>
+              <a href="https://siakad.um.ac.id" class="btn-sm btn-secondary">SIAKAD</a>
+              <a href="http://sipadu.um.ac.id/sirkulasi" class="btn-sm btn-secondary">SIPADU</a>
+              <a href="https://email.um.ac.id" class="btn-sm btn-secondary">E-MAIL</a>
+            </div>
+          </div>
+        </div>
+      </div>
     <!-- Site wrapper -->
 
     <div class="wrapper">
@@ -115,11 +129,6 @@
 
       <aside class="main-sidebar">
         <section class="sidebar">
-          <div class="user-panel">
-            <div class="pull-left info">
-              &nbsp;
-          </div>
-
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <!-- <li class="header">MAIN NAVIGATION</li> -->
