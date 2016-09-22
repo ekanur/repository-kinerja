@@ -54,7 +54,8 @@ class DashboardController extends Controller
     		$data=array();
     		for ($i=date("Y")-5; $i <= date("Y"); $i++) { 
 
-    			$data[$i]=DB::select("select count(id) from akademik where extract(year from tgl)=".$i." and nip_dosen='".Session::get('userID_login')."' and deleted_at IS NULL ");
+                // $data[$i]=DB::select("select count(id) from akademik where extract(year from tgl)=".$i." and nip_dosen='".Session::get('userID_login')."' and deleted_at IS NULL ");
+    			$data[$i]=DB::select("select count(id) from akademik where CAST(thaka AS TEXT) like '".$i."%' and nip_dosen='".Session::get('userID_login')."' and deleted_at IS NULL ");
 
     		}   	
     		
@@ -67,7 +68,8 @@ class DashboardController extends Controller
     		$data=array();
     		for ($i=date("Y")-5; $i <= date("Y"); $i++) { 
 
-    			$data[$i]=DB::select("select count(id) from penelitian where extract(year from tgl)=".$i." and nip_dosen='".Session::get('userID_login')."' and deleted_at IS NULL ");
+                // $data[$i]=DB::select("select count(id) from penelitian where extract(year from tgl)=".$i." and nip_dosen='".Session::get('userID_login')."' and deleted_at IS NULL ");
+    			$data[$i]=DB::select("select count(id) from penelitian where CAST(thaka AS TEXT) like '".$i."%' and nip_dosen='".Session::get('userID_login')."' and deleted_at IS NULL ");
 
     		}   	
     		
@@ -80,7 +82,8 @@ class DashboardController extends Controller
     		$data=array();
     		for ($i=date("Y")-5; $i <= date("Y"); $i++) { 
 
-    			$data[$i]=DB::select("select count(id) from pengabdian where extract(year from tgl)=".$i." and nip_dosen='".Session::get('userID_login')."' and deleted_at IS NULL ");
+                // $data[$i]=DB::select("select count(id) from pengabdian where extract(year from tgl)=".$i." and nip_dosen='".Session::get('userID_login')."' and deleted_at IS NULL ");
+    			$data[$i]=DB::select("select count(id) from pengabdian where CAST(thaka AS TEXT) like '".$i."%' and nip_dosen='".Session::get('userID_login')."' and deleted_at IS NULL ");
 
     		}   	
     		
@@ -92,7 +95,8 @@ class DashboardController extends Controller
     	$data=array();
     		for ($i=date("Y")-5; $i <= date("Y"); $i++) { 
 
-    			$data[$i]=DB::select("select count(id) from kegiatan_penunjang where extract(year from tgl)=".$i." and nip_dosen='".Session::get('userID_login')."' and deleted_at IS NULL ");
+                // $data[$i]=DB::select("select count(id) from kegiatan_penunjang where extract(year from tgl)=".$i." and nip_dosen='".Session::get('userID_login')."' and deleted_at IS NULL ");
+    			$data[$i]=DB::select("select count(id) from kegiatan_penunjang where CAST(thaka AS TEXT) like '".$i."%' and nip_dosen='".Session::get('userID_login')."' and deleted_at IS NULL ");
 
     		}   	
     		
