@@ -9,7 +9,7 @@ class Dosen extends Model
     //
 
     protected $connection='pgsql_2';
-    protected $table='m_dosen';
+    protected $table='dtum.m_dosen';
     protected $primaryKey='dsn_nip';
     public $incrementing=false;
     public $timestamps=false;

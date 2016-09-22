@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Jurusan extends Model
 {
     protected $connection='pgsql_2';
-    protected $table='m_jur';
+    protected $table='dtum.m_jur';
     protected $primaryKey='jur_kd';
     public $incrementing=false;
     public $timestamps=false;

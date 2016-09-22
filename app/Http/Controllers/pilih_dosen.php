@@ -30,7 +30,7 @@ class pilih_dosen extends Controller
         $q->where('fak_kd', '=', \Session::get('userFak'));
       })->where(function($query){
 
-            $query->where('dsn_nip', 'LIKE', Request::input('cari_dosen').'%')->orWhere('dsn_nm', 'LIKE', strtoupper(Request::input('cari_dosen')).'%');
+            $query->where('dsn_nip', 'LIKE', Request::input('cari_dosen').'%')->orWhere('dsn_nm', 'ILIKE', '%'.strtoupper(Request::input('cari_dosen')).'%');
         })->get();
            
         if (!$dosen->isEmpty()) {

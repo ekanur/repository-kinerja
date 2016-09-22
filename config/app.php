@@ -148,6 +148,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         'Illuminate\Html\HtmlServiceProvider',
+        'Barryvdh\Debugbar\ServiceProvider',
 
         /*
          * Application Service Providers...
@@ -205,6 +206,7 @@ return [
         'Input'     => 'Illuminate\Support\Facades\Input',
         'Html'      => 'Illuminate\Html\HtmlFacade',
         'Form'      => 'Illuminate\Html\FormFacade',
+        'Debugbar' => 'Barryvdh\Debugbar\Facade',
 
     ],
 
