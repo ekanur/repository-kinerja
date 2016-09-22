@@ -88,7 +88,11 @@
             <li><a href='{{url("/pilih_dosen/remove")}}' style="padding-top:16px;"><i class="fa fa-close"></i> Ganti Dosen</a></li>
           </ul>
       @else
-        <form class="navbar-form" action="{{url('/pilih_dosen/create')}}" method="post">
+                @if(App::environment()=='production')
+                <form class="navbar-form" action="{{secure_url('/pilih_dosen/create')}}" method="post">
+            @else
+                <form class="navbar-form" action="{{url('/pilih_dosen/create')}}" method="post">
+                @endif
          {{csrf_field()}}
             <div class="form-group" style="display:flex;">
               <div class="input-group" style="display:table;">
