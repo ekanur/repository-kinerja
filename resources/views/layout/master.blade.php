@@ -49,7 +49,7 @@
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
-         <div class="container">
+
     <div class="navbar-header">
        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
                   <span class="sr-only">Toggle navigation</span>
@@ -61,7 +61,7 @@
     </div>
     <div class="navbar-collapse collapse" id="searchbar">
      
-     <ul class="nav navbar-nav navbar-right" style="margin-right:40px">
+     <ul class="nav navbar-nav navbar-right">
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu" style="text-align:right">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -107,8 +107,7 @@
      
     @endif
     </div><!--/.nav-collapse -->
-  </div>
-          
+
         </nav>
       </header>
 
