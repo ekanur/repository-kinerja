@@ -27,21 +27,23 @@ class pilih_dosen extends Controller
 	   // Session::put('userID', Request::input('cari_dosen'));
      // need filter, if nip dosen not found from PTIK.m_dosen, m_jur, m_fak
     $dosen=Dosen::with("jurusan")->whereHas('jurusan', function($q){
-        $q->where('fak_kd', '=', Session::get('userFak'));
-      })->where('dsn_nip', Request::input('cari_dosen'))->get();
+        $q->where('fak_kd', '=', \Session::get('userFak'));
+      })->where(function($query){
+
+            $query->where('dsn_nip', 'LIKE', Request::input('cari_dosen').'%')->orWhere('dsn_nm', 'LIKE', strtoupper(Request::input('cari_dosen')).'%');
+        })->get();
            
         if (!$dosen->isEmpty()) {
-            Session::forget('userID_login');
-            Session::put('userID_login', Request::get('cari_dosen'));
+          Session::forget('userID_login');
           Session::forget('ketDosen');
           Session::put('ketDosen',Request::input('cari_dosen'));
-          Session::put('userID_login',Request::input('cari_dosen'));
+          Session::put('userID_login',Request::input('dsn_nip'));
           foreach ($dosen as $data_dosen) {
             Session::put('ketDosen_nama', $data_dosen->dsn_gelar.$data_dosen->dsn_nm.$data_dosen->dsn_gelar2);
           }
-          return redirect()->back()->with("berhasil", "Berhasil memilih NIP");
+          return redirect()->back()->with("berhasil", "Berhasil mengakses akun dosen");
         }else{
-          return redirect()->back()->with("gagal", "NIP tidak ditemukan");
+          return redirect()->back()->with("gagal", "Akun dosen tidak ditemukan");
         }
        
         

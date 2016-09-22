@@ -26,9 +26,13 @@ class DosenController extends Controller
     public function show($id){
     	// var_dump(\Session::all()); userFak
     	// $dosen=Dosen::with(array("jurusan", "jurusan.fakultas"))->where('dsn_nip', 'LIKE', $id.'%')->where("m_fak.fak_kd", \Session::get('userFak'))->get();
+
     	$dosen=Dosen::with("jurusan")->whereHas('jurusan', function($q){
     		$q->where('fak_kd', '=', \Session::get('userFak'));
-    	})->where('dsn_nip', 'LIKE', $id.'%')->get();
+    	})->where(function($query) use($id){
+
+            $query->where('dsn_nip', 'LIKE', $id.'%')->orWhere('dsn_nm', 'LIKE', strtoupper($id).'%');
+        })->get();
     	// dd($dosen);
     	return response()->json($dosen);
     }

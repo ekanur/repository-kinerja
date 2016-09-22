@@ -94,7 +94,7 @@
       @if($menu['ketdosen'])
 
           <ul class="nav navbar-nav" style="margin:auto">
-            <li style="padding:15px;"><span style="color:yellow">Anda Sedang mengakses Dosen : {{Session::get("ketDosen_nama")}} ({{$menu['ketdosen']}})</span></li>
+            <li style="padding:15px;"><span style="color:yellow">Anda Sedang mengakses Dosen : {{Session::get("ketDosen_nama")}} ({{Session::get("userID_login")}})</span></li>
             <li><a href='{{url("/pilih_dosen/remove")}}' style="padding-top:16px;"><i class="fa fa-close"></i> Ganti Dosen</a></li>
           </ul>
       @else
@@ -104,8 +104,9 @@
                 <form class="navbar-form" action="{{url('/pilih_dosen/create')}}" method="post">
                 @endif
          {{csrf_field()}}
-            <div class="form-group col-md-7">
+            <div class="form-group col-md-8">
               <div class="input-group">
+              <input type="hidden" name="dsn_nip" id="dsn_nip">
                 <input class="form-control" name="cari_dosen" placeholder="Cari NIP Dosen..." autofocus="autofocus" type="text" id="cari_dosen" style="width: 100%;">
                   <span class="input-group-btn" style="width:1%">
                     <button type='submit' class='btn btn-success'><i class="fa fa-university"></i> Pilih Dosen</button>
@@ -287,7 +288,57 @@
         });
        @endif
     });
-      
+
+    @if($menu['userfak'])
+
+        var options={
+        url:function(pharse){
+
+            @if(App::environment()=='production')
+                return "{{secure_url('api/dosen')}}/"+pharse;
+            @else
+                return "{{url('api/dosen')}}/"+pharse;
+            @endif
+        },
+        getValue:function(suggest){
+          $("#dsn_nip").val(suggest.dsn_nip);
+         if (isNaN($("#cari_dosen").val())) {
+          return suggest.dsn_nm ;
+         } else {
+          return suggest.dsn_nip ;
+         }
+
+
+        },
+
+        template:{
+          type:"custom",
+          method: function(value, item){
+                    item.dsn_gelar=(item.dsn_gelar!==null)?item.dsn_gelar:'';
+                    item.dsn_gelar2=(item.dsn_gelar2!==null)?item.dsn_gelar2:'';
+
+                    return "<strong>"+item.dsn_nip+"</strong> - <span>"+item.dsn_gelar+item.dsn_nm+item.dsn_gelar2+"</span> - <em>"+item.jurusan.jur_nm+"</em>";
+          }
+        },
+        list:{
+          showAnimation:{
+            type:"fade",
+            time:400,
+            callback:function(){}
+          },
+          hideAnimation:{
+            type:"slide",
+            time:300,
+            callback:function(){}
+          },
+          onSelectItemEvent:function(){
+            $("#dsn_nip").val($("#cari_dosen").getSelectedItemData().dsn_nip);
+          }
+        }
+      };
+
+      $("#cari_dosen").easyAutocomplete(options);
+    @endif 
     </script>
 
 <?php 
@@ -409,46 +460,6 @@ if($menu['menu']=='Dashboard')
         $('#waktu_pelaksanaan').datepicker();
       });
     </script>
-
-    @if($menu['userfak'])
-    <script>
-
-      var options={
-        url:function(pharse){
-            @if(App::environment()=='production')
-                return "{{secure_url('api/dosen')}}/"+pharse;
-            @else
-                    return "{{url('api/dosen')}}/"+pharse;
-            @endif
-        },
-        getValue:"dsn_nip",
-
-        template:{
-          type:"custom",
-          method: function(value, item){
-                    item.dsn_gelar=(item.dsn_gelar!==null)?item.dsn_gelar:'';
-                    item.dsn_gelar2=(item.dsn_gelar2!==null)?item.dsn_gelar2:'';
-
-                    return "<strong>"+value+"</strong> - <span>"+item.dsn_gelar+item.dsn_nm+item.dsn_gelar2+"</span> - <em>"+item.jurusan.jur_nm+"</em>";
-          }
-        },
-        list:{
-          showAnimation:{
-            type:"fade",
-            time:400,
-            callback:function(){}
-          },
-          hideAnimation:{
-            type:"slide",
-            time:300,
-            callback:function(){}
-          }
-        }
-      };
-
-      $("#cari_dosen").easyAutocomplete(options);
-    </script>
-    @endif
-    
+ 
   </body>
 </html>
