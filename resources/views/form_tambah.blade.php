@@ -16,7 +16,11 @@
                   <h3 class="box-title">Tambah {{$menu['menu']}}</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" method="POST" action="{{url($menu['kategori'].'/tambah')}}" enctype="multipart/form-data">
+                @if(App::environment()=='production')
+                <form role="form" method="POST" action="{{secure_asset($menu['kategori'].'/tambah')}}" enctype="multipart/form-data">
+                  @else
+                    <form role="form" method="POST" action="{{url($menu['kategori'].'/tambah')}}" enctype="multipart/form-data">
+                    @endif
                 {{csrf_field()}}
                 <input type="hidden" id="kategori" value="{{$menu['kategori']}}">
                   <div class="box-body">

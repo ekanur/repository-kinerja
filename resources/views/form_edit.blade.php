@@ -16,8 +16,11 @@
                   <h3 class="box-title">Edit <em>"{{$menu['data']->nama_kegiatan}}"</em></h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" method="POST" action="{{url($menu['kategori'].'/update/'.$menu['data']->id)}}" enctype="multipart/form-data">
-                
+                @if(App::environment()=='production')
+                <form role="form" method="POST" action="{{secure_asset($menu['kategori'].'/update/'.$menu['data']->id)}}" enctype="multipart/form-data">
+                @else
+                    <form role="form" method="POST" action="{{url($menu['kategori'].'/update/'.$menu['data']->id)}}" enctype="multipart/form-data">
+                  @endif
                 {{csrf_field()}}
                 <input type="hidden" name='kategori' id="kategori" value="{{$menu['kategori']}}">
                 <input type="hidden" name="id" id="id" value="{{$menu['data']->id}}">
