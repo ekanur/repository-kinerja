@@ -18,7 +18,7 @@
          		<h3 class="box-title">Data Penelitian</h3>
          	</div>
          	<div class="box-body">
-         		<table class="table table-striped table-bordered table-hover">
+         		<table class="table table-striped table-bordered table-hover" id="data_repo">
          		<thead>
          			<tr>
          				<th>No</th>
@@ -27,7 +27,8 @@
          				<th>Bukti Kinerja</th>
          				<th>URL</th>
          				<th>Waktu Pelaksanaan</th>
-         				<th colspan="2">Opsi</th>
+                        <th></th>
+                        <th></th>
          			</tr>
          		</thead>
          		<tbody>

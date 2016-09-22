@@ -14,7 +14,8 @@
     <link rel="stylesheet" href="{{secure_asset('style/plugins/datepicker/datepicker3.css') }}">
     <link rel="stylesheet" href="{{secure_asset('style/plugins/select2/select2.min.css') }}">
     <link rel="stylesheet" href="{{secure_asset('style/plugins/easyautocomplete/easy-autocomplete.css') }}">
-    <!-- <link rel="stylesheet" href="{{secure_asset('style/plugins/easyautocomplete/easy-autocomplete.themes.css') }}"> -->
+    <link rel="stylesheet" href="{{secure_asset('style/plugins/bootstrap-notify/animate.css') }}">
+    <link rel="stylesheet" href="{{secure_asset('style/plugins/datatables/dataTables.bootstrap.css') }}">
       @else
               <link rel="stylesheet" href="{{asset('style/bootstrap/css/bootstrap.min.css') }}">
               <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -24,7 +25,8 @@
               <link rel="stylesheet" href="{{asset('style/plugins/datepicker/datepicker3.css') }}">
               <link rel="stylesheet" href="{{asset('style/plugins/select2/select2.min.css') }}">
               <link rel="stylesheet" href="{{asset('style/plugins/easyautocomplete/easy-autocomplete.css') }}">
-              <!-- <link rel="stylesheet" href="{{asset('style/plugins/easyautocomplete/easy-autocomplete.themes.css') }}"> -->
+              <link rel="stylesheet" href="{{asset('style/plugins/bootstrap-notify/animate.css') }}">
+              <link rel="stylesheet" href="{{asset('style/plugins/datatables/dataTables.bootstrap.css') }}">
       @endif
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -90,8 +92,9 @@
      
      @if($menu['userfak'])
       @if($menu['ketdosen'])
-          <ul class="nav navbar-nav">
-            <li style="padding:15px;"><span style="color:yellow">Anda Sedang mengakses Dosen : {{$menu['ketdosen']}}</span></li>
+
+          <ul class="nav navbar-nav" style="margin:auto">
+            <li style="padding:15px;"><span style="color:yellow">Anda Sedang mengakses Dosen : {{Session::get("ketDosen_nama")}} ({{$menu['ketdosen']}})</span></li>
             <li><a href='{{url("/pilih_dosen/remove")}}' style="padding-top:16px;"><i class="fa fa-close"></i> Ganti Dosen</a></li>
           </ul>
       @else
@@ -101,7 +104,7 @@
                 <form class="navbar-form" action="{{url('/pilih_dosen/create')}}" method="post">
                 @endif
          {{csrf_field()}}
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-7">
               <div class="input-group">
                 <input class="form-control" name="cari_dosen" placeholder="Cari NIP Dosen..." autofocus="autofocus" type="text" id="cari_dosen" style="width: 100%;">
                   <span class="input-group-btn" style="width:1%">
@@ -182,7 +185,6 @@
         <!-- Main content -->
         <section class="content">
 
-
  <!-- {{var_dump(Session::all())}} -->
           @yield('content')
 
@@ -206,6 +208,8 @@
     <script src="{{secure_asset('style/plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
     <!-- Bootstrap 3.3.5 -->
     <script src="{{secure_asset('style/bootstrap/js/bootstrap.min.js') }}"></script>
+     <!-- bootstrap notify -->
+    <script src="{{ secure_asset('style/plugins/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
     <!-- SlimScroll -->
     <script src="{{secure_asset('style/plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
     <script src="{{secure_asset('style/plugins/datepicker/bootstrap-datepicker.js')}}"></script>
@@ -215,8 +219,9 @@
     <script src="{{ secure_asset('style/plugins/chartjs/Chart.min.js') }}"></script>
     <!-- easyautocomplete -->
     <script src="{{ secure_asset('style/plugins/easyautocomplete/jquery.easy-autocomplete.min.js') }}"></script>
-    <!-- bootstrap notify -->
-    <script src="{{ secure_asset('style/plugins/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
+    <!-- DataTable -->
+    <script src="{{ secure_asset('style/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ secure_asset('style/plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{secure_asset('style/dist/js/app.min.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
@@ -237,11 +242,54 @@
     <script src="{{ asset('style/plugins/easyautocomplete/jquery.easy-autocomplete.min.js') }}"></script>
     <!-- bootstrap notify -->
     <script src="{{ asset('style/plugins/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
+     <!-- DataTable -->
+    <script src="{{ asset('style/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('style/plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{asset('style/dist/js/app.min.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{asset('style/dist/js/demo.js')}}"></script>
         @endif
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+
+      $("#data_repo").DataTable();
+
+
+       @if(session("gagal"))
+        $.notify('{{session("gagal")}}',{
+          type:'danger',
+          timer:1500,
+          delay:500,
+          placement:{
+            from:'top',
+            align:'center'
+          },
+          animate: {
+            enter: 'animated bounceInDown',
+            exit: 'animated bounceOutUp'
+          }
+        });
+      @elseif(session("berhasil"))
+         $.notify('{{session("berhasil")}}',{
+          type:'success',
+           timer:1500,
+           delay:500,
+           placement:{
+            from:'top',
+            align:'center'
+          },
+          animate: {
+            enter: 'animated bounceInDown',
+            exit: 'animated bounceOutUp'
+          }
+        });
+       @endif
+    });
+      
+    </script>
+
 <?php 
 if($menu['menu']=='Dashboard')
 {?>
@@ -401,37 +449,6 @@ if($menu['menu']=='Dashboard')
       $("#cari_dosen").easyAutocomplete(options);
     </script>
     @endif
-
-    @if(session("gagal"))
-    <script>
-    $(document).ready(function(){
-        $.notify({
-          message: '{{session("gagal")}}'
-        },{
-          type:'danger',
-          animate: {
-            enter: 'animated fadeInRight',
-            exit: 'animated fadeOutRight'
-          }
-        });
-    });
-      
-    </script>
-    @elseif(session("berhasil"))
-    <script>
-    $(document).ready(function(){
-      $.notify({
-        message: '{{session("berhasil")}}'
-      },{
-        type:'success',
-        animate: {
-            enter: 'animated fadeInRight',
-            exit: 'animated fadeOutRight'
-        }
-      });
-    });
-      
-    </script>
-    @endif
+    
   </body>
 </html>

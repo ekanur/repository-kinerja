@@ -29,12 +29,16 @@ class pilih_dosen extends Controller
     $dosen=Dosen::with("jurusan")->whereHas('jurusan', function($q){
         $q->where('fak_kd', '=', Session::get('userFak'));
       })->where('dsn_nip', Request::input('cari_dosen'))->get();
-
+           
         if (!$dosen->isEmpty()) {
             Session::forget('userID_login');
             Session::put('userID_login', Request::get('cari_dosen'));
           Session::forget('ketDosen');
-          Session::put('ketDosen',Request::get('cari_dosen'));
+          Session::put('ketDosen',Request::input('cari_dosen'));
+          Session::put('userID_login',Request::input('cari_dosen'));
+          foreach ($dosen as $data_dosen) {
+            Session::put('ketDosen_nama', $data_dosen->dsn_gelar.$data_dosen->dsn_nm.$data_dosen->dsn_gelar2);
+          }
           return redirect()->back()->with("berhasil", "Berhasil memilih NIP");
         }else{
           return redirect()->back()->with("gagal", "NIP tidak ditemukan");

@@ -18,8 +18,9 @@
          		<h3 class="box-title">Data Pendidikan</h3>
          	</div>
          	<div class="box-body">
-         		<table class="table table-striped table-bordered table-hover">
+         		<table  id="data_repo" class="table table-striped table-bordered table-hover">
          		<thead>
+                    
          			<tr>
          				<th>No</th>
          				<th>Nama Kegiatan</th>
@@ -27,7 +28,8 @@
          				<th>Bukti Kinerja</th>
          				<th>URL</th>
          				<th>Waktu Pelaksanaan</th>
-         				<th colspan="2">Opsi</th>
+                        <th></th>
+                        <th></th>
          			</tr>
          		</thead>
          		<tbody>
@@ -49,6 +51,7 @@
                   @endforeach
          		</tbody>
          	</table>
+
          	</div>
          	<div class="box-footer clearfix">
 			{{-- 	<div class="row">
