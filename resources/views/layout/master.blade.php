@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{secure_asset('style/plugins/select2/select2.min.css') }}">
     <link rel="stylesheet" href="{{secure_asset('style/plugins/easyautocomplete/easy-autocomplete.css') }}">
     <link rel="stylesheet" href="{{secure_asset('style/plugins/bootstrap-notify/animate.css') }}">
+    <link rel="stylesheet" href="{{secure_asset('style/plugins/datatables/dataTables.bootstrap.css') }}">
       @else
               <link rel="stylesheet" href="{{asset('style/bootstrap/css/bootstrap.min.css') }}">
               <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -25,6 +26,7 @@
               <link rel="stylesheet" href="{{asset('style/plugins/select2/select2.min.css') }}">
               <link rel="stylesheet" href="{{asset('style/plugins/easyautocomplete/easy-autocomplete.css') }}">
               <link rel="stylesheet" href="{{asset('style/plugins/bootstrap-notify/animate.css') }}">
+              <link rel="stylesheet" href="{{asset('style/plugins/datatables/dataTables.bootstrap.css') }}">
       @endif
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -217,7 +219,9 @@
     <script src="{{ secure_asset('style/plugins/chartjs/Chart.min.js') }}"></script>
     <!-- easyautocomplete -->
     <script src="{{ secure_asset('style/plugins/easyautocomplete/jquery.easy-autocomplete.min.js') }}"></script>
-   
+    <!-- DataTable -->
+    <script src="{{ secure_asset('style/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ secure_asset('style/plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{secure_asset('style/dist/js/app.min.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
@@ -238,6 +242,9 @@
     <script src="{{ asset('style/plugins/easyautocomplete/jquery.easy-autocomplete.min.js') }}"></script>
     <!-- bootstrap notify -->
     <script src="{{ asset('style/plugins/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
+     <!-- DataTable -->
+    <script src="{{ asset('style/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('style/plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{asset('style/dist/js/app.min.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
@@ -246,6 +253,10 @@
 
     <script type="text/javascript">
     $(document).ready(function(){
+
+      $("#data_repo").DataTable();
+
+
        @if(session("gagal"))
         $.notify('{{session("gagal")}}',{
           type:'danger',
