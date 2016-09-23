@@ -31,7 +31,7 @@ class DosenController extends Controller
     		$q->where('fak_kd', '=', \Session::get('userFak'));
     	})->where(function($query) use($id){
 
-            $query->where('dsn_nip', 'LIKE', $id.'%')->orWhere('dsn_nm', 'LIKE', strtoupper($id).'%');
+            $query->where('dsn_nip', 'LIKE', $id.'%')->orWhere('dsn_nm', 'ILIKE', '%'.strtoupper($id).'%');
         })->get();
     	// dd($dosen);
     	return response()->json($dosen);
