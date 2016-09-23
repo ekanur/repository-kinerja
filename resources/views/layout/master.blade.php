@@ -301,7 +301,7 @@
             @endif
         },
         getValue:function(suggest){
-          $("#dsn_nip").val(suggest.dsn_nip);
+          // $("#dsn_nip").val(suggest.dsn_nip);
          if (isNaN($("#cari_dosen").val())) {
           return suggest.dsn_nm ;
          } else {
@@ -331,7 +331,7 @@
             time:300,
             callback:function(){}
           },
-          onSelectItemEvent:function(){
+          onChooseEvent:function(){
             $("#dsn_nip").val($("#cari_dosen").getSelectedItemData().dsn_nip);
           }
         }
