@@ -107,7 +107,7 @@
             <div class="form-group col-md-8">
               <div class="input-group">
               <input type="hidden" name="dsn_nip" id="dsn_nip">
-                <input class="form-control" name="cari_dosen" placeholder="Cari NIP Dosen..." autofocus="autofocus" type="text" id="cari_dosen" style="width: 100%;">
+                <input class="form-control" name="cari_dosen" placeholder="Cari NIP atau nama dosen..." autofocus="autofocus" type="text" id="cari_dosen" style="width: 100%;">
                   <span class="input-group-btn" style="width:1%">
                     <button type='submit' class='btn btn-success'><i class="fa fa-university"></i> Pilih Dosen</button>
                   </span>
@@ -267,10 +267,6 @@
             from:'top',
             align:'center'
           },
-          animate: {
-            enter: 'animated bounceInDown',
-            exit: 'animated bounceOutUp'
-          }
         });
       @elseif(session("berhasil"))
          $.notify('{{session("berhasil")}}',{
@@ -281,10 +277,6 @@
             from:'top',
             align:'center'
           },
-          animate: {
-            enter: 'animated bounceInDown',
-            exit: 'animated bounceOutUp'
-          }
         });
        @endif
     });
