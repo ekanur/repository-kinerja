@@ -323,7 +323,7 @@
             time:300,
             callback:function(){}
           },
-          onChooseEvent:function(){
+          onSelectItemEvent:function(){
             $("#dsn_nip").val($("#cari_dosen").getSelectedItemData().dsn_nip);
           }
         }
