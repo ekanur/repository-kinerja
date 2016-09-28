@@ -45,8 +45,16 @@
                         @endforeach</td>
                      <td>{{$akademik->thaka}}</td>
                      <td>{{$akademik->tgl}}</td>
-                     <td><a href="akademik/edit/{{$akademik->id}}" class='btn btn-sm btn-info'>Edit</a></td>
-                     <td><a href="akademik/hapus/{{$akademik->id}}" class="btn btn-sm btn-danger">Hapus</a></td>
+                     <td>
+                        @if(Session::get('userRole')!='Dosen')
+                            <a href="akademik/edit/{{$akademik->id}}" class='btn btn-sm btn-info'>Edit</a>
+                        @endif
+                    </td>
+                     <td>
+                        @if(Session::get('userRole')!='Dosen')
+                        <a href="akademik/hapus/{{$akademik->id}}" class="btn btn-sm btn-danger">Hapus</a>
+                        @endif
+                    </td>
                   </tr>
                   @endforeach
          		</tbody>
@@ -54,14 +62,14 @@
 
          	</div>
          	<div class="box-footer clearfix">
-			{{-- 	<div class="row">
-					<div class="col-md-1"> --}}
-						<a href="{{url('akademik/tambah')}}" class="btn btn-md btn-success btn-flat pull-left" style="margin-right:10px">Tambah Data</a>
-					{{-- </div>
-					<div class="col-md-1"> --}}
-						<a href="{{url('akademik/import')}}" class="btn btn-md btn-primary btn-flat pull-left">Ambil Data SIAKAD</a>
-{{-- 					</div>
-				</div> --}}
+            @if(Session::get('userRole')!='Dosen')
+                    <a href="{{url('akademik/tambah')}}" class="btn btn-md btn-success btn-flat pull-left" style="margin-right:10px">Tambah Data</a>
+
+                    <a href="{{url('akademik/import')}}" class="btn btn-md btn-primary btn-flat pull-left">Ambil Data SIAKAD</a>
+
+            @endif
+
+						
          	</div>
          </div>
          	

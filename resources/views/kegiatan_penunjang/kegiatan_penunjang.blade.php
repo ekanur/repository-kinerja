@@ -49,15 +49,25 @@
                          @endif
                      </td>
                      <td>{{$kegiatan_penunjang->tgl}}</td>
-                     <td><a href="kegiatan_penunjang/edit/{{$kegiatan_penunjang->id}}" class='btn btn-sm btn-info'>Edit</a></td>
-                     <td><a href="kegiatan_penunjang/hapus/{{$kegiatan_penunjang->id}}" class="btn btn-sm btn-danger">Hapus</a></td>
+                     <td>
+                     @if(Session::get('userRole')!='Dosen')
+                     <a href="kegiatan_penunjang/edit/{{$kegiatan_penunjang->id}}" class='btn btn-sm btn-info'>Edit</a>
+                     @endif
+                     </td>
+                     <td>
+                    @if(Session::get('userRole')!='Dosen')
+                     <a href="kegiatan_penunjang/hapus/{{$kegiatan_penunjang->id}}" class="btn btn-sm btn-danger">Hapus</a>
+                     @endif
+                     </td>
                   </tr>
                   @endforeach
          		</tbody>
          	</table>
          	</div>
          	<div class="box-footer clearfix">
+            @if(Session::get('userRole')!='Dosen')
          		<a href="{{url('kegiatan_penunjang/tambah')}}" class="btn btn-md btn-success btn-flat pull-left">Tambah</a>
+            @endif
          	</div>
          </div>
          	

@@ -21,6 +21,9 @@ class AkademikController extends Controller
 
     public function import($thaka=null)
     {
+        if(Session::get('userRole')=='Dosen'){
+            return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
+        }
     	$thaka = ($thaka==null) ? $this->getNowThaka() : $thaka ;
     	$KdGen=KdGen::select("mt_nm", "mt_kd", "mt_sks")->whereHas('dosen',function($q){
     		$q->where("dsn_nip", Session::get('userID_login'));
@@ -32,7 +35,9 @@ class AkademikController extends Controller
     }
 
     public function import_for_ajax($thaka=null){
-
+        if(Session::get('userRole')=='Dosen'){
+            return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
+        }
     	$thaka = ($thaka==null) ? $this->getNowThaka() : $thaka ;
     	$KdGen=KdGen::select("mt_nm", "mt_kd", "mt_sks")->whereHas('dosen',function($q){
     		$q->where("dsn_nip", Session::get('userID_login'));
@@ -43,7 +48,9 @@ class AkademikController extends Controller
     }
 
     public function save_import(){
-    	
+    	if(Session::get('userRole')=='Dosen'){
+            return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
+        }
     	$data_import=Request::input("data");
     	$thaka=Request::input("thaka");
  		$data=array();
@@ -64,8 +71,6 @@ class AkademikController extends Controller
     	}else{
     		return "gagal";
     	}
-
-    	
 
     }
 

@@ -44,15 +44,25 @@
                         @endforeach</td>
                      <td><a href="{!! $penelitian->url !!}" target="_new">{{$penelitian->url}}</a></td>
                      <td>{{$penelitian->tgl}}</td>
-                     <td><a href="penelitian/edit/{{$penelitian->id}}" class='btn btn-sm btn-info'>Edit</a></td>
-                     <td><a href="penelitian/hapus/{{$penelitian->id}}" class="btn btn-sm btn-danger">Hapus</a></td>
+                     <td>
+                        @if(Session::get('userRole')!='Dosen')
+                            <a href="penelitian/edit/{{$penelitian->id}}" class='btn btn-sm btn-info'>Edit</a>
+                        @endif
+                    </td>
+                    <td>
+                        @if(Session::get('userRole')!='Dosen')
+                        <a href="penelitian/hapus/{{$penelitian->id}}" class="btn btn-sm btn-danger">Hapus</a>
+                        @endif
+                    </td>
                   </tr>
                   @endforeach
          		</tbody>
          	</table>
          	</div>
          	<div class="box-footer clearfix">
+                @if(Session::get('userRole')!='Dosen')
          		<a href="{{url('penelitian/tambah')}}" class="btn btn-md btn-success btn-flat pull-left">Tambah</a>
+                @endif
          	</div>
          </div>
          	

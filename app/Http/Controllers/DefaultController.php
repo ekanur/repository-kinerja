@@ -113,6 +113,10 @@ class DefaultController extends Controller {
 	
 	public function tambah($kategori)
     {
+        if(Session::get('userRole')=='Dosen'){
+            return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
+        }
+
     	if(Request::isMethod('post'))
     	{
     		$data=$this->get_kategori_model($kategori);
@@ -167,7 +171,7 @@ class DefaultController extends Controller {
     	}
     	else
     	{
-    		//show form
+
 
     		switch ($kategori) {
     			case 'akademik':
@@ -190,6 +194,10 @@ class DefaultController extends Controller {
 
 
     public function edit($kategori, $id){
+        if(Session::get('userRole')=='Dosen'){
+            return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
+        }
+
     	$data=$this->get_kategori_model($kategori);
 
     	$model=$data->find($id);
@@ -225,6 +233,9 @@ class DefaultController extends Controller {
 
 
     public function update($kategori, $id){
+        if(Session::get('userRole')=='Dosen'){
+            return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
+        }
     	 $data=$this->get_kategori_model($kategori);
 
     	 $update=$data::find($id);
@@ -416,6 +427,9 @@ class DefaultController extends Controller {
     }
 
     public function hapus($kategori, $id){
+        if(Session::get('userRole')=='Dosen'){
+            return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
+        }
 
     	$data=$this->get_kategori_model($kategori);
 

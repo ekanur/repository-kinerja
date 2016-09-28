@@ -356,23 +356,19 @@
                                       }
                                              $.notify(pesan,{
                                                 type:type,
-                                                 timer:1500,
-                                                 delay:500,
+                                                 timer:5500,
+                                                 delay:5500,
                                                  placement:{
                                                   from:'top',
                                                   align:'center'
                                                 },
                                               });
                                       setTimeout(function(){
-
+                                        console.log("Zzzzzz");
                                       },5500);
                                   window.location='{{url("/akademik")}}';
                                   });
                                 });
-
-
-       
-
     });
 
       $("#pilih_thaka").change(function(){
