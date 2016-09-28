@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf_token" content="{{csrf_token()}}">
     <title>Aplikasi Repository Kinerja | Universitas Negeri Malang</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
       @if(App::environment()=='production')
@@ -254,7 +255,11 @@
 
     <script type="text/javascript">
     $(document).ready(function(){
-
+      $.ajaxSetup({
+        headers:{
+          'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+        }
+      });
       $("#data_repo").DataTable();
 
 
@@ -331,6 +336,50 @@
 
       $("#cari_dosen").easyAutocomplete(options);
     @endif 
+
+    @if($menu['menu']=='Pendidikan')
+
+    $("#dari_siakad").click(function(e){
+      e.preventDefault();
+      var thaka=$("#pilih_thaka").val();
+      var url="{{url('/api/import')}}/"+thaka;
+
+      $.getJSON(url).success(function(response_data){  
+                                  $.post("{{url('/akademik/save_import')}}",
+                                    { data:response_data, thaka:thaka})
+                                  .done(function(msg){
+                                    var pesan="Tidak berhasil menambahkan data pendidikan dari SIAKAD";
+                                    var type="danger";
+                                      if(msg==='berhasil'){
+                                          var pesan="Berhasil menambahkan data pendidikan dari SIAKAD";
+                                          var type="success";
+                                      }
+                                             $.notify(pesan,{
+                                                type:type,
+                                                 timer:1500,
+                                                 delay:500,
+                                                 placement:{
+                                                  from:'top',
+                                                  align:'center'
+                                                },
+                                              });
+                                      setTimeout(function(){
+
+                                      },5500);
+                                  window.location='{{url("/akademik")}}';
+                                  });
+                                });
+
+
+       
+
+    });
+
+      $("#pilih_thaka").change(function(){
+        var thaka=$("#pilih_thaka").val();
+        window.location='{{url("/akademik/import/")}}/'+thaka;
+      });
+    @endif
     </script>
 
 <?php 

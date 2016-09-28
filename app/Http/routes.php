@@ -29,7 +29,11 @@ Route::group(['middleware' => ['web']], function () {
 
 	// get list dosen on pilih_dosen
 	Route::get("/api/dosen/{id}", "DosenController@show");
+	Route::get("/api/import/{thaka}", "AkademikController@import_for_ajax");
 	Route::get("/pilih_dosen/remove", "pilih_dosen@destroy");
+	Route::get("/akademik/import", "AkademikController@import");
+	Route::get("/akademik/import/{thaka}", "AkademikController@import");
+	Route::post("/akademik/save_import", "AkademikController@save_import");
 });
 
 Route::get('/servicecheck','SecurityController@check');

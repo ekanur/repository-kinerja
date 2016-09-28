@@ -19,4 +19,8 @@ class Dosen extends Model
     	return $this->hasOne("App\Jurusan", "jur_kd", "jur_kd");
     }
 
+    // public function kdgen(){
+    //     return $this->hasOne("App\KdGen", "dsn_sandi", "dsn_sandi");
+    // }
+
 }

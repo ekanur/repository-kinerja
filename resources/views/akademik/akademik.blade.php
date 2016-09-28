@@ -26,7 +26,7 @@
          				<th>Nama Kegiatan</th>
          				<th>Surat Penugasan</th>
          				<th>Bukti Kinerja</th>
-         				<th>URL</th>
+         				<th>Thaka</th>
          				<th>Waktu Pelaksanaan</th>
                         <th></th>
                         <th></th>
@@ -43,7 +43,7 @@
                      <td> @foreach($akademik->bukti_kinerja as $bukti_kinerja)
                                 <a href="{{url('uploads/')."/".$bukti_kinerja}}">{{$bukti_kinerja}}</a><br/>
                         @endforeach</td>
-                     <td><a href="{!! $akademik->url !!}" target="_new">{{$akademik->url}}</a></td>
+                     <td>{{$akademik->thaka}}</td>
                      <td>{{$akademik->tgl}}</td>
                      <td><a href="akademik/edit/{{$akademik->id}}" class='btn btn-sm btn-info'>Edit</a></td>
                      <td><a href="akademik/hapus/{{$akademik->id}}" class="btn btn-sm btn-danger">Hapus</a></td>
@@ -59,7 +59,7 @@
 						<a href="{{url('akademik/tambah')}}" class="btn btn-md btn-success btn-flat pull-left" style="margin-right:10px">Tambah Data</a>
 					{{-- </div>
 					<div class="col-md-1"> --}}
-						<a href="{{url('akademik/impor')}}" class="btn btn-md btn-primary btn-flat pull-left">Ambil Data SIAKAD</a>
+						<a href="{{url('akademik/import')}}" class="btn btn-md btn-primary btn-flat pull-left">Ambil Data SIAKAD</a>
 {{-- 					</div>
 				</div> --}}
          	</div>
