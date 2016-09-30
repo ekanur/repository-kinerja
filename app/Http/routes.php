@@ -34,6 +34,15 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get("/akademik/import", "AkademikController@import");
 	Route::get("/akademik/import/{thaka}", "AkademikController@import");
 	Route::post("/akademik/save_import", "AkademikController@save_import");
+
+	Route::get("/user", "UserController@index");
+	Route::post("/user/save", "UserController@store");
+	Route::get("/user/status/{user_id}", "UserController@edit");
+	Route::get("/user/hapus/{user_id}", "UserController@hapus");
+	// Route::post("/user/simpan", "UserController@simpan");
+	Route::post("/user/update", "UserController@update");
+
+	Route::get("/api/pegawai/{keyword}", "PegawaiController@index");
 });
 
 Route::get('/servicecheck','SecurityController@check');

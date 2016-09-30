@@ -77,6 +77,16 @@ return [
                     'prefix'   => '',
                     'schema'   => 'dtum',
             ],
+        'pgsql_3'   => [
+                        'driver'    => 'pgsql',
+                        'host'      => env('DB_HOSTS2', '192.168.1.197'),
+                        'database'  => env('DB_DATABASE2','PTIK'),
+                        'username'  => env('DB_USERNAME2','litbangdev'),
+                        'password'  => env('DB_PASSWORD2','123456789'),
+                        'charset'   => 'utf8',
+                        'prefix'    => '',
+                        'schema'    => 'pegawai',
+        ]
 	],
 
     /*

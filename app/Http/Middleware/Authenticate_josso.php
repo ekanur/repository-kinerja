@@ -5,6 +5,7 @@ use Illuminate\Contracts\Auth\Guard;
 use Session;
 use App;
 use DB;
+use App\User;
 include(app_path() . '/josso-php-inc/josso-cfg.inc');
 include(app_path() . '/josso-php-inc/class.jossoagent.php');
 //\Composer\Autoload\includeFile(App\josso-php-inc\josso-cfg.inc);
@@ -46,16 +47,60 @@ class Authenticate_josso {
                 
                 if(isset($user)){
                     $request->merge(array("idUser" =>$user->name));
-                    if(ereg("ADMINREPO",$user->getProperty('role'))){
-                        Session::put('userRole','adminPT');
-                    }elseif(ereg("FAKREPO",$user->getProperty('role'))){
-                        $user_fak=new App\User;
-                        $data_user=$user_fak->where('user_id', '=',$user->name)->get();
-                        foreach ($data_user as $data_user) {
-                            Session::put('userFak',$data_user->user_fak);
-                            Session::put('userRole','Operator '.$data_user->fak_nm);
-                        }
-                    }else{
+                    // if(ereg("ADMINREPO",$user->getProperty('role'))){
+                    //     Session::put('userRole','adminPT');
+                    // }elseif(ereg("FAKREPO",$user->getProperty('role'))){
+                    //     $user_fak=new App\User;
+                    //     $data_user=$user_fak->where('user_id', '=',$user->name)->get();
+                    //     foreach ($data_user as $data_user) {
+                    //         Session::put('userFak',$data_user->user_fak);
+                    //         Session::put('userRole','Admin '.$data_user->fak_nm);
+                    //     }
+                    // }else{
+                    //     Session::put('userRole','Dosen');
+                    //     Session::put('userID_login',$user->name);
+                    // }
+
+
+                    if (User::where([
+                        ["user_fak", "=", '00'],
+                        ["user_id", "=", $user->name]
+                        ])->first()) {
+                       Session::put('userRole','Admin');
+                        Session::put('userFakNm',"Universitas");
+                    }elseif(User::where([
+                        ["user_fak", "<>", '00'],
+                        ["user_id", "=", $user->name],
+                        ["user_level", "=", '1'],
+                        ["status", "=", '1'],
+                        ])->first()){
+
+                         $user_fak=User::where("user_id", "=", $user->name)->get();
+                       
+                        // echo "<pre>";var_dump($user_fak);exit();
+                        foreach ($user_fak as $data_user) {
+
+                                Session::put('userFak',$data_user->user_fak);
+                                Session::put('userRole','Admin');
+                                Session::put('userFakNm',$data_user->fak_nm);
+                            }
+                       
+
+                    }elseif(User::where([
+                        ["user_fak", "<>", '00'],
+                        ["user_id", "=", $user->name],
+                        ["user_level", "=", '2'],
+                        ["status", "=", '1'],
+                        ])->first()){
+                         $user_fak=User::where("user_id", "=", $user->name)->get();
+                         foreach ($user_fak as $data_user) {
+
+                                Session::put('userFak',$data_user->user_fak);
+                                Session::put('userRole','Operator');
+                                Session::put('userFakNm',$data_user->fak_nm);
+                            }
+                    }
+                    else{
                         Session::put('userRole','Dosen');
                         Session::put('userID_login',$user->name);
                     }

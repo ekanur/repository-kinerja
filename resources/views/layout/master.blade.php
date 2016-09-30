@@ -85,7 +85,7 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu" style="text-align:right; margin-right: 15px;">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <span class="hidden-xs">{{{ Session::get('userID') }}} [Hak Akses: {{{ $menu['hakAkses'] }}}]</span>
+                  <span class="hidden-xs">{{{ Session::get('userID') }}} [Hak Akses: {{ Session::get('userRole')}} {{Session::get('userFakNm')}}]</span>
                 </a>
               </li>
             </ul>
@@ -166,6 +166,12 @@
             <li class="treeview <?php if($menu['menu']=='Kegiatan Penunjang') echo "active"; ?>">
               <a href="{{url('kegiatan_penunjang')}}"><i class="fa fa-book"></i> Kegiatan Penunjang</a>
             </li>
+            @if(Session::get('userRole')=='Admin')
+            <li class="treeview <?php if($menu['menu']=='User') echo "active"; ?>">
+              <a href="{{url('user')}}"><i class="fa fa-user"></i> Manajemen User</a>
+            </li>
+            @endif
+
           </ul>
         </section>
         <!-- /.sidebar -->
@@ -335,6 +341,59 @@
       };
 
       $("#cari_dosen").easyAutocomplete(options);
+    @endif
+
+    @if($menu['menu']=='User')
+      var options={
+        url:function(pharse){
+
+            @if(App::environment()=='production')
+                return "{{secure_url('api/pegawai')}}/"+pharse;
+            @else
+                return "{{url('api/pegawai')}}/"+pharse;
+            @endif
+        },
+        getValue:function(suggest){
+          // $("#dsn_nip").val(suggest.dsn_nip);
+         // if (isNaN($("#cari_dosen").val())) {
+         //  return suggest.dsn_nm ;
+         // } else {
+         //  return suggest.dsn_nip ;
+         // }
+         return suggest.nip;
+
+        },
+
+        template:{
+          type:"custom",
+          method: function(value, item){
+                    item.gelar_depan=(item.gelar_depan!==null)?item.gelar_depan:'';
+                    item.gelar_belakang=(item.gelar_belakang!==null)?item.gelar_belakang:'';
+
+                    return "<strong>"+item.nip+"</strong> - <span>"+item.gelar_depan+item.nama_pegawai+item.gelar_belakang+"</span>";
+          }
+        },
+        list:{
+          showAnimation:{
+            type:"fade",
+            time:400,
+            callback:function(){}
+          },
+          hideAnimation:{
+            type:"slide",
+            time:300,
+            callback:function(){}
+          }
+        }
+      };
+
+      $("#user_id").easyAutocomplete(options);
+
+
+      $("#user_status").change(function(){
+        var user_id=$(this).val();
+        window.location="{{url('user/status/')}}/"+user_id;
+      });
     @endif 
 
     @if($menu['menu']=='Pendidikan')
