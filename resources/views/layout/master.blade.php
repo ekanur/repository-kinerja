@@ -171,7 +171,13 @@
               <a href="{{url('user')}}"><i class="fa fa-user"></i> Manajemen User</a>
             </li>
             @endif
-
+              <li class="header">DOKUMEN</li>
+              <li class="treeview {{{ ($menu['menu']=='Dokumen')?'active':''}}}">
+                  <a href="{{{ url('/') }}}/dokumen/user_manual_1.0.pdf" target="_blank">
+                      <i class="fa fa-user"></i> <span>Panduan Pengguna</span>
+                      <!--<i class="fa fa-angle-left pull-right"></i>-->
+                  </a>
+              </li>
           </ul>
         </section>
         <!-- /.sidebar -->
