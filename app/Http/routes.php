@@ -43,6 +43,9 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post("/user/update", "UserController@update");
 
 	Route::get("/api/pegawai/{keyword}", "PegawaiController@index");
+
+	Route::get("/penelitian/import", "PenelitianController@import");
+	Route::get("/pengabdian/import", "PengabdianController@import");
 });
 
 Route::get('/servicecheck','SecurityController@check');

@@ -26,10 +26,12 @@ class AkademikController extends Controller
             // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
         }
     	$thaka = ($thaka==null) ? $this->getNowThaka() : $thaka ;
+        $mt_kd=Akademik::select("mt_kd")->where('nip_dosen', Session::get('userID_login'))->whereNotNull("mt_kd")->get();
+
+
     	$KdGen=KdGen::select("mt_nm", "mt_kd", "mt_sks")->whereHas('dosen',function($q){
     		$q->where("dsn_nip", Session::get('userID_login'));
-    	})->where("thaka", $thaka)->groupBy( "mt_nm", "mt_kd", "mt_sks")->get();
-    	
+    	})->whereNotIn("mt_kd", $mt_kd)->where("thaka", $thaka)->groupBy( "mt_nm", "mt_kd", "mt_sks")->get();
 
     	$menu=array('menu'=>'Pendidikan','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'), 'thaka'=>$thaka, "data_kdgen"=>$KdGen);
     	return view("akademik.import")->with('menu', $menu);
@@ -41,10 +43,13 @@ class AkademikController extends Controller
             // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
         }
     	$thaka = ($thaka==null) ? $this->getNowThaka() : $thaka ;
+        $mt_kd=Akademik::select("mt_kd")->where('nip_dosen', Session::get('userID_login'))->whereNotNull("mt_kd")->get();
+
+
     	$KdGen=KdGen::select("mt_nm", "mt_kd", "mt_sks")->whereHas('dosen',function($q){
     		$q->where("dsn_nip", Session::get('userID_login'));
-    	})->where("thaka", $thaka)->groupBy( "mt_nm", "mt_kd", "mt_sks")->get();
-
+    	})->whereNotIn("mt_kd", $mt_kd)->where("thaka", $thaka)->groupBy( "mt_nm", "mt_kd", "mt_sks")->get();
+        // dd($KdGen);
     	return response()->json($KdGen);
     	
     }
@@ -64,7 +69,8 @@ class AkademikController extends Controller
     				"thaka"=>$thaka,
     				"created_at"=>date("Y-m-d"),
     				"created_by"=>Session::get("userID"),
-    				"nip_dosen"=>Session::get("userID_login"),
+                    "nip_dosen"=>Session::get("userID_login"),
+    				"mt_kd"=>$akademik['mt_kd'],
     			);
 
     	}

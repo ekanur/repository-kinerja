@@ -61,7 +61,10 @@
          	</div>
          	<div class="box-footer clearfix">
                 @if(Session::get('userRole')!='Dosen')
-         		<a href="{{url('penelitian/tambah')}}" class="btn btn-md btn-success btn-flat pull-left">Tambah</a>
+         		<a href="{{url('penelitian/tambah')}}" class="btn btn-md btn-success btn-flat pull-left"  style="margin-right:10px">Tambah</a>
+
+                <a href="{{url('penelitian/import')}}" class="btn btn-md btn-primary btn-flat pull-left">Ambil Data LITABMAS</a>
+
                 @endif
          	</div>
          </div>

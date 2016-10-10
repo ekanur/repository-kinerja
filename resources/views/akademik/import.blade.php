@@ -21,7 +21,7 @@
                     <select name="thaka" id="pilih_thaka" class="form-control" style="border:none; background-color:#efefef;font-weight: bolder;width:120px">
                         {{$selected1=""}}
                         {{$selected2=""}}
-                        {{var_dump($menu['thaka'])}}
+                        {{-- {{var_dump($menu['thaka'])}} --}}
                         @for($i=date('Y');$i>=2009; $i--)
                             <option {{($menu['thaka']==$i."2")?"selected":""}} value="{{$i}}2">{{$i}}-Genap</option> 
                             <option {{($menu['thaka']==$i."1")?"selected":""}} value="{{$i}}1">{{$i}}-Ganjil</option> 
