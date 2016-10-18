@@ -29,7 +29,10 @@ Route::group(['middleware' => ['web']], function () {
 
 	// get list dosen on pilih_dosen
 	Route::get("/api/dosen/{id}", "DosenController@show");
-	Route::get("/api/import/{thaka}", "AkademikController@import_for_ajax");
+	Route::get("/api/akademik/{thaka}", "AkademikController@import_for_ajax");
+	Route::get("/api/penelitian/{tahun}", "PenelitianController@import_for_ajax");
+	Route::get("/api/pegawai/{keyword}", "PegawaiController@index");
+
 	Route::get("/pilih_dosen/remove", "pilih_dosen@destroy");
 	Route::get("/akademik/import", "AkademikController@import");
 	Route::get("/akademik/import/{thaka}", "AkademikController@import");
@@ -42,10 +45,12 @@ Route::group(['middleware' => ['web']], function () {
 	// Route::post("/user/simpan", "UserController@simpan");
 	Route::post("/user/update", "UserController@update");
 
-	Route::get("/api/pegawai/{keyword}", "PegawaiController@index");
 
 	Route::get("/penelitian/import", "PenelitianController@import");
 	Route::get("/pengabdian/import", "PengabdianController@import");
+	Route::get("/penelitian/import/{tahun}", "PenelitianController@import");
+	Route::post("/penelitian/save_import", "PenelitianController@save_import");
+	Route::get("/pengabdian/import/{tahun}", "PengabdianController@import");
 });
 
 Route::get('/servicecheck','SecurityController@check');

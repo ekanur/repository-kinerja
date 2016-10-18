@@ -407,7 +407,7 @@
     $("#dari_siakad").click(function(e){
       e.preventDefault();
       var thaka=$("#pilih_thaka").val();
-      var url="{{url('/api/import')}}/"+thaka;
+      var url="{{url('/api/akademik')}}/"+thaka;
 
       $.getJSON(url).success(function(response_data){  
                                   $.post("{{url('/akademik/save_import')}}",
@@ -439,6 +439,48 @@
       $("#pilih_thaka").change(function(){
         var thaka=$("#pilih_thaka").val();
         window.location='{{url("/akademik/import/")}}/'+thaka;
+      });
+    @endif
+
+
+    @if ($menu['menu']=='Penelitian')
+
+    $("#dari_litabmas").click(function(e){
+      e.preventDefault();
+      var tahun=$("#tahun").val();
+      var url="{{url('/api/penelitian')}}/"+tahun;
+
+      $.getJSON(url).success(function(response_data){ 
+                                  $.post("{{url('/penelitian/save_import')}}",
+                                    { data:response_data, tahun:tahun})
+                                  .done(function(msg){
+                                    var pesan="Tidak berhasil menambahkan data pendidikan dari SIAKAD";
+                                    var type="danger";
+                                      if(msg==='berhasil'){
+                                          var pesan="Berhasil menambahkan data pendidikan dari SIAKAD";
+                                          var type="success";
+                                      }
+                                             $.notify(pesan,{
+                                                type:type,
+                                                 timer:5500,
+                                                 delay:5500,
+                                                 placement:{
+                                                  from:'top',
+                                                  align:'center'
+                                                },
+                                              });
+                                      setTimeout(function(){
+                                        console.log("Zzzzzz");
+                                      },5500);
+                                  window.location='{{url("/penelitian")}}';
+                                  });
+                                });
+    });
+
+
+      $("#tahun").change(function(){
+        var tahun=$("#tahun").val();
+        window.location='{{url("/penelitian/import/")}}/'+tahun;
       });
     @endif
     </script>

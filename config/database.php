@@ -95,8 +95,18 @@ return [
                         'password'  => env('DB_PASSWORD','123456789'),
                         'charset'   => 'utf8',
                         'prefix'    => '',
-                        'schema'    => 'ref',
+                        'schema'    => 'data',
         ],
+        "pgsql_5"   => [
+                        'driver'    => 'pgsql',
+                        'host'      => env("DB_HOSTS", "192.168.1.197"),
+                        'database'  => env("DB_DATABASE3", "litabmas"),
+                        'username'  => env("DB_USERNAME", "litbangdev"),
+                        "password"  => env("DB_PASSWORD", "123456789"),
+                        "charset"   => 'utf8',
+                        "prefix"    => '',
+                        "schema"    => 'pegawai'
+        ]
 	],
 
     /*
