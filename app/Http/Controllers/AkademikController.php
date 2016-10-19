@@ -33,26 +33,30 @@ class AkademikController extends Controller
     		$q->where("dsn_nip", Session::get('userID_login'));
     	})->whereNotIn("mt_kd", $mt_kd)->where("thaka", $thaka)->groupBy( "mt_nm", "mt_kd", "mt_sks")->get();
 
+        if (Request::ajax()) {
+            return response()->json($KdGen);
+        }
+
     	$menu=array('menu'=>'Pendidikan','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'), 'thaka'=>$thaka, "data_kdgen"=>$KdGen);
     	return view("akademik.import")->with('menu', $menu);
     }
 
-    public function import_for_ajax($thaka=null){
-        if(Session::get('userRole')=='Dosen'){
-            abort(404);
-            // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
-        }
-    	$thaka = ($thaka==null) ? $this->getNowThaka() : $thaka ;
-        $mt_kd=Akademik::select("mt_kd")->where('nip_dosen', Session::get('userID_login'))->whereNotNull("mt_kd")->get();
+    // public function import_for_ajax($thaka=null){
+    //     if(Session::get('userRole')=='Dosen'){
+    //         abort(404);
+    //         // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
+    //     }
+    // 	$thaka = ($thaka==null) ? $this->getNowThaka() : $thaka ;
+    //     $mt_kd=Akademik::select("mt_kd")->where('nip_dosen', Session::get('userID_login'))->whereNotNull("mt_kd")->get();
 
 
-    	$KdGen=KdGen::select("mt_nm", "mt_kd", "mt_sks")->whereHas('dosen',function($q){
-    		$q->where("dsn_nip", Session::get('userID_login'));
-    	})->whereNotIn("mt_kd", $mt_kd)->where("thaka", $thaka)->groupBy( "mt_nm", "mt_kd", "mt_sks")->get();
-        // dd($KdGen);
-    	return response()->json($KdGen);
+    // 	$KdGen=KdGen::select("mt_nm", "mt_kd", "mt_sks")->whereHas('dosen',function($q){
+    // 		$q->where("dsn_nip", Session::get('userID_login'));
+    // 	})->whereNotIn("mt_kd", $mt_kd)->where("thaka", $thaka)->groupBy( "mt_nm", "mt_kd", "mt_sks")->get();
+    //     // dd($KdGen);
+    // 	return response()->json($KdGen);
     	
-    }
+    // }
 
     public function save_import(){
     	if(Session::get('userRole')=='Dosen'){

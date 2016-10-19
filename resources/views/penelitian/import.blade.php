@@ -43,7 +43,7 @@
                         <th>Judul Penelitian</th>
                         <th>Status</th>
                         <th>Lama Kegiatan</th>
-         				<th>Total Dana</th>
+         				<th>Total Pendanaan</th>
 
          			</tr>
          		</thead>

@@ -195,7 +195,7 @@ class DefaultController extends Controller {
 
 
     public function edit($kategori, $id){
-        if(Session::get('userRole')=='Dosen'){
+        if(Session::get('userRole')=='Dosen' || Session::get("userID_login")==null){
             abort(404);
             // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
         }
@@ -438,6 +438,12 @@ class DefaultController extends Controller {
     	$data=$this->get_kategori_model($kategori);
 
     	$model=$data::findOrfail($id);
+
+        if(($kategori=="penelitian"||$kategori=='pengabdian')){
+            if($model->id_litabmas!=null){
+                $model->forceDelete();
+            }
+        }
 
     	if($model->delete())
     	{

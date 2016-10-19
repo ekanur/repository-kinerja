@@ -407,7 +407,7 @@
     $("#dari_siakad").click(function(e){
       e.preventDefault();
       var thaka=$("#pilih_thaka").val();
-      var url="{{url('/api/akademik')}}/"+thaka;
+      var url="{{url('/akademik/import')}}/"+thaka;
 
       $.getJSON(url).success(function(response_data){  
                                   $.post("{{url('/akademik/save_import')}}",
@@ -448,7 +448,7 @@
     $("#dari_litabmas").click(function(e){
       e.preventDefault();
       var tahun=$("#tahun").val();
-      var url="{{url('/api/penelitian')}}/"+tahun;
+      var url="{{url('/penelitian/import')}}/"+tahun;
 
       $.getJSON(url).success(function(response_data){ 
                                   $.post("{{url('/penelitian/save_import')}}",
@@ -481,6 +481,47 @@
       $("#tahun").change(function(){
         var tahun=$("#tahun").val();
         window.location='{{url("/penelitian/import/")}}/'+tahun;
+      });
+    @endif
+
+    @if($menu['menu']=='Pengabdian')
+      $("#dari_litabmas").click(function(e){
+      e.preventDefault();
+      var tahun=$("#tahun").val();
+      var url="{{url('/pengabdian/import')}}/"+tahun;
+
+      $.getJSON(url).success(function(response_data){ 
+                                  $.post("{{url('/pengabdian/save_import')}}",
+                                    { data:response_data, tahun:tahun})
+                                  .done(function(msg){
+                                    // console.log(msg);
+                                    var pesan="Tidak berhasil menambahkan data pendidikan dari SIAKAD";
+                                    var type="danger";
+                                      if(msg==='berhasil'){
+                                          var pesan="Berhasil menambahkan data pendidikan dari SIAKAD";
+                                          var type="success";
+                                      }
+                                             $.notify(pesan,{
+                                                type:type,
+                                                 timer:5500,
+                                                 delay:5500,
+                                                 placement:{
+                                                  from:'top',
+                                                  align:'center'
+                                                },
+                                              });
+                                      setTimeout(function(){
+                                        console.log("Zzzzzz");
+                                      },5500);
+                                   window.location='{{url("/pengabdian")}}';
+                                  });
+                                });
+    });
+
+
+      $("#tahun").change(function(){
+        var tahun=$("#tahun").val();
+        window.location='{{url("/pengabdian/import/")}}/'+tahun;
       });
     @endif
     </script>
