@@ -15,6 +15,9 @@ error_reporting(E_ALL & ~E_DEPRECATED & ~E_STRICT);
 //Route::get('/', function () {
 //    return view('welcome');
 //});
+if (App::environment('production')) {
+	URL::forceSchema('https');
+}
 Route::group(['middleware' => ['web']], function () {
     Route::get('/', ['as' => '/', 'uses' => 'DashboardController@index']);
 	Route::get('/pilih_dosen','pilih_dosen@index');
