@@ -36,6 +36,10 @@ class UserController extends Controller
     	// $menu=array('menu'=>'User','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'', 'data'=>$data,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'));
     	// return View::make("user.tambah")->with('menu', $menu);
         // var_dump($request->all());exit();
+
+        if (User::where("user_id", $request->user_id)->count()>0) {
+            return redirect()->back()->with("gagal", "User telah menjadi operator Fakultas");
+        }
         $user=new User;
 
         $user->user_id=$request->user_id;
