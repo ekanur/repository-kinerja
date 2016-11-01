@@ -83,7 +83,11 @@
                       </select>
                     </div><!-- /.form-group -->
                     <div class="form-group">
-                      <label for="surat_penugasan">Ganti Surat penugasan</label><br>
+                      <label for="surat_penugasan">Ganti Surat penugasan</label>
+                      @if($menu['data']->surat_penugasan!='')
+                        ( <a href="{{url('uploads/')."/".$menu['data']->surat_penugasan}}" target="_blank">{{$menu['data']->surat_penugasan}}</a> )
+                      @endif
+                      <br>
                       <div class="btn btn-default btn-file">
                         <i class="fa fa-paperclip"></i> Surat penugasan
                         <input type="file" id="surat_penugasan" name="surat_penugasan">
@@ -91,7 +95,18 @@
                       <p class="help-block">Format file jpg, jpeg, bmp, png</p>
                     </div>
                     <div class="form-group">
-                      <label for="bukti_kinerja[]">Tambah Bukti kinerja</label><br>
+                      <label for="bukti_kinerja[]">Tambah Bukti kinerja</label>
+                      <br>
+                      @if($menu['data']->bukti_kinerja!='')
+
+                      <ul class="list-unstyled">
+                        @foreach($menu['data']->bukti_kinerja as $bukti_kinerja)
+                          <li><a href="{{url('uploads/')."/".$bukti_kinerja}}" target='_blank'>{{$bukti_kinerja}}</a></li>
+                        @endforeach
+                      </ul>
+
+                      @endif
+                      
                       <div class="btn btn-default btn-file">
                         <i class="fa fa-paperclip"></i> Bukti kinerja
                         <input type="file" id="bukti_kinerja[]" name="bukti_kinerja[]" multiple="">

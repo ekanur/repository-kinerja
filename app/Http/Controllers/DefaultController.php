@@ -133,7 +133,7 @@ class DefaultController extends Controller {
     			// $data->bukti_kinerja=$this->multiple_upload($kategori, $file_info_bukti_kinerja);
     			$data->created_at=date('Y-m-d H:i:s');
     			$data->updated_at=null;
-    			$data->created_by=Session::get('userID_login');
+    			$data->created_by=Session::get('userID');
     			$data->updated_by=null;
     			$data->deleted_at=null;
     			$data->nip_dosen=Session::get('userID_login');
@@ -203,6 +203,10 @@ class DefaultController extends Controller {
     	$data=$this->get_kategori_model($kategori);
 
     	$model=$data->find($id);
+
+        $model->bukti_kinerja=explode(",", $model->bukti_kinerja);
+    
+
     	$model->tgl=$this->format_tgl($model->tgl);
 
     	switch ($kategori) {
@@ -273,7 +277,7 @@ class DefaultController extends Controller {
 			// $update->created_at=date('Y-m-d H:i:s');
 			$update->updated_at=date('Y-m-d H:i:s');
 			// $update->created_by="Admin";
-			$update->updated_by=Session::get("userID_login");
+			$update->updated_by=Session::get("userID");
 			// $update->deleted_at=null;
 			// $update->nip_dosen=Session::get('userID_login');
     			
@@ -325,7 +329,7 @@ class DefaultController extends Controller {
                     // $fileName = rand(11111,99 999).'.'.$extension; //filename format
                     
                     // if($tipe_file=='surat_penugasan'){
-                        $fileName = $array_file_info['id']."_surat_tugas_".$kategori.'_'.$original_name.'.'.$extension; //filename format utk surat penugasan
+                    $fileName = $array_file_info['id']."_surat_tugas_".$kategori.'_'.$original_name.'.'.$extension; //filename format utk surat penugasan
                     // }else{
                     //     $fileName = $array_file_info['id']."_".$tipe_file.'_'.$kategori.'.'.$extension; //filename format utk bukti kinerja
                     //     // var_dump($fileName);
