@@ -45,7 +45,7 @@ class PengabdianController extends Controller
     	}
 
     	$menu=array('menu'=>'Pengabdian','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'),"tahun"=>$tahun,"data_litabmas"=>$litabmas);
-    	return view("Pengabdian.import")->with("menu", $menu);
+    	return view("pengabdian.import")->with("menu", $menu);
     }
 
     // public function import_for_ajax($tahun=null){
