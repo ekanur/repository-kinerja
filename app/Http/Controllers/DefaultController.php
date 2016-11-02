@@ -443,11 +443,11 @@ class DefaultController extends Controller {
 
     	$model=$data::findOrfail($id);
 
-        if(($kategori=="penelitian"||$kategori=='pengabdian')){
-            if($model->id_litabmas!=null){
-                $model->forceDelete();
-            }
-        }
+        // if(($kategori=="penelitian"||$kategori=='pengabdian')){
+        //     if($model->id_litabmas!=null){
+        //         $model->forceDelete();
+        //     }
+        // }
 
     	if($model->delete())
     	{

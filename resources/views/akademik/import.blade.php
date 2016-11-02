@@ -42,7 +42,7 @@
          			<tr>
          				<th>No</th>
                         <th>Mata Kuliah</th>
-                        <th>Kode</th>
+                        <th>Kelas-Offering</th>
          				<th>SKS</th>
 
          			</tr>
@@ -58,7 +58,7 @@
                          <tr>
                          <td>{{$i++}}</td>
                          <td><strong>{{$kdgen->mt_nm}}</strong></td>
-                         <td><strong>{{$kdgen->mt_kd}}</strong></td>
+                         <td><strong>{{$kdgen->angkatan}} {{$kdgen->jw_kls}}-{{$kdgen->jw_offr}}</strong></td>
                          <td><strong>{{$kdgen->mt_sks}}</strong></td>
                          
                          
