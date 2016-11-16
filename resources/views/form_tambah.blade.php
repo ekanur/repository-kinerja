@@ -36,15 +36,34 @@
                       <label for="url_kegiatan">URL kegiatan</label>
                       <input type="text" class="form-control" id="url_kegiatan" name="url_kegiatan" placeholder="URL kegiatan" value="{{old('url_kegiatan')}}">
                     </div>
-                    <div class="form-group">
-                      <label for="waktu_pelaksanaan">Waktu pelaksanaan</label>
-                      <div class="input-group">
-                        <div class="input-group-addon">
-                          <i class="fa fa-calendar"></i>
-                        </div>
-                        <input type="text" class="form-control pull-right" id="waktu_pelaksanaan" name="waktu_pelaksanaan" required="" value="{{old('waktu_pelaksanaan')}}">
-                      </div><!-- /.input group -->
-                    </div><!-- /.form group -->
+                    <div class="row-fluid">
+                      <div class="container-fluid" style="padding-left: 0px;padding-right: 0px">
+                        
+                          <div class="form-group col-md-6" style="padding-left:0px;padding-right:10px">
+                            <label for="waktu_pelaksanaan">Waktu pelaksanaan</label>
+                            <div class="input-group">
+                              <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                              </div>
+                              <input type="text" class="form-control pull-right" id="waktu_pelaksanaan" name="waktu_pelaksanaan" value="{{old('waktu_pelaksanaan')}}">
+                            </div><!-- /.input group -->
+                          </div><!-- /.form group -->
+                        
+                        
+                          <div class="form-group col-md-6" style="padding-right:0px;padding-left:10px">
+                            <label for="akhir_pelaksanaan">Hingga</label>
+                            <div class="input-group">
+                              <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                              </div>
+                              <input type="text" class="form-control pull-right" id="akhir_pelaksanaan" name="akhir_pelaksanaan" value="{{old('akhir_pelaksanaan')}}">
+                            </div><!-- /.input group -->
+                          </div><!-- /.form group -->
+                        
+                      </div>
+                    </div>
+                    
+                    
                     <div class="form-group">
                       <label>Tahun akademik</label>
                       <select class="form-control select2 col-md-4" id="thaka" name="thaka">

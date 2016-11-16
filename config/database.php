@@ -58,6 +58,7 @@ return [
             		'engine'    => null,
         	],
 		'pgsql' => [
+        //untuk koneksi utama repository
             		'driver'   => 'pgsql',
             		'host'     => env('DB_HOST', '192.168.1.197'),
             		'database' => env('DB_DATABASE', 'repository'),
@@ -68,6 +69,7 @@ return [
             		'schema'   => 'public',
         	],
         'pgsql_2' => [
+        // untuk mengambil data fakultas, jurusan, dosen, pegawai, dan jadwal matkul di kdgen
                     'driver'   => 'pgsql',
                     'host'     => env('DB_HOST2', '192.168.1.197'),
                     'database' => env('DB_DATABASE2', 'PTIK'),
@@ -88,6 +90,7 @@ return [
                         'schema'    => 'pegawai',
         ],
         "pgsql_4"   => [
+        // untuk mengambil data litabmas.anggotalitabmas pada fungsi import penelitian dan pengabdian dari litabmas
                         'driver'    => 'pgsql',
                         'host'      => env('DB_HOSTS', '192.168.1.197'),
                         'database'  => env('DB_DATABASE3','litabmas'),
@@ -106,6 +109,17 @@ return [
                         "charset"   => 'utf8',
                         "prefix"    => '',
                         "schema"    => 'pegawai'
+        ],
+        "pgsql_6"   => [
+        // untuk mengambil data dna untuk bukti kinerja import data pendidikan
+                        'driver'    => 'pgsql',
+                        "host"      => env("DB_HOSTS", "192.168.1.197"),
+                        "database"  => env("DB_DATABASE2", 'PTIK'),
+                        "username"  => env("DB_USERNAME2", "litbangdev"),
+                        "password"  => env("DB_PASSWORD", "123456789"),
+                        "charset"   => 'utf8',
+                        "prefix"    => '',
+                        "schema"    => 'dna'
         ]
 	],
 

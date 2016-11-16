@@ -44,7 +44,11 @@
                                 <a href="{{url('uploads/')."/".$bukti_kinerja}}">{{$bukti_kinerja}}</a><br/>
                         @endforeach</td>
                      <td>{{$akademik->thaka}}</td>
-                     <td>{{$akademik->tgl}}</td>
+                     <td>
+                        @if($akademik->tgl!=null&&$akademik->akhir_pelaksanaan!=null)
+                        {{$akademik->tgl}} - {{$akademik->akhir_pelaksanaan}}
+                        @endif
+                     </td>
                      <td>
                         @if(Session::get('userRole')!='Dosen')
                             <a href="akademik/edit/{{$akademik->id}}" class='btn btn-sm btn-info'>Edit</a>

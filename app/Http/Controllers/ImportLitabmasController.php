@@ -24,6 +24,4 @@ class ImportLitabmasController extends Controller
         }
     }
 
-
-    public function import($tahun=null){}
 }

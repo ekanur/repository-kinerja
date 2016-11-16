@@ -43,7 +43,11 @@
                                 <a href="{{url('uploads/')."/".$bukti_kinerja}}">{{$bukti_kinerja}}</a><br/>
                         @endforeach</td>
                      <td><a href="{!! $penelitian->url !!}" target="_new">{{$penelitian->url}}</a></td>
-                     <td>{{$penelitian->tgl}}</td>
+                     <td>
+                     @if($penelitian->tgl!=null&&$penelitian->akhir_pelaksanaan!=null)
+                     {{$penelitian->tgl}} - {{$penelitian->akhir_pelaksanaan}}
+                     @endif
+                     </td>
                      <td>
                         @if(Session::get('userRole')!='Dosen')
                             <a href="penelitian/edit/{{$penelitian->id}}" class='btn btn-sm btn-info'>Edit</a>

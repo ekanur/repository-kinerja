@@ -48,7 +48,11 @@
                             <a href="http://{!! $kegiatan_penunjang->url !!}" target="_new">{{$kegiatan_penunjang->url}}</a>
                          @endif
                      </td>
-                     <td>{{$kegiatan_penunjang->tgl}}</td>
+                     <td>
+                     @if($kegiatan_penunjang->tgl!=null&&$kegiatan_penunjang->akhir_pelaksanaan!=null)
+                        {{$kegiatan_penunjang->tgl}} - {{$kegiatan_penunjang->akhir_pelaksanaan}}
+                     @endif
+                     </td>
                      <td>
                      @if(Session::get('userRole')!='Dosen')
                      <a href="kegiatan_penunjang/edit/{{$kegiatan_penunjang->id}}" class='btn btn-sm btn-info'>Edit</a>

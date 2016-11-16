@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Dosen;
 use App\Jurusan;
 use App\Fakultas;
+use App\Verifikator;
 use DB;
 
 
@@ -26,6 +27,7 @@ class DosenController extends Controller
     public function show($id){
     	// var_dump(\Session::all()); userFak
     	// $dosen=Dosen::with(array("jurusan", "jurusan.fakultas"))->where('dsn_nip', 'LIKE', $id.'%')->where("m_fak.fak_kd", \Session::get('userFak'))->get();
+        $verifikator=Verifikator::select("nip_dosen")->where("verifikator", \Session::get("userID"))->get();
 
     	$dosen=Dosen::with("jurusan")->whereHas('jurusan', function($q){
     		$q->where('fak_kd', '=', \Session::get('userFak'));

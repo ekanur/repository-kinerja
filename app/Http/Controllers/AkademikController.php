@@ -9,22 +9,25 @@ use Session;
 use App\Dosen;
 use App\KdGen;
 use App\Akademik;
+use PDF;
+
 
 class AkademikController extends Controller
 {
     public function __construct()
 	{
+        if(Session::get('userRole')=='Dosen'){
+            abort(404);
+        }
+
 		$this->middleware('auth_josso');
-                // SecurityController::check();
-        
+   
 	}
 
     public function import($thaka=null)
     {
-        if(Session::get('userRole')=='Dosen'){
-            abort(404);
-            // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
-        }
+        // $pdf=PDF::loadView("pdf.bukti_kinerja");
+        // return $pdf->stream("file.pdf");
     	$thaka = ($thaka==null) ? $this->getNowThaka() : $thaka ;
         $kd_komp=Akademik::select("kd_komp")->where('nip_dosen', Session::get('userID_login'))->whereNotNull("kd_komp")->get();
 
@@ -59,10 +62,6 @@ class AkademikController extends Controller
     // }
 
     public function save_import(){
-    	if(Session::get('userRole')=='Dosen'){
-            abort(404);
-            // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
-        }
     	$data_import=Request::input("data");
     	$thaka=Request::input("thaka");
  		$data=array();
@@ -70,6 +69,8 @@ class AkademikController extends Controller
     		$data[]=array(
     				"nama_kegiatan"=>"Pengampun matakuliah ".$akademik['mt_nm']." [".$akademik['mt_kd']."] kelas ".$akademik['angkatan'].' '.$akademik['jw_kls'].'-'.$akademik['jw_offr'],
     				"deskripsi"=>"Import dari SIAKAD:".$akademik['mt_nm']." [".$akademik['mt_kd']."] ".$akademik['mt_sks']." SKS",
+                    // "surat_penugasan"=>$this->createSuratPenugasan($akademik['kd_komp']),
+                    // "bukti_kinerja"=>$this->createBuktiKinerja($akademik['kd_komp']),
     				"thaka"=>$thaka,
     				"created_at"=>date("Y-m-d"),
     				"created_by"=>Session::get("userID"),
@@ -84,12 +85,25 @@ class AkademikController extends Controller
     	}else{
     		return "gagal";
     	}
-
     }
 
     public function getNowThaka()
     {
     	$semester = (date("m")<=6) ? 2 : 1 ;
     	return date("Y").$semester;
+    }
+
+    public function createBuktiKinerja($kd_komp)
+    {
+        // select data dna pada kd_komp tersebut,
+        // load data to view
+        // export pdf
+        # code...
+    }
+
+
+    public function exportPDF()
+    {
+        
     }
 }

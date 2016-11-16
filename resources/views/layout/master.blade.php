@@ -170,6 +170,10 @@
             <li class="treeview <?php if($menu['menu']=='User') echo "active"; ?>">
               <a href="{{url('user')}}"><i class="fa fa-user"></i> Manajemen User</a>
             </li>
+            <!-- <li class="treeview <?php if($menu['menu']=='Dosen') echo "active"; ?>">
+              <a href="{{url('dosen')}}"><i class="fa fa-user"></i> List Dosen</a>
+            </li> -->
+
             @endif
               <li class="header">DOKUMEN</li>
               <li class="treeview {{{ ($menu['menu']=='Dokumen')?'active':''}}}">
@@ -643,6 +647,7 @@ if($menu['menu']=='Dashboard')
       $(function () {
         $(".select2").select2();
         $('#waktu_pelaksanaan').datepicker();
+        $('#akhir_pelaksanaan').datepicker();
       });
     </script>
  

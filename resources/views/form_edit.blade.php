@@ -38,15 +38,32 @@
                       <label for="url">URL kegiatan</label>
                       <input type="text" class="form-control" id="url" name="url" value="{{$menu['data']->url}}" placeholder="URL kegiatan" >
                     </div>
-                    <div class="form-group">
-                      <label for="tgl">Waktu pelaksanaan</label>
-                      <div class="input-group">
-                        <div class="input-group-addon">
-                          <i class="fa fa-calendar"></i>
-                        </div>
-                        <input type="text" class="form-control pull-right" id="waktu_pelaksanaan" name="tgl" required="" value="{{$menu['data']->tgl}}">
-                      </div><!-- /.input group -->
-                    </div><!-- /.form group -->
+                    <div class="row-fluid">
+                      <div class="container-fluid" style="padding-left: 0px;padding-right: 0px">
+                        
+                          <div class="form-group col-md-6" style="padding-left:0px;padding-right:10px">
+                            <label for="waktu_pelaksanaan">Waktu pelaksanaan</label>
+                            <div class="input-group">
+                              <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                              </div>
+                              <input type="text" class="form-control pull-right" id="waktu_pelaksanaan" name="tgl" value="{{$menu['data']->tgl}}">
+                            </div><!-- /.input group -->
+                          </div><!-- /.form group -->
+                        
+                        
+                          <div class="form-group col-md-6" style="padding-right:0px;padding-left:10px">
+                            <label for="akhir_pelaksanaan">Hingga</label>
+                            <div class="input-group">
+                              <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                              </div>
+                              <input type="text" class="form-control pull-right" id="akhir_pelaksanaan" name="akhir_pelaksanaan" value="{{$menu['data']->akhir_pelaksanaan}}">
+                            </div><!-- /.input group -->
+                          </div><!-- /.form group -->
+                        
+                      </div>
+                    </div>
                     <div class="form-group">
                       <label>Tahun akademik</label>
                       <select class="form-control select2 col-md-4" id="thaka" name="thaka">

@@ -149,6 +149,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         'Illuminate\Html\HtmlServiceProvider',
         'Barryvdh\Debugbar\ServiceProvider',
+        Barryvdh\DomPDF\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -206,7 +207,8 @@ return [
         'Input'     => 'Illuminate\Support\Facades\Input',
         'Html'      => 'Illuminate\Html\HtmlFacade',
         'Form'      => 'Illuminate\Html\FormFacade',
-        'Debugbar' => 'Barryvdh\Debugbar\Facade',
+        'Debugbar'  => 'Barryvdh\Debugbar\Facade',
+        'PDF'       => Barryvdh\DomPDF\Facade::class,
 
     ],
 

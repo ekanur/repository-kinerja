@@ -46,7 +46,11 @@
                         @endforeach
                      </td>
                      <td><a href="http://{!! $pengabdian->url !!}" target="_new">{{$pengabdian->url}}</a></td>
-                     <td>{{$pengabdian->tgl}}</td>
+                     <td>
+                        @if($pengabdian->tgl!=null && $pengabdian->akhir_pelaksanaan!=null)
+                            {{$pengabdian->tgl}} - {{$pengabdian->akhir_pelaksanaan}}
+                        @endif
+                    </td>
                      <td>
                          @if(Session::get('userRole')!='Dosen')
                          <a href="pengabdian/edit/{{$pengabdian->id}}" class='btn btn-sm btn-info'>Edit</a>

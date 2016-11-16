@@ -120,14 +120,24 @@ class DefaultController extends Controller {
 
     	if(Request::isMethod('post'))
     	{
-    		$data=$this->get_kategori_model($kategori);
+            if (Session::get('userID_login')==null) {
+                session()->flash('error', 'Belum memilih data dosen');
+                return Redirect::to($kategori);
+            }
 
-    			
+
+            $request=new \Illuminate\Http\Request;
+            $this->validate($request, [
+                'waktu_pelaksanaan'=>'date_format:m/d/Y',
+                'akhir_pelaksanaan'=>'date_format:m/d/Y'
+                ]);
+    		$data=$this->get_kategori_model($kategori);
 
     			$data->nama_kegiatan=Request::get('nama_kegiatan');
     			$data->deskripsi=Request::get('deskripsi_kegiatan');
     			$data->url=Request::get('url_kegiatan');
     			$data->tgl=Request::get('waktu_pelaksanaan');
+                $data->akhir_pelaksanaan=Request::get("akhir_pelaksanaan");
     			$data->thaka=Request::get('thaka');
     			// $data->surat_penugasan=$this->single_upload($kategori, $file_info_surat_penugasan);
     			// $data->bukti_kinerja=$this->multiple_upload($kategori, $file_info_bukti_kinerja);
@@ -207,7 +217,8 @@ class DefaultController extends Controller {
         $model->bukti_kinerja=explode(",", $model->bukti_kinerja);
     
 
-    	$model->tgl=$this->format_tgl($model->tgl);
+        $model->tgl=$this->format_tgl($model->tgl);
+    	$model->akhir_pelaksanaan=$this->format_tgl($model->akhir_pelaksanaan);
 
     	switch ($kategori) {
     			case 'akademik':
@@ -243,6 +254,7 @@ class DefaultController extends Controller {
             abort(404);
             // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
         }
+
     	 $data=$this->get_kategori_model($kategori);
 
     	 $update=$data::find($id);
@@ -251,6 +263,7 @@ class DefaultController extends Controller {
 			$update->deskripsi=Request::get('deskripsi');
 			$update->url=Request::get('url');
 			$update->tgl=Request::get('tgl');
+            $update->akhir_pelaksanaan=Request::get("akhir_pelaksanaan");
 			$update->thaka=Request::get('thaka');
 
 			if(Request::file('surat_penugasan')!=null){
