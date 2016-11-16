@@ -23,15 +23,33 @@ class pilih_dosen extends Controller
     }
 
    public function create(){
-    // dd(Session::all());
-	   // Session::put('userID', Request::input('cari_dosen'));
-     // need filter, if nip dosen not found from PTIK.m_dosen, m_jur, m_fak
-    $dosen=Dosen::with("jurusan")->whereHas('jurusan', function($q){
-        $q->where('fak_kd', '=', \Session::get('userFak'));
-      })->where(function($query){
+            if(\Session::get('userFak')=='Pusat'){
+                $dosen=Dosen::with("jurusan")->where(function($query){
 
-            $query->where('dsn_nip', '=', Request::input('cari_dosen'))->orWhere('dsn_nm', '=', strtoupper(Request::input('cari_dosen')));
-        })->get();
+                    $query->where('dsn_nip', '=', Request::input('cari_dosen'))->orWhere('dsn_nm', '=', strtoupper( Request::input('cari_dosen')));
+                })->whereRaw("LENGTH(dsn_nip)=18")->get();
+                // ->whereIn("dsn_nip", $verifikator)
+            }else{
+              // diaktifkan klo sudah pake verifikator
+              // $verifikator=Verifikator::select("nip_dosen")->where("verifikator", \Session::get("userID"))->get();
+
+              $dosen=Dosen::with("jurusan")->whereHas('jurusan', function($q){
+                $q->where('fak_kd', '=', \Session::get('userFak'));
+              })->where(function($query){
+
+                    $query->where('dsn_nip', '=',Request::input('cari_dosen'))->orWhere('dsn_nm', '=', strtoupper( Request::input('cari_dosen')));
+                })->whereRaw("LENGTH(dsn_nip)=18")->get();
+              // ->whereIn("dsn_nip", $verifikator)
+            }
+
+
+
+    // $dosen=Dosen::with("jurusan")->whereHas('jurusan', function($q){
+    //     $q->where('fak_kd', '=', \Session::get('userFak'));
+    //   })->where(function($query){
+
+    //         $query->where('dsn_nip', '=', Request::input('cari_dosen'))->orWhere('dsn_nm', '=', strtoupper(Request::input('cari_dosen')));
+    //     })->get();
            
         if (!$dosen->isEmpty()) {
           Session::forget('userID_login');

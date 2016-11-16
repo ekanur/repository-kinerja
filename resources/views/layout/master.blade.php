@@ -101,7 +101,7 @@
       @else
                 @if(App::environment()=='production')
                 <form class="navbar-form" action="{{secure_url('/pilih_dosen/create')}}" method="post">
-            @else
+                @else
                 <form class="navbar-form" action="{{url('/pilih_dosen/create')}}" method="post">
                 @endif
          {{csrf_field()}}
@@ -327,9 +327,12 @@
         template:{
           type:"custom",
           method: function(value, item){
+
                     item.dsn_gelar=(item.dsn_gelar!==null)?item.dsn_gelar:'';
                     item.dsn_gelar2=(item.dsn_gelar2!==null)?item.dsn_gelar2:'';
-
+                    if (item.jurusan===null) {
+                      item.jurusan={jur_nm:""};
+                    }
                     return "<strong>"+item.dsn_nip+"</strong> - <span>"+item.dsn_gelar+item.dsn_nm+item.dsn_gelar2+"</span> - <em>"+item.jurusan.jur_nm+"</em>";
           }
         },

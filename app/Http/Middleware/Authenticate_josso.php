@@ -66,8 +66,9 @@ class Authenticate_josso {
                         ["user_fak", "=", '00'],
                         ["user_id", "=", $user->name]
                         ])->first()) {
-                       Session::put('userRole','Admin');
+                        Session::put('userRole','Admin');
                         Session::put('userFakNm',"Universitas");
+                        Session::put("userFak", "Pusat");
                     }elseif(User::where([
                         ["user_fak", "<>", '00'],
                         ["user_id", "=", $user->name],

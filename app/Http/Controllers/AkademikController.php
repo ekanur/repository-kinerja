@@ -26,8 +26,6 @@ class AkademikController extends Controller
 
     public function import($thaka=null)
     {
-        // $pdf=PDF::loadView("pdf.bukti_kinerja");
-        // return $pdf->stream("file.pdf");
     	$thaka = ($thaka==null) ? $this->getNowThaka() : $thaka ;
         $kd_komp=Akademik::select("kd_komp")->where('nip_dosen', Session::get('userID_login'))->whereNotNull("kd_komp")->get();
 
@@ -70,7 +68,7 @@ class AkademikController extends Controller
     				"nama_kegiatan"=>"Pengampun matakuliah ".$akademik['mt_nm']." [".$akademik['mt_kd']."] kelas ".$akademik['angkatan'].' '.$akademik['jw_kls'].'-'.$akademik['jw_offr'],
     				"deskripsi"=>"Import dari SIAKAD:".$akademik['mt_nm']." [".$akademik['mt_kd']."] ".$akademik['mt_sks']." SKS",
                     // "surat_penugasan"=>$this->createSuratPenugasan($akademik['kd_komp']),
-                    // "bukti_kinerja"=>$this->createBuktiKinerja($akademik['kd_komp']),
+                    "bukti_kinerja"=>$this->createBuktiKinerja($akademik['kd_komp']),
     				"thaka"=>$thaka,
     				"created_at"=>date("Y-m-d"),
     				"created_by"=>Session::get("userID"),
@@ -95,10 +93,11 @@ class AkademikController extends Controller
 
     public function createBuktiKinerja($kd_komp)
     {
-        // select data dna pada kd_komp tersebut,
-        // load data to view
-        // export pdf
-        # code...
+        $dosen=null;
+        $jadwal=null;
+        $data=array("dosen"=>$dosen);
+        $pdf=PDF::loadView("pdf.bukti_kinerja", $data);
+        return $pdf->stream("file.pdf");
     }
 
 
