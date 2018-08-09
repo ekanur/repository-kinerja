@@ -22,14 +22,16 @@
          <thead>
           <tr>
            <th>No</th>
+              <th>ID Penelitian</th>
            <th>Judul</th>
            <th>Ketua</th>
            <th>Kategori Bid</th>
            <th>Kategori TSE</th>
            <th>Tahun</th>
-           <th>Luaran</th>
            <th></th>
            <th></th>
+            <th></th>
+     
          </tr>
        </thead>
        <tbody>
@@ -39,6 +41,10 @@
 
         <tr>
          <td>{{$i++}}</td>
+         <td><strong data-toggle="tooltip" data-placement="top" >{{$penelitian_non_dilitabmas->id}}</strong></td>
+          <td><strong data-toggle="tooltip" data-placement="top">
+              <a href="penelitian_non_dilitabmas/lihat_non_dilitabmas/{{$penelitian_non_dilitabmas->id}}">
+                {{$penelitian_non_dilitabmas->judul}}</a></strong></td>
          <td><strong data-toggle="tooltip" data-placement="top" >{{$penelitian_non_dilitabmas->judul}}</strong></td>
 
          <td><strong data-toggle="tooltip" data-placement="top" >{{$penelitian_non_dilitabmas->ketua}}</strong></td>
@@ -51,10 +57,10 @@
       </td><td><strong data-toggle="tooltip" data-placement="top">
         {{$penelitian_non_dilitabmas->tahun}}</strong></td>
       </td>                
-      <td>
-      </td> 
+     
 
       @if(Session::get('userRole')!='Dosen')
+       
       <td>
  <div class="dropdown">
           <a class="btn btn-sm btn-warning fa fa-plus-square" id="dropdownMenu1" data-toggle="dropdown" title="Tambahkan Luaran"></a>

@@ -25,11 +25,10 @@
               <th>Judul</th>
               <th>Ketua</th>
               <th>Skema</th><th>Tahun</th>
-              <th>Luaran</th>
-              @if(Session::get('userRole')!='Dosen')
+                           @if(Session::get('userRole')!='Dosen')
               <th></th>
               <th></th>
-              <th></th>
+              <th></th>  
               @endif
             </tr>
           </thead>
@@ -39,8 +38,11 @@
             
             <tr>
              <td>{{$i++}}</td>
-             <td><strong data-toggle="tooltip" data-placement="top" >
-                {{$pengabdian_non_dilitabmas->judul}}</strong></td>
+              <td><strong data-toggle="tooltip" data-placement="top">
+            {{$pengabdian_non_dilitabmas->id}}</strong></td>
+             <td><strong data-toggle="tooltip" data-placement="top">
+              <a href="pengabdian_non_dilitabmas/lihat_peng_non_dilitabmas/{{$pengabdian_non_dilitabmas->id}}">
+                {{$pengabdian_non_dilitabmas->judul}}</a></strong></td>
 
              <td><strong data-toggle="tooltip" data-placement="top" >
                 {{$pengabdian_non_dilitabmas->ketua}}</strong></td>
@@ -50,8 +52,9 @@
           </td><td><strong data-toggle="tooltip" data-placement="top">
             {{$pengabdian_non_dilitabmas->tahun}}</strong></td>
           </td>                
-          <td></td>
+         
           @if(Session::get('userRole')!='Dosen')
+      
           <td>
             
             <div class="dropdown">
@@ -71,12 +74,9 @@
             <li ><a href="pengabdian_non_dilitabmas/luaran_lain_peng/{{$pengabdian_non_dilitabmas->id}}">Lain-Lain</a></li>
           </ul>
             </div>
-
-          </td>
-
-          <td>
-           
-            <a class="btn btn-sm btn-info  fa fa-edit" href="pengabdian_non_dilitabmas/edit_peng_non_dilitabmas/{{$pengabdian_non_dilitabmas->id}}" title="Edit Pengabdian"></a>
+</td>
+<td>
+  <a class="btn btn-sm btn-info  fa fa-edit" href="pengabdian_non_dilitabmas/edit_peng_non_dilitabmas/{{$pengabdian_non_dilitabmas->id}}" title="Edit Pengabdian"></a>
             
           </td>
           <td>

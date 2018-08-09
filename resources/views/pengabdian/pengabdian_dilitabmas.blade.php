@@ -22,10 +22,11 @@
           <thead>
             <tr>
               <th>No</th>
+               <th>ID Peng</th>
               <th>Judul</th>
               <th>Ketua</th>
               <th>Skema</th><th>Tahun</th>
-              <th>Luaran</th>
+            
               @if(Session::get('userRole')!='Dosen')
               <th></th>
               <th></th>
@@ -39,9 +40,12 @@
             
             <tr>
              <td>{{$i++}}</td>
-             <td><strong data-toggle="tooltip" data-placement="top" >
-                {{$pengabdian_dilitabmas->judul}}</strong></td>
+              <td><strong data-toggle="tooltip" data-placement="top">
+            {{$pengabdian_dilitabmas->id}}</strong></td>
 
+              <td><strong data-toggle="tooltip" data-placement="top">
+              <a href="pengabdian_dilitabmas/lihat_peng_dilitabmas/{{$pengabdian_dilitabmas->id}}">
+                {{$pengabdian_dilitabmas->judul}}</a></strong></td>
              <td><strong data-toggle="tooltip" data-placement="top" >
                 {{$pengabdian_dilitabmas->ketua}}</strong></td>
            </td>
@@ -50,8 +54,9 @@
           </td><td><strong data-toggle="tooltip" data-placement="top">
             {{$pengabdian_dilitabmas->tahun}}</strong></td>
           </td>                
-          <td></td>
+         
           @if(Session::get('userRole')!='Dosen')
+            
           <td>
             
             <div class="dropdown">
@@ -71,10 +76,9 @@
               </ul>
             </div>
 
-          </td>
-
-          <td>
-           
+          
+           </td>
+           <td>
             <a class=" btn btn-sm btn-info  fa fa-edit" href="pengabdian_dilitabmas/edit_peng_dilitabmas/{{$pengabdian_dilitabmas->id}}" title="Edit Penelitian"></a>
             
           </td>

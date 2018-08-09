@@ -24,6 +24,7 @@
           @endif
           {{csrf_field()}}
           <input type="hidden" id="kategori" value="{{$menu['kategori']}}">
+             <input type="hidden" id="jenis_penelitian" name="jenis_penelitian" value="dilitabmas">
           <div class="box-body">
             <div class="form-group">
               <label for="judul">Judul</label>

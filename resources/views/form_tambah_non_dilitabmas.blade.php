@@ -24,6 +24,7 @@
           @endif
           {{csrf_field()}}
           <input type="hidden" id="kategori" value="{{$menu['kategori']}}">
+          <input type="hidden" id="jenis_penelitian" name="jenis_penelitian" value="non dilitabmas">
           <div class="box-body">
             <div class="form-group">
               <label for="judul">Judul</label>
@@ -65,10 +66,10 @@
            
             <div class="form-group col-md-6" style="padding-left: 0px;padding-right: 10px">
              <label for="jenis_penelitian">Jenis Penelitian</label>
-             <select class="form-control" name="jenis_penelitian" id="jenis_penelitian">
+             <select class="form-control" name="isi_jenis_penelitian" id="isi_jenis_penelitian">
                <option value="">-- Pilih Jenis Penelitian --</option>   
-               @foreach($menu['data_jenis_penelitian'] as $jenis_penelitian)
-               <option value="{{$jenis_penelitian->jenis_penelitian}}">  {{$jenis_penelitian->jenis_penelitian}}</option>                           
+               @foreach($menu['data_jenis_penelitian'] as $isi_jenis_penelitian)
+               <option value="{{$isi_jenis_penelitian->jenis_penelitian}}">  {{$isi_jenis_penelitian->jenis_penelitian}}</option>                           
                @endforeach
              </select>
            </div>

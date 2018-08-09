@@ -7,6 +7,6 @@ namespace App;
 class kategori_bidang extends BaseModel
 {
     protected $primaryKey='id';
-    protected $table="kategori_bidang";
+    protected $table="isi_kategori_bidang";
     protected $fillable=array('kategori_bidang');
 }

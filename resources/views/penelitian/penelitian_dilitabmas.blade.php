@@ -23,16 +23,18 @@
           <thead>
             <tr>
               <th>No</th>
+               <th>ID Pen</th>
               <th>Judul</th>
               <th>Ketua</th>
               <th>Kategori Bid</th>
               <th>Kategori TSE</th>
               <th>Tahun</th>
-              <th>Luaran</th>
+            
               @if(Session::get('userRole')!='Dosen')
               <th></th>
               <th></th>
               <th></th>
+            
               @endif
             </tr>
           </thead>
@@ -42,7 +44,10 @@
             
             <tr>
              <td>{{$i++}}</td>
-             <td><strong data-toggle="tooltip" data-placement="top" >{{$penelitian_dilitabmas->judul}}</strong></td>
+             <td><strong data-toggle="tooltip" data-placement="top" >{{$penelitian_dilitabmas->id}}</strong></td>
+              <td><strong data-toggle="tooltip" data-placement="top">
+              <a href="penelitian_dilitabmas/lihat_dilitabmas/{{$penelitian_dilitabmas->id}}">
+                {{$penelitian_dilitabmas->judul}}</a></strong></td>
 
              <td><strong data-toggle="tooltip" data-placement="top" >{{$penelitian_dilitabmas->ketua}}</strong></td>
            </td>
@@ -53,9 +58,12 @@
             {{$penelitian_dilitabmas->kategori_tse}}</strong></td>
           </td><td><strong data-toggle="tooltip" data-placement="top">
             {{$penelitian_dilitabmas->tahun}}</strong></td>
-          </td>                
-          <td></td>
+          </td>    
+                          
+        
           @if(Session::get('userRole')!='Dosen')
+         
+  
           <td>
             
             <div class="dropdown">

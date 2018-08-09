@@ -66,7 +66,7 @@ class PengabdianController extends Controller {
 
 // --------------------------------------------------------------
 // --------------------------------------------------------------
-// -----------------------Penelitian-----------------------------
+// -----------------------pengabdian-----------------------------
 // --------------------------------------------------------------
 // --------------------------------------------------------------
 
@@ -97,7 +97,7 @@ class PengabdianController extends Controller {
 
 
 // tambah data
-public function tambah_peng_dilitabmas($kategori)
+public function tambah_peng_dilitabmas()
 {   
 
 
@@ -112,7 +112,7 @@ public function tambah_peng_dilitabmas($kategori)
   {
     if (Session::get('userID_login')==null) {
       session()->flash('error', 'Belum memilih data dosen');
-      return Redirect::to($kategori);
+      return Redirect::to('pengabdian_dilitabmas');
     }
 
 
@@ -120,7 +120,7 @@ public function tambah_peng_dilitabmas($kategori)
     $this->validate($request,[
       'created_at'=>'date_format:Y-m-d H:i:s',
     ]);
-    $data=$this->get_kategori_model($kategori);
+    $data=new App\pengabdian_dilitabmas;
 
     $data->judul=Request::get('judul');
     $data->ketua=Request::get('ketua');
@@ -146,14 +146,14 @@ public function tambah_peng_dilitabmas($kategori)
     $data->updated_by=null;
     $data->deleted_at=null;
     $data->nip_dosen=Session::get('userID_login');
-
+$data->jenis_pengabdian=Request::get('jenis_pengabdian');
     if($data->save()){
       $update=$data::find($data->id);
       $update->save();
-      session()->flash('success', 'Berhasil menambahkan kegiatan '.$kategori.' baru');
+      session()->flash('success', 'Berhasil menambahkan kegiatan baru');
     }
     else{
-      session()->flash('error', 'Gagal menambahkan kegiatan '.$kategori.' ');
+      session()->flash('error', 'Gagal menambahkan kegiatan  ');
     }
 
 
@@ -162,15 +162,10 @@ public function tambah_peng_dilitabmas($kategori)
   else
   {
 
-    switch ($kategori) {
-      case 'pengabdian_dilitabmas':
+    
       $title = 'Pengabdian Dilitabmas';
-      break;
-      case 'pengabdian_non_dilitabmas':
-      $title = 'Pengabdian Non Dilitabmas';
-      break;            
-    }
-    $menu=array('menu'=>$title,'submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'','kategori'=>$kategori,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'),'data_sumberdaya'=>$sumberdaya,'data_skema_peng'=>$skema_pengabdian);
+      
+    $menu=array('menu'=>$title,'submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'','kategori'=>'pengabdian_dilitabmas','userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'),'data_sumberdaya'=>$sumberdaya,'data_skema_peng'=>$skema_pengabdian);
     return View::make('form_tambah_peng_dilitabmas')->with('menu',$menu);
   }       
 
@@ -178,7 +173,7 @@ public function tambah_peng_dilitabmas($kategori)
 
 
 
-public function tambah_peng_non_dilitabmas($kategori)
+public function tambah_peng_non_dilitabmas()
 {   
 
 
@@ -194,7 +189,7 @@ public function tambah_peng_non_dilitabmas($kategori)
   {
     if (Session::get('userID_login')==null) {
       session()->flash('error', 'Belum memilih data dosen');
-      return Redirect::to($kategori);
+      return Redirect::to('pengabdian_non_dilitabmas');
     }
 
 
@@ -202,7 +197,7 @@ public function tambah_peng_non_dilitabmas($kategori)
     $this->validate($request,[
       'created_at'=>'date_format:Y-m-d H:i:s',
     ]);
-    $data=$this->get_kategori_model($kategori);
+    $data=new App\pengabdian_non_dilitabmas;
 
     $data->judul=Request::get('judul');
     $data->ketua=Request::get('ketua');
@@ -212,7 +207,7 @@ public function tambah_peng_non_dilitabmas($kategori)
     $data->anggota_4=Request::get('anggota_4');
     $data->anggota_5=Request::get('anggota_5');
     $data->skema=Request::get('skema_peng');
-    $data->jenis_pengabdian=Request::get('jenis_pengabdian');
+    $data->isi_jenis_pengabdian=Request::get('isi_jenis_pengabdian');
     $data->sumberdaya_iptek=Request::get('sumberdaya');
     $data->tahun_mulai=Request::get('tahun_mulai');
     $data->tahun_selesai=Request::get('tahun_selesai');
@@ -232,14 +227,14 @@ public function tambah_peng_non_dilitabmas($kategori)
     $data->updated_by=null;
     $data->deleted_at=null;
     $data->nip_dosen=Session::get('userID_login');
-
+$data->jenis_pengabdian=Request::get('jenis_pengabdian');
     if($data->save()){
       $update=$data::find($data->id);
       $update->save();
-      session()->flash('success', 'Berhasil menambahkan kegiatan '.$kategori.' baru');
+      session()->flash('success', 'Berhasil menambahkan kegiatan baru');
     }
     else{
-      session()->flash('error', 'Gagal menambahkan kegiatan '.$kategori.' ');
+      session()->flash('error', 'Gagal menambahkan kegiatan ');
     }
 
 
@@ -248,26 +243,18 @@ public function tambah_peng_non_dilitabmas($kategori)
   else
   {
 
-    switch ($kategori) {
-      case 'pengabdian_dilitabmas':
-      $title = 'Pengabdian Dilitabmas';
-      break;
-      case 'pengabdian_non_dilitabmas':
+  
       $title = 'Pengabdian Non Dilitabmas';
-      break;            
-    }
-    $menu=array('menu'=>$title,'submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'','kategori'=>$kategori,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'),'data_sumberdaya'=>$sumberdaya,'data_skema_peng'=>$skema_pengabdian,'data_jenis_penelitian'=>$jenis_penelitian);
+      
+    $menu=array('menu'=>$title,'submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'','kategori'=>'pengabdian_non_dilitabmas','userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'),'data_sumberdaya'=>$sumberdaya,'data_skema_peng'=>$skema_pengabdian,'data_jenis_penelitian'=>$jenis_penelitian);
     return View::make('form_tambah_peng_non_dilitabmas')->with('menu',$menu);
   }       
 
 }
 
 
-
-
-
 // edit dilitabmas
-public function edit_peng_dilitabmas($kategori, $id){
+public function edit_peng_dilitabmas($id){
   $skema_pengabdian=App\skema_pengabdian::all();
   $sumberdaya=App\sumberdaya::all();
 
@@ -276,25 +263,18 @@ public function edit_peng_dilitabmas($kategori, $id){
             // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
   }
 
-  $data=$this->get_kategori_model($kategori);
-
+$data=new App\pengabdian_dilitabmas;
   $model=$data->find($id);
 
-  switch ($kategori) {
-    case 'pengabdian_dilitabmas':
+  
     $title = 'Pengabdian Dilitabmas';
-    break;
-    case 'pengabdian_non_dilitabmas':
-    $title = 'Pengabdian Non Dilitabmas';
-    break;            
-  }
-
-  $menu=array('menu'=>$title,'submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'','kategori'=>$kategori, 'data'=>$model,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'),'data_sumberdaya'=>$sumberdaya,'data_skema_peng'=>$skema_pengabdian);
+  
+  $menu=array('menu'=>$title,'submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'','kategori'=>'pengabdian_dilitabmas', 'data'=>$model,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'),'data_sumberdaya'=>$sumberdaya,'data_skema_peng'=>$skema_pengabdian);
   return View::make('form_edit_peng_dilitabmas')->with('menu', $menu);
 }
 
 
-public function edit_peng_non_dilitabmas($kategori, $id){
+public function edit_peng_non_dilitabmas($id){
  $skema_pengabdian=App\skema_pengabdian::all();
  $sumberdaya=App\sumberdaya::all();
  $jenis_penelitian=App\jenis_penelitian::all();
@@ -304,21 +284,57 @@ public function edit_peng_non_dilitabmas($kategori, $id){
             // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
 }
 
-$data=$this->get_kategori_model($kategori);
+$data=new App\pengabdian_non_dilitabmas;
 
 $model=$data->find($id);
 
-switch ($kategori) {
-  case 'pengabdian_dilitabmas':
-  $title = 'Pengabdian Dilitabmas';
-  break;
-  case 'pengabdian_non_dilitabmas':
+ 
   $title = 'Pengabdian Non Dilitabmas';
-  break;            
+  
+$menu=array('menu'=>$title,'submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'','kategori'=>'pengabdian_non_dilitabmas', 'data'=>$model,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'),'data_sumberdaya'=>$sumberdaya,'data_skema_peng'=>$skema_pengabdian,'data_jenis_penelitian'=>$jenis_penelitian);
+return View::make('form_edit_peng_non_dilitabmas')->with('menu', $menu);
 }
 
-$menu=array('menu'=>$title,'submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'','kategori'=>$kategori, 'data'=>$model,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'),'data_sumberdaya'=>$sumberdaya,'data_skema_peng'=>$skema_pengabdian,'data_jenis_penelitian'=>$jenis_penelitian);
-return View::make('form_edit_peng_non_dilitabmas')->with('menu', $menu);
+
+public function lihat_peng_dilitabmas($id){
+  $skema_pengabdian=App\skema_pengabdian::all();
+  $sumberdaya=App\sumberdaya::all();
+
+  if(Session::get('userRole')=='Dosen' || Session::get("userID_login")==null){
+    abort(404);
+            // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
+  }
+
+$data=new App\pengabdian_dilitabmas;
+  $model=$data->find($id);
+
+  
+    $title = 'Pengabdian Dilitabmas';
+  
+  $menu=array('menu'=>$title,'submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'','kategori'=>'pengabdian_dilitabmas', 'data'=>$model,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'),'data_sumberdaya'=>$sumberdaya,'data_skema_peng'=>$skema_pengabdian);
+  return View::make('lihat_peng_dilitabmas')->with('menu', $menu);
+}
+
+
+public function lihat_peng_non_dilitabmas($id){
+ $skema_pengabdian=App\skema_pengabdian::all();
+ $sumberdaya=App\sumberdaya::all();
+ $jenis_penelitian=App\jenis_penelitian::all();
+
+ if(Session::get('userRole')=='Dosen' || Session::get("userID_login")==null){
+  abort(404);
+            // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
+}
+
+$data=new App\pengabdian_non_dilitabmas;
+
+$model=$data->find($id);
+
+ 
+  $title = 'Pengabdian Non Dilitabmas';
+  
+$menu=array('menu'=>$title,'submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'','kategori'=>'pengabdian_non_dilitabmas', 'data'=>$model,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'),'data_sumberdaya'=>$sumberdaya,'data_skema_peng'=>$skema_pengabdian,'data_jenis_penelitian'=>$jenis_penelitian);
+return View::make('lihat_peng_non_dilitabmas')->with('menu', $menu);
 }
 
 
@@ -367,10 +383,10 @@ public function update_peng_dilitabmas($kategori, $id){
   $update->updated_by=Session::get("userID");
 
   if($update->save()){
-    session()->flash('success', 'Berhasil memperbarui kegiatan '.$kategori);
+    session()->flash('success', 'Berhasil memperbarui kegiatan ' );
   }
   else{
-    session()->flash('error', 'Gagal memperbarui kegiatan '.$kategori);
+    session()->flash('error', 'Gagal memperbarui kegiatan ' );
   }
 
 
@@ -399,7 +415,7 @@ public function update_peng_non_dilitabmas($kategori, $id){
   $update->anggota_3=Request::get('anggota_3');
   $update->anggota_4=Request::get('anggota_4');
   $update->anggota_5=Request::get('anggota_5');
-  $update->jenis_pengabdian=Request::get('jenis_pengabdian');
+  $update->isi_jenis_pengabdian=Request::get('isi_jenis_pengabdian');
   $update->skema=Request::get('skema_peng');
   $update->sumberdaya_iptek=Request::get('sumberdaya');
   $update->tahun_mulai=Request::get('tahun_mulai');
@@ -417,10 +433,10 @@ public function update_peng_non_dilitabmas($kategori, $id){
   $update->updated_by=Session::get("userID");
 
   if($update->save()){
-    session()->flash('success', 'Berhasil memperbarui kegiatan '.$kategori);
+    session()->flash('success', 'Berhasil memperbarui kegiatan ' );
   }
   else{
-    session()->flash('error', 'Gagal memperbarui kegiatan '.$kategori);
+    session()->flash('error', 'Gagal memperbarui kegiatan ' );
   }
 
 
@@ -482,41 +498,27 @@ public function hapus_peng_non_dilitabmas($kategori, $id){
 // ------------------------------------------------------- 
 // -------------------------------------------------------
 
+public function tampil_peng_luaran_buku()
+{
 
-public function luaran_jurnal_peng($kategori, $id){
-  $jenis_publikasi=App\jenis_publikasi::all();
+  $tampil=new App\peng_luaran_buku_ajar;
+  $data=$tampil->where('nip_dosen', '=', Session::get('userID_login'))->orderBy('id', 'DESC')->get();
 
-  if(Session::get('userRole')=='Dosen' || Session::get("userID_login")==null){
-    abort(404);
-            // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
+  $menu=array('menu'=>'tampil_peng_luaran_buku','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'', 'data'=>$data,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'));
+  foreach ($data as $tampil) {
+    $tampil->bukti_kinerja=explode(",", $tampil->bukti_kinerja);
   }
-
-  $data=$this->get_kategori_model($kategori);
-
-  $model=$data->find($id);
-
-  switch ($kategori) {
-    case 'pengabdian_dilitabmas':
-    $title = 'Pengabdian Dilitabmas';
-    break;
-    case 'pengabdian_non_dilitabmas':
-    $title = 'Pengabdian Non Dilitabmas';
-    break;            
-  }
-  $menu=array('menu'=>$title,'submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'','kategori'=>$kategori, 'data'=>$model,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'),'data_jenis_publikasi'=>$jenis_publikasi);
-  return View::make('luaran_jurnal_peng')->with('menu', $menu);
+  return View::make('luaran/peng_luaran_buku')->with('menu',$menu);
 }
-
-
 
 public function luaran_buku_ajar_peng($kategori, $id){
-  $tse=App\tse::all();
+
 
   if(Session::get('userRole')=='Dosen' || Session::get("userID_login")==null){
     abort(404);
             // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
   }
-
+$luaran=new App\peng_luaran_buku_ajar;
   $data=$this->get_kategori_model($kategori);
 
   $model=$data->find($id);
@@ -529,9 +531,174 @@ public function luaran_buku_ajar_peng($kategori, $id){
     $title = 'Pengabdian Non Dilitabmas';
     break;            
   }
-  $menu=array('menu'=>$title,'submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'','kategori'=>$kategori, 'data'=>$model,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'),'data_tse'=>$tse);
-  return View::make('luaran_buku_ajar_peng')->with('menu', $menu);
+
+  $menu=array('menu'=>$title,'submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'','kategori'=>$kategori, 'data'=>$model,'luaran'=>$luaran,'userfak'=>Session::get('userFak'),'id_pengabdian'=>Session::get('id'),'ketdosen'=>Session::get('ketDosen'));
+  return View::make('tambah_peng_luaran_buku_ajar')->with('menu', $menu);
 }
+
+
+
+public function tambah_peng_luaran_buku($kategori, $id){
+  if(Session::get('userRole')=='Dosen'){
+    abort(404);
+            // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
+  }
+
+  $data=$this->get_kategori_model($kategori);
+$luaran=new App\peng_luaran_buku_ajar;
+
+    $luaran->judul=Request::get('judul');
+    $luaran->penerbit=Request::get('penerbit');
+    $luaran->isbn=Request::get('isbn');
+    $luaran->jumlah_halaman=Request::get('jumlah_halaman');
+    $luaran->tahun=Request::get('tahun');
+    $luaran->sumberdana=Request::get('sumberdana');
+    $luaran->dana=Request::get('dana');
+    $luaran->url=Request::get('url');
+    $luaran->created_at=date('Y-m-d H:i:s');
+    $luaran->updated_at=null;
+    $luaran->created_by=Session::get('userID');
+    $luaran->updated_by=null;
+    $luaran->deleted_at=null;
+    $luaran->nip_dosen=Session::get('userID_login');
+    $luaran->id_pengabdian=Request::get('id');
+    $luaran->jenis_pengabdian=Request::get('jenis_pengabdian');
+  
+  if($luaran->save()){
+    Session::flash('success', 'Berhasil memperbarui kegiatan ');
+  }
+  else{
+    Session::flash('error', 'Gagal memperbarui kegiatan ');
+  }
+
+
+  return Redirect::to($kategori);
+
+}
+
+public function hapus_buku($id){
+  if(Session::get('userRole')=='Dosen'){
+    abort(404);
+  }
+
+  exit();
+
+  $data=new App\pen_luaran_buku;
+
+  $model=$data::findOrfail($id);
+
+  if($model->delete())
+  {
+    Session::flash('success', 'Data kegiatan berhasil dihapus');
+  }
+  else{
+    Session::flash('error', 'Data kegiatan gagal dihapus');
+  }
+  return redirect('tampil_pen_luaran_buku');
+}
+
+
+public function tampil_peng_luaran_jurnal()
+{
+
+  $tampil=new App\peng_luaran_jurnal;
+  $data=$tampil->where('nip_dosen', '=', Session::get('userID_login'))->orderBy('id', 'DESC')->get();
+
+  $menu=array('menu'=>'tampil_peng_luaran_jurnal','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'', 'data'=>$data,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'));
+  foreach ($data as $tampil) {
+    $tampil->bukti_kinerja=explode(",", $tampil->bukti_kinerja);
+  }
+  return View::make('luaran/peng_luaran_jurnal')->with('menu',$menu);
+}
+
+
+public function luaran_jurnal_peng($kategori, $id){
+
+
+  if(Session::get('userRole')=='Dosen' || Session::get("userID_login")==null){
+    abort(404);
+            // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
+  }
+$jenis_publikasi=App\jenis_publikasi::all();
+$luaran=new App\peng_luaran_jurnal;
+  $data=$this->get_kategori_model($kategori);
+
+  $model=$data->find($id);
+
+  switch ($kategori) {
+    case 'pengabdian_dilitabmas':
+    $title = 'Pengabdian Dilitabmas';
+    break;
+    case 'pengabdian_non_dilitabmas':
+    $title = 'Pengabdian Non Dilitabmas';
+    break;            
+  }
+
+  $menu=array('menu'=>$title,'submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'','kategori'=>$kategori, 'data'=>$model,'luaran'=>$luaran,'userfak'=>Session::get('userFak'),'id_pengabdian'=>Session::get('id'),'ketdosen'=>Session::get('ketDosen'),'data_jenis_publikasi'=>$jenis_publikasi);
+  return View::make('tambah_peng_luaran_jurnal')->with('menu', $menu);
+}
+
+
+
+public function tambah_peng_luaran_jurnal($kategori, $id){
+  if(Session::get('userRole')=='Dosen'){
+    abort(404);
+            // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
+  }
+$jenis_publikasi=App\jenis_publikasi::all();
+  $data=$this->get_kategori_model($kategori);
+$luaran=new App\peng_luaran_jurnal;
+    $luaran->judul=Request::get('judul');
+    $luaran->penulis_publikasi=Request::get('penulis_publikasi');
+    $luaran->nama_jurnal=Request::get('nama_jurnal');
+    $luaran->jenis_publikasi=Request::get('jenis_publikasi');
+    $luaran->p_issn=Request::get('p_issn');
+    $luaran->e_issn=Request::get('e_issn');
+    $luaran->volume=Request::get('volume');
+    $luaran->nomor=Request::get('nomor');
+    $luaran->halaman_awal=Request::get('halaman_awal');
+    $luaran->halaman_akhir=Request::get('halaman_akhir');
+    $luaran->tahun=Request::get('tahun');
+    $luaran->sumberdana=Request::get('sumberdana');
+    $luaran->dana=Request::get('dana');
+    $luaran->url=Request::get('url');
+    $luaran->created_at=date('Y-m-d H:i:s');
+    $luaran->updated_at=null;
+    $luaran->created_by=Session::get('userID');
+    $luaran->updated_by=null;
+    $luaran->deleted_at=null;
+    $luaran->nip_dosen=Session::get('userID_login');
+    $luaran->id_pengabdian=Request::get('id');
+    $luaran->jenis_pengabdian=Request::get('jenis_pengabdian');
+  
+  if($luaran->save()){
+    Session::flash('success', 'Berhasil memperbarui kegiatan ');
+  }
+  else{
+    Session::flash('error', 'Gagal memperbarui kegiatan ');
+  }
+
+
+  return Redirect::to($kategori);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 public function luaran_pemakalah_peng($kategori, $id){

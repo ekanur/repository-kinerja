@@ -148,10 +148,10 @@
               <ul class="treeview-menu">
 
                <li><a href="{{url('penelitian_dilitabmas')}}">
-                <span class="fa fa-caret-square-o-right">&nbsp;</span> Ditlitabmas
+                <span class="fa fa-genderless">&nbsp;</span>Ditlitabmas
               </a></li>
               <li><a href="{{url('penelitian_non_dilitabmas')}}">
-                <span class="fa fa-caret-square-o-right">&nbsp;</span> Non-Ditlitabmas
+                <span class="fa fa-genderless">&nbsp;</span>Non-Ditlitabmas
               </a></li>
             </ul>
           </li>
@@ -164,10 +164,10 @@
           <ul class="treeview-menu">
 
             <li><a class="" href="{{url('pengabdian_dilitabmas')}}">
-              <span class="fa fa-caret-square-o-right">&nbsp;</span> Ditlitabmas
+              <span class="fa fa-genderless">&nbsp;</span>Ditlitabmas
             </a></li>
             <li><a class="" href="{{url('pengabdian_non_dilitabmas')}}">
-              <span class="fa fa-caret-square-o-right">&nbsp;</span> Non-Ditlitabmas
+              <span class="fa fa-genderless">&nbsp;</span>Non-Ditlitabmas
             </a></li>
 
           </ul>
@@ -177,26 +177,63 @@
 
         <li class="treeview <?php if($menu['menu']=='Luaran') echo "active"; ?>">
          <a href="{{url('/')}}">
-          <i class="fa fa-share-alt"></i> <span>Luaran</span>
+          <i class="fa fa-share-alt"></i> <span>Luaran Penelitian</span>
           <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
 
-          <li><a class="" href="{{url('pengabdian_dilitabmas')}}">
-            <span class="fa fa-caret-square-o-right">&nbsp;</span> Penelitian Ditlitabmas
+          <li><a class="" href="{{url('tampil_pen_luaran_buku')}}">
+            <span class="fa fa-genderless">&nbsp;</span>Buku Ajar
           </a></li>
-          <li><a class="" href="{{url('pengabdian_non_dilitabmas')}}">
-            <span class="fa fa-caret-square-o-right">&nbsp;</span> Penelitian Non-Ditlitabmas
+          <li><a class="" href="{{url('tampil_pen_luaran_jurnal')}}">
+            <span class="fa fa-genderless">&nbsp;</span>Jurnal
+          </a></li>
+           <li><a class="" href="{{url('tampil_pen_luaran_jurnal')}}">
+            <span class="fa fa-genderless">&nbsp;</span>HKI
           </a></li>
 
-          <li><a class="" href="{{url('pengabdian_dilitabmas')}}">
-            <span class="fa fa-caret-square-o-right">&nbsp;</span> Pengabdian Ditlitabmas
+ <li><a class="" href="{{url('tampil_pen_luaran_jurnal')}}">
+            <span class="fa fa-genderless">&nbsp;</span>Pemakalah
           </a></li>
-          <li><a class="" href="{{url('pengabdian_non_dilitabmas')}}">
-            <span class="fa fa-caret-square-o-right">&nbsp;</span> Pengabdian Non-Ditlitabmas
-          </a></li>  
+
+ <li><a class="" href="{{url('tampil_pen_luaran_jurnal')}}">
+            <span class="fa fa-genderless">&nbsp;</span>Luaran Lain
+          </a></li>
+
+
+         
         </ul>
       </li>
+
+
+
+       <li class="treeview <?php if($menu['menu']=='Luaran') echo "active"; ?>">
+         <a href="{{url('/')}}">
+          <i class="fa fa-share-alt"></i> <span>Luaran Pengabdian</span>
+          <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+   <li><a class="" href="{{url('tampil_peng_luaran_buku')}}">
+            <span class="fa fa-genderless">&nbsp;</span>Buku Ajar
+          </a></li>
+          <li><a class="" href="{{url('tampil_peng_luaran_jurnal')}}">
+            <span class="fa fa-genderless">&nbsp;</span>Jurnal
+          </a></li>
+           <li><a class="" href="{{url('tampil_pen_luaran_jurnal')}}">
+            <span class="fa fa-genderless">&nbsp;</span>HKI
+          </a></li>
+
+ <li><a class="" href="{{url('tampil_pen_luaran_jurnal')}}">
+            <span class="fa fa-genderless">&nbsp;</span>Pemakalah
+          </a></li>
+
+ <li><a class="" href="{{url('tampil_pen_luaran_jurnal')}}">
+            <span class="fa fa-genderless">&nbsp;</span>Luaran Lain
+          </a></li>
+
+        </ul>
+      </li>
+
 
 
       <li class="treeview <?php if($menu['menu']=='Kegiatan Penunjang') echo "active"; ?>">
@@ -214,7 +251,7 @@
             <li class="header">DOKUMEN</li>
             <li class="treeview {{{ ($menu['menu']=='Dokumen')?'active':''}}}">
               <a href="{{{ url('/') }}}/dokumen/user_manual_1.0.pdf" target="_blank">
-                <i class="fa fa-user"></i> <span> Panduan Pengguna</span>
+                <i class="fa fa-info-circle"></i> <span> Panduan Pengguna</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
             </li>
