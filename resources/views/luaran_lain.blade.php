@@ -57,10 +57,16 @@
              <label for="sumber_dana">Sumber Dana</label>
              <input type="text" class="form-control" id="sumber_dana" name="sumber_dana" placeholder="Sumber Dana" value="">     
            </div>
-           <div class="form-group col-md-9" style="padding-right: 0px;padding-left: 10px">
-            <label for="dana">Dana</label>
-            <input type="text" class="form-control" id="dana" name="dana" placeholder="Dana kegiatan" value="Rp. {{$menu['data']->dana}}">
-          </div>
+           <div class="form-group col-md-9">
+               
+              <label for="dana">Biaya Publikasi</label>
+              <div class="input-group">
+                <div class="input-group-addon">Rp
+                </div>
+
+                <input type="number" class="form-control" id="dana" name="dana" placeholder="Biaya Publikasi" value="{{old('dana')}}">
+              </div>
+            </div>
           <div class="form-group">
             <label for="url_kegiatan">URL kegiatan</label>
             <input type="text" class="form-control" id="url" name="url" placeholder="URL" value="{{$menu['data']->url}}">

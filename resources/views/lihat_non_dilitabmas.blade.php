@@ -62,69 +62,77 @@
               <label for="anggota_5">Anggota 5</label>
               <input type="text" readonly="" class="form-control" id="anggota_5" name="anggota_5" placeholder="Kosongkan Jika Tidak Ada" value='{{$menu['data']->anggota_5}}'>
             </div>
-
-            <div class="form-group col-md-6" style="padding-left: 0px;padding-right: 10px">
-             <label for="jenis_penelitian">Jenis Penelitian</label>
-              <input type="text" class="form-control" id="jenis_penelitian" readonly="" name="jenis_penelitian"value="{{$menu['data']->jenis_penelitian}}">
+            <div class="row">
+              <div class="form-group col-md-6" >
+               <label for="jenis_penelitian">Jenis Penelitian</label>
+               <input type="text" class="form-control" id="jenis_penelitian" readonly="" name="jenis_penelitian"value="{{$menu['data']->jenis_penelitian}}">
+             </div>
+             
+             <div class="form-group col-md-6" >
+               <label for="skema">Skema</label>
+               <input type="text" class="form-control" id="skema" readonly="" name="skema"value="{{$menu['data']->skema}}">         
+             </div>
            </div>
-           
-           <div class="form-group col-md-6" style="padding-right:0px;padding-left: 10px">
-             <label for="skema">Skema</label>
-                       <input type="text" class="form-control" id="skema" readonly="" name="skema"value="{{$menu['data']->skema}}">         
-           </div>
+           <div class="row">
+             <div class="form-group col-md-6" >
+               <label for="kategori bidang">Kategori Bidang</label>
+               <input type="text" class="form-control" id="kategori_bidang" readonly="" name="kategori_bidang"value="{{$menu['data']->kategori_bidang}}">
+             </div>
 
-           <div class="form-group col-md-6" style="padding-left: 0px;padding-right: 10px">
-             <label for="kategori bidang">Kategori Bidang</label>
-                       <input type="text" class="form-control" id="kategori_bidang" readonly="" name="kategori_bidang"value="{{$menu['data']->kategori_bidang}}">
+             <div class="form-group col-md-6" >
+               <label for="bidang">Bidang</label>
+               <input type="text" class="form-control" id="bidang" readonly="" name="bidang"value="{{$menu['data']->bidang}}">
+             </div>
+
+           </div>
+           <div class="row">
+             <div class="form-group col-md-6" >
+               <label for="kategori tse">Kategori Tujuan Sosial Ekonomi</label>
+               <input type="text" class="form-control" id="kategori_tse" readonly="" name="kategori_tse"value="{{$menu['data']->kategori_tse}}">
+             </div>
+
+             <div class="form-group col-md-6" >
+               <label for="tse">Tujuan Sosial Ekonomi</label>
+               <input type="text" class="form-control" id="tse" readonly="" name="tse"value="{{$menu['data']->tse}}">
+             </div>
+
+           </div>
+           <div class="row">
+             <div class="form-group col-md-4" >
+               <label for="Institusi">Institusi</label>
+               <input type="text" class="form-control" id="sumber_dana" readonly="" name="sumber_dana"value="{{$menu['data']->ins_sumber_dana}}">
+             </div>
+
+             <div class="form-group col-md-8"  >
+              <label for="sumber_dana">Sumber Dana</label>
+              <input type="text" class="form-control" id="sumber_dana" readonly="" name="sumber_dana" value="{{$menu['data']->sumber_dana}}">
+            </div>
+
           </div>
 
-          <div class="form-group col-md-6" style="padding-right: 0px;padding-left: 10px">
-           <label for="bidang">Bidang</label>
-            <input type="text" class="form-control" id="bidang" readonly="" name="bidang"value="{{$menu['data']->bidang}}">
+          <div class="row">
+           <div class="form-group col-md-9" >
+            <label for="dana">Jumlah Dana</label>
+            <div class="input-group">
+              <div class="input-group-addon">Rp
+              </div>
+              <input type="text" class="form-control" id="dana" name="dana" readonly="" placeholder="Dana kegiatan" value="{{$menu['data']->dana}}">
+            </div>
+          </div>
+
+          <div class="form-group col-md-3"  >
+           <label for="tahun">Tahun</label>
+           <input type="text" class="form-control" readonly="" id="tahun" name="tahun" placeholder="Tahun" value="{{$menu['data']->tahun}}">
+           
          </div>
-
-
-         <div class="form-group col-md-6" style="padding-left: 0px;padding-right: 10px">
-           <label for="kategori tse">Kategori TSE</label>
-            <input type="text" class="form-control" id="kategori_tse" readonly="" name="kategori_tse"value="{{$menu['data']->kategori_tse}}">
-        </div>
-
-        <div class="form-group col-md-6" style="padding-right: 0px;padding-left: 10px">
-         <label for="tse">TSE</label>
-          <input type="text" class="form-control" id="tse" readonly="" name="tse"value="{{$menu['data']->tse}}">
        </div>
+       <div class="form-group">
 
-
-       <div class="form-group col-md-4" style="padding-left: 0px;padding-right: 10px">
-         <label for="Institusi">Institusi</label>
-        <input type="text" class="form-control" id="sumber_dana" readonly="" name="sumber_dana"value="{{$menu['data']->ins_sumber_dana}}">
+        <label for="url_kegiatan">URL kegiatan</label>
+        <input type="text" readonly="" class="form-control" id="url" name="url" placeholder="URL" value="{{$menu['data']->url}}">
       </div>
-
-      <div class="form-group col-md-8" style="padding-right:0px;padding-left: 10px">
-        <label for="sumber_dana">Sumber Dana</label>
-        <input type="text" class="form-control" id="sumber_dana" readonly="" name="sumber_dana" value="{{$menu['data']->sumber_dana}}">
-      </div>
-
-
-
-      <div class="form-group col-md-9" style="padding-left: 0px;padding-right: 10px">
-        <label for="dana">Dana</label>
-        <input type="text" class="form-control" id="dana" readonly="" name="dana" placeholder="Dana kegiatan" value="Rp. {{$menu['data']->dana}}">
-      </div>
-
-      <div class="form-group col-md-3" style="padding-right: 0px;padding-left: 10px">
-       <label for="tahun">Tahun</label>
-       <input type="text" class="form-control" readonly="" id="tahun" name="tahun" placeholder="Tahun" value="{{$menu['data']->tahun}}">
-       
-     </div>
-
-     <div class="form-group">
-
-      <label for="url_kegiatan">URL kegiatan</label>
-      <input type="text" readonly="" class="form-control" id="url" name="url" placeholder="URL" value="{{$menu['data']->url}}">
-    </div>
-  </div><!-- /.box-body -->
-</form>
+    </div><!-- /.box-body -->
+  </form>
 </div><!-- /.box -->
 </div>
 </div><!-- /.row -->

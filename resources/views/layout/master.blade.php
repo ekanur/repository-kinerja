@@ -34,7 +34,7 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
     </head>
-    <body class="skin-blue sidebar-mini">
+    <body class="skin-blue sidebar-mini sidebar-collapse">
       <div style="padding: 15px 0;" aria-expanded="true">
         <div class="container-fluid">
           <div class="row">
@@ -59,8 +59,8 @@
 
         <header class="main-header">
           <!-- Logo -->
-          <a href="{{url('/')}}" class="logo">
-            <strong>Repositori Kinerja</strong>
+          <a href="{{url('/')}}" class="logo" >
+            <i class="  fa fa-institution"></i> <strong>Repositari Kinerja  </strong>
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <!-- <span class="logo-mini"><img src="{{asset('style/img/logo-small.png') }}" alt="" /></span> -->
             <!-- logo for regular state and mobile devices -->
@@ -130,7 +130,7 @@
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <!-- <li class="header">MAIN NAVIGATION</li> -->
-            <li class='treeview <?php if($menu["menu"]=="Dashboard") echo "active"; ?>  '>
+            <!-- <li class='treeview <?php if($menu["menu"]=="Dashboard") echo "active"; ?>  '>
               <a href="{{url('/')}}">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
               </a>
@@ -139,7 +139,7 @@
             <li class='treeview <?php if($menu["menu"]=="Pendidikan") echo "active"; ?>  '>
               <a href="{{url('akademik')}}"><i class="fa fa-graduation-cap"></i> <span>Pendidikan</span></a>
             </li>
-
+ -->
             <li class='treeview <?php if($menu["menu"]=="Penelitian") echo "active"; ?>  '>
               <a href="{{url('/')}}">
                 <i class="fa fa-line-chart"></i> <span>Penelitian</span>
@@ -722,8 +722,8 @@
     <script>
       $(function () {
         $(".select2").select2();
-        $('#waktu_pelaksanaan').datepicker();
-        $('#akhir_pelaksanaan').datepicker();
+        $('#waktu_mulai').datepicker();
+        $('#waktu_selesai').datepicker();
       });
     </script>
     

@@ -35,35 +35,39 @@
               <label for="penerbit">Penerbit</label>
               <input type="text" class="form-control" id="penerbit" name="penerbit" placeholder="Penerbit" required="" value="{{old('penerbit')}}">
             </div>
-
-            <div class="form-group col-md-6" style="padding-left: 0px;padding-right: 10px">
+<div class="row">
+            <div class="form-group col-md-6"  >
               <label for="isbn">ISBN</label>
               <input type="text" class="form-control" id="isbn" name="isbn" placeholder="ISBN" value="{{old('isbn')}}">
             </div>
 
-            <div class="form-group col-md-3" style="padding-left: 10px;padding-right: 10px">
+            <div class="form-group col-md-3" >
              <label for="jumlah_halaman">Jumlah Halaman</label>
              <input type="text" class="form-control" id="jumlah_halaman" name="jumlah_halaman" placeholder="Jumlah Halaman" value="{{old('jumlah_halaman')}}">
 
            </div>
-           <div class="form-group col-md-3" style="padding-right: 0px;padding-left: 0px">
+
+           <div class="form-group col-md-3" >
            
              <label for="tahun">Tahun</label>
              <input type="text" class="form-control" id="tahun" name="tahun" placeholder="Tahun" value="{{old('tahun')}}">
-
+            </div>
            </div>
-
-           <div class="form-group col-md-3" style="padding-left: 0px;padding-right: 10px">
+<div class="row">
+           <div class="form-group col-md-3" >
              <label for="sumberdana">Sumber Dana</label>
              <input type="text" class="form-control" id="sumberdana" name="sumberdana" placeholder="Sumber Dana" value="{{old('sumberdana')}}">
 
            </div>
-           <div class="form-group col-md-9" style="padding-right: 0px;padding-left: 10px">
-            <label for="dana">Dana</label>
-            <input type="text" class="form-control" id="dana" name="dana" placeholder="Dana kegiatan" value="{{old('dana')}}">
+          <div class="row">
+       <div class="form-group col-md-9" >
+        <label for="dana">Biaya Publikasi</label>
+        <div class="input-group">
+          <div class="input-group-addon">Rp
           </div>
-
-
+      <input type="text" class="form-control" id="dana" name="dana" readonly="" placeholder="Dana kegiatan" value="{{$menu['data']->dana}}">
+    </div>
+</div></div>
           <div class="form-group">
 
             <label for="url_kegiatan">URL kegiatan</label>

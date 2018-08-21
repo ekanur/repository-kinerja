@@ -22,16 +22,15 @@
         <table class="table table-striped table-bordered table-hover" id="data_repo">
           <thead>
             <tr><th>No</th>
-              <th>ID Luaran</th>
               <th>Jenis Pengabdian</th>
-              <th>ID Pen</th>
+              <th>Judul Pengabdian</th>
               <th>Judul</th>
               <th>Penerbit</th>
               <th>Tahun</th>
               @if(Session::get('userRole')!='Dosen')
               <th></th>
               <th></th>
-                <th></th>
+              <th></th>
               @endif
             </tr>
           </thead>
@@ -41,39 +40,42 @@
             
             <tr>
              <td>{{$i++}}</td>
-             <td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->id}}</strong></td>
-
              <td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->jenis_pengabdian}}</strong></td>
            </td>
-           <td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->id_pengabdian}}</strong></td>
-           </td><td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->judul}}</strong></td>
-           </td><td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->penerbit}}</strong></td><td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->tahun}}</strong></td>
-           </td>
-           </td>
-         
-          @if(Session::get('userRole')!='Dosen')
-            <td>
+           <td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->judul_pengabdian}}</strong></td>
+         </td><td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->judul}}</strong></td>
+       </td><td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->penerbit}}</strong></td><td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->tahun}}</strong></td>
+     </td>
+   </td>
+   
+   @if(Session::get('userRole')!='Dosen')
+   <td>
     <a class="btn btn-sm btn-default  fa fa-eye" href="#" title="Lihat Luaran"></a>
-        </td>     
-          <td>
-           
-            <a class="btn btn-sm btn-info  fa fa-edit" href="#" title="Edit Pengabdian"></a>
-            
-          </td>
-          <td>
-            <div>
-              <a class="btn btn-sm btn-danger fa fa-trash" href="tampil_pen_luaran_buku/hapus_buku/{{$tampil->id}}" title="Hapus Penelitian"></a>
-            </div>              
-          </td>
-          
-          @endif
+  </td>     
+  <td>
+   
+    <a class="btn btn-sm btn-info  fa fa-edit" href="#" title="Edit Pengabdian"></a>
+    
+  </td>
+  <td>
+    <div>
+      <a class="btn btn-sm btn-danger fa fa-trash" href="tampil_pen_luaran_buku/hapus_buku/{{$tampil->id}}" title="Hapus Penelitian"></a>
+    </div>              
+  </td>
+  
+  @endif
 
-        </tr>
-        @endforeach
-      </tbody>
-    </table>
-  </div>
- 
+</tr>
+@endforeach
+</tbody>
+</table>
+ <div class="box-footer clearfix">
+        @if(Session::get('userRole')!='Dosen')
+        <a href="{{url('tambah_non_pen_luaran_buku')}}" class="btn btn-md btn-success btn-flat pull-left glyphicon glyphicon-new-window"  style="margin-right:10px" title="Tambahkan Luaran Tanpa Penelitian"></a>
+        @endif
+      </div>
+</div>
+
 </div>
 
 </div>

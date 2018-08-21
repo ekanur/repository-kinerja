@@ -33,7 +33,7 @@
 
             <div class="form-group">
               <label for="ketua">Ketua</label>
-              <input type="text" class="form-control" id="ketua" name="ketua" placeholder="Ketua" required="" value="{{old('ketua')}}">
+              <input type="text" class="form-control" id="ketua" name="ketua" placeholder="Ketua" required="" value='{{Session::get("ketDosen_nama")}}'>
             </div>
 
 
@@ -63,8 +63,8 @@
               <label for="anggota_5">Anggota 5</label>
               <input type="text" class="form-control" id="anggota_5" name="anggota_5" placeholder="Kosongkan Jika Tidak Ada" value="{{old('anggota_5')}}">
             </div>
-
- <div class="form-group col-md-6" style="padding-left: 0px;padding-right: 10px">
+<div class="row">
+ <div class="form-group col-md-6" >
              <label for="skema_peng">Skema</label>
              <select class="form-control" name="skema_peng" id="skema_peng">
                <option value="">-- Pilih Skema Pengabdian --</option>   
@@ -73,7 +73,7 @@
                @endforeach
              </select>
            </div>
- <div class="form-group col-md-6" style="padding-right: 0px;padding-left: 10px">
+ <div class="form-group col-md-6" >
              <label for="sumberdaya">Sumberdaya IPTEK</label>
              <select class="form-control" name="sumberdaya" id="sumberdaya">
                <option value="">-- Pilih Sumberdaya IPTEK --</option>   
@@ -82,39 +82,60 @@
                @endforeach
              </select>
            </div>
-     <div class="form-group col-md-4" style="padding-left: 0px;padding-right: 10px">
+</div>
+<div class="row">
+
+     <div class="form-group col-md-4" >
       <label for="jumlah_mahasiswa">Jumlah Mahasiswa</label>
       <input type="text" class="form-control" id="jumlah_mahasiswa" name="jumlah_mahasiswa" placeholder="Jumlah Mahasiswa" value="{{old('jumlah_mahasiswa')}}">
       </div>
-       <div class="form-group col-md-4" style="padding-left: 0px;padding-right: 10px">
+       <div class="form-group col-md-4"  >
       <label for="jumlah_alumni">Jumlah Alumni</label>
       <input type="text" class="form-control" id="jumlah_alumni" name="jumlah_alumni" placeholder="jumlah_alumni" value="{{old('jumlah_alumni')}}">
     </div>
-       <div class="form-group col-md-4" style="padding-left: 0px;padding-right: 10px">
+       <div class="form-group col-md-4" >
       <label for="jumlah_staf">Jumlah Staf Pendukung</label>
       <input type="text" class="form-control" id="jumlah_staf" name="jumlah_staf" placeholder="Jumlah Staf" value="{{old('jumlah_staf')}}">
     </div>
 
-     <div class="form-group col-md-4" style="padding-left: 0px;padding-right: 10px">
+    </div>
+<div class="row">
+     <div class="form-group col-md-4" >
       <label for="lama_kegiatan">Lama Kegiatan</label>
       <input type="text" class="form-control" id="lama_kegiatan" name="lama_kegiatan" placeholder="Lama kegiatan" value="{{old('lama_kegiatan')}}">
     </div>
 
-     <div class="form-group col-md-8" style="padding-left: 0px;padding-right: 10px">
+     <div class="form-group col-md-8" >
       <label for="sumber_dana">Sumber Dana</label>
       <input type="text" class="form-control" id="sumber_dana" name="sumber_dana" placeholder="Sumber Dana kegiatan" value="{{old('sumber_dana')}}">
     </div>
+</div>
 
-     <div class="form-group col-md-9" style="padding-left: 0px;padding-right: 10px">
-      <label for="dana">Dana</label>
-      <input type="text" class="form-control" id="dana" name="dana" placeholder="Dana kegiatan" value="Rp. {{old('dana')}}">
+    <div class="row">
+ <div class="form-group col-md-9" >
+  <label for="dana">Jumlah Dana</label>
+  <div class="input-group">
+    <div class="input-group-addon">Rp
     </div>
+    <input type="number" class="form-control" id="dana" name="dana" placeholder="Dana kegiatan" value="{{old('dana')}}">
+  </div>
+</div>
 
-    <div class="form-group col-md-3" style="padding-right: 0px;padding-left: 10px">
-     <label for="tahun">Tahun</label>
-     <input type="text" class="form-control" id="tahun" name="tahun" placeholder="Tahun" value="{{old('tahun')}}">
-     
-   </div>
+    <div class="form-group col-md-3">
+       <label for="tahun">Tahun</label>
+               <select class="form-control" name="tahun" id="tahun">
+                <option value="">Pilih Tahun</option>
+                <?php
+                $thn_skr = date('Y');
+                for ($x = $thn_skr; $x >= 2005; $x--) {
+                ?>
+                    <option value=" {{$x}} ">{{$x}}</option>
+                <?php
+                }
+                ?>
+            </select>
+   </div></div>
+
 
    <div class="form-group">
 

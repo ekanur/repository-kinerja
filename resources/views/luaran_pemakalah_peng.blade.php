@@ -26,9 +26,9 @@
             <input type="hidden" name="id" id="id" value="{{$menu['data']->id}}">
 
             <div class="box-body">
+<div class="row">
 
-
-              <div class="form-group col-md-4" style="padding-left: 0px;padding-right: 5px">
+              <div class="form-group col-md-4" >
                <label for="forum_ilmiah">Forum Ilmiah</label>
                <select class="form-control" name="forum_ilmiah" id="forum_ilmiah">
                  <option value="">-- Pilih Forum Ilmiah --</option>   
@@ -48,11 +48,25 @@
                </select>
              </div>
 
-             <div class="form-group col-md-4" style="padding-right: 0px;padding-left: 10px">
-               <label for="tahun">Tahun</label>
-               <input type="text" class="form-control" id="tahun" name="tahun" placeholder="Tahun" value="{{$menu['data']->tahun}}">
+          <div class="form-group col-md-3" >
+                 
+                 <label for="tahun">Tahun</label>
+                 
+                 <select class="form-control" name="tahun" id="tahun">
+                  <option value="">Pilih Tahun</option>
+                  <?php
+                  $thn_skr = date('Y');
+                  for ($x = $thn_skr; $x >= 2005; $x--) {
+                    ?>
+                    <option value=" {{$x}} ">{{$x}}</option>
+                    <?php
+                  }
+                  ?>
+                </select>
 
+              </div>
              </div>
+
 
              <div class="form-group">
               <label for="judul_makalah">Judul Makalah</label>
@@ -67,43 +81,49 @@
               <label for="institusi_penyelenggara">Institusi Penyelenggara</label>
               <input type="text" class="form-control" id="institusi_penyelenggara" name="institusi_penyelenggara" placeholder="Institusi Penyelenggara" required="" value="">
             </div>
-
-            <div class="form-group col-md-6" style="padding-left: 0px;padding-right: 5px">
+<div class="row">
+            <div class="form-group col-md-6" >
               <label for="tempat_pelaksanaan">Tempat Pelaksanaan</label>
               <input type="text" class="form-control" id="tempat_pelaksanaan" name="tempat_pelaksanaan" placeholder="Temppat Pelaksanaan" value="">
             </div>
 
-            <div class="form-group col-md-3" style="padding-right:0px;padding-left:10px">
-              <label for="Waktu_mulai">Waktu Pelaksanaan</label>
+            <div class="form-group col-md-3" >
+              <label for="waktu_mulai">Waktu Pelaksanaan</label>
               <div class="input-group">
                 <div class="input-group-addon">
                   <i class="fa fa-calendar"></i>
                 </div>
-                <input type="text" class="form-control pull-right" id="akhir_pelaksanaan" name="akhir_pelaksanaan" value="">
+                <input type="text" class="form-control pull-right" id="waktu_mulai" name="waktu_mulai" value="">
               </div>
             </div>
 
-            <div class="form-group col-md-3" style="padding-right:0px;padding-left:10px">
+            <div class="form-group col-md-3" >
               <label for="waktu_selesai">s/d</label>
               <div class="input-group">
                 <div class="input-group-addon">
                   <i class="fa fa-calendar"></i>
                 </div>
-                <input type="text" class="form-control pull-right" id="akhir_pelaksanaan" name="akhir_pelaksanaan" value="">
+                <input type="text" class="form-control pull-right" id="waktu_selesai" name="waktu_selesai" value="">
               </div>
             </div>
-
-            <div class="form-group col-md-3" style="padding-left: 0px;padding-right: 10px">
+          </div>
+<div class="row">
+            <div class="form-group col-md-3" >
              <label for="sumber_dana">Sumber Dana</label>
              <input type="text" class="form-control" id="sumber_dana" name="sumber_dana" placeholder="Sumber Dana" value="">
              
            </div>
-           <div class="form-group col-md-9" style="padding-right: 0px;padding-left: 10px">
-            <label for="dana">Dana</label>
-            <input type="text" class="form-control" id="dana" name="dana" placeholder="Dana kegiatan" value="Rp. {{$menu['data']->dana}}">
-          </div>
+         <div class="form-group col-md-9">
+               
+              <label for="dana">Biaya Publikasi</label>
+              <div class="input-group">
+                <div class="input-group-addon">Rp
+                </div>
 
-
+                <input type="number" class="form-control" id="dana" name="dana" placeholder="Biaya Publikasi" value="{{old('dana')}}">
+              </div>
+            </div>
+</div>
           <div class="form-group">
 
             <label for="url_kegiatan">URL kegiatan</label>

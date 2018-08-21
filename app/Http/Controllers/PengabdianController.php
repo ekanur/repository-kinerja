@@ -146,7 +146,7 @@ public function tambah_peng_dilitabmas()
     $data->updated_by=null;
     $data->deleted_at=null;
     $data->nip_dosen=Session::get('userID_login');
-$data->jenis_pengabdian=Request::get('jenis_pengabdian');
+    $data->jenis_pengabdian=Request::get('jenis_pengabdian');
     if($data->save()){
       $update=$data::find($data->id);
       $update->save();
@@ -163,8 +163,8 @@ $data->jenis_pengabdian=Request::get('jenis_pengabdian');
   {
 
     
-      $title = 'Pengabdian Dilitabmas';
-      
+    $title = 'Pengabdian Dilitabmas';
+    
     $menu=array('menu'=>$title,'submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'','kategori'=>'pengabdian_dilitabmas','userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'),'data_sumberdaya'=>$sumberdaya,'data_skema_peng'=>$skema_pengabdian);
     return View::make('form_tambah_peng_dilitabmas')->with('menu',$menu);
   }       
@@ -227,7 +227,7 @@ public function tambah_peng_non_dilitabmas()
     $data->updated_by=null;
     $data->deleted_at=null;
     $data->nip_dosen=Session::get('userID_login');
-$data->jenis_pengabdian=Request::get('jenis_pengabdian');
+    $data->jenis_pengabdian=Request::get('jenis_pengabdian');
     if($data->save()){
       $update=$data::find($data->id);
       $update->save();
@@ -243,9 +243,9 @@ $data->jenis_pengabdian=Request::get('jenis_pengabdian');
   else
   {
 
-  
-      $title = 'Pengabdian Non Dilitabmas';
-      
+    
+    $title = 'Pengabdian Non Dilitabmas';
+    
     $menu=array('menu'=>$title,'submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'','kategori'=>'pengabdian_non_dilitabmas','userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'),'data_sumberdaya'=>$sumberdaya,'data_skema_peng'=>$skema_pengabdian,'data_jenis_penelitian'=>$jenis_penelitian);
     return View::make('form_tambah_peng_non_dilitabmas')->with('menu',$menu);
   }       
@@ -263,11 +263,11 @@ public function edit_peng_dilitabmas($id){
             // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
   }
 
-$data=new App\pengabdian_dilitabmas;
+  $data=new App\pengabdian_dilitabmas;
   $model=$data->find($id);
 
   
-    $title = 'Pengabdian Dilitabmas';
+  $title = 'Pengabdian Dilitabmas';
   
   $menu=array('menu'=>$title,'submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'','kategori'=>'pengabdian_dilitabmas', 'data'=>$model,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'),'data_sumberdaya'=>$sumberdaya,'data_skema_peng'=>$skema_pengabdian);
   return View::make('form_edit_peng_dilitabmas')->with('menu', $menu);
@@ -288,9 +288,9 @@ $data=new App\pengabdian_non_dilitabmas;
 
 $model=$data->find($id);
 
- 
-  $title = 'Pengabdian Non Dilitabmas';
-  
+
+$title = 'Pengabdian Non Dilitabmas';
+
 $menu=array('menu'=>$title,'submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'','kategori'=>'pengabdian_non_dilitabmas', 'data'=>$model,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'),'data_sumberdaya'=>$sumberdaya,'data_skema_peng'=>$skema_pengabdian,'data_jenis_penelitian'=>$jenis_penelitian);
 return View::make('form_edit_peng_non_dilitabmas')->with('menu', $menu);
 }
@@ -305,11 +305,11 @@ public function lihat_peng_dilitabmas($id){
             // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
   }
 
-$data=new App\pengabdian_dilitabmas;
+  $data=new App\pengabdian_dilitabmas;
   $model=$data->find($id);
 
   
-    $title = 'Pengabdian Dilitabmas';
+  $title = 'Pengabdian Dilitabmas';
   
   $menu=array('menu'=>$title,'submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'','kategori'=>'pengabdian_dilitabmas', 'data'=>$model,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'),'data_sumberdaya'=>$sumberdaya,'data_skema_peng'=>$skema_pengabdian);
   return View::make('lihat_peng_dilitabmas')->with('menu', $menu);
@@ -330,9 +330,9 @@ $data=new App\pengabdian_non_dilitabmas;
 
 $model=$data->find($id);
 
- 
-  $title = 'Pengabdian Non Dilitabmas';
-  
+
+$title = 'Pengabdian Non Dilitabmas';
+
 $menu=array('menu'=>$title,'submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'','kategori'=>'pengabdian_non_dilitabmas', 'data'=>$model,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'),'data_sumberdaya'=>$sumberdaya,'data_skema_peng'=>$skema_pengabdian,'data_jenis_penelitian'=>$jenis_penelitian);
 return View::make('lihat_peng_non_dilitabmas')->with('menu', $menu);
 }
@@ -415,7 +415,7 @@ public function update_peng_non_dilitabmas($kategori, $id){
   $update->anggota_3=Request::get('anggota_3');
   $update->anggota_4=Request::get('anggota_4');
   $update->anggota_5=Request::get('anggota_5');
-  $update->isi_jenis_pengabdian=Request::get('isi_jenis_pengabdian');
+  $update->jenis_pengabdian=Request::get('isi_jenis_pengabdian');
   $update->skema=Request::get('skema_peng');
   $update->sumberdaya_iptek=Request::get('sumberdaya');
   $update->tahun_mulai=Request::get('tahun_mulai');
@@ -518,7 +518,7 @@ public function luaran_buku_ajar_peng($kategori, $id){
     abort(404);
             // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
   }
-$luaran=new App\peng_luaran_buku_ajar;
+  $luaran=new App\peng_luaran_buku_ajar;
   $data=$this->get_kategori_model($kategori);
 
   $model=$data->find($id);
@@ -545,24 +545,24 @@ public function tambah_peng_luaran_buku($kategori, $id){
   }
 
   $data=$this->get_kategori_model($kategori);
-$luaran=new App\peng_luaran_buku_ajar;
+  $luaran=new App\peng_luaran_buku_ajar;
 
-    $luaran->judul=Request::get('judul');
-    $luaran->penerbit=Request::get('penerbit');
-    $luaran->isbn=Request::get('isbn');
-    $luaran->jumlah_halaman=Request::get('jumlah_halaman');
-    $luaran->tahun=Request::get('tahun');
-    $luaran->sumberdana=Request::get('sumberdana');
-    $luaran->dana=Request::get('dana');
-    $luaran->url=Request::get('url');
-    $luaran->created_at=date('Y-m-d H:i:s');
-    $luaran->updated_at=null;
-    $luaran->created_by=Session::get('userID');
-    $luaran->updated_by=null;
-    $luaran->deleted_at=null;
-    $luaran->nip_dosen=Session::get('userID_login');
-    $luaran->id_pengabdian=Request::get('id');
-    $luaran->jenis_pengabdian=Request::get('jenis_pengabdian');
+  $luaran->judul=Request::get('judul');
+  $luaran->penerbit=Request::get('penerbit');
+  $luaran->isbn=Request::get('isbn');
+  $luaran->jumlah_halaman=Request::get('jumlah_halaman');
+  $luaran->tahun=Request::get('tahun');
+  $luaran->sumberdana=Request::get('sumberdana');
+  $luaran->dana=Request::get('dana');
+  $luaran->url=Request::get('url');
+  $luaran->created_at=date('Y-m-d H:i:s');
+  $luaran->updated_at=null;
+  $luaran->created_by=Session::get('userID');
+  $luaran->updated_by=null;
+  $luaran->deleted_at=null;
+  $luaran->nip_dosen=Session::get('userID_login');
+  $luaran->judul_pengabdian=Request::get('judul_pengabdian');
+  $luaran->jenis_pengabdian=Request::get('jenis_pengabdian');
   
   if($luaran->save()){
     Session::flash('success', 'Berhasil memperbarui kegiatan ');
@@ -619,8 +619,8 @@ public function luaran_jurnal_peng($kategori, $id){
     abort(404);
             // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
   }
-$jenis_publikasi=App\jenis_publikasi::all();
-$luaran=new App\peng_luaran_jurnal;
+  $jenis_publikasi=App\jenis_publikasi::all();
+  $luaran=new App\peng_luaran_jurnal;
   $data=$this->get_kategori_model($kategori);
 
   $model=$data->find($id);
@@ -645,31 +645,31 @@ public function tambah_peng_luaran_jurnal($kategori, $id){
     abort(404);
             // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
   }
-$jenis_publikasi=App\jenis_publikasi::all();
+  $jenis_publikasi=App\jenis_publikasi::all();
   $data=$this->get_kategori_model($kategori);
-$luaran=new App\peng_luaran_jurnal;
-    $luaran->judul=Request::get('judul');
-    $luaran->penulis_publikasi=Request::get('penulis_publikasi');
-    $luaran->nama_jurnal=Request::get('nama_jurnal');
-    $luaran->jenis_publikasi=Request::get('jenis_publikasi');
-    $luaran->p_issn=Request::get('p_issn');
-    $luaran->e_issn=Request::get('e_issn');
-    $luaran->volume=Request::get('volume');
-    $luaran->nomor=Request::get('nomor');
-    $luaran->halaman_awal=Request::get('halaman_awal');
-    $luaran->halaman_akhir=Request::get('halaman_akhir');
-    $luaran->tahun=Request::get('tahun');
-    $luaran->sumberdana=Request::get('sumberdana');
-    $luaran->dana=Request::get('dana');
-    $luaran->url=Request::get('url');
-    $luaran->created_at=date('Y-m-d H:i:s');
-    $luaran->updated_at=null;
-    $luaran->created_by=Session::get('userID');
-    $luaran->updated_by=null;
-    $luaran->deleted_at=null;
-    $luaran->nip_dosen=Session::get('userID_login');
-    $luaran->id_pengabdian=Request::get('id');
-    $luaran->jenis_pengabdian=Request::get('jenis_pengabdian');
+  $luaran=new App\peng_luaran_jurnal;
+  $luaran->judul=Request::get('judul');
+  $luaran->penulis_publikasi=Request::get('penulis_publikasi');
+  $luaran->nama_jurnal=Request::get('nama_jurnal');
+  $luaran->jenis_publikasi=Request::get('jenis_publikasi');
+  $luaran->p_issn=Request::get('p_issn');
+  $luaran->e_issn=Request::get('e_issn');
+  $luaran->volume=Request::get('volume');
+  $luaran->nomor=Request::get('nomor');
+  $luaran->halaman_awal=Request::get('halaman_awal');
+  $luaran->halaman_akhir=Request::get('halaman_akhir');
+  $luaran->tahun=Request::get('tahun');
+  $luaran->sumberdana=Request::get('sumberdana');
+  $luaran->dana=Request::get('dana');
+  $luaran->url=Request::get('url');
+  $luaran->created_at=date('Y-m-d H:i:s');
+  $luaran->updated_at=null;
+  $luaran->created_by=Session::get('userID');
+  $luaran->updated_by=null;
+  $luaran->deleted_at=null;
+  $luaran->nip_dosen=Session::get('userID_login');
+  $luaran->judul_pengabdian=Request::get('judul_pengabdian');
+  $luaran->jenis_pengabdian=Request::get('jenis_pengabdian');
   
   if($luaran->save()){
     Session::flash('success', 'Berhasil memperbarui kegiatan ');
