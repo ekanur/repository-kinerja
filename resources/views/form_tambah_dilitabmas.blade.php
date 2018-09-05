@@ -24,7 +24,7 @@
           @endif
           {{csrf_field()}}
           <input type="hidden" id="kategori" value="{{$menu['kategori']}}">
-             <input type="hidden" id="jenis_penelitian" name="jenis_penelitian" value="dilitabmas">
+          <input type="hidden" id="jenis_penelitian" name="jenis_penelitian" value="dilitabmas">
           <div class="box-body">
             <div class="form-group">
               <label for="judul">Judul</label>
@@ -154,17 +154,21 @@
       </div>
     </div>
 
-
-   <div class="form-group">
-
-    <label for="url_kegiatan">URL kegiatan</label>
-    <input type="text" class="form-control" id="url" name="url" placeholder="URL" value="{{old('url')}}">
+ <div class="form-group">
+      <label for="url_kegiatan">URL kegiatan</label>
+      <input type="text" class="form-control" id="url" name="url" placeholder="URL" value="{{old('url')}}">
+    </div>
+<div class="row">
+    <div class="form-group col-md-9 " >
+      <label for="abstrak">Abstrak</label>
+      <textarea  rows="10" cols="30" class="form-control" id="abstrak" name="abstrak" placeholder="Inputkan abstrak dari kegiatan" >{{old('abstrak')}}</textarea>
+    </div>
   </div>
-</div><!-- /.box-body -->
+  </div><!-- /.box-body -->
 
-<div class="box-footer">
-  <button type="submit" class="btn btn-primary">Submit</button>
-</div>
+  <div class="box-footer">
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
 </form>
 </div><!-- /.box -->
 </div>

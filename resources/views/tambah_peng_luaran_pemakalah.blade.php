@@ -16,15 +16,17 @@
           <h3 class="box-title">Tambah luaran {{$menu['menu']}}: <em>"{{$menu['data']->judul}}"</em></h3>
         </div><!-- /.box-header -->
         <!-- form start -->
-        @if(App::environment()=='production')
-        <form role="form" method="POST" action="#">
+       @if(App::environment()=='production')
+        <form role="form" method="POST" action="{{secure_asset($menu['kategori'].'/tambah_peng_luaran_pemakalah/'.$menu['data']->id)}}" enctype="multipart/form-data">
           @else
-          <form role="form" method="POST" action="#" enctype="multipart/form-data">
+          <form role="form" method="POST" action="{{url($menu['kategori'].'/tambah_peng_luaran_pemakalah/'.$menu['data']->id)}}" enctype="multipart/form-data">
             @endif
             {{csrf_field()}}
-            <input type="hidden" name='kategori' id="kategori" value="{{$menu['kategori']}}">
-            <input type="hidden" name="id" id="id" value="{{$menu['data']->id}}">
-
+                  <input type="hidden" name='kategori' id="kategori" value="{{$menu['kategori']}}">
+            <input type="hidden" name='jenis_pengabdian' id="jenis_pengabdian" value="{{$menu['data']->jenis_pengabdian}}">
+            <input type="hidden" name="judul_pengabdian" id="judul_pengabdian" value="{{$menu['data']->judul}}">
+           <!--  <input type="hidden" name='abstrak' id="abstrak" value="{{$menu['data']->abstrak}}">
+             -->
             <div class="box-body">
 
               <div class="row">
@@ -78,12 +80,12 @@
             </div>
             <div class="form-group">
               <label for="institusi_penyelenggara">Institusi Penyelenggara</label>
-              <input type="text" class="form-control" id="institusi_penyelenggara" name="institusi_penyelenggara" placeholder="Institusi Penyelenggara" required="" value="">
+              <input type="text" class="form-control" id="ins_penyelenggara" name="ins_penyelenggara" placeholder="Institusi Penyelenggara" required="" value="">
             </div>
             <div class="row">
               <div class="form-group col-md-6">
                 <label for="tempat_pelaksanaan">Tempat Pelaksanaan</label>
-                <input type="text" class="form-control" id="tempat_pelaksanaan" name="tempat_pelaksanaan" placeholder="Tempat Pelaksanaan" value="">
+                <input type="text" class="form-control" id="tempat" name="tempat" placeholder="Tempat Pelaksanaan" value="">
               </div>
 
               <div class="form-group col-md-3" >
@@ -92,7 +94,7 @@
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="text" class="form-control pull-right" id="waktu_mulai" name="waktu_mulai" value="{{old('waktu_mulai')}}">
+                  <input type="text" class="form-control pull-right" id="waktu_mulai" name="waktu_mulai" value="{{old('waktu_mulai')}}" required="">
                 </div>
               </div>
 
@@ -102,14 +104,14 @@
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="text" class="form-control pull-right" id="waktu_selesai" name="waktu_selesai" value="{{old('waktu_selesai')}}">
+                  <input type="text" class="form-control pull-right" id="waktu_selesai" name="waktu_selesai" value="{{old('waktu_selesai')}}" required="">
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="form-group col-md-3" >
                <label for="sumber_dana">Sumber Dana</label>
-               <input type="text" class="form-control" id="sumber_dana" name="sumber_dana" placeholder="Sumber Dana" value="">
+               <input type="text" class="form-control" id="sumberdana" name="sumberdana" placeholder="Sumber Dana" value="">
 
              </div>
              <div class="form-group col-md-9">
@@ -126,7 +128,7 @@
 
           <div class="form-group">
 
-            <label for="url_kegiatan">URL kegiatan</label>
+            <label for="url_kegiatan">URL</label>
             <input type="text" class="form-control" id="url" name="url" placeholder="URL" value="{{$menu['data']->url}}">
           </div>
 

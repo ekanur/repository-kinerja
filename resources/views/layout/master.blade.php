@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="{{secure_asset('style/plugins/easyautocomplete/easy-autocomplete.css') }}">
   <link rel="stylesheet" href="{{secure_asset('style/plugins/bootstrap-notify/animate.css') }}">
   <link rel="stylesheet" href="{{secure_asset('style/plugins/datatables/dataTables.bootstrap.css') }}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   @else
   <link rel="stylesheet" href="{{asset('style/bootstrap/css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -28,6 +30,7 @@
   <link rel="stylesheet" href="{{asset('style/plugins/easyautocomplete/easy-autocomplete.css') }}">
   <link rel="stylesheet" href="{{asset('style/plugins/bootstrap-notify/animate.css') }}">
   <link rel="stylesheet" href="{{asset('style/plugins/datatables/dataTables.bootstrap.css') }}">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   @endif
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -106,11 +109,11 @@
               @endif
               {{csrf_field()}}
               <div class="form-group col-md-8">
-                <div class="input-group">
+                <div class="input-group pencarian-dosen">
                   <input type="hidden" name="dsn_nip" id="dsn_nip">
                   <input class="form-control" name="cari_dosen" placeholder="Cari NIP atau nama dosen..." autofocus="autofocus" type="text" id="cari_dosen" style="width: 100%;">
                   <span class="input-group-btn" style="width:1%">
-                    <button type='submit' class='btn btn-success'><i class="fa fa-university"></i> Pilih Dosen</button>
+                    <button type='submit' class='btn btn-success'><i class=" fa fa-bullseye"></i> Pilih Dosen</button>
                   </span>
                 </div>
               </div>
@@ -173,11 +176,11 @@
           </ul>
         </li>
 
-
+   <li class="header">LUARAN</li>
 
         <li class="treeview <?php if($menu['menu']=='Luaran') echo "active"; ?>">
          <a href="{{url('/')}}">
-          <i class="fa fa-share-alt"></i> <span>Luaran Penelitian</span>
+          <i class="fa fa-retweet"></i> <span>Luaran Penelitian</span>
           <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
@@ -188,15 +191,15 @@
           <li><a class="" href="{{url('tampil_pen_luaran_jurnal')}}">
             <span class="fa fa-genderless">&nbsp;</span>Jurnal
           </a></li>
-           <li><a class="" href="{{url('tampil_pen_luaran_jurnal')}}">
+           <li><a class="" href="{{url('tampil_pen_luaran_hki')}}">
             <span class="fa fa-genderless">&nbsp;</span>HKI
           </a></li>
 
- <li><a class="" href="{{url('tampil_pen_luaran_jurnal')}}">
+ <li><a class="" href="{{url('tampil_pen_luaran_pemakalah')}}">
             <span class="fa fa-genderless">&nbsp;</span>Pemakalah
           </a></li>
 
- <li><a class="" href="{{url('tampil_pen_luaran_jurnal')}}">
+ <li><a class="" href="{{url('tampil_pen_luaran_lain')}}">
             <span class="fa fa-genderless">&nbsp;</span>Luaran Lain
           </a></li>
 
@@ -209,7 +212,7 @@
 
        <li class="treeview <?php if($menu['menu']=='Luaran') echo "active"; ?>">
          <a href="{{url('/')}}">
-          <i class="fa fa-share-alt"></i> <span>Luaran Pengabdian</span>
+          <i class="fa fa-exchange"></i> <span>Luaran Pengabdian</span>
           <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
@@ -219,15 +222,15 @@
           <li><a class="" href="{{url('tampil_peng_luaran_jurnal')}}">
             <span class="fa fa-genderless">&nbsp;</span>Jurnal
           </a></li>
-           <li><a class="" href="{{url('tampil_pen_luaran_jurnal')}}">
+           <li><a class="" href="{{url('tampil_peng_luaran_hki')}}">
             <span class="fa fa-genderless">&nbsp;</span>HKI
           </a></li>
 
- <li><a class="" href="{{url('tampil_pen_luaran_jurnal')}}">
+ <li><a class="" href="{{url('tampil_peng_luaran_pemakalah')}}">
             <span class="fa fa-genderless">&nbsp;</span>Pemakalah
           </a></li>
 
- <li><a class="" href="{{url('tampil_pen_luaran_jurnal')}}">
+ <li><a class="" href="{{url('tampil_peng_luaran_lain')}}">
             <span class="fa fa-genderless">&nbsp;</span>Luaran Lain
           </a></li>
 
@@ -236,13 +239,14 @@
 
 
 
-      <li class="treeview <?php if($menu['menu']=='Kegiatan Penunjang') echo "active"; ?>">
+     <!--  <li class="treeview <?php if($menu['menu']=='Kegiatan Penunjang') echo "active"; ?>">
         <a href="{{url('kegiatan_penunjang')}}"><i class="fa fa-book"></i><span> Kegiatan Penunjang</span></a>
       </li>
       @if(Session::get('userRole')=='Admin')
       <li class="treeview <?php if($menu['menu']=='User') echo "active"; ?>">
         <a href="{{url('user')}}"><i class="fa fa-user"></i><span> Manajemen User</span></a>
-      </li>
+      </li> -->
+
          <!--    <li class="treeview <?php if($menu['menu']=='Dosen') echo "active"; ?>">
               <a href="{{url('dosen')}}"><i class="fa fa-user"></i> List Dosen</a>
             </li> -->
@@ -343,6 +347,65 @@
   @endif
 
   <script type="text/javascript">
+    
+// cari data anggota
+ function buildOptions(element_id) {
+        return {
+      url:function(pharse){
+        @if(App::environment()=='production')
+        return "{{secure_url('api/dosen')}}/"+pharse;
+        @else
+        return "{{url('api/dosen')}}/"+pharse;
+        @endif
+      },
+      getValue:function(suggest){
+          // $("#dsn_nip").val(suggest.dsn_nip);
+          if (isNaN($("#"+element_id).val())) {
+            return (suggest.dsn_gelar || '')+suggest.dsn_nm+(suggest.dsn_gelar2 || '');
+          } else {
+            return suggest.dsn_nip ;
+          }
+        },
+
+        template:{
+          type:"custom",
+          method: function(value, item){
+            item.dsn_gelar=(item.dsn_gelar!==null)?item.dsn_gelar:'';
+            item.dsn_gelar2=(item.dsn_gelar2!==null)?item.dsn_gelar2:'';
+            if (item.jurusan===null) {
+              item.jurusan={jur_nm:""};
+            }
+            return "<strong>"+item.dsn_nip+"</strong> - <span>"+item.dsn_gelar+item.dsn_nm+item.dsn_gelar2+"</span> - <em>"+item.jurusan.jur_nm+"</em>";
+          }
+        },
+        list:{
+          showAnimation:{
+            type:"fade",
+            time:400,
+            callback:function(){}
+          },
+          hideAnimation:{
+            type:"slide",
+            time:300,
+            callback:function(){}
+          },
+          /*onSelectItemEvent:function(){
+            $("#"+element_id+"_nip").val($("#"+element_id).getSelectedItemData().dsn_nip);
+          }*/
+        }
+      };
+      }
+
+      $("#anggota_1").easyAutocomplete(buildOptions('anggota_1'));
+      $("#anggota_2").easyAutocomplete(buildOptions('anggota_2'));
+      $("#anggota_3").easyAutocomplete(buildOptions('anggota_3'));
+      $("#anggota_4").easyAutocomplete(buildOptions('anggota_4'));
+      $("#anggota_5").easyAutocomplete(buildOptions('anggota_5'));
+// akhir cari data anggota
+   
+
+
+
     $(document).ready(function(){
       $.ajaxSetup({
         headers:{
@@ -523,7 +586,22 @@
     @endif
 
 
-    @if ($menu['menu']=='Penelitian')
+
+
+
+
+
+
+
+
+
+     
+
+
+
+
+
+  @if ($menu['menu']=='Penelitian')
 
     $("#dari_litabmas").click(function(e){
       e.preventDefault();

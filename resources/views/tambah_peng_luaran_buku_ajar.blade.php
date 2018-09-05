@@ -25,6 +25,7 @@
             <input type="hidden" name='kategori' id="kategori" value="{{$menu['kategori']}}">
             <input type="hidden" name='jenis_pengabdian' id="jenis_pengabdian" value="{{$menu['data']->jenis_pengabdian}}">
             <input type="hidden" name="judul_pengabdian" id="judul_pengabdian" value="{{$menu['data']->judul}}">
+              <input type="hidden" name='abstrak' id="abstrak" value="{{$menu['data']->abstrak}}">
             <div class="box-body">
               <div class="form-group">
                 <label for="judul">Judul</label>
@@ -79,7 +80,7 @@
           </div>
           <div class="form-group">
 
-            <label for="url_kegiatan">URL kegiatan</label>
+            <label for="url_kegiatan">URL</label>
             <input type="text" class="form-control" id="url" name="url" placeholder="URL" value="{{$menu['data']->url}}">
           </div>
 

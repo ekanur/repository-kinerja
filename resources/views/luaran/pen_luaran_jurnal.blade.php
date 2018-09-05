@@ -28,10 +28,11 @@
               <th>Judul</th>
               <th>Publikasi</th>
               <th>Tahun</th>
+              <th>Abstrak</th>
               @if(Session::get('userRole')!='Dosen')
+          <!--     <th></th>
               <th></th>
-              <th></th>
-              <th></th>
+              <th></th> -->
               @endif
             </tr>
           </thead>
@@ -42,15 +43,38 @@
             <tr>
              <td>{{$i++}}</td>
              <td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->jenis_penelitian}}</strong></td>
-           </td>
-           <td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->judul_penelitian}}</strong></td>
-         </td><td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->judul}}</strong></td>
-       </td><td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->jenis_publikasi}}</strong></td><td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->tahun}}</strong></td>
-     </td>
-   </td>
-   
-   @if(Session::get('userRole')!='Dosen')
-   <td>
+             
+             <td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->judul_penelitian}}</strong></td>
+             <td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->judul}}</strong></td>
+             <td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->jenis_publikasi}}</strong></td>
+
+             <td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->tahun}}</strong></td>
+             
+             <td>
+
+               <a class="btn btn-sm  glyphicon glyphicon-bookmark" data-toggle="modal" data-target="#abstrak-{{$tampil->id}}"></a>
+
+               <div class="modal fade" id="abstrak-{{$tampil->id}}" tabindex="-1" role="dialog" aria-labelledby="Title" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <strong><h3 class="modal-title" id="Title">Abstrak</h3></strong>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                   {{$tampil->abstrak}}
+                 </div>
+                 <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </td>                      
+        
+        @if(Session::get('userRole')!='Dosen')
+<!--    <td>
     <a class="btn btn-sm btn-default  fa fa-eye" href="#" title="Lihat Luaran"></a>
   </td>   
   <td>
@@ -63,18 +87,18 @@
       <a class="btn btn-sm btn-danger fa fa-trash" href="#" title="Hapus Penelitian"></a>
     </div>              
   </td>
-  
-  @endif
+-->
+@endif
 
 </tr>
 @endforeach
 </tbody>
 </table>
- <div class="box-footer clearfix">
-        @if(Session::get('userRole')!='Dosen')
-        <a href="{{url('tambah_non_pen_luaran_buku')}}" class="btn btn-md btn-success btn-flat pull-left glyphicon glyphicon-new-window"  style="margin-right:10px" title="Tambahkan Luaran Tanpa Penelitian"></a>
-        @endif
-      </div>
+<div class="box-footer clearfix">
+  @if(Session::get('userRole')!='Dosen')
+  <a href="{{url('tampil_pen_luaran_jurnal/tambah_non_pen_luaran_jurnal')}}" class="btn btn-md btn-success btn-flat pull-left glyphicon glyphicon-new-window"  style="margin-right:10px" title="Tambahkan Luaran Tanpa Penelitian"></a>
+  @endif
+</div>
 </div>
 
 </div>

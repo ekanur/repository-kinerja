@@ -28,6 +28,7 @@
               <th>Kategori Bid</th>
               <th>Kategori TSE</th>
               <th>Tahun</th>
+              <th>Abstrak</th>
               
               @if(Session::get('userRole')!='Dosen')
               <th></th>
@@ -55,10 +56,33 @@
               </td>
               <td><strong data-toggle="tooltip" data-placement="top">
                 {{$penelitian_dilitabmas->kategori_tse}}</strong></td>
-              </td><td><strong data-toggle="tooltip" data-placement="top">
+              </td>
+
+              <td><strong data-toggle="tooltip" data-placement="top">
                 {{$penelitian_dilitabmas->tahun}}</strong></td>
-              </td>    
-              
+              </td>   
+              <td>
+
+               <a class="btn btn-sm  glyphicon glyphicon-bookmark" data-toggle="modal" data-target="#abstrak-{{$penelitian_dilitabmas->id}}"></a>
+
+               <div class="modal fade" id="abstrak-{{$penelitian_dilitabmas->id}}" tabindex="-1" role="dialog" aria-labelledby="Title" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <strong><h3 class="modal-title" id="Title">Abstrak</h3></strong>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                   {{$penelitian_dilitabmas->abstrak}}
+                 </div>
+                 <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </td>    
               
               @if(Session::get('userRole')!='Dosen')
               
@@ -68,9 +92,10 @@
                 <div class="dropdown">
                   <a class="btn btn-sm btn-warning fa fa-plus-square" id="dropdownMenu1" data-toggle="dropdown" title="Tambahkan Luaran"> </a>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li ><a href="penelitian_dilitabmas/luaran_jurnal/{{$penelitian_dilitabmas->id}}">Jurnal</a></li>
-                    <li class="divider"></li>
+                    
                     <li ><a href="penelitian_dilitabmas/luaran_buku_ajar/{{$penelitian_dilitabmas->id}}">Buku Ajar</a></li>
+                    <li class="divider"></li>
+                    <li ><a href="penelitian_dilitabmas/luaran_jurnal/{{$penelitian_dilitabmas->id}}">Jurnal</a></li>
                     <li class="divider"></li>
                     <li ><a href="penelitian_dilitabmas/luaran_pemakalah/{{$penelitian_dilitabmas->id}}">Pemakalah Forum Ilmiah</a></li>
                     <li class="divider"></li>
@@ -89,9 +114,10 @@
               </td>
               <td>
                 <div>
-                  <a class="btn btn-sm btn-danger fa fa-trash" href="penelitian_dilitabmas/hapus_dilitabmas/{{$penelitian_dilitabmas->id}}" title="Hapus Penelitian"></a>
-                </div>              
-              </td>
+                  <a class="btn btn-sm btn-danger fa fa-trash" onclick="return confirm('Anda Yakin Ingin Menghapus Data ?')" href="penelitian_dilitabmas/hapus_dilitabmas/{{$penelitian_dilitabmas->id}}" title="Hapus Penelitian"></a>
+                </div>   
+
+             </td>
               
               @endif
 
@@ -103,8 +129,6 @@
       <div class="box-footer clearfix">
         @if(Session::get('userRole')!='Dosen')
         <a href="{{url('penelitian_dilitabmas/tambah_dilitabmas')}}" class="btn btn-md btn-success btn-flat pull-left"  style="margin-right:10px">Tambah</a>
-
-        <a href="{{url('penelitian/import')}}" class="btn btn-md btn-primary btn-flat pull-left">Ambil Data LITABMAS</a>
 
         @endif
       </div>

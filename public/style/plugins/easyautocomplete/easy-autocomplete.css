@@ -256,6 +256,17 @@
   padding-bottom: 0;
   padding-left: 0;
   position: relative;
+  top: -1px;
+  /*top: 32px;*/
+}
+.pencarian-dosen .easy-autocomplete-container ul {
+  background: none repeat scroll 0 0 #ffffff;
+  border-top: 1px dotted #ccc;
+  display: none;
+  margin-top: 0;
+  padding-bottom: 0;
+  padding-left: 0;
+  position: relative;
   /*top: -1px;*/
   top: 32px;
 }
