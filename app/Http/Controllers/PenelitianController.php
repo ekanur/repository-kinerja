@@ -666,29 +666,35 @@ public function tambah_pen_luaran_buku($kategori, $id){
   return Redirect::to($kategori);
 }
 
+
+
+
 public function hapus_buku($id){
   if(Session::get('userRole')=='Dosen'){
     abort(404);
+            // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
   }
-  exit();
 
-  $data=new App\pen_luaran_buku;
+  $data=new App\pen_luaran_buku_ajar;
+
   $model=$data::findOrfail($id);
+
   if($model->delete())
   {
-    Session::flash('berhasil', 'Data kegiatan berhasil dihapus');
+    Session::flash('berhasil', 'Data luaran berhasil dihapus');
   }
   else{
-    Session::flash('gagal', 'Data kegiatan gagal dihapus');
+    Session::flash('gagal', 'Data luaran gagal dihapus');
   }
-  return redirect('tampil_pen_luaran_buku');
-}
+  // dd(session("berhasil"));
 
+  return redirect("tampil_pen_luaran_buku");
+}
 // ----------------------------------------------------------------------------------------------------
 
 public function tambah_non_pen_luaran_jurnal()
 {   
-$jenis_publikasi=App\jenis_publikasi::all();
+  $jenis_publikasi=App\jenis_publikasi::all();
   if(Session::get('userRole')=='Dosen'){
     abort(404);
             // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
@@ -707,32 +713,32 @@ $jenis_publikasi=App\jenis_publikasi::all();
       'created_at'=>'date_format:Y-m-d H:i:s',
     ]);
 
- 
-  $luaran=new App\pen_luaran_jurnal;
+    
+    $luaran=new App\pen_luaran_jurnal;
 
-  $luaran->judul=Request::get('judul');
-  $luaran->penulis_publikasi=Request::get('penulis_publikasi');
-  $luaran->nama_jurnal=Request::get('nama_jurnal');
-  $luaran->jenis_publikasi=Request::get('jenis_publikasi');
-$luaran->p_issn=Request::get('p_issn');
-  $luaran->e_issn=Request::get('e_issn');
-  $luaran->volume=Request::get('volume');
-  $luaran->nomor=Request::get('nomor');
-  $luaran->halaman_awal=Request::get('halaman_awal');
-  $luaran->halaman_akhir=Request::get('halaman_akhir');
-  $luaran->tahun=Request::get('tahun');
-  $luaran->sumberdana=Request::get('sumberdana');
-  $luaran->dana=Request::get('dana');
-  $luaran->url=Request::get('url');
-  $luaran->created_at=date('Y-m-d H:i:s');
-  $luaran->updated_at=null;
-  $luaran->created_by=Session::get('userID');
-  $luaran->updated_by=null;
-  $luaran->deleted_at=null;
-  $luaran->nip_dosen=Session::get('userID_login');
-  $luaran->judul_penelitian=Request::get('judul_penelitian');
-  $luaran->jenis_penelitian=Request::get('jenis_penelitian');
-  $luaran->abstrak=Request::get('abstrak');
+    $luaran->judul=Request::get('judul');
+    $luaran->penulis_publikasi=Request::get('penulis_publikasi');
+    $luaran->nama_jurnal=Request::get('nama_jurnal');
+    $luaran->jenis_publikasi=Request::get('jenis_publikasi');
+    $luaran->p_issn=Request::get('p_issn');
+    $luaran->e_issn=Request::get('e_issn');
+    $luaran->volume=Request::get('volume');
+    $luaran->nomor=Request::get('nomor');
+    $luaran->halaman_awal=Request::get('halaman_awal');
+    $luaran->halaman_akhir=Request::get('halaman_akhir');
+    $luaran->tahun=Request::get('tahun');
+    $luaran->sumberdana=Request::get('sumberdana');
+    $luaran->dana=Request::get('dana');
+    $luaran->url=Request::get('url');
+    $luaran->created_at=date('Y-m-d H:i:s');
+    $luaran->updated_at=null;
+    $luaran->created_by=Session::get('userID');
+    $luaran->updated_by=null;
+    $luaran->deleted_at=null;
+    $luaran->nip_dosen=Session::get('userID_login');
+    $luaran->judul_penelitian=Request::get('judul_penelitian');
+    $luaran->jenis_penelitian=Request::get('jenis_penelitian');
+    $luaran->abstrak=Request::get('abstrak');
 
     if($luaran->save()){
       $update=$luaran::find($luaran->id);
@@ -837,32 +843,52 @@ public function tambah_pen_luaran_jurnal($kategori, $id){
 }
 
 
+public function hapus_jurnal($id){
+  if(Session::get('userRole')=='Dosen'){
+    abort(404);
+            // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
+  }
 
+  $data=new App\pen_luaran_jurnal;
+
+  $model=$data::findOrfail($id);
+
+  if($model->delete())
+  {
+    Session::flash('berhasil', 'Data luaran berhasil dihapus');
+  }
+  else{
+    Session::flash('gagal', 'Data luaran gagal dihapus');
+  }
+  // dd(session("berhasil"));
+
+  return redirect("tampil_pen_luaran_jurnal");
+}
 
 // ---------------------------------------------------------------------------------------------------------------------------
 public function tambah_non_pen_luaran_pemakalah()
 {   
  $forum_ilmiah=App\forum_ilmiah::all();
  $status_pemakalah=App\status_pemakalah::all();
-   $luaran=new App\pen_luaran_pemakalah;
+ $luaran=new App\pen_luaran_pemakalah;
 
-  if(Session::get('userRole')=='Dosen'){
-    abort(404);
+ if(Session::get('userRole')=='Dosen'){
+  abort(404);
             // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
+}
+
+if(Request::isMethod('post'))
+{
+  if (Session::get('userID_login')==null) {
+    session()->flash('gagal', 'Belum memilih data dosen');
+    return Redirect::to('tampil_pen_luaran_pemakalah');
   }
 
-  if(Request::isMethod('post'))
-  {
-    if (Session::get('userID_login')==null) {
-      session()->flash('gagal', 'Belum memilih data dosen');
-      return Redirect::to('tampil_pen_luaran_pemakalah');
-    }
 
-
-    $request=new \Illuminate\Http\Request;
-    $this->validate($request,[
-      'created_at'=>'date_format:Y-m-d H:i:s',
-    ]);
+  $request=new \Illuminate\Http\Request;
+  $this->validate($request,[
+    'created_at'=>'date_format:Y-m-d H:i:s',
+  ]);
 
   $luaran->judul=Request::get('judul_makalah');
   $luaran->forum_ilmiah=Request::get('forum_ilmiah');
@@ -885,26 +911,26 @@ public function tambah_non_pen_luaran_pemakalah()
   $luaran->judul_penelitian=Request::get('judul_penelitian');
   $luaran->jenis_penelitian=Request::get('jenis_penelitian');
 
-    if($luaran->save()){
-      $update=$luaran::find($luaran->id);
-      $update->save();
-      session()->flash('berhasil', 'Berhasil menambahkan kegiatan baru');
-    }
-    else{
-      session()->flash('gagal', 'Gagal menambahkan kegiatan ');
-    }
-
-
-    return Redirect::to('tampil_pen_luaran_pemakalah');
+  if($luaran->save()){
+    $update=$luaran::find($luaran->id);
+    $update->save();
+    session()->flash('berhasil', 'Berhasil menambahkan kegiatan baru');
   }
-  else
-  {
+  else{
+    session()->flash('gagal', 'Gagal menambahkan kegiatan ');
+  }
 
-    $title = 'luaran non Penelitian';
-    
-    $menu=array('menu'=>$title,'submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'','userfak'=>Session::get('userFak'),'data_forum_ilmiah'=>$forum_ilmiah,'data_status_pemakalah'=>$status_pemakalah,'ketdosen'=>Session::get('ketDosen'),);
-    return View::make('tambah_non_pen_luaran_pemakalah')->with('menu',$menu);
-  }       
+
+  return Redirect::to('tampil_pen_luaran_pemakalah');
+}
+else
+{
+
+  $title = 'luaran non Penelitian';
+  
+  $menu=array('menu'=>$title,'submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'','userfak'=>Session::get('userFak'),'data_forum_ilmiah'=>$forum_ilmiah,'data_status_pemakalah'=>$status_pemakalah,'ketdosen'=>Session::get('ketDosen'),);
+  return View::make('tambah_non_pen_luaran_pemakalah')->with('menu',$menu);
+}       
 
 }
 
@@ -991,33 +1017,53 @@ public function tambah_pen_luaran_pemakalah($kategori, $id){
 }
 
 
+public function hapus_pemakalah($id){
+  if(Session::get('userRole')=='Dosen'){
+    abort(404);
+            // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
+  }
 
+  $data=new App\pen_luaran_pemakalah;
+
+  $model=$data::findOrfail($id);
+
+  if($model->delete())
+  {
+    Session::flash('berhasil', 'Data luaran berhasil dihapus');
+  }
+  else{
+    Session::flash('gagal', 'Data luaran gagal dihapus');
+  }
+  // dd(session("berhasil"));
+
+  return redirect("tampil_pen_luaran_pemakalah");
+}
 
 
 
 // ---------------------------------------------------------------------------------------------------------------------------
 public function tambah_non_pen_luaran_hki()
 {   
-   $jenis_hki=App\jenis_hki::all();
-  $status_hki=App\status_hki::all();
-  $luaran=new App\pen_luaran_hki;
-  if(Session::get('userRole')=='Dosen'){
-    abort(404);
+ $jenis_hki=App\jenis_hki::all();
+ $status_hki=App\status_hki::all();
+ $luaran=new App\pen_luaran_hki;
+ if(Session::get('userRole')=='Dosen'){
+  abort(404);
             // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
+}
+
+if(Request::isMethod('post'))
+{
+  if (Session::get('userID_login')==null) {
+    session()->flash('gagal', 'Belum memilih data dosen');
+    return Redirect::to('tampil_pen_luaran_hki');
   }
 
-  if(Request::isMethod('post'))
-  {
-    if (Session::get('userID_login')==null) {
-      session()->flash('gagal', 'Belum memilih data dosen');
-      return Redirect::to('tampil_pen_luaran_hki');
-    }
 
-
-    $request=new \Illuminate\Http\Request;
-    $this->validate($request,[
-      'created_at'=>'date_format:Y-m-d H:i:s',
-    ]);
+  $request=new \Illuminate\Http\Request;
+  $this->validate($request,[
+    'created_at'=>'date_format:Y-m-d H:i:s',
+  ]);
 
 
   $luaran->jenis=Request::get('jenis');
@@ -1037,26 +1083,26 @@ public function tambah_non_pen_luaran_hki()
   $luaran->nip_dosen=Session::get('userID_login');
   $luaran->judul_penelitian=Request::get('judul_penelitian');
   $luaran->jenis_penelitian=Request::get('jenis_penelitian');
-    if($luaran->save()){
-      $update=$luaran::find($luaran->id);
-      $update->save();
-      session()->flash('berhasil', 'Berhasil menambahkan kegiatan baru');
-    }
-    else{
-      session()->flash('gagal', 'Gagal menambahkan kegiatan ');
-    }
-
-
-    return Redirect::to('tampil_pen_luaran_hki');
+  if($luaran->save()){
+    $update=$luaran::find($luaran->id);
+    $update->save();
+    session()->flash('berhasil', 'Berhasil menambahkan kegiatan baru');
   }
-  else
-  {
+  else{
+    session()->flash('gagal', 'Gagal menambahkan kegiatan ');
+  }
 
-    $title = 'luaran non Penelitian';
-    
-    $menu=array('menu'=>$title,'submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'','userfak'=>Session::get('userFak'),'data_jenis_hki'=>$jenis_hki,'data_status_hki'=>$status_hki,'ketdosen'=>Session::get('ketDosen'),);
-    return View::make('tambah_non_pen_luaran_hki')->with('menu',$menu);
-  }       
+
+  return Redirect::to('tampil_pen_luaran_hki');
+}
+else
+{
+
+  $title = 'luaran non Penelitian';
+  
+  $menu=array('menu'=>$title,'submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'','userfak'=>Session::get('userFak'),'data_jenis_hki'=>$jenis_hki,'data_status_hki'=>$status_hki,'ketdosen'=>Session::get('ketDosen'),);
+  return View::make('tambah_non_pen_luaran_hki')->with('menu',$menu);
+}       
 
 }
 
@@ -1138,11 +1184,34 @@ public function tambah_pen_luaran_hki($kategori, $id){
 
 }
 
+
+public function hapus_hki($id){
+  if(Session::get('userRole')=='Dosen'){
+    abort(404);
+            // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
+  }
+
+  $data=new App\pen_luaran_hki;
+
+  $model=$data::findOrfail($id);
+
+  if($model->delete())
+  {
+    Session::flash('berhasil', 'Data luaran berhasil dihapus');
+  }
+  else{
+    Session::flash('gagal', 'Data luaran gagal dihapus');
+  }
+  // dd(session("berhasil"));
+
+  return redirect("tampil_pen_luaran_hki");
+}
+
 // ----------------------------------------------------------------------------------------------------------------------------
 public function tambah_non_pen_luaran_lain()
 { 
   $jenis_luaran_lain=App\jenis_luaran_lain::all();
- 
+  
   $luaran=new App\pen_luaran_lain;
 
   if(Session::get('userRole')=='Dosen'){
@@ -1163,21 +1232,21 @@ public function tambah_non_pen_luaran_lain()
       'created_at'=>'date_format:Y-m-d H:i:s',
     ]);
 
-  $luaran->jenis=Request::get('jenis');
-  $luaran->tahun=Request::get('tahun');
-  $luaran->judul=Request::get('judul');
-  $luaran->deskripsi=Request::get('deskripsi');
-  $luaran->sumberdana=Request::get('sumberdana');
-  $luaran->dana=Request::get('dana');
-  $luaran->url=Request::get('url');
-  $luaran->created_at=date('Y-m-d H:i:s');
-  $luaran->updated_at=null;
-  $luaran->created_by=Session::get('userID');
-  $luaran->updated_by=null;
-  $luaran->deleted_at=null;
-  $luaran->nip_dosen=Session::get('userID_login');
-  $luaran->judul_penelitian=Request::get('judul_penelitian');
-  $luaran->jenis_penelitian=Request::get('jenis_penelitian');
+    $luaran->jenis=Request::get('jenis');
+    $luaran->tahun=Request::get('tahun');
+    $luaran->judul=Request::get('judul');
+    $luaran->deskripsi=Request::get('deskripsi');
+    $luaran->sumberdana=Request::get('sumberdana');
+    $luaran->dana=Request::get('dana');
+    $luaran->url=Request::get('url');
+    $luaran->created_at=date('Y-m-d H:i:s');
+    $luaran->updated_at=null;
+    $luaran->created_by=Session::get('userID');
+    $luaran->updated_by=null;
+    $luaran->deleted_at=null;
+    $luaran->nip_dosen=Session::get('userID_login');
+    $luaran->judul_penelitian=Request::get('judul_penelitian');
+    $luaran->jenis_penelitian=Request::get('jenis_penelitian');
     if($luaran->save()){
       $update=$luaran::find($luaran->id);
       $update->save();
@@ -1277,13 +1346,33 @@ public function tambah_pen_luaran_lain($kategori, $id){
 
 
 
+public function hapus_lain($id){
+  if(Session::get('userRole')=='Dosen'){
+    abort(404);
+            // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
+  }
+
+  $data=new App\pen_luaran_lain;
+
+  $model=$data::findOrfail($id);
+
+  if($model->delete())
+  {
+    Session::flash('berhasil', 'Data luaran berhasil dihapus');
+  }
+  else{
+    Session::flash('gagal', 'Data luaran gagal dihapus');
+  }
+  // dd(session("berhasil"));
+
+  return redirect("tampil_pen_luaran_lain");
+}
 
 
 
 
 
-
-
+// ...........................................................................................................................
 
 
 

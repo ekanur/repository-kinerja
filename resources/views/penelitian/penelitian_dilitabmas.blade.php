@@ -44,27 +44,13 @@
             
             <tr>
              <td>{{$i++}}</td>
-             
-             <td><strong data-toggle="tooltip" data-placement="top">
-              <a href="penelitian_dilitabmas/lihat_dilitabmas/{{$penelitian_dilitabmas->id}}">
-                {{$penelitian_dilitabmas->judul}}</a></strong></td>
-
-                <td><strong data-toggle="tooltip" data-placement="top" >{{$penelitian_dilitabmas->ketua}}</strong></td>
-              </td>
-              <td><strong data-toggle="tooltip" data-placement="top">
-                {{$penelitian_dilitabmas->kategori_bidang}}</strong></td>
-              </td>
-              <td><strong data-toggle="tooltip" data-placement="top">
-                {{$penelitian_dilitabmas->kategori_tse}}</strong></td>
-              </td>
-
-              <td><strong data-toggle="tooltip" data-placement="top">
-                {{$penelitian_dilitabmas->tahun}}</strong></td>
-              </td>   
+              <td><a href="penelitian_dilitabmas/lihat_dilitabmas/{{$penelitian_dilitabmas->id}}">{{$penelitian_dilitabmas->judul}}</a></td>
+                <td>{{$penelitian_dilitabmas->ketua}}</td>
+              <td>{{$penelitian_dilitabmas->kategori_bidang}}</td>
+              <td>{{$penelitian_dilitabmas->kategori_tse}}</td>
+              <td>{{$penelitian_dilitabmas->tahun}}</td>
               <td>
-
                <a class="btn btn-sm  glyphicon glyphicon-bookmark" data-toggle="modal" data-target="#abstrak-{{$penelitian_dilitabmas->id}}"></a>
-
                <div class="modal fade" id="abstrak-{{$penelitian_dilitabmas->id}}" tabindex="-1" role="dialog" aria-labelledby="Title" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
@@ -127,9 +113,9 @@
         </table>
       </div>
       <div class="box-footer clearfix">
-        @if(Session::get('userRole')!='Dosen')
+  @if(Session::get('userRole')!='Dosen')
         <a href="{{url('penelitian_dilitabmas/tambah_dilitabmas')}}" class="btn btn-md btn-success btn-flat pull-left"  style="margin-right:10px">Tambah</a>
-
+      
         @endif
       </div>
     </div>

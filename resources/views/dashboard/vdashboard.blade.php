@@ -9,11 +9,11 @@
          	<div class="col-md-3 col-sm-6 col-xs-12">
          		<div class="info-box">
          			<span class="info-box-icon bg-aqua">
-	         			<i class="fa fa-graduation-cap"></i>
+	         			<i class="fa fa-line-chart"></i>
 	         		</span>
 	         		<div class="info-box-content">
-	         			<span class="info-box-text">Pendidikan</span>
-	         			<span class="info-box-number">{{$menu['data']['akademik']}}</span>
+	         			<span class="info-box-text">Penelitian Dilitabmas</span>
+	         			<span class="info-box-number">{{$menu['data']['penelitian_dilitabmas']}}</span>
 	         		</div>
          		</div>
          		
@@ -24,8 +24,8 @@
 	         			<i class="fa fa-line-chart"></i>
 	         		</span>
 	         		<div class="info-box-content">
-	         			<span class="info-box-text">Penelitian</span>
-	         			<span class="info-box-number">{{$menu['data']['penelitian']}}</span>
+	         			<span class="info-box-text">Penelitian Non Dilitabmas</span>
+	         			<span class="info-box-number">{{$menu['data']['penelitian_non_dilitabmas']}}</span>
 	         		</div>
          		</div>
          		
@@ -36,8 +36,8 @@
 	         			<i class="fa fa-users"></i>
 	         		</span>
 	         		<div class="info-box-content">
-	         			<span class="info-box-text">Pengabdian</span>
-	         			<span class="info-box-number">{{$menu['data']['pengabdian']}}</span>
+	         			<span class="info-box-text">Pengabdian Dilitabmas</span>
+	         			<span class="info-box-number">{{$menu['data']['pengabdian_dilitabmas']}}</span>
 	         		</div>
          		</div>
          		
@@ -45,11 +45,11 @@
          	<div class="col-md-3 col-sm-6 col-xs-12">
          		<div class="info-box">
          			<span class="info-box-icon bg-yellow">
-	         			<i class="fa fa-book"></i>
+	         			<i class="fa fa-users"></i>
 	         		</span>
 	         		<div class="info-box-content">
-	         			<span class="info-box-text">Kegiatan Penunjang</span>
-	         			<span class="info-box-number">{{$menu['data']['kegiatan_penunjang']}}</span>
+	         			<span class="info-box-text">Pengabdian Non Dilitabmas</span>
+	         			<span class="info-box-number">{{$menu['data']['pengabdian_non_dilitabmas']}}</span>
 	         		</div>
          		</div>
          		
@@ -62,6 +62,7 @@
                  )</h3></div>
                  <div class="box-body">
                      <div class="chart"><canvas id="statistik" height="75"></canvas></div>
+
                  </div>
                  <div class="box-footer"></div>
              </div>

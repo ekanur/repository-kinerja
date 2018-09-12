@@ -103,7 +103,7 @@
         <div class="row">
          <div class="form-group col-md-3" >
            <label for="sumber_dana">Sumber Dana</label>
-           <input type="text" class="form-control" id="sumber_dana" name="sumber_dana" placeholder="Sumber Dana" value='{{old("sumber_dana")}}'>
+           <input type="text" class="form-control" id="sumberdana" name="sumberdana" placeholder="Sumber Dana" value='{{old("sumber_dana")}}'>
          </div>
          <div class="form-group col-md-9" >
           <label for="dana">Biaya Publikasi</label>

@@ -81,7 +81,7 @@
         <div class="row">
           <div class="form-group col-md-3">
            <label for="sumber_dana">Sumber Dana</label>
-           <input type="text" class="form-control" id="sumberdana" name="sumber_dana" placeholder="Sumber Dana" value="">
+           <input type="text" class="form-control" id="sumberdana" name="sumberdana" placeholder="Sumber Dana" value="">
          </div>
          <div class="form-group col-md-9">
 

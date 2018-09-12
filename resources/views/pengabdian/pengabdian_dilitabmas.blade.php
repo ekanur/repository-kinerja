@@ -40,18 +40,14 @@
             
             <tr>
              <td>{{$i++}}</td>
-             <td><strong data-toggle="tooltip" data-placement="top">
-              <a href="pengabdian_dilitabmas/lihat_peng_dilitabmas/{{$pengabdian_dilitabmas->id}}">
-                {{$pengabdian_dilitabmas->judul}}</a></strong></td>
-                <td><strong data-toggle="tooltip" data-placement="top" >
-                  {{$pengabdian_dilitabmas->ketua}}</strong></td>
-                </td>
-                <td><strong data-toggle="tooltip" data-placement="top">
-                  {{$pengabdian_dilitabmas->skema}}</strong></td>
-                </td><td><strong data-toggle="tooltip" data-placement="top">
-                  {{$pengabdian_dilitabmas->tahun}}</strong></td>
-                </td>                
-                   <td>
+             <td><a href="pengabdian_dilitabmas/lihat_peng_dilitabmas/{{$pengabdian_dilitabmas->id}}">
+              {{$pengabdian_dilitabmas->judul}}</a></td>
+              <td>{{$pengabdian_dilitabmas->ketua}}</td>
+              
+              <td>{{$pengabdian_dilitabmas->skema}}</td>
+              <td>{{$pengabdian_dilitabmas->tahun}}</td>
+              
+              <td>
 
                <a class="btn btn-sm  glyphicon glyphicon-bookmark" data-toggle="modal" data-target="#abstrak-{{$pengabdian_dilitabmas->id}}"></a>
 
@@ -73,57 +69,57 @@
           </div>
 
         </td>       
-                @if(Session::get('userRole')!='Dosen')
-                
-                <td>
-                  
-                  <div class="dropdown">
-                    <a class="btn btn-sm btn-warning fa fa-plus-square" id="dropdownMenu1" data-toggle="dropdown" title="Tambahkan Luaran">
-                      
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                      <li ><a href="pengabdian_dilitabmas/luaran_buku_ajar_peng/{{$pengabdian_dilitabmas->id}}">Buku Ajar</a></li>
-                      <li class="divider"></li>
-                       <li ><a href="pengabdian_dilitabmas/luaran_jurnal_peng/{{$pengabdian_dilitabmas->id}}">Jurnal</a></li>
-                     
-                      <li class="divider"></li>
-                      <li ><a href="pengabdian_dilitabmas/luaran_pemakalah_peng/{{$pengabdian_dilitabmas->id}}">Pemakalah Forum Ilmiah</a></li>
-                      <li class="divider"></li>
-                      <li ><a href="pengabdian_dilitabmas/luaran_hki_peng/{{$pengabdian_dilitabmas->id}}">HKI</a></li>
-                      <li class="divider"></li>
-                      <li ><a href="pengabdian_dilitabmas/luaran_lain_peng/{{$pengabdian_dilitabmas->id}}">Lain-Lain</a></li>
-                    </ul>
-                  </div>
+        @if(Session::get('userRole')!='Dosen')
+        
+        <td>
+          
+          <div class="dropdown">
+            <a class="btn btn-sm btn-warning fa fa-plus-square" id="dropdownMenu1" data-toggle="dropdown" title="Tambahkan Luaran">
+              
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li ><a href="pengabdian_dilitabmas/luaran_buku_ajar_peng/{{$pengabdian_dilitabmas->id}}">Buku Ajar</a></li>
+              <li class="divider"></li>
+              <li ><a href="pengabdian_dilitabmas/luaran_jurnal_peng/{{$pengabdian_dilitabmas->id}}">Jurnal</a></li>
+              
+              <li class="divider"></li>
+              <li ><a href="pengabdian_dilitabmas/luaran_pemakalah_peng/{{$pengabdian_dilitabmas->id}}">Pemakalah Forum Ilmiah</a></li>
+              <li class="divider"></li>
+              <li ><a href="pengabdian_dilitabmas/luaran_hki_peng/{{$pengabdian_dilitabmas->id}}">HKI</a></li>
+              <li class="divider"></li>
+              <li ><a href="pengabdian_dilitabmas/luaran_lain_peng/{{$pengabdian_dilitabmas->id}}">Lain-Lain</a></li>
+            </ul>
+          </div>
 
-                  
-                </td>
-                <td>
-                  <a class=" btn btn-sm btn-info  fa fa-edit" href="pengabdian_dilitabmas/edit_peng_dilitabmas/{{$pengabdian_dilitabmas->id}}" title="Edit Penelitian"></a>
-                  
-                </td>
-                <td>
-                  <div>
-                    <a class="btn btn-sm btn-danger fa fa-trash" onclick="return confirm('Anda Yakin Ingin Menghapus Data ?')" href="pengabdian_dilitabmas/hapus_peng_dilitabmas/{{$pengabdian_dilitabmas->id}}" title="Hapus Penelitian"></a>
-                  </div>              
-                </td>
-                
-                @endif
+          
+        </td>
+        <td>
+          <a class=" btn btn-sm btn-info  fa fa-edit" href="pengabdian_dilitabmas/edit_peng_dilitabmas/{{$pengabdian_dilitabmas->id}}" title="Edit Penelitian"></a>
+          
+        </td>
+        <td>
+          <div>
+            <a class="btn btn-sm btn-danger fa fa-trash" onclick="return confirm('Anda Yakin Ingin Menghapus Data ?')" href="pengabdian_dilitabmas/hapus_peng_dilitabmas/{{$pengabdian_dilitabmas->id}}" title="Hapus Penelitian"></a>
+          </div>              
+        </td>
+        
+        @endif
 
-              </tr>
-              @endforeach
-            </tbody>
-          </table>
-        </div>
-        <div class="box-footer clearfix">
-          @if(Session::get('userRole')!='Dosen')
-          <a href="{{url('pengabdian_dilitabmas/tambah_peng_dilitabmas')}}" class="btn btn-md btn-success btn-flat pull-left"  style="margin-right:10px">Tambah</a>
+      </tr>
+      @endforeach
+    </tbody>
+  </table>
+</div>
+<div class="box-footer clearfix">
+  @if(Session::get('userRole')!='Dosen')
+  <a href="{{url('pengabdian_dilitabmas/tambah_peng_dilitabmas')}}" class="btn btn-md btn-success btn-flat pull-left"  style="margin-right:10px">Tambah</a>
 
-    
-          @endif
-        </div>
-      </div>
+  
+  @endif
+</div>
+</div>
 
-    </div>
-  </div><!-- /.row -->
+</div>
+</div><!-- /.row -->
 </section><!-- /.content -->
 @endsection

@@ -5,7 +5,7 @@
   <!-- Small boxes (Stat box) -->
   <div class="row">
    <div class="col-md-12">
-    
+
      @if(session('success'))
      
      <div class='alert alert-success'>{{session('success')}}</div>
@@ -22,72 +22,98 @@
         <table class="table table-striped table-bordered table-hover" id="data_repo">
           <thead>
             <tr><th>No</th>
-             
+
               <th>Jenis Penelitian</th>
               <th>Judul Penelitian</th>
               <th>Judul</th>
               <th>Publikasi</th>
               <th>Tahun</th>
-              <th>Abstrak</th>
+
               @if(Session::get('userRole')!='Dosen')
-          <!--     <th></th>
-              <th></th>
-              <th></th> -->
-              @endif
-            </tr>
-          </thead>
-          <tbody>
-            <?php $i=1; ?>
-            @foreach($menu['data'] as $tampil)
-            
-            <tr>
-             <td>{{$i++}}</td>
-             <td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->jenis_penelitian}}</strong></td>
-             
-             <td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->judul_penelitian}}</strong></td>
-             <td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->judul}}</strong></td>
-             <td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->jenis_publikasi}}</strong></td>
+<!--               <th></th>
+-->              <th></th>
 
-             <td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->tahun}}</strong></td>
-             
-             <td>
+@endif
+</tr>
+</thead>
+<tbody>
+  <?php $i=1; ?>
+  @foreach($menu['data'] as $tampil)
 
-               <a class="btn btn-sm  glyphicon glyphicon-bookmark" data-toggle="modal" data-target="#abstrak-{{$tampil->id}}"></a>
+  <tr>
+   <td>{{$i++}}</td>
+   <td>{{$tampil->jenis_penelitian}}</td>
 
-               <div class="modal fade" id="abstrak-{{$tampil->id}}" tabindex="-1" role="dialog" aria-labelledby="Title" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <strong><h3 class="modal-title" id="Title">Abstrak</h3></strong>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                   {{$tampil->abstrak}}
-                 </div>
-                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-              </div>
+   <td>{{$tampil->judul_penelitian}}</td>
+
+   <td><a href= "" data-toggle="modal" data-target="#abstrak-{{$tampil->id}}" title="Detail">{{$tampil->judul}}</a>
+
+    <!-- modal awal -->
+    <div class="modal fade bs-example-modal-lg" id="abstrak-{{$tampil->id}}" tabindex="-1" role="dialog" aria-labelledby="Title" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document" style="min-width: 1000px; overflow-y: auto;">
+        <!-- <div class="modal-dialog modal-lg" role="document" style="overflow-y: scroll;"> -->
+          <div class="modal-content">
+            <div class="modal-header">
+              <strong><h4 class="modal-title" id="Title">Detail : {{$tampil->judul}} </h4></strong>
             </div>
-          </div>
+            <div class="modal-body">
+             <table id="classTable" class="table table-bordered table-responsive">
+              <thead>  
+               <tr>
+                 <th>Penulis</th>
+                 <th>Nama Jurnal</th>
+                 <th>Volume</th>
+                 <th>Nomor</th>
+                 <th>Sumberdana</th>
+                 <th>Biaya</th>
+                 <th>Tahun</th>
+                 <th>URL</th>
+               </tr>
 
-        </td>                      
-        
-        @if(Session::get('userRole')!='Dosen')
-<!--    <td>
-    <a class="btn btn-sm btn-default  fa fa-eye" href="#" title="Lihat Luaran"></a>
-  </td>   
-  <td>
+             </thead>
+
+             <tbody>
+              <tr>
+                <td>{{$tampil->penulis_publikasi}}</td>
+                <td>{{$tampil->nama_jurnal}}</td>
+                <td>{{$tampil->volume}}</td>
+                <td>{{$tampil->nomor}}</td>
+                <td>{{$tampil->sumberdana}}</td>
+                <td>{{$tampil->biaya}}</td>
+                <td>{{$tampil->tahun}}</td>
+                <td>{{$tampil->url}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- modal akhir -->
+
+</td>
+<td>{{$tampil->jenis_publikasi}}</td>
+
+<td>{{$tampil->tahun}}</td>
+
+
+
+@if(Session::get('userRole')!='Dosen')
+<!--   <td>
    
     <a class="btn btn-sm btn-info  fa fa-edit" href="#" title="Edit Penelitian"></a>
     
   </td>
-  <td>
-    <div>
-      <a class="btn btn-sm btn-danger fa fa-trash" href="#" title="Hapus Penelitian"></a>
-    </div>              
-  </td>
--->
+--> 
+<td>
+  <a class="btn btn-sm btn-danger fa fa-trash" onclick="return confirm('Anda Yakin Ingin Menghapus Data ?')" href="tampil_pen_luaran_jurnal/hapus_jurnal/{{$tampil->id}}" title="Hapus Luaran"></a>
+</td>
+
 @endif
 
 </tr>

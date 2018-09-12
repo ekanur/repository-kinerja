@@ -545,143 +545,131 @@
     });
     @endif 
 
-    @if($menu['menu']=='Pendidikan')
-
-    $("#dari_siakad").click(function(e){
-      e.preventDefault();
-      var thaka=$("#pilih_thaka").val();
-      var url="{{url('/akademik/import')}}/"+thaka;
-
-      $.getJSON(url).success(function(response_data){  
-        $.post("{{url('/akademik/save_import')}}",
-          { data:response_data, thaka:thaka})
-        .done(function(msg){
-          var pesan="Tidak berhasil menambahkan data pendidikan dari SIAKAD";
-          var type="danger";
-          if(msg==='berhasil'){
-            var pesan="Berhasil menambahkan data pendidikan dari SIAKAD";
-            var type="success";
-          }
-          $.notify(pesan,{
-            type:type,
-            timer:5500,
-            delay:5500,
-            placement:{
-              from:'top',
-              align:'center'
-            },
-          });
-          setTimeout(function(){
-            console.log("Zzzzzz");
-          },5500);
-          window.location='{{url("/akademik")}}';
-        });
-      });
-    });
-
-    $("#pilih_thaka").change(function(){
-      var thaka=$("#pilih_thaka").val();
-      window.location='{{url("/akademik/import/")}}/'+thaka;
-    });
-    @endif
 
 
 
+  //   @if($menu['menu']=='Pendidikan')
+
+  //   $("#dari_siakad").click(function(e){
+  //     e.preventDefault();
+  //     var thaka=$("#pilih_thaka").val();
+  //     var url="{{url('/akademik/import')}}/"+thaka;
+
+  //     $.getJSON(url).success(function(response_data){  
+  //       $.post("{{url('/akademik/save_import')}}",
+  //         { data:response_data, thaka:thaka})
+  //       .done(function(msg){
+  //         var pesan="Tidak berhasil menambahkan data pendidikan dari SIAKAD";
+  //         var type="danger";
+  //         if(msg==='berhasil'){
+  //           var pesan="Berhasil menambahkan data pendidikan dari SIAKAD";
+  //           var type="success";
+  //         }
+  //         $.notify(pesan,{
+  //           type:type,
+  //           timer:5500,
+  //           delay:5500,
+  //           placement:{
+  //             from:'top',
+  //             align:'center'
+  //           },
+  //         });
+  //         setTimeout(function(){
+  //           console.log("Zzzzzz");
+  //         },5500);
+  //         window.location='{{url("/akademik")}}';
+  //       });
+  //     });
+  //   });
+
+  //   $("#pilih_thaka").change(function(){
+  //     var thaka=$("#pilih_thaka").val();
+  //     window.location='{{url("/akademik/import/")}}/'+thaka;
+  //   });
+  //   @endif
 
 
+  // @if ($menu['menu']=='Penelitian')
+
+  //   $("#dari_litabmas").click(function(e){
+  //     e.preventDefault();
+  //     var tahun=$("#tahun").val();
+  //     var url="{{url('/penelitian/import')}}/"+tahun;
+
+  //     $.getJSON(url).success(function(response_data){ 
+  //       $.post("{{url('/penelitian/save_import')}}",
+  //         { data:response_data, tahun:tahun})
+  //       .done(function(msg){
+  //         var pesan="Tidak berhasil menambahkan data pendidikan dari SIAKAD";
+  //         var type="danger";
+  //         if(msg==='berhasil'){
+  //           var pesan="Berhasil menambahkan data pendidikan dari SIAKAD";
+  //           var type="success";
+  //         }
+  //         $.notify(pesan,{
+  //           type:type,
+  //           timer:5500,
+  //           delay:5500,
+  //           placement:{
+  //             from:'top',
+  //             align:'center'
+  //           },
+  //         });
+  //         setTimeout(function(){
+  //           console.log("Zzzzzz");
+  //         },5500);
+  //         window.location='{{url("/penelitian")}}';
+  //       });
+  //     });
+  //   });
 
 
+  //   $("#tahun").change(function(){
+  //     var tahun=$("#tahun").val();
+  //     window.location='{{url("/penelitian/import/")}}/'+tahun;
+  //   });
+  //   @endif
+
+  //   @if($menu['menu']=='Pengabdian')
+  //   $("#dari_litabmas").click(function(e){
+  //     e.preventDefault();
+  //     var tahun=$("#tahun").val();
+  //     var url="{{url('/pengabdian/import')}}/"+tahun;
+
+  //     $.getJSON(url).success(function(response_data){ 
+  //       $.post("{{url('/pengabdian/save_import')}}",
+  //         { data:response_data, tahun:tahun})
+  //       .done(function(msg){
+  //                                   // console.log(msg);
+  //                                   var pesan="Tidak berhasil menambahkan data pendidikan dari SIAKAD";
+  //                                   var type="danger";
+  //                                   if(msg==='berhasil'){
+  //                                     var pesan="Berhasil menambahkan data pendidikan dari SIAKAD";
+  //                                     var type="success";
+  //                                   }
+  //                                   $.notify(pesan,{
+  //                                     type:type,
+  //                                     timer:5500,
+  //                                     delay:5500,
+  //                                     placement:{
+  //                                       from:'top',
+  //                                       align:'center'
+  //                                     },
+  //                                   });
+  //                                   setTimeout(function(){
+  //                                     console.log("Zzzzzz");
+  //                                   },5500);
+  //                                   window.location='{{url("/pengabdian")}}';
+  //                                 });
+  //     });
+  //   });
 
 
-
-
-     
-
-
-
-
-
-  @if ($menu['menu']=='Penelitian')
-
-    $("#dari_litabmas").click(function(e){
-      e.preventDefault();
-      var tahun=$("#tahun").val();
-      var url="{{url('/penelitian/import')}}/"+tahun;
-
-      $.getJSON(url).success(function(response_data){ 
-        $.post("{{url('/penelitian/save_import')}}",
-          { data:response_data, tahun:tahun})
-        .done(function(msg){
-          var pesan="Tidak berhasil menambahkan data pendidikan dari SIAKAD";
-          var type="danger";
-          if(msg==='berhasil'){
-            var pesan="Berhasil menambahkan data pendidikan dari SIAKAD";
-            var type="success";
-          }
-          $.notify(pesan,{
-            type:type,
-            timer:5500,
-            delay:5500,
-            placement:{
-              from:'top',
-              align:'center'
-            },
-          });
-          setTimeout(function(){
-            console.log("Zzzzzz");
-          },5500);
-          window.location='{{url("/penelitian")}}';
-        });
-      });
-    });
-
-
-    $("#tahun").change(function(){
-      var tahun=$("#tahun").val();
-      window.location='{{url("/penelitian/import/")}}/'+tahun;
-    });
-    @endif
-
-    @if($menu['menu']=='Pengabdian')
-    $("#dari_litabmas").click(function(e){
-      e.preventDefault();
-      var tahun=$("#tahun").val();
-      var url="{{url('/pengabdian/import')}}/"+tahun;
-
-      $.getJSON(url).success(function(response_data){ 
-        $.post("{{url('/pengabdian/save_import')}}",
-          { data:response_data, tahun:tahun})
-        .done(function(msg){
-                                    // console.log(msg);
-                                    var pesan="Tidak berhasil menambahkan data pendidikan dari SIAKAD";
-                                    var type="danger";
-                                    if(msg==='berhasil'){
-                                      var pesan="Berhasil menambahkan data pendidikan dari SIAKAD";
-                                      var type="success";
-                                    }
-                                    $.notify(pesan,{
-                                      type:type,
-                                      timer:5500,
-                                      delay:5500,
-                                      placement:{
-                                        from:'top',
-                                        align:'center'
-                                      },
-                                    });
-                                    setTimeout(function(){
-                                      console.log("Zzzzzz");
-                                    },5500);
-                                    window.location='{{url("/pengabdian")}}';
-                                  });
-      });
-    });
-
-
-    $("#tahun").change(function(){
-      var tahun=$("#tahun").val();
-      window.location='{{url("/pengabdian/import/")}}/'+tahun;
-    });
-    @endif
+  //   $("#tahun").change(function(){
+  //     var tahun=$("#tahun").val();
+  //     window.location='{{url("/pengabdian/import/")}}/'+tahun;
+  //   });
+  //   @endif
   </script>
 
   <?php 
@@ -695,54 +683,54 @@
           @endfor       ],
           datasets: [
           {
-            label: "Akademik",
+            label: "Penelitian Dilitabmas",
             fillColor: "rgba(210, 214, 222, 1)",
             strokeColor: "#00C0EF",
             pointColor: "#00C0EF",
             pointStrokeColor: "#c1c7d1",
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(220,220,220,1)",
-            data: [@foreach($menu['chart']['akademik'] as $akademik)
-            {{$akademik[0]->count.", "}}
+            data: [@foreach($menu['chart']['penelitian_dilitabmas'] as $penelitian_dilitabmas)
+            {{$penelitian_dilitabmas[0]->count.", "}}
             @endforeach
             ]
           },
           {
-            label: "Penelitian",
+            label: "Penelitian Non Dilitabmas",
             fillColor: "rgba(60,141,188,0.9)",
             strokeColor: "#00A65A",
             pointColor: "#00A65A",
             pointStrokeColor: "rgba(60,141,188,1)",
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(60,141,188,1)",
-            data: [@foreach($menu['chart']['penelitian'] as $penelitian)
-            {{$penelitian[0]->count.", "}}
+            data: [@foreach($menu['chart']['penelitian_non_dilitabmas'] as $penelitian_non_dilitabmas)
+            {{$penelitian_non_dilitabmas[0]->count.", "}}
             @endforeach
             ]
           },
           {
-            label: "Pengabdian Masyarakat",
+            label: "Pengabdian Dilitabmas",
             fillColor: "rgba(60,141,188,0.9)",
             strokeColor: "#DD4B39",
             pointColor: "#DD4B39",
             pointStrokeColor: "rgba(60,141,188,1)",
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(60,141,188,1)",
-            data: [@foreach($menu['chart']['pengabdian'] as $pengabdian)
-            {{$pengabdian[0]->count.", "}}
+            data: [@foreach($menu['chart']['pengabdian_dilitabmas'] as $pengabdian_dilitabmas)
+            {{$pengabdian_dilitabmas[0]->count.", "}}
             @endforeach
             ]
           },
           {
-            label: "Kegiatan Penunjang",
+            label: "Pengabdian Non Dilitabmas",
             fillColor: "rgba(60,141,188,0.9)",
             strokeColor: "#F39C12",
             pointColor: "#F39C12",
             pointStrokeColor: "rgba(60,141,188,1)",
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(60,141,188,1)",
-            data: [@foreach($menu['chart']['kegiatan_penunjang'] as $kegiatan_penunjang)
-            {{$kegiatan_penunjang[0]->count.", "}}
+            data: [@foreach($menu['chart']['pengabdian_non_dilitabmas'] as $pengabdian_non_dilitabmas)
+            {{$pengabdian_non_dilitabmas[0]->count.", "}}
             @endforeach
             ]
           }

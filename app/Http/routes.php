@@ -97,6 +97,12 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/{kategori}/hapus_dilitabmas/{id}', "PenelitianController@hapus_dilitabmas");
 	Route::get('/{kategori}/hapus_non_dilitabmas/{id}', "PenelitianController@hapus_non_dilitabmas");
 	Route::get('/tampil_pen_luaran_buku/hapus_buku/{id}', "PenelitianController@hapus_buku");
+	Route::get('/tampil_pen_luaran_jurnal/hapus_jurnal/{id}', "PenelitianController@hapus_jurnal");
+	Route::get('/tampil_pen_luaran_pemakalah/hapus_pemakalah/{id}', "PenelitianController@hapus_pemakalah");
+	Route::get('/tampil_pen_luaran_hki/hapus_hki/{id}', "PenelitianController@hapus_hki");
+	Route::get('/tampil_pen_luaran_lain/hapus_lain/{id}', "PenelitianController@hapus_lain");
+
+
 
 
 // --------------------------------------------------------------
@@ -165,7 +171,11 @@ Route::group(['middleware' => ['web']], function () {
 // route hapus data
 	Route::get('/{kategori}/hapus_peng_dilitabmas/{id}', "PengabdianController@hapus_peng_dilitabmas");
 	Route::get('/{kategori}/hapus_peng_non_dilitabmas/{id}', "PengabdianController@hapus_peng_non_dilitabmas");
-
+	Route::get('/tampil_peng_luaran_buku/hapus_buku_peng/{id}', "PengabdianController@hapus_buku_peng");
+	Route::get('/tampil_peng_luaran_jurnal/hapus_jurnal_peng/{id}', "PengabdianController@hapus_jurnal_peng");
+	Route::get('/tampil_peng_luaran_pemakalah/hapus_pemakalah_peng/{id}', "PengabdianController@hapus_pemakalah_peng");
+	Route::get('/tampil_peng_luaran_hki/hapus_hki_peng/{id}', "PengabdianController@hapus_hki_peng");
+	Route::get('/tampil_peng_luaran_lain/hapus_lain_peng/{id}', "PengabdianController@hapus_lain_peng");
 
 
 

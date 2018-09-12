@@ -29,43 +29,87 @@
               <th>Ins Penyelenggara</th>
               <th>Tahun</th>
               @if(Session::get('userRole')!='Dosen')
-          <!--     <th></th>
               <th></th>
-              <th></th> -->
-              @endif
-            </tr>
-          </thead>
-          <tbody>
-            <?php $i=1; ?>
-            @foreach($menu['data'] as $tampil)
-            
-            <tr>
-             <td>{{$i++}}</td>
-             <td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->jenis_pengabdian}}</strong></td>
+          <!--     <th></th>
+          -->    @endif
+        </tr>
+      </thead>
+      <tbody>
+        <?php $i=1; ?>
+        @foreach($menu['data'] as $tampil)
 
-             <td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->judul_pengabdian}}</strong></td>
+        <tr>
+         <td>{{$i++}}</td>
+         <td>{{$tampil->jenis_pengabdian}}</td></td>
 
-           </td><td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->judul}}</strong></td>
-           <td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->nama_forum}}</strong></td>
-           <td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->ins_penyelenggara}}</strong></td>
-           <td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->tahun}}</strong></td>
-                             
+         <td>{{$tampil->judul_pengabdian}}</td></td>
 
-      @if(Session::get('userRole')!='Dosen')
-<!--    <td>
-    <a class="btn btn-sm btn-default  fa fa-eye" href="#" title="Lihat Luaran"></a>
-  </td>   
-  <td>
+         <td>
+          <a href= "" data-toggle="modal" data-target="#abstrak-{{$tampil->id}}" title="Detail">{{$tampil->judul}}</a>
+
+          <!-- modal awal -->
+          <div class="modal fade bs-example-modal-lg" id="abstrak-{{$tampil->id}}" tabindex="-1" role="dialog" aria-labelledby="Title" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document" style="min-width: 1000px; overflow-y: auto;">
+              <!-- <div class="modal-dialog modal-lg" role="document" style="overflow-y: scroll;"> -->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <strong><h4 class="modal-title" id="Title">Detail : {{$tampil->judul}} </h4></strong>
+                  </div>
+                  <div class="modal-body">
+                   <table id="classTable" class="table table-bordered table-responsive">
+                    <thead>  
+                      <tr>
+                        <th>Forum</th>
+                        <th>Status</th>
+                        <th>Tempat</th>
+                        <th>Waktu Mulai</th>
+                        <th>Waktu Selesai</th>
+                        <th>Sumberdana</th>
+                        <th>Dana</th>
+                        <th>URL</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{{$tampil->nama_forum}}</td>
+                        <td>{{$tampil->status}}</td>
+                        <td>{{$tampil->tempat}}</td>
+                        <td>{{$tampil->waktu_mulai}}</td>
+                        <td>{{$tampil->waktu_selesai}}</td>
+                        <td>{{$tampil->sumberdana}}</td>
+                        <td>{{$tampil->dana}}</td>
+                        <td>{{$tampil->url}}</td>
+
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- modal akhir -->
+
+        </td>
+        <td>{{$tampil->nama_forum}}</td></td>
+        <td>{{$tampil->ins_penyelenggara}}</td></td>
+        <td>{{$tampil->tahun}}</td></td>
+
+
+        @if(Session::get('userRole')!='Dosen')
+<!--   <td>
    
-    <a class="btn btn-sm btn-info  fa fa-edit" href="#" title="Edit Penelitian"></a>
+    <a class="btn btn-sm btn-info  fa fa-edit" href="#" title="Edit pengabdian"></a>
     
   </td>
-  <td>
-    <div>
-      <a class="btn btn-sm btn-danger fa fa-trash" href="#" title="Hapus Penelitian"></a>
-    </div>              
-  </td>
--->
+-->  <td>
+  <a class="btn btn-sm btn-danger fa fa-trash" onclick="return confirm('Anda Yakin Ingin Menghapus Data ?')" href="tampil_peng_luaran_pemakalah/hapus_pemakalah_peng/{{$tampil->id}}" title="Hapus Pengabdian"></a>
+
+</td>
+
 @endif
 
 </tr>

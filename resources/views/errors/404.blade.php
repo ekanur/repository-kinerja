@@ -34,7 +34,7 @@
 	<body>
 		<div class="container">
 			<div class="content">
-				<div class="title">Baaaaa, 404 Not Found</div>
+				<div class="title">OOPS, 404 Not Found</div>
 			</div>
 		</div>
 	</body>

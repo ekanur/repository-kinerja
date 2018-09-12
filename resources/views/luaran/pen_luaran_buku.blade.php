@@ -27,11 +27,10 @@
               <th>Judul</th>
               <th>Penerbit</th>
               <th>Tahun</th>
-              <th>Abstrak</th>
+              
               @if(Session::get('userRole')!='Dosen')
-           <!--    <th></th>
               <th></th>
-              <th></th> -->
+              <!--   <th></th> -->
               @endif
             </tr>
           </thead>
@@ -41,84 +40,72 @@
             
             <tr>
              <td>{{$i++}}</td>
-             <td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->jenis_penelitian}}</strong></td>
+             <td>{{$tampil->jenis_penelitian}} </td>
              
-             <td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->judul_penelitian}}</strong></td>
-             <td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->judul}}</strong></td>
-             <td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->penerbit}}</strong></td>
-             <td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->tahun}}</strong></td>
-             
-             
+             <td>{{$tampil->judul_penelitian}} </td>
              <td>
+              <a href= "" data-toggle="modal" data-target="#abstrak-{{$tampil->id}}" title="Detail">{{$tampil->judul}}</a>
 
-               <a class="btn btn-sm  glyphicon glyphicon-bookmark" data-toggle="modal" data-target="#abstrak-{{$tampil->id}}"></a>
-
-               <div class="modal fade bs-example-modal-lg" id="abstrak-{{$tampil->id}}" tabindex="-1" role="dialog" aria-labelledby="Title" aria-hidden="true">
+              <!-- modal awal -->
+              <div class="modal fade bs-example-modal-lg" id="abstrak-{{$tampil->id}}" tabindex="-1" role="dialog" aria-labelledby="Title" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document" style="min-width: 1000px; overflow-y: auto;">
-                <!-- <div class="modal-dialog modal-lg" role="document" style="overflow-y: scroll;"> -->
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <strong><h3 class="modal-title" id="Title">Abstrak</h3></strong>
+                  <!-- <div class="modal-dialog modal-lg" role="document" style="overflow-y: scroll;"> -->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <strong><h4 class="modal-title" id="Title">Detail : {{$tampil->judul}} </h4></strong>
+                      </div>
+                      <div class="modal-body">
+                       <table id="classTable" class="table table-bordered table-responsive">
+                        <thead>  
+                          <tr>
+                            <th>Penerbit</th>
+                            <th>ISBN</th>
+                            <th>Halaman</th>
+                            <th>Tahun</th>
+                            <th>Sumberdana</th>
+                            <th>Dana</th>
+                            <th>URL</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>{{$tampil->penerbit}}</td>
+                            <td>{{$tampil->isbn}}</td>
+                            <td>{{$tampil->jumlah_halaman}}</td>
+                            <td>{{$tampil->tahun}}</td>
+                            <td>{{$tampil->sumberdana}}</td>
+                            <td>{{$tampil->dana}}</td>
+                            <td>{{$tampil->url}}</td>
+
+                          </tr>
+                        </tbody>
+                      </table>
+
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      </div>
                     </div>
-                    <div class="modal-body">
-                     <table id="classTable" class="table table-bordered table-responsive">
-                      <thead>  
-                        <tr>
-                          <th>Jenis Penelitian</th>
-                          <th>Judul Penelitian</th>
-                          <th>Judul</th>
-                          <th>Penerbit</th>
-                          <th>Tahun</th>
-                          <th>Jenis Penelitian</th>
-                          <th>Judul Penelitian</th>
-                          <th>Judul</th>
-                          <th>Penerbit</th>
-                          <th>Tahun</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                         <td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->jenis_penelitian}}</strong></td>
-
-                         <td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->judul_penelitian}}</strong></td>
-                         <td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->judul}}</strong></td>
-                         <td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->penerbit}}</strong></td>
-                         <td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->tahun}}</strong></td>
-                         <td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->jenis_penelitian}}</strong></td>
-
-                         <td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->judul_penelitian}}</strong></td>
-                         <td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->judul}}</strong></td>
-                         <td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->penerbit}}</strong></td>
-                         <td><strong data-toggle="tooltip" data-placement="top" >{{$tampil->tahun}}</strong></td>
-                       </tr>
-                     </tbody>
-                   </table>
-
-                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
+              <!-- modal akhir -->
+            </td>
+            <td>{{$tampil->penerbit}} </td>
+            <td>{{$tampil->tahun}} </td>
 
-        </td>         
-        @if(Session::get('userRole')!='Dosen')
-  <!--  <td>
-    <a class="btn btn-sm btn-default  fa fa-eye" href="#" title="Lihat Luaran"></a>
-  </td>     
-  <td>
+            @if(Session::get('userRole')!='Dosen')
+
+  <!-- <td>
    
     <a class="btn btn-sm btn-info  fa fa-edit" href="#" title="Edit Penelitian"></a>
     
-  </td>
+  </td> -->
   <td>
-    <div>
-      <a class="btn btn-sm btn-danger fa fa-trash" href="tampil_pen_luaran_buku/hapus_buku/{{$tampil->id}}" title="Hapus Penelitian"></a>
-    </div>              
+    <a class="btn btn-sm btn-danger fa fa-trash" onclick="return confirm('Anda Yakin Ingin Menghapus Data ?')" href="tampil_pen_luaran_buku/hapus_buku/{{$tampil->id}}" title="Hapus Penelitian"></a>
+
   </td>
--->
-@endif
+
+  @endif
 
 </tr>
 @endforeach

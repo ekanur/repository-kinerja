@@ -20,10 +20,10 @@ class DashboardController extends Controller
     public function index(){
         
     	$data_chart=array(
-    		"akademik"=>$this->data_chart_akademik(),
-    		"penelitian"=>$this->data_chart_penelitian(),
-    		"pengabdian"=>$this->data_chart_pengabdian(),
-    		"kegiatan_penunjang"=>$this->data_chart_kegiatan_penunjang(),
+    		"penelitian_dilitabmas"=>$this->data_chart_penelitian_dilitabmas(),
+    		"penelitian_non_dilitabmas"=>$this->data_chart_penelitian_non_dilitabmas(),
+    		"pengabdian_dilitabmas"=>$this->data_chart_pengabdian_dilitabmas(),
+    		"pengabdian_non_dilitabmas"=>$this->data_chart_pengabdian_non_dilitabmas(),
 
     		);
 
@@ -34,28 +34,28 @@ class DashboardController extends Controller
 
     public function get_total_tridarma(){
     	$result=array();
-    	$akademik=new App\Akademik;
-    	$penelitian=new App\Penelitian;
-    	$pengabdian=new App\Pengabdian;
-    	$kegiatan_penunjang=new App\Kegiatan_penunjang;
+    	$penelitian_dilitabmas=new App\penelitian_dilitabmas;
+    	$penelitian_non_dilitabmas=new App\penelitian_non_dilitabmas;
+    	$pengabdian_dilitabmas=new App\pengabdian_dilitabmas;
+    	$pengabdian_non_dilitabmas=new App\pengabdian_non_dilitabmas;
 
     	$result=array(
-    		"akademik"=>$akademik->where('nip_dosen', '=', Session::get('userID_login'))->where("deleted_at", "=", null)->get()->count(),
-    		"penelitian"=>$penelitian->where('nip_dosen', '=', Session::get('userID_login'))->where("deleted_at", "=", null)->get()->count(),
-    		"pengabdian"=>$pengabdian->where('nip_dosen', '=', Session::get('userID_login'))->where("deleted_at", "=", null)->get()->count(),
-    		"kegiatan_penunjang"=>$kegiatan_penunjang->where('nip_dosen', '=', Session::get('userID_login'))->where("deleted_at", "=", null)->get()->count(),
+    		"penelitian_dilitabmas"=>$penelitian_dilitabmas->where('nip_dosen', '=', Session::get('userID_login'))->where("deleted_at", "=", null)->get()->count(),
+    		"penelitian_non_dilitabmas"=>$penelitian_non_dilitabmas->where('nip_dosen', '=', Session::get('userID_login'))->where("deleted_at", "=", null)->get()->count(),
+    		"pengabdian_dilitabmas"=>$pengabdian_dilitabmas->where('nip_dosen', '=', Session::get('userID_login'))->where("deleted_at", "=", null)->get()->count(),
+    		"pengabdian_non_dilitabmas"=>$pengabdian_non_dilitabmas->where('nip_dosen', '=', Session::get('userID_login'))->where("deleted_at", "=", null)->get()->count(),
     		);
 
     	return $result;
     }
 
-    public function data_chart_akademik(){
+    public function data_chart_penelitian_dilitabmas(){
 
     		$data=array();
     		for ($i=date("Y")-5; $i <= date("Y"); $i++) { 
 
-                // $data[$i]=DB::select("select count(id) from akademik where extract(year from tgl)=".$i." and nip_dosen='".Session::get('userID_login')."' and deleted_at IS NULL ");
-    			$data[$i]=DB::select("select count(id) from akademik where CAST(thaka AS TEXT) like '".$i."%' and nip_dosen='".Session::get('userID_login')."' and deleted_at IS NULL ");
+                // $data[$i]=DB::select("select count(id) from penelitian_dilitabmas where extract(year from tgl)=".$i." and nip_dosen='".Session::get('userID_login')."' and deleted_at IS NULL ");
+    			$data[$i]=DB::select("select count(id) from penelitian_dilitabmas where CAST(tahun AS TEXT) like '".$i."%' and nip_dosen='".Session::get('userID_login')."' and deleted_at IS NULL ");
 
     		}   	
     		
@@ -63,13 +63,13 @@ class DashboardController extends Controller
 
     }
 
-    public function data_chart_penelitian(){
+    public function data_chart_penelitian_non_dilitabmas(){
 
     		$data=array();
     		for ($i=date("Y")-5; $i <= date("Y"); $i++) { 
 
-                // $data[$i]=DB::select("select count(id) from penelitian where extract(year from tgl)=".$i." and nip_dosen='".Session::get('userID_login')."' and deleted_at IS NULL ");
-    			$data[$i]=DB::select("select count(id) from penelitian where CAST(thaka AS TEXT) like '".$i."%' and nip_dosen='".Session::get('userID_login')."' and deleted_at IS NULL ");
+                // $data[$i]=DB::select("select count(id) from penelitian_non_dilitabmas where extract(year from tgl)=".$i." and nip_dosen='".Session::get('userID_login')."' and deleted_at IS NULL ");
+    			$data[$i]=DB::select("select count(id) from penelitian_non_dilitabmas where CAST(tahun AS TEXT) like '".$i."%' and nip_dosen='".Session::get('userID_login')."' and deleted_at IS NULL ");
 
     		}   	
     		
@@ -77,13 +77,13 @@ class DashboardController extends Controller
 
     }
 
-    public function data_chart_pengabdian(){
+    public function data_chart_pengabdian_dilitabmas(){
 
     		$data=array();
     		for ($i=date("Y")-5; $i <= date("Y"); $i++) { 
 
-                // $data[$i]=DB::select("select count(id) from pengabdian where extract(year from tgl)=".$i." and nip_dosen='".Session::get('userID_login')."' and deleted_at IS NULL ");
-    			$data[$i]=DB::select("select count(id) from pengabdian where CAST(thaka AS TEXT) like '".$i."%' and nip_dosen='".Session::get('userID_login')."' and deleted_at IS NULL ");
+                // $data[$i]=DB::select("select count(id) from pengabdian_dilitabmas where extract(year from tgl)=".$i." and nip_dosen='".Session::get('userID_login')."' and deleted_at IS NULL ");
+    			$data[$i]=DB::select("select count(id) from pengabdian_dilitabmas where CAST(tahun AS TEXT) like '".$i."%' and nip_dosen='".Session::get('userID_login')."' and deleted_at IS NULL ");
 
     		}   	
     		
@@ -91,12 +91,12 @@ class DashboardController extends Controller
 
     }
 
-    public function data_chart_kegiatan_penunjang(){
+    public function data_chart_pengabdian_non_dilitabmas(){
     	$data=array();
     		for ($i=date("Y")-5; $i <= date("Y"); $i++) { 
 
-                // $data[$i]=DB::select("select count(id) from kegiatan_penunjang where extract(year from tgl)=".$i." and nip_dosen='".Session::get('userID_login')."' and deleted_at IS NULL ");
-    			$data[$i]=DB::select("select count(id) from kegiatan_penunjang where CAST(thaka AS TEXT) like '".$i."%' and nip_dosen='".Session::get('userID_login')."' and deleted_at IS NULL ");
+                // $data[$i]=DB::select("select count(id) from pengabdian_non_dilitabmas where extract(year from tgl)=".$i." and nip_dosen='".Session::get('userID_login')."' and deleted_at IS NULL ");
+    			$data[$i]=DB::select("select count(id) from pengabdian_non_dilitabmas where CAST(tahun AS TEXT) like '".$i."%' and nip_dosen='".Session::get('userID_login')."' and deleted_at IS NULL ");
 
     		}   	
     		
