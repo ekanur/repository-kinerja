@@ -30,7 +30,7 @@
               
               @if(Session::get('userRole')!='Dosen')
               <th></th>
-              <!--   <th></th> -->
+                <th></th>
               @endif
             </tr>
           </thead>
@@ -99,11 +99,9 @@
             
             @if(Session::get('userRole')!='Dosen')
 
-  <!-- <td>
-   
-    <a class="btn btn-sm btn-info  fa fa-edit" href="#" title="Edit Penelitian"></a>
-    
-  </td> -->
+   <td>
+    <a class="btn btn-sm btn-info  fa fa-edit" href="tampil_peng_luaran_buku/edit_peng_luaran_buku/{{$tampil->id}}" title="Edit Luaran"></a>
+  </td>
   <td>
     <a class="btn btn-sm btn-danger fa fa-trash" onclick="return confirm('Anda Yakin Ingin Menghapus Data ?')" href="tampil_peng_luaran_buku/hapus_buku_peng/{{$tampil->id}}" title="Hapus Penelitian"></a>
 

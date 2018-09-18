@@ -544,10 +544,10 @@ public function tambah_non_peng_luaran_buku()
     if($luaran->save()){
       $update=$luaran::find($luaran->id);
       $update->save();
-      session()->flash('berhasil', 'Berhasil menambahkan kegiatan baru');
+      session()->flash('berhasil', 'Berhasil menambahkan luaran baru');
     }
     else{
-      session()->flash('gagal', 'Gagal menambahkan kegiatan ');
+      session()->flash('gagal', 'Gagal menambahkan luaran ');
     }
 
 
@@ -633,10 +633,10 @@ public function tambah_peng_luaran_buku($kategori, $id){
   $luaran->abstrak=Request::get('abstrak');
   
   if($luaran->save()){
-    Session::flash('berhasil', 'Berhasil memperbarui kegiatan ');
+    Session::flash('berhasil', 'Berhasil memperbarui luaran ');
   }
   else{
-    Session::flash('gagal', 'Gagal memperbarui kegiatan ');
+    Session::flash('gagal', 'Gagal memperbarui luaran ');
   }
 
 
@@ -665,6 +665,65 @@ public function hapus_buku_peng($id){
 
   return redirect("tampil_peng_luaran_buku");
 }
+
+
+public function edit_peng_luaran_buku($id){
+
+  $data=new App\peng_luaran_buku_ajar;
+
+  if(Session::get('userRole')=='Dosen' || Session::get("userID_login")==null){
+    abort(404);
+            // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
+  }
+
+
+  $model=$data->find($id);
+
+
+  $title = 'Luaran Buku Ajar';
+  
+
+  $menu=array('menu'=>$title,'submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'','data'=>$model,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'));
+  return View::make('edit_peng_luaran_buku')->with('menu', $menu);
+}
+
+
+
+public function update_peng_luaran_buku(){
+  // echo "hahahah"; die();
+  if(Session::get('userRole')=='Dosen'){
+    abort(404);
+            // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
+  }
+  $id = Request::get('id');
+  $data=new App\peng_luaran_buku_ajar;
+
+  $update=$data::find($id);
+
+  $update->judul=Request::get('judul');
+  $update->penerbit=Request::get('penerbit');
+  $update->isbn=Request::get('isbn');
+  $update->jumlah_halaman=Request::get('jumlah_halaman');
+  $update->tahun=Request::get('tahun');
+  $update->sumberdana=Request::get('sumberdana');
+  $update->dana=Request::get('dana');
+  $update->url=Request::get('url');
+  $update->updated_at=date('Y-m-d H:i:s');
+  $update->updated_by=Session::get("userID");
+
+  if($update->save()){
+    session()->flash('berhasil', 'Berhasil memperbarui luaran ' );
+
+  }
+  else{
+    session()->flash('gagal', 'Gagal memperbarui luaran ' );
+  }
+
+
+  return Redirect::to("tampil_peng_luaran_buku");
+
+}
+
 
 
 // ----------------------------------------------------------------------------------------------------
@@ -720,10 +779,10 @@ public function tambah_non_peng_luaran_jurnal()
     if($luaran->save()){
       $update=$luaran::find($luaran->id);
       $update->save();
-      session()->flash('berhasil', 'Berhasil menambahkan kegiatan baru');
+      session()->flash('berhasil', 'Berhasil menambahkan luaran baru');
     }
     else{
-      session()->flash('gagal', 'Gagal menambahkan kegiatan ');
+      session()->flash('gagal', 'Gagal menambahkan luaran ');
     }
 
 
@@ -815,10 +874,10 @@ public function tambah_peng_luaran_jurnal($kategori, $id){
   
   
   if($luaran->save()){
-    Session::flash('berhasil', 'Berhasil memperbarui kegiatan ');
+    Session::flash('berhasil', 'Berhasil memperbarui luaran ');
   }
   else{
-    Session::flash('gagal', 'Gagal memperbarui kegiatan ');
+    Session::flash('gagal', 'Gagal memperbarui luaran ');
   }
 
 
@@ -850,6 +909,60 @@ public function hapus_jurnal_peng($id){
 }
 
 
+public function edit_peng_luaran_jurnal($id){
+
+  $data=new App\peng_luaran_jurnal;
+  $jenis_publikasi=App\jenis_publikasi::all();
+  if(Session::get('userRole')=='Dosen' || Session::get("userID_login")==null){
+    abort(404);
+            // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
+  }
+  $model=$data->find($id);
+  $title = 'Luaran jurnal';
+  
+  $menu=array('menu'=>$title,'submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'','data'=>$model,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'),'data_jenis_publikasi'=>$jenis_publikasi);
+  return View::make('edit_peng_luaran_jurnal')->with('menu', $menu);
+}
+
+
+
+public function update_peng_luaran_jurnal(){
+  if(Session::get('userRole')=='Dosen'){
+    abort(404);
+            // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
+  } $id = Request::get('id');
+  $data=new App\peng_luaran_jurnal;
+  $update=$data::find($id);
+
+  $update->judul=Request::get('judul');
+  $update->penulis_publikasi=Request::get('penulis_publikasi');
+  $update->nama_jurnal=Request::get('nama_jurnal');
+  $update->jenis_publikasi=Request::get('jenis_publikasi');
+  $update->e_issn=Request::get('e_issn');
+  $update->p_issn=Request::get('p_issn');
+  $update->volume=Request::get('volume');
+  $update->nomor=Request::get('nomor');
+  $update->halaman_awal=Request::get('halaman_awal');
+  $update->halaman_akhir=Request::get('halaman_akhir');
+  $update->tahun=Request::get('tahun');
+  $update->sumberdana=Request::get('sumberdana');
+  $update->dana=Request::get('dana');
+  $update->url=Request::get('url');
+  $update->updated_at=date('Y-m-d H:i:s');
+  $update->updated_by=Session::get("userID");
+
+  if($update->save()){
+    session()->flash('berhasil', 'Berhasil memperbarui luaran ' );
+
+  }
+  else{
+    session()->flash('gagal', 'Gagal memperbarui luaran ' );
+  }
+
+
+  return Redirect::to("tampil_peng_luaran_jurnal");
+
+}
 
 
 // ...........................................................................................................................
@@ -903,10 +1016,10 @@ if(Request::isMethod('post'))
   if($luaran->save()){
     $update=$luaran::find($luaran->id);
     $update->save();
-    session()->flash('berhasil', 'Berhasil menambahkan kegiatan baru');
+    session()->flash('berhasil', 'Berhasil menambahkan luaran baru');
   }
   else{
-    session()->flash('gagal', 'Gagal menambahkan kegiatan ');
+    session()->flash('gagal', 'Gagal menambahkan luaran ');
   }
 
 
@@ -994,10 +1107,10 @@ public function tambah_peng_luaran_pemakalah($kategori, $id){
   $luaran->jenis_pengabdian=Request::get('jenis_pengabdian');
   
   if($luaran->save()){
-    Session::flash('berhasil', 'Berhasil memperbarui kegiatan ');
+    Session::flash('berhasil', 'Berhasil memperbarui luaran ');
   }
   else{
-    Session::flash('gagal', 'Gagal memperbarui kegiatan ');
+    Session::flash('gagal', 'Gagal memperbarui luaran ');
   }
 
 
@@ -1029,6 +1142,60 @@ public function hapus_pemakalah_peng($id){
 }
 
 
+public function edit_peng_luaran_pemakalah($id){
+
+
+  $data=new App\peng_luaran_pemakalah;
+  $forum_ilmiah=App\forum_ilmiah::all();
+  $status_pemakalah=App\status_pemakalah::all();
+  if(Session::get('userRole')=='Dosen' || Session::get("userID_login")==null){
+    abort(404);
+            // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
+  }
+  $model=$data->find($id);
+  $title = 'Luaran pemakalah';
+  
+  $menu=array('menu'=>$title,'submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'','data'=>$model,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'),'data_forum_ilmiah'=>$forum_ilmiah,'data_status_pemakalah'=>$status_pemakalah);
+  return View::make('edit_peng_luaran_pemakalah')->with('menu', $menu);
+}
+
+
+
+public function update_peng_luaran_pemakalah(){
+  if(Session::get('userRole')=='Dosen'){
+    abort(404);
+            // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
+  } $id = Request::get('id');
+  $data=new App\peng_luaran_pemakalah;
+  $update=$data::find($id);
+
+  $update->judul=Request::get('judul_makalah');
+  $update->forum_ilmiah=Request::get('forum_ilmiah');
+  $update->status=Request::get('status_pemakalah');
+  $update->nama_forum=Request::get('nama_forum');
+  $update->ins_penyelenggara=Request::get('ins_penyelenggara');
+  $update->tempat=Request::get('tempat');
+  $update->waktu_mulai=Request::get('waktu_mulai');
+  $update->waktu_selesai=Request::get('waktu_selesai');
+  $update->tahun=Request::get('tahun');
+  $update->sumberdana=Request::get('sumberdana');
+  $update->dana=Request::get('dana');
+  $update->url=Request::get('url');
+  $update->updated_at=date('Y-m-d H:i:s');
+  $update->updated_by=Session::get("userID");
+
+  if($update->save()){
+    session()->flash('berhasil', 'Berhasil memperbarui luaran ' );
+
+  }
+  else{
+    session()->flash('gagal', 'Gagal memperbarui luaran ' );
+  }
+
+
+  return Redirect::to("tampil_peng_luaran_pemakalah");
+
+}
 
 // ............................................................................................................................
 
@@ -1076,10 +1243,10 @@ if(Request::isMethod('post'))
   if($luaran->save()){
     $update=$luaran::find($luaran->id);
     $update->save();
-    session()->flash('berhasil', 'Berhasil menambahkan kegiatan baru');
+    session()->flash('berhasil', 'Berhasil menambahkan luaran baru');
   }
   else{
-    session()->flash('gagal', 'Gagal menambahkan kegiatan ');
+    session()->flash('gagal', 'Gagal menambahkan luaran ');
   }
 
 
@@ -1163,10 +1330,10 @@ public function tambah_peng_luaran_hki($kategori, $id){
   $luaran->jenis_pengabdian=Request::get('jenis_pengabdian');
   
   if($luaran->save()){
-    Session::flash('berhasil', 'Berhasil memperbarui kegiatan ');
+    Session::flash('berhasil', 'Berhasil memperbarui luaran ');
   }
   else{
-    Session::flash('gagal', 'Gagal memperbarui kegiatan ');
+    Session::flash('gagal', 'Gagal memperbarui luaran ');
   }
 
 
@@ -1197,6 +1364,58 @@ public function hapus_hki_peng($id){
   return redirect("tampil_peng_luaran_hki");
 }
 
+
+public function edit_peng_luaran_hki($id){
+
+
+  $data=new App\peng_luaran_hki;
+  $jenis_hki=App\jenis_hki::all();
+  $status_hki=App\status_hki::all();
+  if(Session::get('userRole')=='Dosen' || Session::get("userID_login")==null){
+    abort(404);
+            // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
+  }
+  $model=$data->find($id);
+  $title = 'Luaran hki';
+  
+  $menu=array('menu'=>$title,'submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'','data'=>$model,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'),'data_jenis_hki'=>$jenis_hki,'data_status_hki'=>$status_hki);
+  return View::make('edit_peng_luaran_hki')->with('menu', $menu);
+}
+
+
+
+public function update_peng_luaran_hki(){
+  if(Session::get('userRole')=='Dosen'){
+    abort(404);
+            // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
+  } $id = Request::get('id');
+  $data=new App\peng_luaran_hki;
+  $update=$data::find($id);
+
+  $update->jenis=Request::get('jenis');
+  $update->status=Request::get('status');
+  $update->tahun=Request::get('tahun');
+  $update->judul=Request::get('judul');
+  $update->nomor_pendaftaran=Request::get('nomor_pendaftaran');
+  $update->nomor_pencatatan=Request::get('nomor_pencatatan');
+  $update->sumberdana=Request::get('sumberdana');
+  $update->dana=Request::get('dana');
+  $update->url=Request::get('url');
+  $update->updated_at=date('Y-m-d H:i:s');
+  $update->updated_by=Session::get("userID");
+
+  if($update->save()){
+    session()->flash('berhasil', 'Berhasil memperbarui luaran ' );
+
+  }
+  else{
+    session()->flash('gagal', 'Gagal memperbarui luaran ' );
+  }
+
+
+  return Redirect::to("tampil_peng_luaran_hki");
+
+}
 
 
 // ............................................................................................................................
@@ -1243,10 +1462,10 @@ public function tambah_non_peng_luaran_lain()
     if($luaran->save()){
       $update=$luaran::find($luaran->id);
       $update->save();
-      session()->flash('berhasil', 'Berhasil menambahkan kegiatan baru');
+      session()->flash('berhasil', 'Berhasil menambahkan luaran baru');
     }
     else{
-      session()->flash('gagal', 'Gagal menambahkan kegiatan ');
+      session()->flash('gagal', 'Gagal menambahkan luaran ');
     }
 
 
@@ -1325,10 +1544,10 @@ public function tambah_peng_luaran_lain($kategori, $id){
   $luaran->jenis_pengabdian=Request::get('jenis_pengabdian');
   
   if($luaran->save()){
-    Session::flash('berhasil', 'Berhasil memperbarui kegiatan ');
+    Session::flash('berhasil', 'Berhasil memperbarui luaran ');
   }
   else{
-    Session::flash('gagal', 'Gagal memperbarui kegiatan ');
+    Session::flash('gagal', 'Gagal memperbarui luaran ');
   }
 
 
@@ -1358,6 +1577,56 @@ public function hapus_lain_peng($id){
 
   return redirect("tampil_peng_luaran_lain");
 }
+
+
+public function edit_peng_luaran_lain($id){
+
+  $data=new App\peng_luaran_lain;
+ $jenis_luaran_lain=App\jenis_luaran_lain::all();
+ if(Session::get('userRole')=='Dosen' || Session::get("userID_login")==null){
+  abort(404);
+            // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
+}
+$model=$data->find($id);
+$title = 'Luaran lain';
+
+$menu=array('menu'=>$title,'submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'','data'=>$model,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'),'data_jenis_luaran_lain'=>$jenis_luaran_lain,);
+return View::make('edit_peng_luaran_lain')->with('menu', $menu);
+}
+
+
+
+public function update_peng_luaran_lain(){
+  if(Session::get('userRole')=='Dosen'){
+    abort(404);
+            // return back()->with("gagal", "Anda tidak memiliki hak akses untuk menambah");
+  } $id = Request::get('id');
+  $data=new App\peng_luaran_lain;
+  $update=$data::find($id);
+
+  $update->jenis=Request::get('jenis');
+  $update->tahun=Request::get('tahun');
+  $update->judul=Request::get('judul');
+  $update->deskripsi=Request::get('deskripsi');
+  $update->sumberdana=Request::get('sumberdana');
+  $update->dana=Request::get('dana');
+  $update->url=Request::get('url');
+  $update->updated_at=date('Y-m-d H:i:s');
+  $update->updated_by=Session::get("userID");
+
+  if($update->save()){
+    session()->flash('berhasil', 'Berhasil memperbarui luaran ' );
+
+  }
+  else{
+    session()->flash('gagal', 'Gagal memperbarui luaran ' );
+  }
+
+
+  return Redirect::to("tampil_peng_luaran_lain");
+
+}
+
 
 
 

@@ -25,17 +25,16 @@
             <input type="hidden" name='kategori' id="kategori" value="{{$menu['kategori']}}">
             <input type="hidden" name='jenis_pengabdian' id="jenis_pengabdian" value="{{$menu['data']->jenis_pengabdian}}">
             <input type="hidden" name="judul_pengabdian" id="judul_pengabdian" value="{{$menu['data']->judul}}">
-              <input type="hidden" name='abstrak' id="abstrak" value="{{$menu['data']->abstrak}}">
+             <!--  <input type="hidden" name='abstrak' id="abstrak" value="{{$menu['data']->abstrak}}"> -->
             
             <div class="box-body">
               <div class="form-group">
                 <label for="judul">Judul</label>
                 <input type="text" class="form-control" id="judul" name="judul" placeholder="judul" required="" value='{{old("judul")}}'>
               </div>
-
               <div class="form-group">
                 <label for="penulis_publikasi">Penulis Publikasi</label>
-                <input type="text" class="form-control" id="penulis_publikasi" name="penulis_publikasi" placeholder="Penulis Publikasi" required="" value='{{old("penulis_publikasi")}}'>
+                <input type="text" class="form-control" id="penulis_publikasi" name="penulis_publikasi" placeholder="Penulis Publikasi" required="" value="{{$menu['data']->ketua}}" readonly="">
               </div>
               <div class="form-group">
                 <label for="nama_jurnal">Nama Jurnal</label>

@@ -28,7 +28,7 @@
               <th>Kategori Bid</th>
               <th>Kategori TSE</th>
               <th>Tahun</th>
-              <th>Abstrak</th>
+            <!--   <th>Abstrak</th> -->
               
               @if(Session::get('userRole')!='Dosen')
               <th></th>
@@ -49,7 +49,7 @@
               <td>{{$penelitian_dilitabmas->kategori_bidang}}</td>
               <td>{{$penelitian_dilitabmas->kategori_tse}}</td>
               <td>{{$penelitian_dilitabmas->tahun}}</td>
-              <td>
+            <!--   <td>
                <a class="btn btn-sm  glyphicon glyphicon-bookmark" data-toggle="modal" data-target="#abstrak-{{$penelitian_dilitabmas->id}}"></a>
                <div class="modal fade" id="abstrak-{{$penelitian_dilitabmas->id}}" tabindex="-1" role="dialog" aria-labelledby="Title" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -68,7 +68,7 @@
             </div>
           </div>
 
-        </td>    
+        </td>     -->
               
               @if(Session::get('userRole')!='Dosen')
               

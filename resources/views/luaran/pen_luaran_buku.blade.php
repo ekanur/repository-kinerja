@@ -30,7 +30,7 @@
               
               @if(Session::get('userRole')!='Dosen')
               <th></th>
-              <!--   <th></th> -->
+                <th></th>
               @endif
             </tr>
           </thead>
@@ -44,10 +44,10 @@
              
              <td>{{$tampil->judul_penelitian}} </td>
              <td>
-              <a href= "" data-toggle="modal" data-target="#abstrak-{{$tampil->id}}" title="Detail">{{$tampil->judul}}</a>
+              <a href= "" data-toggle="modal" data-target="#{{$tampil->id}}" title="Detail">{{$tampil->judul}}</a>
 
               <!-- modal awal -->
-              <div class="modal fade bs-example-modal-lg" id="abstrak-{{$tampil->id}}" tabindex="-1" role="dialog" aria-labelledby="Title" aria-hidden="true">
+              <div class="modal fade bs-example-modal-lg" id="{{$tampil->id}}" tabindex="-1" role="dialog" aria-labelledby="Title" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document" style="min-width: 1000px; overflow-y: auto;">
                   <!-- <div class="modal-dialog modal-lg" role="document" style="overflow-y: scroll;"> -->
                     <div class="modal-content">
@@ -95,13 +95,11 @@
 
             @if(Session::get('userRole')!='Dosen')
 
-  <!-- <td>
-   
-    <a class="btn btn-sm btn-info  fa fa-edit" href="#" title="Edit Penelitian"></a>
-    
-  </td> -->
   <td>
-    <a class="btn btn-sm btn-danger fa fa-trash" onclick="return confirm('Anda Yakin Ingin Menghapus Data ?')" href="tampil_pen_luaran_buku/hapus_buku/{{$tampil->id}}" title="Hapus Penelitian"></a>
+    <a class="btn btn-sm btn-info  fa fa-edit" href="tampil_pen_luaran_buku/edit_pen_luaran_buku/{{$tampil->id}}" title="Edit Luaran"></a>
+  </td>
+  <td>
+    <a class="btn btn-sm btn-danger fa fa-trash" onclick="return confirm('Anda Yakin Ingin Menghapus Data ?')" href="tampil_pen_luaran_buku/hapus_buku/{{$tampil->id}}" title="Hapus Luaran"></a>
 
   </td>
 

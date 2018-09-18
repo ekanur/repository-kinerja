@@ -27,7 +27,7 @@
            <th>Kategori Bid</th>
            <th>Kategori TSE</th>
            <th>Tahun</th>
-           <th>Abstrak</th>
+    <!--        <th>Abstrak</th> -->
 
            <th></th>
            <th></th>
@@ -49,7 +49,7 @@
           <td>{{$penelitian_non_dilitabmas->kategori_tse}}</td>
           <td>{{$penelitian_non_dilitabmas->tahun}}</td>
 
-          <td>
+    <!--       <td>
             <a class="btn btn-sm  glyphicon glyphicon-bookmark" data-toggle="modal" data-target="#abstrak-{{$penelitian_non_dilitabmas->id}}"></a>
 
            <div class="modal fade" id="abstrak-{{$penelitian_non_dilitabmas->id}}" tabindex="-1" role="dialog" aria-labelledby="Title" aria-hidden="true">
@@ -69,7 +69,7 @@
         </div>
       </div>
 
-    </td>    
+    </td>     -->
     @if(Session::get('userRole')!='Dosen')
 
     <td>

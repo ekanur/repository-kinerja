@@ -63,10 +63,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('/tampil_pen_luaran_pemakalah/tambah_non_pen_luaran_pemakalah','PenelitianController@tambah_non_pen_luaran_pemakalah');
 	Route::post('/tampil_pen_luaran_hki/tambah_non_pen_luaran_hki','PenelitianController@tambah_non_pen_luaran_hki');
 	Route::post('/tampil_pen_luaran_lain/tambah_non_pen_luaran_lain','PenelitianController@tambah_non_pen_luaran_lain');
-// route edit
 
-	Route::get('/penelitian_dilitabmas/edit_dilitabmas/{id}', "PenelitianController@edit_dilitabmas");
-	Route::get('/penelitian_non_dilitabmas/edit_non_dilitabmas/{id}', "PenelitianController@edit_non_dilitabmas");
 
 //lihat data
 	Route::get('/penelitian_dilitabmas/lihat_dilitabmas/{id}', "PenelitianController@lihat_dilitabmas");
@@ -87,11 +84,23 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('/{kategori}/tambah_pen_luaran_hki/{id}','PenelitianController@tambah_pen_luaran_hki');
 	Route::post('/{kategori}/tambah_pen_luaran_lain/{id}','PenelitianController@tambah_pen_luaran_lain');
 
-	
+// route edit
 
+	Route::get('/penelitian_dilitabmas/edit_dilitabmas/{id}', "PenelitianController@edit_dilitabmas");
+	Route::get('/penelitian_non_dilitabmas/edit_non_dilitabmas/{id}', "PenelitianController@edit_non_dilitabmas");
+	Route::get('/tampil_pen_luaran_buku/edit_pen_luaran_buku/{id}', "PenelitianController@edit_pen_luaran_buku");
+	Route::get('/tampil_pen_luaran_jurnal/edit_pen_luaran_jurnal/{id}',"PenelitianController@edit_pen_luaran_jurnal");
+	Route::get('/tampil_pen_luaran_hki/edit_pen_luaran_hki/{id}', "PenelitianController@edit_pen_luaran_hki");
+	Route::get('/tampil_pen_luaran_pemakalah/edit_pen_luaran_pemakalah/{id}',"PenelitianController@edit_pen_luaran_pemakalah");
+	Route::get('/tampil_pen_luaran_lain/edit_pen_luaran_lain/{id}', "PenelitianController@edit_pen_luaran_lain");
 // route update data
 	Route::post('/{kategori}/update_dilitabmas/{id}', "PenelitianController@update_dilitabmas");
 	Route::post('/{kategori}/update_non_dilitabmas/{id}', "PenelitianController@update_non_dilitabmas");
+	Route::post('/tampil_pen_luaran_buku/update_pen_luaran_buku','PenelitianController@update_pen_luaran_buku');
+	Route::post('/tampil_pen_luaran_jurnal/update_pen_luaran_jurnal','PenelitianController@update_pen_luaran_jurnal');
+	Route::post('/tampil_pen_luaran_hki/update_pen_luaran_hki','PenelitianController@update_pen_luaran_hki');
+	Route::post('/tampil_pen_luaran_pemakalah/update_pen_luaran_pemakalah','PenelitianController@update_pen_luaran_pemakalah');
+	Route::post('/tampil_pen_luaran_lain/update_pen_luaran_lain','PenelitianController@update_pen_luaran_lain');
 
 // route hapus data
 	Route::get('/{kategori}/hapus_dilitabmas/{id}', "PenelitianController@hapus_dilitabmas");
@@ -139,15 +148,10 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('/tampil_peng_luaran_hki/tambah_non_peng_luaran_hki','PengabdianController@tambah_non_peng_luaran_hki');
 	Route::post('/tampil_peng_luaran_lain/tambah_non_peng_luaran_lain','PengabdianController@tambah_non_peng_luaran_lain');
 
-// route edit
-
-	Route::get('/pengabdian_dilitabmas/edit_peng_dilitabmas/{id}', "PengabdianController@edit_peng_dilitabmas");
-	Route::get('/pengabdian_non_dilitabmas/edit_peng_non_dilitabmas/{id}', "PengabdianController@edit_peng_non_dilitabmas");
 
 //route lihat pengabdian
 	Route::get('/pengabdian_dilitabmas/lihat_peng_dilitabmas/{id}', "PengabdianController@lihat_peng_dilitabmas");
 	Route::get('/pengabdian_non_dilitabmas/lihat_peng_non_dilitabmas/{id}', "PengabdianController@lihat_peng_non_dilitabmas");
-
 
 
 //route luaran
@@ -163,10 +167,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('/{kategori}/tambah_peng_luaran_pemakalah/{id}','PengabdianController@tambah_peng_luaran_pemakalah');
 	Route::post('/{kategori}/tambah_peng_luaran_hki/{id}','PengabdianController@tambah_peng_luaran_hki');
 	Route::post('/{kategori}/tambah_peng_luaran_lain/{id}','PengabdianController@tambah_peng_luaran_lain');
-
-// route update data
-	Route::post('/{kategori}/update_peng_dilitabmas/{id}', "PengabdianController@update_peng_dilitabmas");
-	Route::post('/{kategori}/update_peng_non_dilitabmas/{id}', "PengabdianController@update_peng_non_dilitabmas");
+	
 
 // route hapus data
 	Route::get('/{kategori}/hapus_peng_dilitabmas/{id}', "PengabdianController@hapus_peng_dilitabmas");
@@ -178,6 +179,24 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/tampil_peng_luaran_lain/hapus_lain_peng/{id}', "PengabdianController@hapus_lain_peng");
 
 
+// route edit
+
+	Route::get('/pengabdian_dilitabmas/edit_peng_dilitabmas/{id}', "PengabdianController@edit_peng_dilitabmas");
+	Route::get('/pengabdian_non_dilitabmas/edit_peng_non_dilitabmas/{id}', "PengabdianController@edit_peng_non_dilitabmas");
+	Route::get('/tampil_peng_luaran_buku/edit_peng_luaran_buku/{id}', "PengabdianController@edit_peng_luaran_buku");
+	Route::get('/tampil_peng_luaran_jurnal/edit_peng_luaran_jurnal/{id}',"PengabdianController@edit_peng_luaran_jurnal");
+	Route::get('/tampil_peng_luaran_hki/edit_peng_luaran_hki/{id}', "PengabdianController@edit_peng_luaran_hki");
+	Route::get('/tampil_peng_luaran_pemakalah/edit_peng_luaran_pemakalah/{id}',"PengabdianController@edit_peng_luaran_pemakalah");
+	Route::get('/tampil_peng_luaran_lain/edit_peng_luaran_lain/{id}', "PengabdianController@edit_peng_luaran_lain");
+
+// route update data
+	Route::post('/{kategori}/update_peng_dilitabmas/{id}', "PengabdianController@update_peng_dilitabmas");
+	Route::post('/{kategori}/update_peng_non_dilitabmas/{id}', "PengabdianController@update_peng_non_dilitabmas");
+	Route::post('/tampil_peng_luaran_buku/update_peng_luaran_buku','PengabdianController@update_peng_luaran_buku');
+	Route::post('/tampil_peng_luaran_jurnal/update_peng_luaran_jurnal','PengabdianController@update_peng_luaran_jurnal');
+	Route::post('/tampil_peng_luaran_hki/update_peng_luaran_hki','PengabdianController@update_peng_luaran_hki');
+	Route::post('/tampil_peng_luaran_pemakalah/update_peng_luaran_pemakalah','PengabdianController@update_peng_luaran_pemakalah');
+	Route::post('/tampil_peng_luaran_lain/update_peng_luaran_lain','PengabdianController@update_peng_luaran_lain');
 
 
 

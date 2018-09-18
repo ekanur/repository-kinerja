@@ -24,7 +24,7 @@
             {{csrf_field()}}
             <input type="hidden" name='kategori' id="kategori" value="{{$menu['kategori']}}">
             <input type="hidden" name='jenis_penelitian' id="jenis_penelitian" value="{{$menu['data']->jenis_penelitian}}">
-             <input type="hidden" name='abstrak' id="abstrak" value="{{$menu['data']->abstrak}}">
+            <!--  <input type="hidden" name='abstrak' id="abstrak" value="{{$menu['data']->abstrak}}"> -->
             <input type="hidden" name="judul_penelitian" id="judul_penelitian" value="{{$menu['data']->judul}}">
             <div class="box-body">
               <div class="form-group">

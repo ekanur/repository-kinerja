@@ -22,7 +22,6 @@
         <table class="table table-striped table-bordered table-hover" id="data_repo">
           <thead>
             <tr><th>No</th>
-
               <th>Jenis Pengabdian</th>
               <th>Judul Pengabdian</th>
               <th>Judul</th>
@@ -30,8 +29,8 @@
               <th>Tahun</th>
 
               @if(Session::get('userRole')!='Dosen')
-<!--               <th></th>
--->              <th></th>
+               <th></th>
+              <th></th>
 
 @endif
 </tr>
@@ -103,12 +102,9 @@
 
 
 @if(Session::get('userRole')!='Dosen')
-<!--   <td>
-   
-    <a class="btn btn-sm btn-info  fa fa-edit" href="#" title="Edit pengabdian"></a>
-    
+  <td>
+    <a class="btn btn-sm btn-info  fa fa-edit" href="tampil_peng_luaran_jurnal/edit_peng_luaran_jurnal/{{$tampil->id}}" title="Edit Luaran"></a>
   </td>
---> 
 <td>
   <a class="btn btn-sm btn-danger fa fa-trash" onclick="return confirm('Anda Yakin Ingin Menghapus Data ?')" href="tampil_peng_luaran_jurnal/hapus_jurnal_peng/{{$tampil->id}}" title="Hapus Luaran"></a>
 </td>

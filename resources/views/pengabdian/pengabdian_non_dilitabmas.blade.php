@@ -26,7 +26,7 @@
               <th>Ketua</th>
               <th>Skema</th>
               <th>Tahun</th>
-              <th>Abstrak</th>
+          <!--     <th>Abstrak</th> -->
               @if(Session::get('userRole')!='Dosen')
               <th></th>
               <th></th>
@@ -47,7 +47,7 @@
               <td>    {{$pengabdian_non_dilitabmas->skema}}</td>
               <td>    {{$pengabdian_non_dilitabmas->tahun}}</td>
               
-              <td>
+     <!--          <td>
                <a class="btn btn-sm  glyphicon glyphicon-bookmark" data-toggle="modal" data-target="#abstrak-{{$pengabdian_non_dilitabmas->id}}"></a>
 
                <div class="modal fade" id="abstrak-{{$pengabdian_non_dilitabmas->id}}" tabindex="-1" role="dialog" aria-labelledby="Title" aria-hidden="true">
@@ -67,7 +67,7 @@
             </div>
           </div>
 
-        </td>    
+        </td>     -->
         @if(Session::get('userRole')!='Dosen')
         
         <td>

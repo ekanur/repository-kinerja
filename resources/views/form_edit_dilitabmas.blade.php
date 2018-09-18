@@ -169,14 +169,14 @@
       <label for="url_kegiatan">URL kegiatan</label>
       <input type="text" class="form-control" id="url" name="url" placeholder="URL" value="{{$menu['data']->url}}">
     </div>
-<div class="row">
+<!-- <div class="row">
     <div class="form-group col-md-9 " >
       <label for="abstrak">Abstrak</label>
       <textarea  rows="10" cols="30" class="form-control" id="abstrak" name="abstrak" placeholder="Inputkan abstrak dari kegiatan" >{{$menu['data']->abstrak}}
     </textarea>
     </div>
   </div>
-
+ -->
   </div><!-- /.box-body -->
 
   <div class="box-footer">

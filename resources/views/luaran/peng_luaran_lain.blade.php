@@ -30,8 +30,8 @@
               <th>Tahun</th>
               @if(Session::get('userRole')!='Dosen')
               <th></th>
-          <!--     <th></th>
-          -->    @endif
+              <th></th>
+             @endif
         </tr>
       </thead>
       <tbody>
@@ -94,13 +94,9 @@
 
 
           @if(Session::get('userRole')!='Dosen')
-
-  <!-- <td>
-   
-    <a class="btn btn-sm btn-info  fa fa-edit" href="#" title="Edit pengabdian"></a>
-    
+  <td>
+    <a class="btn btn-sm btn-info  fa fa-edit" href="tampil_peng_luaran_lain/edit_peng_luaran_lain/{{$tampil->id}}" title="Edit Luaran"></a>
   </td>
--->
 
 <td>
   <a class="btn btn-sm btn-danger fa fa-trash" onclick="return confirm('Anda Yakin Ingin Menghapus Data ?')" href="tampil_peng_luaran_lain/hapus_lain_peng/{{$tampil->id}}" title="Hapus Luaran"></a>
