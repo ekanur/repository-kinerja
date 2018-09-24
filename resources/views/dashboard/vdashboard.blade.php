@@ -56,7 +56,7 @@
          	</div>
          <div class="col-md-12 col-sm-12 col-xs-12">
              <div class="box">
-                 <div class="box-header"><h3>Statistik Implementasi Tri Dharma Perguruan Tinggi (
+                 <div class="box-header"><h3>Statistik Implementasi Tri Dharma Perguruan Tinggi Dalam 5 Tahun Terakhir (
 
                    {{date("Y")-5}} - {{date("Y")}}
                  )</h3></div>

@@ -24,8 +24,8 @@ class DashboardController extends Controller
     		"penelitian_non_dilitabmas"=>$this->data_chart_penelitian_non_dilitabmas(),
     		"pengabdian_dilitabmas"=>$this->data_chart_pengabdian_dilitabmas(),
     		"pengabdian_non_dilitabmas"=>$this->data_chart_pengabdian_non_dilitabmas(),
-
     		);
+        // print_r($data_chart); die();
 
     	$menu=array('menu'=>'Dashboard','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'', 'data'=>$this->get_total_tridarma(), 'chart'=>$data_chart,'userfak'=>Session::get('userFak')
 		,'ketdosen'=>Session::get('ketDosen'));

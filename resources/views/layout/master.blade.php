@@ -37,7 +37,7 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
     </head>
-    <body class="skin-blue sidebar-mini sidebar-collapse">
+    <body class="skin-blue-light sidebar-mini sidebar-collapse">
       <div style="padding: 15px 0;" aria-expanded="true">
         <div class="container-fluid">
           <div class="row">
@@ -113,7 +113,7 @@
                   <input type="hidden" name="dsn_nip" id="dsn_nip">
                   <input class="form-control" name="cari_dosen" placeholder="Cari NIP atau nama dosen..." autofocus="autofocus" type="text" id="cari_dosen" style="width: 100%;">
                   <span class="input-group-btn" style="width:1%">
-                    <button type='submit' class='btn btn-success'><i class=" fa fa-bullseye"></i> Pilih Dosen</button>
+                    <button type='submit' class='btn btn-success'><i class="fa fa-arrow-circle-right"></i></button> {{-- pilih dosen --}}
                   </span>
                 </div>
               </div>
