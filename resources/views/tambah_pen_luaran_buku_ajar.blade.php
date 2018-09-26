@@ -51,11 +51,11 @@
                  
                  <label for="tahun">Tahun</label>
                  
-                 <select class="form-control" name="tahun" id="tahun">
+                 <select class="select2 form-control" name="tahun" id="tahun">
                   <option value="">Pilih Tahun</option>
                   <?php
                   $thn_skr = date('Y');
-                  for ($x = $thn_skr; $x >= 2005; $x--) {
+                  for ($x = $thn_skr; $x >= 1954; $x--) {
                     ?>
                     <option value=" {{$x}} ">{{$x}}</option>
                     <?php
@@ -67,7 +67,7 @@
             </div>
             <div class="row">
              <div class="form-group col-md-3">
-               <label for="sumberdana">Sumber Dana</label>
+               <label for="sumberdana">SumberDana</label>
                <input type="text" class="form-control" id="sumberdana" name="sumberdana" placeholder="Sumber Dana" value="{{old('sumberdana')}}">
 
              </div>

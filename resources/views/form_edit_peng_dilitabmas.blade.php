@@ -66,7 +66,7 @@
             <div class="row">
              <div class="form-group col-md-6">
                <label for="skema_peng">Skema</label>
-               <select class="form-control" name="skema_peng" id="skema_peng">
+               <select class="select2 form-control" name="skema_peng" id="skema_peng">
                  <option value="{{$menu['data']->skema}}">{{$menu['data']->skema}}</option>   
                  @foreach($menu['data_skema_peng'] as $skema_pengabdian)
                  <option value="{{$skema_pengabdian->skema_peng}}">  {{$skema_pengabdian->skema_peng}}</option>                           
@@ -75,7 +75,7 @@
              </div>
              <div class="form-group col-md-6">
                <label for="sumberdaya">Sumberdaya IPTEK</label>
-               <select class="form-control" name="sumberdaya" id="sumberdaya">
+               <select class="select2 form-control" name="sumberdaya" id="sumberdaya">
                  <option value="{{$menu['data']->sumberdaya_iptek}}">{{$menu['data']->sumberdaya_iptek}}</option>   
                  @foreach($menu['data_sumberdaya'] as $sumberdaya)
                  <option value="{{$sumberdaya->sumberdaya}}">  {{$sumberdaya->sumberdaya}}</option>                           
@@ -121,12 +121,12 @@
 
         <div class="form-group col-md-3">
          <label for="tahun">Tahun</label>
-         <select class="form-control" name="tahun" id="tahun">
+         <select class="select2 form-control" name="tahun" id="tahun">
           <option value="{{$menu['data']->tahun}}">{{$menu['data']->tahun}}</option>
           <option value="">Pilih Tahun</option>
           <?php
           $thn_skr = date('Y');
-          for ($x = $thn_skr; $x >= 2005; $x--) {
+          for ($x = $thn_skr; $x >= 1954; $x--) {
             ?>
             <option value=" {{$x}} ">{{$x}}</option>
             <?php

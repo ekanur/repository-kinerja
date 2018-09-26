@@ -47,7 +47,7 @@
              <div class="form-group col-md-3" >
 
                <label for="tahun">Tahun</label>
-               <select class="form-control" name="tahun" id="tahun">
+               <select class="select2 form-control" name="tahun" id="tahun">
                 <option value="{{$menu['data']->tahun}}">{{$menu['data']->tahun}}</option>
 
                 <?php

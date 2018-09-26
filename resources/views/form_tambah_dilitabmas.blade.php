@@ -65,7 +65,7 @@
             <div class="row">
               <div class="form-group col-md-6" >
                <label for="Hibah">Hibah</label>
-               <select class="form-control" name="hibah" id="hibah">
+               <select class="select2 form-control" name="hibah" id="hibah">
                  <option value="">-- Pilih Hibah Penelitian --</option>   
                  @foreach($menu['data_hibah'] as $hibah)
                  <option value=" {{$hibah->hibah}}">  {{$hibah->hibah}}</option>                           
@@ -75,7 +75,7 @@
 
              <div class="form-group col-md-6" >
                <label for="skema">Skema</label>
-               <select class="form-control" name="skema_penelitian" id="skema_penelitian">
+               <select class="select2 form-control" name="skema_penelitian" id="skema_penelitian">
                 <option value="">-- Pilih Skema Penelitian --</option>   
                 @foreach($menu['data_skema_penelitian'] as $skema_penelitian)
                 <option value="{{$skema_penelitian->skema_penelitian}}">  {{$skema_penelitian->skema_penelitian}}</option>
@@ -87,7 +87,7 @@
           <div class="row">
             <div class="form-group col-md-6" >
              <label for="kategori bidang">Kategori Bidang</label>
-             <select class="form-control" name="kategori_bidang" id="kategori_bidang">
+             <select class="select2 form-control" name="kategori_bidang" id="kategori_bidang">
               <option value="">-- Pilih Kategori Bidang Penelitian --</option>   
               @foreach($menu['data_kategori_bidang'] as $kategori_bidang)
               <option value=" {{$kategori_bidang->kategori_bidang}}">{{$kategori_bidang->kategori_bidang}}</option>                           
@@ -97,7 +97,7 @@
 
           <div class="form-group col-md-6">
            <label for="bidang">Bidang</label>
-           <select class="form-control" name="bidang" id="bidang" placeholder="bidang">
+           <select class="select2 form-control" name="bidang" id="bidang" placeholder="bidang">
              <option value="">-- Pilih Bidang Penelitian --</option>   
              @foreach($menu['data_bidang'] as $bidang)
              <option value=" {{$bidang->bidang}}">  {{$bidang->bidang}}</option>                           
@@ -109,7 +109,7 @@
        <div class="row">
          <div class="form-group col-md-6" >
            <label for="kategori tse">Kategori Tujuan Sosial Ekonomi</label>
-           <select class="form-control" name="kategori_tse" id="kategori_tse">
+           <select class="select2 form-control" name="kategori_tse" id="kategori_tse">
             <option value="">-- Pilih Kategori Tujuan Sosial Ekonomi Penelitian --</option>   
             @foreach($menu['data_kategori_tse'] as $kategori_tse)
             <option value=" {{$kategori_tse->kategori_tse}}">  {{$kategori_tse->kategori_tse}}</option>                           
@@ -119,7 +119,7 @@
 
         <div class="form-group col-md-6" >
          <label for="tse">Tujuan Sosial Ekonomi</label>
-         <select class="form-control" name="tse" id="tse">
+         <select class="select2 form-control" name="tse" id="tse">
            <option value="">-- Pilih Tujuan Sosial Ekonomi Penelitian --</option>   
            @foreach($menu['data_tse'] as $tse)
            <option value=" {{$tse->tse}}">  {{$tse->tse}}</option>                           
@@ -138,13 +138,14 @@
         </div>
       </div>
 
-      <div class="form-group col-md-3" >
+
+          <div class="form-group col-md-3" >
         <label for="tahun">Tahun</label>
-        <select class="form-control" name="tahun" id="tahun">
+        <select class="select2 form-control" name="tahun" id="tahun">
           <option value="">Pilih Tahun</option>
           <?php
           $thn_skr = date('Y');
-          for ($x = $thn_skr; $x >= 2005; $x--) {
+          for ($x = $thn_skr; $x >= 1954; $x--) {
             ?>
             <option value=" {{$x}} ">{{$x}}</option>
             <?php
@@ -167,7 +168,7 @@
   </div><!-- /.box-body -->
 
   <div class="box-footer">
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Simpan</button>
   </div>
 </form>
 </div><!-- /.box -->

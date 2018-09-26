@@ -66,7 +66,7 @@
             <div class="row">
              <div class="form-group col-md-6" >
                <label for="skema_peng">Skema</label>
-               <select class="form-control" name="skema_peng" id="skema_peng">
+               <select class="select2 form-control" name="skema_peng" id="skema_peng">
                  <option value="">-- Pilih Skema Pengabdian --</option>   
                  @foreach($menu['data_skema_peng'] as $skema_pengabdian)
                  <option value="{{$skema_pengabdian->skema_peng}}">  {{$skema_pengabdian->skema_peng}}</option>                           
@@ -74,7 +74,7 @@
                </select>
              </div>
              <div class="form-group col-md-6">
-               <label for="sumberdaya">Sumberdaya IPTEK</label>
+               <label for="select2 sumberdaya">Sumberdaya IPTEK</label>
                <select class="form-control" name="sumberdaya" id="sumberdaya">
                  <option value="">-- Pilih Sumberdaya IPTEK --</option>   
                  @foreach($menu['data_sumberdaya'] as $sumberdaya)
@@ -86,7 +86,7 @@
            <div class="row">
             <div class="form-group col-md-6" >
              <label for="sumberdaya">Jenis Pengabdian</label>
-             <select class="form-control" name="isi_jenis_pengabdian" id="isi_jenis_pengabdian">
+             <select class="select2 form-control" name="isi_jenis_pengabdian" id="isi_jenis_pengabdian">
                <option value="">-- Pilih Jenis Pengabdian --</option>   
                @foreach($menu['data_jenis_penelitian'] as $jenis_penelitian)
                <option value="{{$jenis_penelitian->jenis_penelitian}}">  {{$jenis_penelitian->jenis_penelitian}}</option>                           
@@ -114,7 +114,7 @@
         <div class="row">
          <div class="form-group col-md-3"  >
           <label for="tahun_mulai">Tahun mulai</label>
-          <select class="form-control" name="tahun_mulai" id="tahun_mulai">
+          <select class="select2 form-control" name="tahun_mulai" id="tahun_mulai">
             <option value="">Pilih Tahun</option>
             <?php
             $thn_skr = date('Y');
@@ -130,7 +130,7 @@
         <div class="form-group col-md-3"  >
           <label for="tahun_selesai">Tahun selesai</label>
 
-          <select class="form-control" name="tahun_selesai" id="tahun_selesai">
+          <select class="select2 form-control" name="tahun_selesai" id="tahun_selesai">
             <option value="">Pilih Tahun</option>
             <?php
             $thn_skr = date('Y');
@@ -172,7 +172,7 @@
 
       <div class="form-group col-md-3"  >
         <label for="tahun">Tahun</label>
-        <select class="form-control" name="tahun" id="tahun">
+        <select class="select2 form-control" name="tahun" id="tahun">
           <option value="">Pilih Tahun</option>
           <?php
           $thn_skr = date('Y');
@@ -201,7 +201,7 @@
   </div><!-- /.box-body -->
 
   <div class="box-footer">
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Simpan</button>
   </div>
 </form>
 </div><!-- /.box -->

@@ -65,7 +65,7 @@
             <div class="row">
               <div class="form-group col-md-6" >
                <label for="jenis_penelitian">Jenis Penelitian</label>
-               <input type="text" class="form-control" id="jenis_penelitian" readonly="" name="jenis_penelitian"value="{{$menu['data']->jenis_penelitian}}">
+               <input type="text" class="form-control" id="jenis_penelitian" readonly="" name="jenis_penelitian"value="{{$menu['data']->isi_jenis_penelitian}}">
              </div>
              
              <div class="form-group col-md-6" >

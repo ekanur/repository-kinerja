@@ -28,7 +28,7 @@
             <div class="row">
               <div class="form-group col-md-4" >
                <label for="forum_ilmiah">Forum Ilmiah</label>
-               <select class="form-control" name="forum_ilmiah" id="forum_ilmiah">
+               <select class="select2 form-control" name="forum_ilmiah" id="forum_ilmiah">
                  <option value="{{$menu['data']->forum_ilmiah}}">{{$menu['data']->forum_ilmiah}}</option>   
                  @foreach($menu['data_forum_ilmiah'] as $forum_ilmiah)
                  <option value="{{$forum_ilmiah->forum_ilmiah}}">  {{$forum_ilmiah->forum_ilmiah}}</option>                           
@@ -38,7 +38,7 @@
 
              <div class="form-group col-md-4" >
                <label for="status">Status</label>
-               <select class="form-control" name="status_pemakalah" id="status_pemakalah">
+               <select class="select2 form-control" name="status_pemakalah" id="status_pemakalah">
                  <option value="{{$menu['data']->status}}">{{$menu['data']->status}}</option>   
                  @foreach($menu['data_status_pemakalah'] as $status_pemakalah)
                  <option value="{{$status_pemakalah->status_pemakalah}}">  {{$status_pemakalah->status_pemakalah}}</option>                           
@@ -50,11 +50,11 @@
 
                <label for="tahun">Tahun</label>
                
-               <select class="form-control" name="tahun" id="tahun">
+               <select class="select2 form-control" name="tahun" id="tahun">
                 <option value="{{$menu['data']->tahun}}">{{$menu['data']->tahun}}</option>
                 <?php
                 $thn_skr = date('Y');
-                for ($x = $thn_skr; $x >= 2005; $x--) {
+                for ($x = $thn_skr; $x >= 1954; $x--) {
                   ?>
                   <option value=" {{$x}} ">{{$x}}</option>
                   <?php

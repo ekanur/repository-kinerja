@@ -13,12 +13,17 @@
   <link rel="stylesheet" href="{{secure_asset('style/dist/css/AdminLTE.min.css') }}">
   <link rel="stylesheet" href="{{secure_asset('style/dist/css/skins/_all-skins.min.css') }}">
   <link rel="stylesheet" href="{{secure_asset('style/plugins/datepicker/datepicker3.css') }}">
-  <link rel="stylesheet" href="{{secure_asset('style/plugins/select2/select2.min.css') }}">
+{{--   <link rel="stylesheet" href="{{secure_asset('style/plugins/select2/select2.min.css') }}"> --}}
   <link rel="stylesheet" href="{{secure_asset('style/plugins/easyautocomplete/easy-autocomplete.css') }}">
   <link rel="stylesheet" href="{{secure_asset('style/plugins/bootstrap-notify/animate.css') }}">
   <link rel="stylesheet" href="{{secure_asset('style/plugins/datatables/dataTables.bootstrap.css') }}">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    {{-- Select 2 --}}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+
+    {{-- Custom css untuk patching style dari plugin --}}
+    <link href="{{ asset('style/dist/css/custom.css') }}" rel="stylesheet" />
+
   @else
   <link rel="stylesheet" href="{{asset('style/bootstrap/css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -30,7 +35,12 @@
   <link rel="stylesheet" href="{{asset('style/plugins/easyautocomplete/easy-autocomplete.css') }}">
   <link rel="stylesheet" href="{{asset('style/plugins/bootstrap-notify/animate.css') }}">
   <link rel="stylesheet" href="{{asset('style/plugins/datatables/dataTables.bootstrap.css') }}">
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    {{-- Select 2 --}}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+
+    {{-- Custom css untuk patching style dari plugin --}}
+    <link href="{{ asset('style/dist/css/custom.css') }}" rel="stylesheet" />
+
   @endif
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -321,6 +331,7 @@
   <script src="{{secure_asset('style/dist/js/app.min.js') }}"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="{{secure_asset('style/dist/js/demo.js')}}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
   @else
   <!-- jQuery 2.1.4 -->
   <script src="{{asset('style/plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
@@ -329,7 +340,7 @@
   <!-- SlimScroll -->
   <script src="{{asset('style/plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
   <script src="{{asset('style/plugins/datepicker/bootstrap-datepicker.js')}}"></script>
-  <script src="{{asset('style/plugins/select2/select2.full.min.js')}}"></script>
+ {{--  <script src="{{asset('style/plugins/select2/select2.full.min.js')}}"></script> --}}
   <!-- FastClick -->
   <script src="{{ asset('style/plugins/fastclick/fastclick.min.js') }}"></script>
   <script src="{{ asset('style/plugins/chartjs/Chart.min.js') }}"></script>
@@ -344,7 +355,9 @@
   <script src="{{asset('style/dist/js/app.min.js') }}"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="{{asset('style/dist/js/demo.js')}}"></script>
-  @endif
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+  <script src="{{ asset('style/dist/js/textareacounter.js') }}"></script>
+  @endif 
 
   <script type="text/javascript">
     
@@ -787,11 +800,22 @@
 
     <script>
       $(function () {
-        $(".select2").select2();
+      
         $('#waktu_mulai').datepicker();
         $('#waktu_selesai').datepicker();
       });
-    </script>
+
+// select2 cari list
+    $(document).ready(function() {
+      $('.select2').select2();
+      minimumInputLength: 2
+      maximumResultsForSearch: 5
+      minimumResultsForSearch: 3
+    });
+
+ $("textarea[name='deskripsi']").textareaCounter({ limit: 100 });
+
+  </script>
     
   </body>
   </html>

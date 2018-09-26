@@ -49,11 +49,11 @@
              <div class="form-group col-md-3" >
 
                <label for="tahun">Tahun</label>
-               <select class="form-control" name="tahun" id="tahun">
+               <select class="select2 form-control" name="tahun" id="tahun">
                 <option value="">Pilih Tahun</option>
                 <?php
                 $thn_skr = date('Y');
-                for ($x = $thn_skr; $x >= 2005; $x--) {
+                for ($x = $thn_skr; $x >= 1954; $x--) {
                   ?>
                   <option value=" {{$x}} ">{{$x}}</option>
                   <?php
@@ -96,7 +96,7 @@
 
 
       <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Simpan</button>
       </div>
     </form>
   </div><!-- /.box -->

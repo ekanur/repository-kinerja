@@ -28,7 +28,7 @@
             <div class="row">
               <div class="form-group col-md-8" >
                <label for="jenis">Jenis</label>
-               <select class="form-control" name="jenis" id="jenis">
+               <select class="select2 form-control" name="jenis" id="jenis">
                  <option value="{{$menu['data']->jenis}}">{{$menu['data']->jenis}}</option>   
                  @foreach($menu['data_jenis_luaran_lain'] as $jenis_luaran_lain)
                  <option value="{{$jenis_luaran_lain->jenis_luaran_lain}}">  {{$jenis_luaran_lain->jenis_luaran_lain}}</option>@endforeach
@@ -40,11 +40,11 @@
 
 
                <label for="tahun">Tahun</label>
-               <select class="form-control" name="tahun" id="tahun">
+               <select class="select2 form-control" name="tahun" id="tahun">
                 <option value="{{$menu['data']->tahun}}">{{$menu['data']->tahun}}</option>
                 <?php
                 $thn_skr = date('Y');
-                for ($x = $thn_skr; $x >= 2005; $x--) {
+                for ($x = $thn_skr; $x >= 1954; $x--) {
                   ?>
                   <option value=" {{$x}} ">{{$x}}</option>
                   <?php
@@ -62,7 +62,7 @@
         <div class="row">
           <div class="form-group col-md-10">
             <label for="deskripsi"> Deskripsi </label>
-            <textarea class="form-control" id="deskripsi" name="deskripsi" placeholder="Deskripsi Penelitian" requered="" value="{{$menu['data']->deskripsi}}"></textarea>
+            <textarea class="form-control" id="deskripsi" name="deskripsi" placeholder="Deskripsi" requered="" value="{{$menu['data']->deskripsi}}"></textarea>
           </div>         
         </div>
         <div class="row">

@@ -40,8 +40,8 @@
               <div class="row">
                 <div class="form-group col-md-4" >
                  <label for="publikasi">Publikasi</label>
-                 <select class="form-control" name="jenis_publikasi" id="jenis_publikasi">
-                   <option value="{{$menu['data']->jenis_publikasi}}">"{{$menu['data']->jenis_publikasi}}"</option>   
+                 <select class="select2 form-control" name="jenis_publikasi" id="jenis_publikasi">
+                   <option value="{{$menu['data']->jenis_publikasi}}">{{$menu['data']->jenis_publikasi}}</option>   
                    @foreach($menu['data_jenis_publikasi'] as $jenis_publikasi)
                    <option value="{{$jenis_publikasi->jenis_publikasi}}">  {{$jenis_publikasi->jenis_publikasi}}</option>                           
                    @endforeach
@@ -83,11 +83,11 @@
            <div class="form-group col-md-2" >
              <label for="tahun">Tahun</label>
              
-             <select class="form-control" name="tahun" id="tahun">
-              <option value="{{$menu['data']->tahun}}">"{{$menu['data']->tahun}}"</option>
+             <select class="select2 form-control" name="tahun" id="tahun">
+              <option value="{{$menu['data']->tahun}}">{{$menu['data']->tahun}}</option>
               <?php
               $thn_skr = date('Y');
-              for ($x = $thn_skr; $x >= 2005; $x--) {
+              for ($x = $thn_skr; $x >= 1954; $x--) {
                 ?>
                 <option value=" {{$x}} ">{{$x}}</option>
                 <?php

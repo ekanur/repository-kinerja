@@ -93,7 +93,7 @@
             
             <div class="form-group col-md-6" >
              <label for="sumberdaya">Jenis Pengabdian</label>
-             <input type="text" class="form-control" id="jenis_pengabdian" name="jenis_pengabdian" value="{{$menu['data']->jenis_pengabdian}}" readonly="">
+             <input type="text" class="form-control" id="jenis_pengabdian" name="jenis_pengabdian" value="{{$menu['data']->isi_jenis_pengabdian}}" readonly="">
            </div>
          </div>
 

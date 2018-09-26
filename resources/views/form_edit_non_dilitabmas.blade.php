@@ -66,8 +66,8 @@
             <div class="row">
               <div class="form-group col-md-6" >
                <label for="jenis_penelitian">Jenis Penelitian</label>
-               <select class="form-control" name="jenis_penelitian" id="jenis_penelitian">
-                 <option value="{{$menu['data']->jenis_penelitian}}">{{$menu['data']->jenis_penelitian}}</option>   
+               <select class="select2 form-control" name="jenis_penelitian" id="jenis_penelitian">
+                 <option value="{{$menu['data']->isi_jenis_penelitian}}">{{$menu['data']->isi_jenis_penelitian}}</option>   
                  @foreach($menu['data_jenis_penelitian'] as $jenis_penelitian)
                  <option value="{{$jenis_penelitian->jenis_penelitian}}">  {{$jenis_penelitian->jenis_penelitian}}</option>                           
                  @endforeach
@@ -76,7 +76,7 @@
 
              <div class="form-group col-md-6">
                <label for="skema">Skema</label>
-               <select class="form-control" name="skema_penelitian" id="skema_penelitian">
+               <select class="select2 form-control" name="skema_penelitian" id="skema_penelitian">
                  <option value="{{$menu['data']->skema}}">{{$menu['data']->skema}}</option>   
                  @foreach($menu['data_skema_penelitian'] as $skema_penelitian)
                  <option value="{{$skema_penelitian->skema_penelitian}}">  {{$skema_penelitian->skema_penelitian}}</option>                           
@@ -88,7 +88,7 @@
 
              <div class="form-group col-md-6">
                <label for="kategori bidang">Kategori Bidang</label>
-               <select class="form-control" name="kategori_bidang" id="kategori_bidang">
+               <select class="select2 form-control" name="kategori_bidang" id="kategori_bidang">
                 <option value="{{$menu['data']->kategori_bidang}}">{{$menu['data']->kategori_bidang}}</option>   
                 @foreach($menu['data_kategori_bidang'] as $kategori_bidang)
                 <option value=" {{$kategori_bidang->kategori_bidang}}">  {{$kategori_bidang->kategori_bidang}}</option>                           
@@ -98,7 +98,7 @@
 
             <div class="form-group col-md-6">
              <label for="bidang">Bidang</label>
-             <select class="form-control" name="bidang" id="bidang" placeholder="bidang">
+             <select class="select2 form-control" name="bidang" id="bidang" placeholder="bidang">
                <option value="{{$menu['data']->bidang}}">{{$menu['data']->bidang}}</option>   
                @foreach($menu['data_bidang'] as $bidang)
                <option value=" {{$bidang->bidang}}">  {{$bidang->bidang}}</option>                           
@@ -109,7 +109,7 @@
          <div class="row">
            <div class="form-group col-md-6" >
              <label for="kategori tse">Kategori Tujuan Sosial Ekonomi</label>
-             <select class="form-control" name="kategori_tse" id="kategori_tse">
+             <select class="select2 form-control" name="kategori_tse" id="kategori_tse">
               <option value="{{$menu['data']->kategori_tse}}">{{$menu['data']->kategori_tse}}</option>   
               @foreach($menu['data_kategori_tse'] as $kategori_tse)
               <option value=" {{$kategori_tse->kategori_tse}}">  {{$kategori_tse->kategori_tse}}</option>                           
@@ -119,7 +119,7 @@
 
           <div class="form-group col-md-6" >
            <label for="tse">Tujuan Sosial Ekonomi</label>
-           <select class="form-control" name="tse" id="tse">
+           <select class="select2 form-control" name="tse" id="tse">
              <option value="{{$menu['data']->tse}}">{{$menu['data']->tse}}</option>   
 
              @foreach($menu['data_tse'] as $tse)
@@ -132,7 +132,7 @@
 
          <div class="form-group col-md-4" >
            <label for="Institusi">Institusi</label>
-           <select class="form-control" name="institusi" id="institusi">
+           <select class="select2 form-control" name="institusi" id="institusi">
             <option value="{{$menu['data']->ins_sumber_dana}}">{{$menu['data']->ins_sumber_dana}}</option>   
             @foreach($menu['data_institusi'] as $institusi)
             <option value=" {{$institusi->institusi}}">  {{$institusi->institusi}}</option>                           
@@ -158,12 +158,12 @@
       </div>
       <div class="form-group col-md-3" >
         <label for="tahun">Tahun</label>
-        <select class="form-control" name="tahun" id="tahun">
+        <select class="select2 form-control" name="tahun" id="tahun">
           <option value="{{$menu['data']->tahun}}">{{$menu['data']->tahun}}</option>
           <option value="">Pilih Tahun</option>
           <?php
           $thn_skr = date('Y');
-          for ($x = $thn_skr; $x >= 2005; $x--) {
+          for ($x = $thn_skr; $x >= 1954; $x--) {
             ?>
             <option value=" {{$x}} ">{{$x}}</option>
             <?php
