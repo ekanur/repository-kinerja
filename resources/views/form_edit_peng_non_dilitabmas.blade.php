@@ -106,7 +106,7 @@
             </div>
             <div class="form-group col-md-4" >
               <label for="jumlah_alumni">Jumlah Alumni</label>
-              <input type="number" class="form-control" id="jumlah_alumni" name="jumlah_alumni" placeholder="jumlah_alumni" value="{{$menu['data']->jumlah_alumni}}">
+              <input type="number" class="form-control" id="jumlah_alumni" name="jumlah_alumni" placeholder="Jumlah Alumni" value="{{$menu['data']->jumlah_alumni}}">
             </div>
             <div class="form-group col-md-4" >
               <label for="jumlah_staf">Jumlah Staf Pendukung</label>
@@ -149,9 +149,7 @@
           ?>
         </select>
       </div>
-
-
-
+      
       <div class="form-group col-md-4" >
         <label for="tahun_ke">Tahun Ke</label>
         <input type="text" class="form-control" id="tahun_ke" name="tahun_ke" placeholder="Tahun Ke" value="{{$menu['data']->tahun_ke}}">

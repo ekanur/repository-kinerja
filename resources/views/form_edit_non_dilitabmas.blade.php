@@ -30,38 +30,76 @@
               <input type="text" class="form-control" id="judul" name="judul" placeholder="judul" required="" value='{{$menu['data']->judul}}'>
             </div>
 
-            <div class="form-group">
+              <div class="form-group">
               <label for="ketua">Ketua</label>
-              <input type="text" class="form-control" id="ketua" name="ketua" placeholder="Ketua" required="" value='{{$menu['data']->ketua}}'>
+               <select class="select2 form-control" name="ketua" id="ketua" required="">
+                <option value="{{$menu['data']->ketua}}">{{$menu['data']->ketua}}</option>   
+                @foreach($menu['data_daftar_dosen'] as $daftar_dosen)
+                <option value=" {{$daftar_dosen->dsn_gelar.''.$daftar_dosen->dsn_nm.''.$daftar_dosen->dsn_gelar2}}">  {{$daftar_dosen->dsn_gelar.$daftar_dosen->dsn_nm.$daftar_dosen->dsn_gelar2}}</option>@endforeach
+              </select>
             </div>
-
+             <!--   <div class="form-group col-md-6" >
+               <label for="dosen">dosen</label>
+               <select class="select2 form-control" name="dosen" id="dosen">
+                <option value="">-- Pilih Skema Penelitian --</option>   
+                @foreach($menu['data_daftar_dosen'] as $daftar_dosen)
+                <option value=" {{$daftar_dosen->dsn_nm.''.$daftar_dosen->dsn_gelar2}}">  {{$daftar_dosen->dsn_gelar.$daftar_dosen->dsn_nm.$daftar_dosen->dsn_gelar2}}</option>                           
+                @endforeach
+              </select>
+            </div>
+          </div> -->
 
             <div class="form-group">
               <label for="anggota_1">Anggota 1</label>
-              <input type="text" class="form-control" id="anggota_1" name="anggota_1" placeholder="Kosongkan Jika Tidak Ada" value='{{$menu['data']->anggota_1}}'>
+               <select class="select2 form-control" name="cari_anggota1" id="cari_anggota1">
+                <option value="{{$menu['data']->anggota_1}}">{{$menu['data']->anggota_1}}</option>   
+                 <option value="">-- Kosongkan jika tidak ada --</option> 
+                @foreach($menu['data_daftar_dosen'] as $daftar_dosen)
+                <option value=" {{$daftar_dosen->dsn_gelar.''.$daftar_dosen->dsn_nm.''.$daftar_dosen->dsn_gelar2}}">  {{$daftar_dosen->dsn_gelar.$daftar_dosen->dsn_nm.$daftar_dosen->dsn_gelar2}}</option>@endforeach
+              </select>
             </div>
-
 
             <div class="form-group">
               <label for="anggota_2">Anggota 2</label>
-              <input type="text" class="form-control" id="anggota_2" name="anggota_2" placeholder="Kosongkan Jika Tidak Ada" value='{{$menu['data']->anggota_2}}'>
+             <select class="select2 form-control" name="cari_anggota2" id="cari_anggota2">
+                <option value="{{$menu['data']->anggota_2}}">{{$menu['data']->anggota_2}}</option>   
+                 <option value="">-- Kosongkan jika tidak ada --</option> 
+                @foreach($menu['data_daftar_dosen'] as $daftar_dosen)
+                <option value=" {{$daftar_dosen->dsn_gelar.''.$daftar_dosen->dsn_nm.''.$daftar_dosen->dsn_gelar2}}">  {{$daftar_dosen->dsn_gelar.$daftar_dosen->dsn_nm.$daftar_dosen->dsn_gelar2}}</option>@endforeach
+              </select>
             </div>
 
             <div class="form-group">
               <label for="anggota_3">Anggota 3</label>
-              <input type="text" class="form-control" id="anggota_3" name="anggota_3" placeholder="Kosongkan Jika Tidak Ada" value='{{$menu['data']->anggota_3}}'>
+             <select class="select2 form-control" name="cari_anggota3" id="cari_anggota3">
+                <option value="{{$menu['data']->anggota_3}}">{{$menu['data']->anggota_3}}</option>   
+                 <option value="">-- Kosongkan jika tidak ada --</option> 
+                @foreach($menu['data_daftar_dosen'] as $daftar_dosen)
+                <option value=" {{$daftar_dosen->dsn_gelar.''.$daftar_dosen->dsn_nm.''.$daftar_dosen->dsn_gelar2}}">  {{$daftar_dosen->dsn_gelar.$daftar_dosen->dsn_nm.$daftar_dosen->dsn_gelar2}}</option>@endforeach
+              </select>
             </div>
 
             <div class="form-group">
               <label for="anggota_4">Anggota 4</label>
-              <input type="text" class="form-control" id="anggota_4" name="anggota_4" placeholder="Kosongkan Jika Tidak Ada" value='{{$menu['data']->anggota_4}}'>
+             <select class="select2 form-control" name="cari_anggota4" id="cari_anggota4">
+                <option value="{{$menu['data']->anggota_4}}">{{$menu['data']->anggota_4}}</option>   
+                 <option value="">-- Kosongkan jika tidak ada --</option> 
+                @foreach($menu['data_daftar_dosen'] as $daftar_dosen)
+                <option value=" {{$daftar_dosen->dsn_gelar.''.$daftar_dosen->dsn_nm.''.$daftar_dosen->dsn_gelar2}}">  {{$daftar_dosen->dsn_gelar.$daftar_dosen->dsn_nm.$daftar_dosen->dsn_gelar2}}</option>@endforeach
+              </select>
             </div> 
 
 
             <div class="form-group">
               <label for="anggota_5">Anggota 5</label>
-              <input type="text" class="form-control" id="anggota_5" name="anggota_5" placeholder="Kosongkan Jika Tidak Ada" value='{{$menu['data']->anggota_5}}'>
+             <select class="select2 form-control" name="cari_anggota5" id="cari_anggota5">
+                <option value="{{$menu['data']->anggota_5}}">{{$menu['data']->anggota_5}}</option>   
+                 <option value="">-- Kosongkan jika tidak ada --</option> 
+                @foreach($menu['data_daftar_dosen'] as $daftar_dosen)
+                <option value=" {{$daftar_dosen->dsn_gelar.''.$daftar_dosen->dsn_nm.''.$daftar_dosen->dsn_gelar2}}">  {{$daftar_dosen->dsn_gelar.$daftar_dosen->dsn_nm.$daftar_dosen->dsn_gelar2}}</option>@endforeach
+              </select>
             </div>
+
 
             <div class="row">
               <div class="form-group col-md-6" >

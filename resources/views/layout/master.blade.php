@@ -6,6 +6,7 @@
   <meta name="csrf_token" content="{{csrf_token()}}">
   <title>Aplikasi Repository Kinerja | Universitas Negeri Malang</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="icon" type="image/png" href="style/img/logo_um.png">
   @if(App::environment()=='production')
   <link rel="stylesheet" href="{{secure_asset('style/bootstrap/css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -18,7 +19,7 @@
   <link rel="stylesheet" href="{{secure_asset('style/plugins/bootstrap-notify/animate.css') }}">
   <link rel="stylesheet" href="{{secure_asset('style/plugins/datatables/dataTables.bootstrap.css') }}">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    {{-- Select 2 --}}
+ {{-- Select 2 --}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 
     {{-- Custom css untuk patching style dari plugin --}}
@@ -35,6 +36,7 @@
   <link rel="stylesheet" href="{{asset('style/plugins/easyautocomplete/easy-autocomplete.css') }}">
   <link rel="stylesheet" href="{{asset('style/plugins/bootstrap-notify/animate.css') }}">
   <link rel="stylesheet" href="{{asset('style/plugins/datatables/dataTables.bootstrap.css') }}">
+
     {{-- Select 2 --}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 
@@ -73,11 +75,16 @@
         <header class="main-header">
           <!-- Logo -->
           <a href="{{url('/')}}" class="logo" >
-            <i class="  fa fa-institution"></i> <strong>Repositari Kinerja  </strong>
+            <span class="logo-mini">
+              <i class="fa fa-institution"></i>
+            </span>
+            <span class="logo-lg">
+            <strong>Repository Kinerja</strong>
+            </span>
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <!-- <span class="logo-mini"><img src="{{asset('style/img/logo-small.png') }}" alt="" /></span> -->
             <!-- logo for regular state and mobile devices -->
-            <!-- <span class="logo-lg"><img src="{{asset('style/img/logo.png') }}" alt="" /></span> -->
+           <!--  <span class="logo-lg"><img src="{{asset('style/img/repo.jpg') }}" alt="" /></span> -->
           </a>
           <!-- Header Navbar: style can be found in header.less -->
           <nav class="navbar navbar-static-top" role="navigation">
@@ -118,10 +125,10 @@
             <form class="navbar-form" action="{{url('/pilih_dosen/create')}}" method="post">
               @endif
               {{csrf_field()}}
-              <div class="form-group col-md-8">
+              <div class="form-group col-md-7">
                 <div class="input-group pencarian-dosen">
                   <input type="hidden" name="dsn_nip" id="dsn_nip">
-                  <input class="form-control" name="cari_dosen" placeholder="Cari NIP atau nama dosen..." autofocus="autofocus" type="text" id="cari_dosen" style="width: 100%;">
+                  <input class="form-control" name="cari_dosen" placeholder="Cari NIP atau nama dosen..." autofocus="autofocus" type="text" id="cari_dosen" style="width: 99%;">
                   <span class="input-group-btn" style="width:1%">
                     <button type='submit' class='btn btn-success'><i class="fa fa-arrow-circle-right"></i></button> {{-- pilih dosen --}}
                   </span>
@@ -332,6 +339,7 @@
   <!-- AdminLTE for demo purposes -->
   <script src="{{secure_asset('style/dist/js/demo.js')}}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   @else
   <!-- jQuery 2.1.4 -->
   <script src="{{asset('style/plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
@@ -357,6 +365,7 @@
   <script src="{{asset('style/dist/js/demo.js')}}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
   <script src="{{ asset('style/dist/js/textareacounter.js') }}"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   @endif 
 
   <script type="text/javascript">

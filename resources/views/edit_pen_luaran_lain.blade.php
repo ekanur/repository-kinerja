@@ -59,6 +59,7 @@
             <input type="text" class="form-control" id="judul" name="judul" placeholder="judul" required="" value="{{$menu['data']->judul}}">
           </div>
         </div>
+       <!--  printr('{{$menu['data']->deskripsi}}'); -->
         <div class="row">
           <div class="form-group col-md-10">
             <label for="deskripsi"> Deskripsi </label>
@@ -87,8 +88,6 @@
       </div>
 
     </div><!-- /.box-body -->
-
-
 
       <div class="box-footer">
         <button type="submit" class="btn btn-success">Simpan</button>

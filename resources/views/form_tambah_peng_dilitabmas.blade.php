@@ -87,15 +87,15 @@
 
      <div class="form-group col-md-4" >
       <label for="jumlah_mahasiswa">Jumlah Mahasiswa</label>
-      <input type="text" class="form-control" id="jumlah_mahasiswa" name="jumlah_mahasiswa" placeholder="Jumlah Mahasiswa" value="{{old('jumlah_mahasiswa')}}">
+      <input type="number" class="form-control" id="jumlah_mahasiswa" name="jumlah_mahasiswa" placeholder="Jumlah Mahasiswa" value="{{old('jumlah_mahasiswa')}}">
       </div>
        <div class="form-group col-md-4"  >
       <label for="jumlah_alumni">Jumlah Alumni</label>
-      <input type="text" class="form-control" id="jumlah_alumni" name="jumlah_alumni" placeholder="jumlah_alumni" value="{{old('jumlah_alumni')}}">
+      <input type="number" class="form-control" id="jumlah_alumni" name="jumlah_alumni" placeholder="Jumlah Alumni" value="{{old('jumlah_alumni')}}">
     </div>
        <div class="form-group col-md-4" >
       <label for="jumlah_staf">Jumlah Staf Pendukung</label>
-      <input type="text" class="form-control" id="jumlah_staf" name="jumlah_staf" placeholder="Jumlah Staf" value="{{old('jumlah_staf')}}">
+      <input type="number" class="form-control" id="jumlah_staf" name="jumlah_staf" placeholder="Jumlah Staf" value="{{old('jumlah_staf')}}">
     </div>
 
     </div>
@@ -123,7 +123,7 @@
 
     <div class="form-group col-md-3">
        <label for="tahun">Tahun</label>
-               <select class="select2 form-control" name="tahun" id="tahun">
+               <select class="select2 form-control" name="tahun" id="tahun" required="">
                 <option value="">Pilih Tahun</option>
                 <?php
                 $thn_skr = date('Y');

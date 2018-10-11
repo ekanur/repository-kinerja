@@ -31,7 +31,7 @@
             <div class="row">
              <div class="form-group col-md-4" >
                <label for="jenis_hki">Jenis</label>
-               <select class="form-control" name="jenis" id="jenis">
+               <select class="select2 form-control" name="jenis" id="jenis">
                  <option value="">-- Pilih Jenis HKI --</option>   
                  @foreach($menu['data_jenis_hki'] as $jenis_hki)
                  <option value="{{$jenis_hki->jenis_hki}}">  {{$jenis_hki->jenis_hki}}</option>                          @endforeach
@@ -40,7 +40,7 @@
              </div>
              <div class="form-group col-md-4" >
                <label for="status">Status</label>
-               <select class="form-control" name="status" id="status">
+               <select class="select2 form-control" name="status" id="status">
                  <option value="">-- Pilih Status HKI --</option>   
                  @foreach($menu['data_status_hki'] as $status_hki)
                  <option value="{{$status_hki->status_hki}}">  {{$status_hki->status_hki}}</option>                           
@@ -50,12 +50,12 @@
 
              <div class="form-group col-md-4" >
 
-               <label for="tahun">Tahun</label>
+               <label for="select2 tahun">Tahun</label>
                <select class="form-control" name="tahun" id="tahun">
                 <option value="">Pilih Tahun</option>
                 <?php
                 $thn_skr = date('Y');
-                for ($x = $thn_skr; $x >= 2005; $x--) {
+                for ($x = $thn_skr; $x >= 1954; $x--) {
                   ?>
                   <option value=" {{$x}} ">{{$x}}</option>
                   <?php

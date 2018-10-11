@@ -5,7 +5,7 @@
   <!-- Small boxes (Stat box) -->
   <div class="row">
    <div class="col-md-12">
-    
+
      @if(session('success'))
      
      <div class='alert alert-success'>{{session('success')}}</div>
@@ -28,14 +28,13 @@
               <th>Kategori Bid</th>
               <th>Kategori TSE</th>
               <th>Tahun</th>
-            <!--   <th>Abstrak</th> -->
+              <!--   <th>Abstrak</th> -->
               
-              @if(Session::get('userRole')!='Dosen')
+      
               <th></th>
               <th></th>
               <th></th>
-              
-              @endif
+        
             </tr>
           </thead>
           <tbody>
@@ -44,11 +43,11 @@
             
             <tr>
              <td>{{$i++}}</td>
-              <td><a href="penelitian_dilitabmas/lihat_dilitabmas/{{$penelitian_dilitabmas->id}}">{{$penelitian_dilitabmas->judul}}</a></td>
-                <td>{{$penelitian_dilitabmas->ketua}}</td>
-              <td>{{$penelitian_dilitabmas->kategori_bidang}}</td>
-              <td>{{$penelitian_dilitabmas->kategori_tse}}</td>
-              <td>{{$penelitian_dilitabmas->tahun}}</td>
+             <td><a href="penelitian_dilitabmas/lihat_dilitabmas/{{$penelitian_dilitabmas->id}}">{{$penelitian_dilitabmas->judul}}</a></td>
+             <td>{{$penelitian_dilitabmas->ketua}}</td>
+             <td>{{$penelitian_dilitabmas->kategori_bidang}}</td>
+             <td>{{$penelitian_dilitabmas->kategori_tse}}</td>
+             <td>{{$penelitian_dilitabmas->tahun}}</td>
             <!--   <td>
                <a class="btn btn-sm  glyphicon glyphicon-bookmark" data-toggle="modal" data-target="#abstrak-{{$penelitian_dilitabmas->id}}"></a>
                <div class="modal fade" id="abstrak-{{$penelitian_dilitabmas->id}}" tabindex="-1" role="dialog" aria-labelledby="Title" aria-hidden="true">
@@ -69,58 +68,99 @@
           </div>
 
         </td>     -->
-              
-              @if(Session::get('userRole')!='Dosen')
-              
-              
-              <td>
-                
-                <div class="dropdown">
-                  <a class="btn btn-sm btn-warning fa fa-plus-square" id="dropdownMenu1" data-toggle="dropdown" title="Tambahkan Luaran"> </a>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    
-                    <li ><a href="penelitian_dilitabmas/luaran_buku_ajar/{{$penelitian_dilitabmas->id}}">Buku Ajar</a></li>
-                    <li class="divider"></li>
-                    <li ><a href="penelitian_dilitabmas/luaran_jurnal/{{$penelitian_dilitabmas->id}}">Jurnal</a></li>
-                    <li class="divider"></li>
-                    <li ><a href="penelitian_dilitabmas/luaran_pemakalah/{{$penelitian_dilitabmas->id}}">Pemakalah Forum Ilmiah</a></li>
-                    <li class="divider"></li>
-                    <li ><a href="penelitian_dilitabmas/luaran_hki/{{$penelitian_dilitabmas->id}}">HKI</a></li>
-                    <li class="divider"></li>
-                    <li ><a href="penelitian_dilitabmas/luaran_lain/{{$penelitian_dilitabmas->id}}">Lain-Lain</a></li>
-                  </ul>
-                </div>
 
-              </td>
+        <td>
+           @if(Session::get('userID_login')==null)
+          <button onclick="ulogin_null()" class="btn btn-sm btn-warning fa fa-plus-square" title="Tambah Luaran"></button>
+          @else
+          
+          <div class="dropdown">
+            <a class="btn btn-sm btn-warning fa fa-plus-square" id="dropdownMenu1" data-toggle="dropdown" title="Tambahkan Luaran"> </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 
-              <td>
-               
-                <a class="btn btn-sm btn-info  fa fa-edit" href="penelitian_dilitabmas/edit_dilitabmas/{{$penelitian_dilitabmas->id}}" title="Edit Penelitian"></a>
-                
-              </td>
-              <td>
-                <div>
-                  <a class="btn btn-sm btn-danger fa fa-trash" onclick="return confirm('Anda Yakin Ingin Menghapus Data ?')" href="penelitian_dilitabmas/hapus_dilitabmas/{{$penelitian_dilitabmas->id}}" title="Hapus Penelitian"></a>
-                </div>   
+              <li ><a href="penelitian_dilitabmas/luaran_buku_ajar/{{$penelitian_dilitabmas->id}}">Buku Ajar</a></li>
+              <li class="divider"></li>
+              <li ><a href="penelitian_dilitabmas/luaran_jurnal/{{$penelitian_dilitabmas->id}}">Jurnal</a></li>
+              <li class="divider"></li>
+              <li ><a href="penelitian_dilitabmas/luaran_pemakalah/{{$penelitian_dilitabmas->id}}">Pemakalah Forum Ilmiah</a></li>
+              <li class="divider"></li>
+              <li ><a href="penelitian_dilitabmas/luaran_hki/{{$penelitian_dilitabmas->id}}">HKI</a></li>
+              <li class="divider"></li>
+              <li ><a href="penelitian_dilitabmas/luaran_lain/{{$penelitian_dilitabmas->id}}">Lain-Lain</a></li>
+            </ul>
+          </div>
+ @endif
+        </td>
 
-             </td>
-              
-              @endif
+        <td>
+          @if(Session::get('userID_login')==null)
+          <button onclick="ulogin_null()" class='btn btn-sm btn-info  fa fa-edit' title="Edit Penelitian"></button>
+          @else
+          <a href = "penelitian_dilitabmas/edit_dilitabmas/{{$penelitian_dilitabmas->id}}" class='btn btn-sm btn-info  fa fa-edit' title="Edit Penelitian"></a>
+          @endif
+        </td>
 
-            </tr>
-            @endforeach
-          </tbody>
-        </table>
-      </div>
-      <div class="box-footer clearfix">
-  @if(Session::get('userRole')!='Dosen')
-        <a href="{{url('penelitian_dilitabmas/tambah_dilitabmas')}}" class="btn btn-md btn-success btn-flat pull-left"  style="margin-right:10px">Tambah</a>
-      
-        @endif
-      </div>
-    </div>
+        <td>
+          @if(Session::get('userID_login')==null)
+          <button onclick="ulogin_null()" class="btn btn-sm btn-danger fa fa-trash" title="Hapus Penelitian"></button>
+          @else
+          <button onclick="hapus('{{$penelitian_dilitabmas->id}}')" class="btn btn-sm btn-danger fa fa-trash" title="Hapus Penelitian"></button>
+          @endif            
+        </td>
 
-  </div>
+
+
+      </tr>
+      <!-- plugin swall alert -->
+
+      <script>
+        function ulogin_null(){
+          swal("Kesalahan", "Data dosen belum dipilih", "warning");
+        }
+
+
+        function hapus(id){
+          swal({
+            title: "Anda Yakin ?",
+            text: "Ketika dihapus, Data anda akan hilang ",
+            icon: "error",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+
+              swal("Data Berhasil Dihapus", {
+                icon: "success",
+              });
+              window.location.href="penelitian_dilitabmas/hapus_dilitabmas/"+id;
+            } else {
+              swal({
+                title: "Batal",
+                text: "Data tersimpan",
+                icon: "info",
+              });
+
+            }
+          });
+        }
+
+
+      </script>
+      <!-- akhir -->
+
+
+      @endforeach
+    </tbody>
+  </table>
+</div>
+<div class="box-footer clearfix">
+
+  <a href="{{url('penelitian_dilitabmas/tambah_dilitabmas')}}" class="btn btn-md btn-success btn-flat pull-left"  style="margin-right:10px">Tambah</a>
+</div>
+</div>
+
+</div>
 </div><!-- /.row -->
 </section><!-- /.content -->
 @endsection

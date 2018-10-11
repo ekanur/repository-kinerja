@@ -72,28 +72,43 @@ class PengabdianController extends Controller {
 
 // tampil data
 
-  public function pengabdian_dilitabmas()
+public function pengabdian_dilitabmas()
   {
-   $pengabdian_dilitabmas=new App\pengabdian_dilitabmas;
-   $data=$pengabdian_dilitabmas->where('nip_dosen', '=', Session::get('userID_login'))->orderBy('id', 'DESC')->get();
 
-   $menu=array('menu'=>'pengabdian_dilitabmas','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'', 'data'=>$data,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'));
-   return View::make('pengabdian\pengabdian_dilitabmas')->with('menu',$menu);
- }
-
-
- public function pengabdian_non_dilitabmas()
- {
-
-  $pengabdian_non_dilitabmas=new App\pengabdian_non_dilitabmas;
-  $data=$pengabdian_non_dilitabmas->where('nip_dosen', '=', Session::get('userID_login'))->orderBy('id', 'DESC')->get();
-
-  $menu=array('menu'=>'pengabdian_non_dilitabmas','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'', 'data'=>$data,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'));
-  foreach ($data as $pengabdian_non_dilitabmas) {
-    $pengabdian_non_dilitabmas->bukti_kinerja=explode(",", $pengabdian_non_dilitabmas->bukti_kinerja);
+    $pengabdian_dilitabmas=new App\pengabdian_dilitabmas;
+    if(Session::get('userID_login')==null){
+    $data=$pengabdian_dilitabmas->orderBy('id', 'DESC')->get();
+    }else{
+      $data=$pengabdian_dilitabmas->where('nip_dosen', '=', Session::get('userID_login'))->orderBy('id', 'DESC')->get();
+    }
+    $menu=array('menu'=>'pengabdian_dilitabmas','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'', 'data'=>$data,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'));
+    foreach ($data as $pengabdian_dilitabmas) {
+      $pengabdian_dilitabmas->bukti_kinerja=explode(",", $pengabdian_dilitabmas->bukti_kinerja);
+    }
+    return View::make('pengabdian/pengabdian_dilitabmas')->with('menu',$menu);
   }
-  return View::make('pengabdian\pengabdian_non_dilitabmas')->with('menu',$menu);
-}
+
+
+public function pengabdian_non_dilitabmas()
+  {
+
+    $pengabdian_non_dilitabmas=new App\pengabdian_non_dilitabmas;
+   if(Session::get('userID_login')==null){ 
+    $data=$pengabdian_non_dilitabmas->orderBy('id', 'DESC')->get();
+    }
+    else{
+       $data=$pengabdian_non_dilitabmas->where('nip_dosen', '=', Session::get('userID_login'))->orderBy('id', 'DESC')->get();
+
+    }
+  
+
+    $menu=array('menu'=>'pengabdian_non_dilitabmas','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'', 'data'=>$data,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'));
+    foreach ($data as $pengabdian_non_dilitabmas) {
+      $pengabdian_non_dilitabmas->bukti_kinerja=explode(",", $pengabdian_non_dilitabmas->bukti_kinerja);
+    }
+    return View::make('pengabdian/pengabdian_non_dilitabmas')->with('menu',$menu);
+  }
+
 
 
 // tambah data
@@ -104,9 +119,9 @@ public function tambah_peng_dilitabmas()
   $skema_pengabdian=App\skema_pengabdian::all();
   $sumberdaya=App\sumberdaya::all();
   
-  if(Session::get('userRole')=='Dosen'){
-    abort(404);
-  }
+  // if(Session::get('userRole')=='Dosen'){
+  //   abort(404);
+  // }
 
   if(Request::isMethod('post'))
   {
@@ -183,9 +198,9 @@ public function tambah_peng_non_dilitabmas()
   $sumberdaya=App\sumberdaya::all();
   $jenis_penelitian=App\jenis_penelitian::all();
   
-  if(Session::get('userRole')=='Dosen'){
-    abort(404);
-  }
+  // if(Session::get('userRole')=='Dosen'){
+  //   abort(404);
+  // }
 
   if(Request::isMethod('post'))
   {
@@ -475,9 +490,9 @@ public function hapus_peng_dilitabmas($kategori, $id){
 
     // hapus non dilitabmas
 public function hapus_peng_non_dilitabmas($kategori, $id){
-  if(Session::get('userRole')=='Dosen'){
-    abort(404);
-  }
+  // if(Session::get('userRole')=='Dosen'){
+  //   abort(404);
+  // }
 
   $data=$this->get_kategori_model($kategori);
 
@@ -569,7 +584,13 @@ public function tampil_peng_luaran_buku()
 {
 
   $tampil=new App\peng_luaran_buku_ajar;
-  $data=$tampil->where('nip_dosen', '=', Session::get('userID_login'))->orderBy('id', 'DESC')->get();
+  
+  if(Session::get('userID_login')==null){
+     $data=$tampil->orderBy('id', 'DESC')->get();
+   }else{
+    $data=$tampil->where('nip_dosen', '=', Session::get('userID_login'))->orderBy('id', 'DESC')->get();
+   }
+ 
 
   $menu=array('menu'=>'tampil_peng_luaran_buku','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'', 'data'=>$data,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'));
   foreach ($data as $tampil) {
@@ -802,8 +823,12 @@ public function tampil_peng_luaran_jurnal()
 {
 
   $tampil=new App\peng_luaran_jurnal;
-  $data=$tampil->where('nip_dosen', '=', Session::get('userID_login'))->orderBy('id', 'DESC')->get();
-
+ if(Session::get('userID_login')==null){
+     $data=$tampil->orderBy('id', 'DESC')->get();
+   }else{
+    $data=$tampil->where('nip_dosen', '=', Session::get('userID_login'))->orderBy('id', 'DESC')->get();
+   }
+ 
   $menu=array('menu'=>'tampil_peng_luaran_jurnal','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'', 'data'=>$data,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'));
   foreach ($data as $tampil) {
     $tampil->bukti_kinerja=explode(",", $tampil->bukti_kinerja);
@@ -1040,7 +1065,12 @@ else
 public function tampil_peng_luaran_pemakalah()
 {
   $tampil=new App\peng_luaran_pemakalah;
-  $data=$tampil->where('nip_dosen', '=', Session::get('userID_login'))->orderBy('id', 'DESC')->get();
+ if(Session::get('userID_login')==null){
+     $data=$tampil->orderBy('id', 'DESC')->get();
+   }else{
+    $data=$tampil->where('nip_dosen', '=', Session::get('userID_login'))->orderBy('id', 'DESC')->get();
+   }
+ 
 
   $menu=array('menu'=>'tampil_peng_luaran_pemakalah','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'', 'data'=>$data,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'));
   return View::make('luaran/peng_luaran_pemakalah')->with('menu',$menu);
@@ -1266,7 +1296,12 @@ else
 public function tampil_peng_luaran_hki()
 {
   $tampil=new App\peng_luaran_hki;
-  $data=$tampil->where('nip_dosen', '=', Session::get('userID_login'))->orderBy('id', 'DESC')->get();
+ if(Session::get('userID_login')==null){
+     $data=$tampil->orderBy('id', 'DESC')->get();
+   }else{
+    $data=$tampil->where('nip_dosen', '=', Session::get('userID_login'))->orderBy('id', 'DESC')->get();
+   }
+ 
 
   $menu=array('menu'=>'tampil_peng_luaran_hki','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'', 'data'=>$data,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'));
   return View::make('luaran/peng_luaran_hki')->with('menu',$menu);
@@ -1485,8 +1520,12 @@ public function tambah_non_peng_luaran_lain()
 public function tampil_peng_luaran_lain()
 {
   $tampil=new App\peng_luaran_lain;
-  $data=$tampil->where('nip_dosen', '=', Session::get('userID_login'))->orderBy('id', 'DESC')->get();
-
+ if(Session::get('userID_login')==null){
+     $data=$tampil->orderBy('id', 'DESC')->get();
+   }else{
+    $data=$tampil->where('nip_dosen', '=', Session::get('userID_login'))->orderBy('id', 'DESC')->get();
+   }
+ 
   $menu=array('menu'=>'tampil_peng_luaran_lain','submenu'=>'','hakAkses'=>Session::get('userRole'),'userId'=>Session::get('userID_login'),'jml_data'=>'', 'data'=>$data,'userfak'=>Session::get('userFak'),'ketdosen'=>Session::get('ketDosen'));
   return View::make('luaran/peng_luaran_lain')->with('menu',$menu);
 }

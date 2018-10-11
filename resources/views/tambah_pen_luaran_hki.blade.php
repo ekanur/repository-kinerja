@@ -34,7 +34,8 @@
                <select class="select2 form-control" name="jenis" id="jenis">
                  <option value="">-- Pilih Jenis HKI --</option>   
                  @foreach($menu['data_jenis_hki'] as $jenis_hki)
-                 <option value="{{$jenis_hki->jenis_hki}}">  {{$jenis_hki->jenis_hki}}</option>                          @endforeach
+                 <option value="{{$jenis_hki->jenis_hki}}">  {{$jenis_hki->jenis_hki}}</option>                          
+                 @endforeach
                </select>
 
              </div>

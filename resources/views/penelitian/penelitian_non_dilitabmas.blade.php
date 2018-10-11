@@ -27,7 +27,7 @@
            <th>Kategori Bid</th>
            <th>Kategori TSE</th>
            <th>Tahun</th>
-    <!--        <th>Abstrak</th> -->
+           <!--        <th>Abstrak</th> -->
 
            <th></th>
            <th></th>
@@ -70,9 +70,12 @@
       </div>
 
     </td>     -->
-    @if(Session::get('userRole')!='Dosen')
+ 
 
     <td>
+     @if(Session::get('userID_login')==null)
+     <button onclick="ulogin_null()" class="btn btn-sm btn-warning fa fa-plus-square" title="Tambah Luaran"></button>
+     @else
      <div class="dropdown">
       <a class="btn btn-sm btn-warning fa fa-plus-square" id="dropdownMenu1" data-toggle="dropdown" title="Tambahkan Luaran"></a>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -88,36 +91,83 @@
        <li ><a href="penelitian_non_dilitabmas/luaran_lain/{{$penelitian_non_dilitabmas->id}}">Lain-Lain</a></li>
      </ul>
    </div>
+   @endif
  </td>
  <td>
-  <a href="penelitian_non_dilitabmas/edit_non_dilitabmas/{{$penelitian_non_dilitabmas->id}}" class='btn btn-sm btn-info  fa fa-edit' title="Edit Penelitian"></a>
+  @if(Session::get('userID_login')==null)
+  <button onclick="ulogin_null()" class='btn btn-sm btn-info  fa fa-edit' title="Edit Penelitian"></button>
+  @else
+  <a href = "penelitian_non_dilitabmas/edit_non_dilitabmas/{{$penelitian_non_dilitabmas->id}}" class='btn btn-sm btn-info  fa fa-edit' title="Edit Penelitian"></a>
+  @endif
 </td>
 
 <td>
-  <div>
-    <a class="btn btn-sm btn-danger fa fa-trash" onclick="return confirm('Anda Yakin Ingin Menghapus Data ?')" href="penelitian_non_dilitabmas/hapus_non_dilitabmas/{{$penelitian_non_dilitabmas->id}}" title="Hapus Penelitian"></a>
-  </div>              
+  @if(Session::get('userID_login')==null)
+  <button onclick="ulogin_null()" class="btn btn-sm btn-danger fa fa-trash" title="Hapus Penelitian"></button>
+  @else
+  <button onclick="hapus('{{$penelitian_non_dilitabmas->id}}')" class="btn btn-sm btn-danger fa fa-trash" title="Hapus Penelitian"></button>
+  @endif            
 </td>
-
-
-@endif
+ 
 
 </tr>
+<!-- plugin swall alert -->
+
+<script>
+  function ulogin_null(){
+    swal("Kesalahan", "Data dosen belum dipilih", "warning");
+  }
+
+
+  function hapus(id){
+    swal({
+      title: "Anda Yakin ?",
+      text: "Ketika dihapus, Data anda akan hilang ",
+      icon: "error",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+
+        swal("Data Berhasil Dihapus", {
+          icon: "success",
+        });
+        window.location.href="penelitian_non_dilitabmas/hapus_non_dilitabmas/"+id;
+      } else {
+        swal({
+          title: "Batal",
+          text: "Data tersimpan",
+          icon: "info",
+        });
+        
+      }
+    });
+  }
+
+
+</script>
+<!-- akhir -->
+
 @endforeach
 </tbody>
 </table>
 </div>
 <div class="box-footer clearfix">
-  @if(Session::get('userRole')!='Dosen')
+ 
   <a href="{{url('penelitian_non_dilitabmas/tambah_non_dilitabmas')}}" class="btn btn-md btn-success btn-flat pull-left"  style="margin-right:10px">Tambah</a>
 
-  
+ 
 
-  @endif
+ 
 </div>
 </div>
 
 </div>
 </div><!-- /.row -->
 </section><!-- /.content -->
+
+
+
+
 @endsection

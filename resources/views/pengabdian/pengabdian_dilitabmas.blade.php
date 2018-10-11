@@ -72,7 +72,9 @@
         @if(Session::get('userRole')!='Dosen')
         
         <td>
-          
+            @if(Session::get('userID_login')==null)
+          <button onclick="ulogin_null()" class="btn btn-sm btn-warning fa fa-plus-square" title="Tambah Luaran"></button>
+          @else
           <div class="dropdown">
             <a class="btn btn-sm btn-warning fa fa-plus-square" id="dropdownMenu1" data-toggle="dropdown" title="Tambahkan Luaran">
               
@@ -90,22 +92,66 @@
               <li ><a href="pengabdian_dilitabmas/luaran_lain_peng/{{$pengabdian_dilitabmas->id}}">Lain-Lain</a></li>
             </ul>
           </div>
+        @endif  
+        </td>
 
-          
-        </td>
         <td>
-          <a class=" btn btn-sm btn-info  fa fa-edit" href="pengabdian_dilitabmas/edit_peng_dilitabmas/{{$pengabdian_dilitabmas->id}}" title="Edit Penelitian"></a>
-          
+          @if(Session::get('userID_login')==null)
+          <button onclick="ulogin_null()" class='btn btn-sm btn-info  fa fa-edit' title="Edit Pengabdian"></button>
+          @else
+          <a href = "pengabdian_dilitabmas/edit_peng_dilitabmas/{{$pengabdian_dilitabmas->id}}" class='btn btn-sm btn-info  fa fa-edit' title="Edit Pengabdian"></a>
+          @endif
         </td>
+
         <td>
-          <div>
-            <a class="btn btn-sm btn-danger fa fa-trash" onclick="return confirm('Anda Yakin Ingin Menghapus Data ?')" href="pengabdian_dilitabmas/hapus_peng_dilitabmas/{{$pengabdian_dilitabmas->id}}" title="Hapus Penelitian"></a>
-          </div>              
+          @if(Session::get('userID_login')==null)
+          <button onclick="ulogin_null()" class="btn btn-sm btn-danger fa fa-trash" title="Hapus Pengabdian"></button>
+          @else
+          <button onclick="hapus('{{$pengabdian_dilitabmas->id}}')" class="btn btn-sm btn-danger fa fa-trash" title="Hapus Pengabdian"></button>
+          @endif            
         </td>
-        
+
         @endif
 
       </tr>
+      <!-- plugin swall alert -->
+
+      <script>
+        function ulogin_null(){
+          swal("Kesalahan", "Data dosen belum dipilih", "warning");
+        }
+
+
+        function hapus(id){
+          swal({
+            title: "Anda Yakin ?",
+            text: "Ketika dihapus, Data anda akan hilang ",
+            icon: "error",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+
+              swal("Data Berhasil Dihapus", {
+                icon: "success",
+              });
+              window.location.href="pengabdian_dilitabmas/hapus_peng_dilitabmas/"+id;
+            } else {
+              swal({
+                title: "Batal",
+                text: "Data tersimpan",
+                icon: "info",
+              });
+
+            }
+          });
+        }
+
+
+      </script>
+      <!-- akhir -->
+
       @endforeach
     </tbody>
   </table>

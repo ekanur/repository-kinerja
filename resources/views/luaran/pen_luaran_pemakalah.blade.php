@@ -28,11 +28,9 @@
               <th>Nama Forum</th>
               <th>Ins Penyelenggara</th>
               <th>Tahun</th>
-              @if(Session::get('userRole')!='Dosen')
+             <th></th>
               <th></th>
-              <th></th>
-             @endif
-        </tr>
+              </tr>
       </thead>
       <tbody>
         <?php $i=1; ?>
@@ -97,27 +95,52 @@
         <td>{{$tampil->nama_forum}}</td></td>
         <td>{{$tampil->ins_penyelenggara}}</td></td>
         <td>{{$tampil->tahun}}</td></td>
-
-
-        @if(Session::get('userRole')!='Dosen')
-  <td>
+ <td>
     <a class="btn btn-sm btn-info  fa fa-edit" href="tampil_pen_luaran_pemakalah/edit_pen_luaran_pemakalah/{{$tampil->id}}" title="Edit Luaran"></a>
   </td>
   <td>
-  <a class="btn btn-sm btn-danger fa fa-trash" onclick="return confirm('Anda Yakin Ingin Menghapus Data ?')" href="tampil_pen_luaran_pemakalah/hapus_pemakalah/{{$tampil->id}}" title="Hapus Penelitian"></a>
+         <button onclick="hapus('{{$tampil->id}}')" class="btn btn-sm btn-danger fa fa-trash" title="Hapus"></button>
+         </td>
+          </tr>
 
-</td>
+ <!-- plugin swall alert -->
 
-@endif
+      <script>
+       
+        function hapus(id){
+          swal({
+            title: "Anda Yakin ?",
+            text: "Ketika dihapus, Data anda akan hilang ",
+            icon: "error",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
 
-</tr>
+              swal("Data Berhasil Dihapus", {
+                icon: "success",
+              });
+              window.location.href="tampil_pen_luaran_pemakalah/hapus_pemakalah/"+id;
+            } else {
+              swal({
+                title: "Batal",
+                text: "Data tersimpan",
+                icon: "info",
+              });
+
+            }
+          });
+        }
+
+
+      </script>
+      <!-- akhir -->
 @endforeach
 </tbody>
 </table>
 <div class="box-footer clearfix">
-  @if(Session::get('userRole')!='Dosen')
   <a href="{{url('tampil_pen_luaran_pemakalah/tambah_non_pen_luaran_pemakalah')}}" class="btn btn-md btn-success btn-flat pull-left glyphicon glyphicon-new-window"  style="margin-right:10px" title="Tambahkan Luaran Tanpa Penelitian"></a>
-  @endif
 </div>
 </div>
 
